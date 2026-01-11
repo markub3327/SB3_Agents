@@ -4,7 +4,6 @@
 # In[1]:
 
 
-import multiprocessing
 import stable_retro as retro
 import ale_py
 import wandb
@@ -28,13 +27,6 @@ import numpy as np
 
 
 # In[ ]:
-
-class SonicRewardEnv(gymnasium.RewardWrapper):
-    def __init__(self, env) -> None:
-        super().__init__(env)
-
-    def reward(self, reward) -> float:
-        return float(reward) * 0.005
 
 
 class SimpleLinearSchedule:
@@ -68,6 +60,17 @@ def linear_schedule(initial_value: float | str) -> SimpleLinearSchedule:
 
 # In[2]:
 
+def make_retro_env():
+        """
+        Configure environment for retro games, using config similar to DeepMind-style Atari in openai/baseline's wrap_deepmind
+        """
+        env = retro.make(env_name, retro.State.DEFAULT, render_mode=None)
+        env = TimeLimit(env, max_episode_steps=8192)
+        env = Monitor(env)
+        env = MaxAndSkipEnv(env, skip=4)
+        env = WarpFrame(env, width=96, height=96)
+        env = ClipRewardEnv(env)
+        return env
 
 def process_main(env_name):
     run = wandb.init(
@@ -78,20 +81,11 @@ def process_main(env_name):
         save_code=False,  # optional
     )
 
-    def make_env():
-        """
-        Configure environment for retro games, using config similar to DeepMind-style Atari in openai/baseline's wrap_deepmind
-        """
-        env = retro.make(env_name, retro.State.DEFAULT, render_mode=None)
-        env = TimeLimit(env, max_episode_steps=4_500)
-        env = Monitor(env)
-        env = MaxAndSkipEnv(env, skip=4)
-        env = WarpFrame(env)
-        env = SonicRewardEnv(env)
-        return env
-
+    # For Atari console
     # vec_env = make_atari_env(env_name, n_envs=16, seed=1234)
-    vec_env = VecTransposeImage(VecFrameStack(SubprocVecEnv([make_env] * 8), n_stack=4))
+
+    # For stable-retro consoles
+    vec_env = VecTransposeImage(VecFrameStack(SubprocVecEnv([make_retro_env] * 16), n_stack=4))
 
     # Use deterministic actions for evaluation
     # early_stopping = StopTrainingOnNoModelImprovement(
@@ -112,15 +106,15 @@ def process_main(env_name):
     model = PPO(
         policy="CnnPolicy",
         env=vec_env,
-        n_steps=1024,
+        n_steps=8192,
         gamma=0.99,
-        gae_lambda=0.95,
+        gae_lambda=0.70,
         n_epochs=4,
-        batch_size=1024,
+        batch_size=8192,
         learning_rate=linear_schedule(2.5e-4),
-        clip_range=0.20,
+        clip_range=0.10,
         vf_coef=0.5,
-        ent_coef=0.001,
+        ent_coef=0.01,
         verbose=0,
         tensorboard_log=f"./logs/{env_name}",
     )
@@ -130,35 +124,36 @@ def process_main(env_name):
 
 
 env_names = [
-    # "BoxingNoFrameskip-v4",
-    # "DemonAttackNoFrameskip-v4",
-    # "FishingDerbyNoFrameskip-v4",
-    # "FreewayNoFrameskip-v4",
-    # "GopherNoFrameskip-v4",
-    # "KrullNoFrameskip-v4",
-    # "KungFuMasterNoFrameskip-v4",
-    # "PongNoFrameskip-v4",
-    # "BreakoutNoFrameskip-v4",
-    # "AssaultNoFrameskip-v4",
-    # "VideoPinballNoFrameskip-v4",
-    # "StarGunnerNoFrameskip-v4",
-    # "CrazyClimberNoFrameskip-v4",
-    # "AtlantisNoFrameskip-v4",
-    # "EnduroNoFrameskip-v4",
-    # "NameThisGameNoFrameskip-v4",
-    # "RoadRunnerNoFrameskip-v4",
-    # "TutankhamNoFrameskip-v4",
-    # "UpNDownNoFrameskip-v4",
-    # "BankHeistNoFrameskip-v4",
-    # "DoubleDunkNoFrameskip-v4",
-    # "JamesbondNoFrameskip-v4",
-    # "KangarooNoFrameskip-v4",
-    # "QbertNoFrameskip-v4",
+    "BoxingNoFrameskip-v4",
+    "DemonAttackNoFrameskip-v4",
+    "FishingDerbyNoFrameskip-v4",
+    "FreewayNoFrameskip-v4",
+    "GopherNoFrameskip-v4",
+    "KrullNoFrameskip-v4",
+    "KungFuMasterNoFrameskip-v4",
+    "PongNoFrameskip-v4",
+    "BreakoutNoFrameskip-v4",
+    "AssaultNoFrameskip-v4",
+    "VideoPinballNoFrameskip-v4",
+    "StarGunnerNoFrameskip-v4",
+    "CrazyClimberNoFrameskip-v4",
+    "AtlantisNoFrameskip-v4",
+    "EnduroNoFrameskip-v4",
+    "NameThisGameNoFrameskip-v4",
+    "RoadRunnerNoFrameskip-v4",
+    "TutankhamNoFrameskip-v4",
+    "UpNDownNoFrameskip-v4",
+    "BankHeistNoFrameskip-v4",
+    "DoubleDunkNoFrameskip-v4",
+    "JamesbondNoFrameskip-v4",
+    "KangarooNoFrameskip-v4",
+    "QbertNoFrameskip-v4",
 
-    "SuperMarioBros3-Nes-v0",
     "SonicTheHedgehog2-Genesis-v0",
     "SonicTheHedgehog3-Genesis-v0",
     "SonicAndKnuckles3-Genesis-v0",
+
+    "SuperMarioBros3-Nes-v0",
 ]
 
 
