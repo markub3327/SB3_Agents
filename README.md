@@ -1,6 +1,6 @@
 # RL Agents
 
-This project focuses on generating datasets and training Reinforcement Learning agents on various Atari and Retro environments using Stable Baselines 3.
+This project focuses on generating datasets and training Reinforcement Learning agents on various Atari, Retro, and classic environments using Stable Baselines 3.
 
 ![Preview](./img/PPO_Agent.gif)
 
