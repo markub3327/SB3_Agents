@@ -2,3 +2,5 @@ stable-retro
 ale-py
 wandb
 stable-baselines3[extra]
+opencv-python==4.11.0.86
+pyyaml

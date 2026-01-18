@@ -1,0 +1,189 @@
+# Based on https://github.com/DLR-RM/rl-baselines3-zoo/blob/master/hyperparams/ppo.yml
+
+Taxi-v3:
+  normalize: true
+  n_envs: 128
+  n_timesteps: !!float 1e7
+  policy: 'MlpPolicy'
+  n_steps: 16
+  batch_size: 64
+  gae_lambda: 0.98
+  gamma: 0.99
+  n_epochs: 4
+  ent_coef: 0.0
+  learning_rate: !!float 2.5e-4
+  clip_range: 0.2
+  vf_coef: 0.5
+  eval_freq: 1_000
+
+FrozenLake-v1:
+  normalize: true
+  n_envs: 128
+  n_timesteps: !!float 1e7
+  policy: 'MlpPolicy'
+  n_steps: 16
+  batch_size: 64
+  gae_lambda: 0.98
+  gamma: 0.99
+  n_epochs: 4
+  ent_coef: 0.0
+  learning_rate: !!float 2.5e-4
+  clip_range: 0.2
+  vf_coef: 0.5
+  eval_freq: 1_000
+
+CliffWalking-v1:
+  normalize: true
+  n_envs: 128
+  n_timesteps: !!float 1e7
+  policy: 'MlpPolicy'
+  n_steps: 16
+  batch_size: 64
+  gae_lambda: 0.98
+  gamma: 0.99
+  n_epochs: 4
+  ent_coef: 0.0
+  learning_rate: !!float 2.5e-4
+  clip_range: 0.2
+  vf_coef: 0.5
+  eval_freq: 1_000
+
+LunarLander-v3:
+  n_envs: 128
+  n_timesteps: !!float 1e7
+  policy: 'MlpPolicy'
+  n_steps: 1024
+  batch_size: 64
+  gae_lambda: 0.98
+  gamma: 0.999
+  n_epochs: 4
+  ent_coef: 0.01
+  learning_rate: !!float 2.5e-4
+  clip_range: 0.2
+  vf_coef: 0.5
+  eval_freq: 1_000
+
+Acrobot-v1:
+  normalize: true
+  n_envs: 128
+  n_timesteps: !!float 1e7
+  policy: 'MlpPolicy'
+  n_steps: 256
+  batch_size: 64
+  gae_lambda: 0.94
+  gamma: 0.99
+  n_epochs: 4
+  ent_coef: 0.0
+  learning_rate: !!float 2.5e-4
+  clip_range: 0.2
+  vf_coef: 0.5
+  eval_freq: 1_000
+
+CartPole-v1:
+  n_envs: 8
+  n_timesteps: !!float 1e7
+  policy: 'MlpPolicy'
+  n_steps: 32
+  batch_size: 256
+  gae_lambda: 0.8
+  gamma: 0.98
+  n_epochs: 20
+  ent_coef: 0.0
+  learning_rate: 0.001
+  clip_range: 0.2
+  vf_coef: 0.5
+  eval_freq: 1_000
+
+MountainCar-v0:
+  normalize: true
+  n_envs: 128
+  n_timesteps: !!float 1e7
+  policy: 'MlpPolicy'
+  n_steps: 16
+  batch_size: 64
+  gae_lambda: 0.98
+  gamma: 0.99
+  n_epochs: 4
+  ent_coef: 0.0
+  learning_rate: !!float 2.5e-4
+  clip_range: 0.2
+  vf_coef: 0.5
+  eval_freq: 1_000
+
+BipedalWalkerHardcore-v3:
+  normalize: true
+  n_envs: 128
+  n_timesteps: !!float 10e7
+  policy: 'MlpPolicy'
+  n_steps: 2048
+  batch_size: 64
+  gae_lambda: 0.95
+  gamma: 0.99
+  n_epochs: 10
+  ent_coef: 0.001
+  learning_rate: !!float 2.5e-4
+  clip_range: 0.2
+  vf_coef: 0.5
+  eval_freq: 100_000
+
+CarRacing-v3:
+  frame_skip: 2
+  frame_stack: 2
+  normalize:
+    norm_obs: false
+    norm_reward: true
+  n_envs: 8
+  n_timesteps: !!float 1e7
+  policy: 'CnnPolicy'
+  batch_size: 128
+  n_steps: 512
+  gamma: 0.99
+  gae_lambda: 0.95
+  n_epochs: 10
+  ent_coef: 0.0
+  sde_sample_freq: 4
+  max_grad_norm: 0.5
+  vf_coef: 0.5
+  learning_rate: !!float 1e-4
+  use_sde: true
+  clip_range: 0.2
+  policy_kwargs:
+    log_std_init: -2
+    ortho_init: false
+    activation_fn: 'nn.GELU'
+    net_arch:
+      pi: [256]
+      vf: [256]
+  eval_freq: 10_000
+
+ale:
+  frame_stack: 4
+  policy: 'CnnPolicy'
+  n_envs: 8
+  n_steps: 128
+  gamma: 0.99
+  gae_lambda: 0.70
+  n_epochs: 4
+  batch_size: 256
+  n_timesteps: !!float 1e7
+  learning_rate: !!float 2.5e-4
+  clip_range: 0.1
+  vf_coef: 0.5
+  ent_coef: 0.01
+  eval_freq: 100_000
+
+retro:
+  frame_stack: 4
+  policy: 'CnnPolicy'
+  n_envs: 128
+  n_steps: 8192
+  gamma: 0.99
+  gae_lambda: 0.70
+  n_epochs: 4
+  batch_size: 8192
+  n_timesteps: !!float 1e8
+  learning_rate: !!float 2.5e-4
+  clip_range: 0.1
+  vf_coef: 0.5
+  ent_coef: 0.01
+  eval_freq: 100_000
