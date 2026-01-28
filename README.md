@@ -8,8 +8,9 @@ This project focuses on generating datasets and training Reinforcement Learning 
 
 The project is organized as follows:
 
-- **`trainer.py`**: The main entry point for training agents using the PPO algorithm. It supports configuration for both standard [Atari environments](https://ale.farama.org/environments/) (via `ale-py`) and [Retro games](https://stable-retro.farama.org/) (via `stable-retro`), with [Weights & Biases (WanDB)](https://wandb.ai/markub/ppo-sb3) integration for experiment tracking.
-- **`inference.py`**: Script for evaluating trained models and generating datasets. It loads the best model for a given environment, runs inference, and saves the resulting trajectories (states, actions, rewards) into `.npz` files.
+- **`run_atari_training.sh` / `run_retro_training.sh` / `run_classic_training.sh`**: **Main entry points**. Shell scripts that define a list of environments and launch training runs for each category.
+- **`sb3_agents/trainer.py`**: The training implementation used by the `run_*.sh` scripts (PPO). Supports [Atari environments](https://ale.farama.org/environments/) (via `ale-py`) and [Retro games](https://stable-retro.farama.org/) (via `stable-retro`), with [Weights & Biases (WanDB)](https://wandb.ai/markub/ppo-sb3) integration for experiment tracking.
+- **`sb3_agents/inference.py`**: Script for evaluating trained models and generating datasets. It loads the best model for a given environment, runs inference, and saves the resulting trajectories (states, actions, rewards) into `.npz` files.
 - **`save/`**: Contains the best-performing model checkpoints (`best_model.zip`) organized by environment name (e.g., `BreakoutNoFrameskip-v4`, `SonicTheHedgehog2-Genesis-v0`).
 
 ## Features
