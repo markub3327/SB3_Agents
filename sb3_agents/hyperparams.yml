@@ -80,7 +80,7 @@ Acrobot-v1:
   eval_freq: 1_000
 
 CartPole-v1:
-  n_envs: 8
+  n_envs: 128
   n_timesteps: !!float 1e7
   policy: 'MlpPolicy'
   n_steps: 32
@@ -132,7 +132,7 @@ CarRacing-v3:
   normalize:
     norm_obs: false
     norm_reward: true
-  n_envs: 8
+  n_envs: 128
   n_timesteps: !!float 1e7
   policy: 'CnnPolicy'
   batch_size: 128
@@ -159,7 +159,7 @@ CarRacing-v3:
 ale:
   frame_stack: 4
   policy: 'CnnPolicy'
-  n_envs: 8
+  n_envs: 128
   n_steps: 128
   gamma: 0.99
   gae_lambda: 0.70

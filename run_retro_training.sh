@@ -32,8 +32,8 @@ envs=(
     ### Sport games
     # "SuperHangOn-Genesis-v0"
     # "NHL94-Genesis-v0"
-    # "F1-Genesis-v0"
-    # "EuropeanClubSoccer-Genesis-v0"
+    "F1-Genesis-v0"
+    "EuropeanClubSoccer-Genesis-v0"
 
     ### Arcade shooters
     # "BioHazardBattle-Genesis-v0"
@@ -61,7 +61,7 @@ envs=(
 #     "GuerrillaWar-Nes-v0"
 #     "POWPrisonersOfWar-Nes-v0"
 #     "SuperC-Nes-v0"
-#     "AeroFighters-Snes-v0"
+    "AeroFighters-Snes-v0"
 
     ### Action games
     # "StreetsOfRage3-Genesis-v0"
@@ -71,20 +71,20 @@ envs=(
 #    "TeenageMutantNinjaTurtlesIIITheManhattanProject-Nes-v0"
 #    "FinalFight3-Snes-v0"
 
-    ### Puzzle / Classic games
+    ### Puzzle / Classic games - HOTOVO
      # "MsPacMan-Genesis-v0"
 #     "PacMania-Genesis-v0"
 #     "BalloonFight-Nes-v0"
      "DonkeyKong-Nes-v0"
-     "BubbleBobble-Nes-v0"
-     "SnowBrothers-Nes-v0"
-     "Arkanoid-Nes-v0"
-     "Popeye-Nes-v0"
-     "BoulderDash-GameBoy-v0"
-     "GradiusTheInterstellarAssault-GameBoy-v0"
-     "BlockKuzushiGB-GameBoy-v0"
-     "Cameltry-Snes-v0"
-     "PacInTime-Snes-v0"
+#     "BubbleBobble-Nes-v0"
+#     "SnowBrothers-Nes-v0"
+#     "Arkanoid-Nes-v0"
+#     "Popeye-Nes-v0"
+#     "BoulderDash-GameBoy-v0"
+#     "GradiusTheInterstellarAssault-GameBoy-v0"
+#     "BlockKuzushiGB-GameBoy-v0"
+#     "Cameltry-Snes-v0"
+#     "PacInTime-Snes-v0"
 )
 
 # Loop through each environment and run the trainer

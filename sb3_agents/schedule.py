@@ -19,6 +19,7 @@ class SimpleLinearSchedule:
     def __repr__(self):
         return f"SimpleLinearSchedule(initial_value={self.initial_value})"
 
+
 class SimpleCosineSchedule:
     """
     Cosine learning rate schedule (from initial value to zero)
@@ -30,7 +31,11 @@ class SimpleCosineSchedule:
         self.initial_value = float(initial_value)
 
     def __call__(self, progress_remaining):
-        return self.initial_value * 0.5 * (1.0 + math.cos(math.pi * (1.0 - progress_remaining)))
+        return (
+            self.initial_value
+            * 0.5
+            * (1.0 + math.cos(math.pi * (1.0 - progress_remaining)))
+        )
 
     def __repr__(self):
         return f"SimpleCosineSchedule(initial_value={self.initial_value})"
