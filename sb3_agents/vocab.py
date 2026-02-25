@@ -96,4 +96,52 @@ ids_action_vocab = {
     ),
     "BoxingNoFrameskip-v4": full_action_space,
     "FishingDerbyNoFrameskip-v4": full_action_space,
+    "AtlantisNoFrameskip-v4": bidict(
+        {
+            "noop": 0,
+            "fire": 1,
+            "rightfire": 2,
+            "leftfire": 3
+        }
+    ),
+    "CrazyClimberNoFrameskip-v4": bidict(
+        {
+            "noop": 0,
+            "up": 1,
+            "right": 2,
+            "left": 3,
+            "down": 4,
+            "upright": 5,
+            "upleft": 6,
+            "downright": 7,
+            "downleft": 8
+        }
+    ),
+    "DefenderNoFrameskip-v4": full_action_space,
+    "EnduroNoFrameskip-v4": bidict(
+        {
+            "noop": 0,
+            "fire": 1,
+            "right": 2,
+            "left": 3,
+            "down": 4,
+            "downright": 5,
+            "downleft": 6,
+            "rightfire": 7,
+            "leftfire": 8,
+        }
+    ),
+    "JamesbondNoFrameskip-v4": full_action_space,
+    "PhoenixNoFrameskip-v4": bidict(
+        {
+            "noop": 0,
+            "fire": 1,
+            "right": 2,
+            "left": 3,
+            "down": 4,
+            "rightfire": 5,
+            "leftfire": 6,
+            "downfire": 7,
+        }
+    )
 }
