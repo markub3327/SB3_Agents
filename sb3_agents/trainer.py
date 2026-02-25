@@ -6,6 +6,7 @@
 
 import argparse
 
+import mars_explorer
 import ale_py
 import gymnasium
 import stable_retro as retro

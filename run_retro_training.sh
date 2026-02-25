@@ -32,8 +32,8 @@ envs=(
     ### Sport games
     # "SuperHangOn-Genesis-v0"
     # "NHL94-Genesis-v0"
-    "F1-Genesis-v0"
-    "EuropeanClubSoccer-Genesis-v0"
+    # "F1-Genesis-v0"
+    # "EuropeanClubSoccer-Genesis-v0"
 
     ### Arcade shooters
     # "BioHazardBattle-Genesis-v0"
@@ -61,7 +61,7 @@ envs=(
 #     "GuerrillaWar-Nes-v0"
 #     "POWPrisonersOfWar-Nes-v0"
 #     "SuperC-Nes-v0"
-    "AeroFighters-Snes-v0"
+    # "AeroFighters-Snes-v0"
 
     ### Action games
     # "StreetsOfRage3-Genesis-v0"
