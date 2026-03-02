@@ -20,10 +20,11 @@ from stable_baselines3.common.callbacks import EvalCallback
 from stable_baselines3.common.env_util import make_atari_env, make_vec_env
 from stable_baselines3.common.monitor import Monitor
 from stable_baselines3.common.vec_env import (SubprocVecEnv, VecFrameStack,
-                                              VecTransposeImage)
+                                              VecTransposeImage, VecNormalize)
 from wandb.integration.sb3 import WandbCallback
 
 import wandb
+import torch
 
 gymnasium.register_envs(ale_py)
 
@@ -112,6 +113,8 @@ if __name__ == "__main__":
         config = load_hyperparams(args.env)
         # Create environment
         vec_env = make_vec_env(args.env, n_envs=config["n_envs"], seed=1234)
+        if config["normalize"]:
+            vec_env = VecNormalize(vec_env, norm_obs=True, norm_reward=True)
     else:
         raise ValueError(f"Unsupported emulator: {args.emulator}")
 
@@ -125,6 +128,9 @@ if __name__ == "__main__":
         render=False,
     )
 
+    # Set the optimizer class
+    config["policy_kwargs"]["optimizer_class"] = torch.optim.AdamW
+
     model = PPO(
         policy=config["policy"],
         env=vec_env,
@@ -137,6 +143,9 @@ if __name__ == "__main__":
         clip_range=config["clip_range"],
         vf_coef=config["vf_coef"],
         ent_coef=config["ent_coef"],
+        normalize_advantage=config["normalize_advantage"],
+        max_grad_norm=config["max_grad_norm"],
+        policy_kwargs=config["policy_kwargs"],
         verbose=0,
         tensorboard_log=f"./logs/{args.env}",
     )

@@ -1,87 +1,49 @@
-# Based on https://github.com/DLR-RM/rl-baselines3-zoo/blob/master/hyperparams/ppo.yml
-
-Taxi-v3:
-  normalize: true
-  n_envs: 128
-  n_timesteps: !!float 1e7
-  policy: 'MlpPolicy'
-  n_steps: 16
-  batch_size: 64
-  gae_lambda: 0.98
-  gamma: 0.99
-  n_epochs: 4
-  ent_coef: 0.0
-  learning_rate: !!float 2.5e-4
-  clip_range: 0.2
-  vf_coef: 0.5
-  eval_freq: 1_000
-
-FrozenLake-v1:
-  normalize: true
-  n_envs: 128
-  n_timesteps: !!float 1e7
-  policy: 'MlpPolicy'
-  n_steps: 16
-  batch_size: 64
-  gae_lambda: 0.98
-  gamma: 0.99
-  n_epochs: 4
-  ent_coef: 0.0
-  learning_rate: !!float 2.5e-4
-  clip_range: 0.2
-  vf_coef: 0.5
-  eval_freq: 1_000
-
-CliffWalking-v1:
-  normalize: true
-  n_envs: 128
-  n_timesteps: !!float 1e7
-  policy: 'MlpPolicy'
-  n_steps: 16
-  batch_size: 64
-  gae_lambda: 0.98
-  gamma: 0.99
-  n_epochs: 4
-  ent_coef: 0.0
-  learning_rate: !!float 2.5e-4
-  clip_range: 0.2
-  vf_coef: 0.5
-  eval_freq: 1_000
+# https://github.com/DLR-RM/rl-baselines3-zoo/blob/master/hyperparams/ppo.yml
 
 LunarLander-v3:
-  n_envs: 128
-  n_timesteps: !!float 1e7
+  normalize: false
+  n_envs: 16
+  n_timesteps: !!float 1e6
   policy: 'MlpPolicy'
   n_steps: 1024
-  batch_size: 64
+  batch_size: 256
   gae_lambda: 0.98
   gamma: 0.999
   n_epochs: 4
   ent_coef: 0.01
-  learning_rate: !!float 2.5e-4
+  learning_rate: 0.0003
   clip_range: 0.2
   vf_coef: 0.5
+  normalize_advantage: true
+  max_grad_norm: 0.5
+  policy_kwargs:
+    ortho_init: true
   eval_freq: 1_000
 
 Acrobot-v1:
   normalize: true
-  n_envs: 128
-  n_timesteps: !!float 1e7
+  n_envs: 16
+  n_timesteps: !!float 1e6
   policy: 'MlpPolicy'
   n_steps: 256
-  batch_size: 64
+  batch_size: 256
   gae_lambda: 0.94
   gamma: 0.99
   n_epochs: 4
   ent_coef: 0.0
-  learning_rate: !!float 2.5e-4
+  learning_rate: 0.0003
   clip_range: 0.2
   vf_coef: 0.5
+  normalize_advantage: true
+  max_grad_norm: 0.5
+  policy_kwargs:
+    ortho_init: true
   eval_freq: 1_000
 
 CartPole-v1:
-  n_envs: 128
-  n_timesteps: !!float 1e7
+  normalize: false
+  n_envs: 8
+  n_timesteps: !!float 1e5
   policy: 'MlpPolicy'
   n_steps: 32
   batch_size: 256
@@ -92,69 +54,31 @@ CartPole-v1:
   learning_rate: 0.001
   clip_range: 0.2
   vf_coef: 0.5
+  normalize_advantage: true
+  max_grad_norm: 0.5
+  policy_kwargs:
+    ortho_init: true
   eval_freq: 1_000
 
 MountainCar-v0:
   normalize: true
-  n_envs: 128
-  n_timesteps: !!float 1e7
+  n_envs: 16
+  n_timesteps: !!float 1e6
   policy: 'MlpPolicy'
-  n_steps: 16
-  batch_size: 64
+  n_steps: 32
+  batch_size: 256
   gae_lambda: 0.98
   gamma: 0.99
   n_epochs: 4
   ent_coef: 0.0
-  learning_rate: !!float 2.5e-4
+  learning_rate: 0.0003
   clip_range: 0.2
   vf_coef: 0.5
-  eval_freq: 1_000
-
-BipedalWalkerHardcore-v3:
-  normalize: true
-  n_envs: 128
-  n_timesteps: !!float 10e7
-  policy: 'MlpPolicy'
-  n_steps: 2048
-  batch_size: 64
-  gae_lambda: 0.95
-  gamma: 0.99
-  n_epochs: 10
-  ent_coef: 0.001
-  learning_rate: !!float 2.5e-4
-  clip_range: 0.2
-  vf_coef: 0.5
-  eval_freq: 100_000
-
-CarRacing-v3:
-  frame_skip: 2
-  frame_stack: 2
-  normalize:
-    norm_obs: false
-    norm_reward: true
-  n_envs: 128
-  n_timesteps: !!float 1e7
-  policy: 'CnnPolicy'
-  batch_size: 128
-  n_steps: 512
-  gamma: 0.99
-  gae_lambda: 0.95
-  n_epochs: 10
-  ent_coef: 0.0
-  sde_sample_freq: 4
+  normalize_advantage: true
   max_grad_norm: 0.5
-  vf_coef: 0.5
-  learning_rate: !!float 1e-4
-  use_sde: true
-  clip_range: 0.2
   policy_kwargs:
-    log_std_init: -2
-    ortho_init: false
-    activation_fn: 'nn.GELU'
-    net_arch:
-      pi: [256]
-      vf: [256]
-  eval_freq: 10_000
+    ortho_init: true
+  eval_freq: 1_000
 
 ale:
   frame_stack: 4
@@ -162,7 +86,7 @@ ale:
   n_envs: 128
   n_steps: 128
   gamma: 0.99
-  gae_lambda: 0.70
+  gae_lambda: 0.85
   n_epochs: 4
   batch_size: 256
   n_timesteps: !!float 1e7
@@ -170,7 +94,13 @@ ale:
   clip_range: 0.1
   vf_coef: 0.5
   ent_coef: 0.01
-  eval_freq: 100_000
+  normalize_advantage: true
+  max_grad_norm: 0.5
+  policy_kwargs:
+    optimizer_kwargs:
+      eps: 1.0e-5
+    ortho_init: true
+  eval_freq: 10_000
 
 retro:
   frame_stack: 4
@@ -188,6 +118,7 @@ retro:
   ent_coef: 0.01
   eval_freq: 100_000
 
+### https://github.com/markub3327/MarsExplorer
 explorer-v1:
   frame_stack: 4
   policy: 'CnnPolicy'
@@ -203,3 +134,30 @@ explorer-v1:
   vf_coef: 0.5
   ent_coef: 0.01
   eval_freq: 100_000
+
+### https://minigrid.farama.org/
+MiniGrid-Empty-Random-5x5-v0: &minigrid-defaults
+  env_wrapper: minigrid.wrappers.FlatObsWrapper # See GH/1320#issuecomment-1421108191
+  normalize: true
+  n_envs: 8 # number of environment copies running in parallel
+  n_timesteps: !!float 1e5
+  policy: 'MlpPolicy'
+  n_steps: 128 # batch size is n_steps * n_env
+  batch_size: 64 # Number of training minibatches per update
+  gae_lambda: 0.95 #  Factor for trade-off of bias vs variance for Generalized Advantage Estimator
+  gamma: 0.99
+  n_epochs: 10 #  Number of epoch when optimizing the surrogate
+  ent_coef: 0.0 # Entropy coefficient for the loss calculation
+  learning_rate: 2.5e-4 # The learning rate, it can be a function
+  clip_range: 0.2 # Clipping parameter, it can be a function
+
+MiniGrid-DoorKey-5x5-v0:
+  <<: *minigrid-defaults
+  n_timesteps: !!float 1e5
+
+MiniGrid-Fetch-5x5-N2-v0:
+  <<: *minigrid-defaults
+  n_timesteps: !!float 5e6
+
+MiniGrid-Unlock-v0:
+  <<: *minigrid-defaults

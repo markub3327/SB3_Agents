@@ -24,6 +24,7 @@ full_action_space = bidict(
     }
 )
 ids_action_vocab = {
+    ### Atari 2600
     "GopherNoFrameskip-v4": bidict(
         {
             "noop": 0,
@@ -143,5 +144,108 @@ ids_action_vocab = {
             "leftfire": 6,
             "downfire": 7,
         }
-    )
+    ),
+    "BankHeistNoFrameskip-v4": full_action_space,
+    "AtlantisNoFrameskip-v4": bidict(
+        {
+            "noop": 0,
+            "fire": 1,
+            "rightfire": 2,
+            "leftfire": 3,
+        }
+    ),
+    "TutankhamNoFrameskip-v4":bidict(
+        {
+            "noop": 0,
+            "up": 1,
+            "right": 2,
+            "left": 3,
+            "down": 4,
+            "upfire": 5,
+            "rightfire": 6,
+            "leftfire": 7,
+        }
+    ),
+    "KungFuMasterNoFrameskip-v4": bidict(
+        {
+            "noop": 0,
+            "up": 1,
+            "right": 2,
+            "left": 3,
+            "down": 4,
+            "downright": 5,
+            "downleft": 6,
+            "rightfire": 7,
+            "leftfire": 8,
+            "downfire": 9,
+            "uprightfire": 10,
+            "upleftfire": 11,
+            "downrightfire": 12,
+            "downleftfire": 13,
+        }
+    ),
+    "UpNDownNoFrameskip-v4": bidict(
+        {
+            "noop": 0,
+            "fire": 1,
+            "up": 2,
+            "down": 3,
+            "upfire": 4,
+            "downfire": 5,
+        }
+    ),
+    "DemonAttackNoFrameskip-v4": bidict(
+        {
+            "noop": 0,
+            "fire": 1,
+            "right": 2,
+            "left": 3,
+            "rightfire": 4,
+            "leftfire": 5,
+        }
+    ),
+    "KangarooNoFrameskip-v4": full_action_space,
+    "VideoPinballNoFrameskip-v4": bidict(
+        {
+            "noop": 0,
+            "fire": 1,
+            "up": 2,
+            "right": 3,
+            "left": 4,
+            "down": 5,
+            "upfire": 6,
+            "rightfire": 7,
+            "leftfire": 8,
+        }
+    ),
+    ### Classic control
+    "CartPole-v1": bidict(
+        {
+            "left": 0,
+            "right": 1,
+        }
+    ),
+    "MountainCar-v0": bidict(
+        {
+            "left": 0,
+            "noop": 1,
+            "right": 2,
+        }
+    ),
+    "Acrobot-v1": bidict(
+        {
+            "left": 0,
+            "noop": 1,
+            "right": 2,
+        }
+    ),
+    ### Box2D
+    "LunarLander-v3": bidict(
+        {
+            "noop": 0,
+            "left": 1,
+            "up": 2,
+            "right": 3,
+        }
+    ),
 }
