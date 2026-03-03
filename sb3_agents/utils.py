@@ -91,7 +91,7 @@ def rollout(
     obs, info = vec_env.reset()
     score = np.zeros(vec_env.num_envs, dtype=np.float32)
     lives = np.array(
-        [info[i]["lives"] if "lives" in info[0] else 0 for i in range(vec_env.num_envs)]
+        [info[i]["lives"] if "lives" in info[0] else -1 for i in range(vec_env.num_envs)]
     )
     started = np.ones(vec_env.num_envs, dtype=np.bool)
 
@@ -153,7 +153,7 @@ def rollout(
 
         # Update lives[t+1]
         lives = np.array(
-            [info[i]["lives"] if "lives" in info[0] else 0 for i in range(vec_env.num_envs)]
+            [info[i]["lives"] if "lives" in info[0] else -1 for i in range(vec_env.num_envs)]
         )
 
         # Update score[t+1]

@@ -6,6 +6,7 @@
 
 import argparse
 
+import minigrid
 import mars_explorer
 import ale_py
 import gymnasium
@@ -69,7 +70,7 @@ if __name__ == "__main__":
         "--emulator",
         type=str,
         required=True,
-        choices=["ale", "retro", "classic"],
+        choices=["ale", "retro", "classic", "minigrid"],
         help="The name of the emulator ['ale', 'retro', 'classic']",
     )
     parser.add_argument(
@@ -107,16 +108,31 @@ if __name__ == "__main__":
         vec_env = VecTransposeImage(vec_env)
         vec_env.action_space.seed(1234)
         vec_env.seed(1234)
+    # For MiniGrid
+    elif "minigrid" in args.emulator.lower():
+        # Load PPO configuration
+        config = load_hyperparams(args.env)
+        # Create environment
+        vec_env = make_vec_env(args.env, n_envs=config["n_envs"], seed=1234)
+        # Use MiniGrid wrapper
+        vec_env = minigrid.wrappers.FlatObsWrapper(vec_env)
     # For Classic
     elif "classic" in args.emulator.lower():
         # Load PPO configuration
         config = load_hyperparams(args.env)
         # Create environment
         vec_env = make_vec_env(args.env, n_envs=config["n_envs"], seed=1234)
-        if config["normalize"]:
-            vec_env = VecNormalize(vec_env, norm_obs=True, norm_reward=True)
     else:
         raise ValueError(f"Unsupported emulator: {args.emulator}")
+
+    # Use normalization
+    if config["normalize"]:
+        if config["policy"] == "CnnPolicy":
+            vec_env = VecNormalize(vec_env, norm_obs=False, norm_reward=True)
+        elif config["policy"] == "MlpPolicy":
+            vec_env = VecNormalize(vec_env, norm_obs=True, norm_reward=True)
+        else:
+            raise ValueError(f"Unsupported policy: {config['policy']}")
 
     # Use deterministic actions for evaluation
     eval_callback = EvalCallback(
