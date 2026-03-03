@@ -36,7 +36,6 @@ def random_splits(
     indices = []
     current_idx = 0
     n_steps = len(states)
-    remainder = False
     while current_idx < n_steps:
         remaining = n_steps - current_idx
         if remaining > min_size:
@@ -46,23 +45,20 @@ def random_splits(
             )
             indices.append(current_idx)
         else:
-            remainder = True
             break
 
     # If there is a remainder, merge it into the final window
-    indices = indices[:-1] if remainder else indices
-
     return (
-        np.split(states, indices),
-        np.split(actions, indices),
-        np.split(actions_logits, indices),
-        np.split(rewards, indices),
-        np.split(scores, indices),
-        np.split(terminated, indices),
-        np.split(truncated, indices),
-        np.split(started, indices),
-        np.split(lives, indices),
-        np.split(imgs_embed, indices),
+        np.split(states, indices[:-1]),
+        np.split(actions, indices[:-1]),
+        np.split(actions_logits, indices[:-1]),
+        np.split(rewards, indices[:-1]),
+        np.split(scores, indices[:-1]),
+        np.split(terminated, indices[:-1]),
+        np.split(truncated, indices[:-1]),
+        np.split(started, indices[:-1]),
+        np.split(lives, indices[:-1]),
+        np.split(imgs_embed, indices[:-1]),
     )
 
 

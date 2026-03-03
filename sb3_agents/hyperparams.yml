@@ -124,7 +124,7 @@ retro:
     optimizer_kwargs:
       eps: 1.0e-5
     ortho_init: true
-  eval_freq: 100_000
+  eval_freq: 10_000
 
 ### https://github.com/markub3327/MarsExplorer
 explorer-v1:
@@ -148,7 +148,7 @@ explorer-v1:
     optimizer_kwargs:
       eps: 1.0e-5
     ortho_init: true
-  eval_freq: 100_000
+  eval_freq: 10_000
 
 ### https://minigrid.farama.org/
 MiniGrid-Empty-Random-5x5-v0: &minigrid-defaults

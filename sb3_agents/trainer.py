@@ -125,15 +125,6 @@ if __name__ == "__main__":
     else:
         raise ValueError(f"Unsupported emulator: {args.emulator}")
 
-    # Use normalization
-    if config["normalize"]:
-        if config["policy"] == "CnnPolicy":
-            vec_env = VecNormalize(vec_env, norm_obs=False, norm_reward=True)
-        elif config["policy"] == "MlpPolicy":
-            vec_env = VecNormalize(vec_env, norm_obs=True, norm_reward=True)
-        else:
-            raise ValueError(f"Unsupported policy: {config['policy']}")
-
     # Use deterministic actions for evaluation
     eval_callback = EvalCallback(
         vec_env,
@@ -143,6 +134,15 @@ if __name__ == "__main__":
         deterministic=True,
         render=False,
     )
+
+    # Use normalization
+    if config["normalize"]:
+        if config["policy"] == "CnnPolicy":
+            vec_env = VecNormalize(vec_env, norm_obs=False, norm_reward=True)
+        elif config["policy"] == "MlpPolicy":
+            vec_env = VecNormalize(vec_env, norm_obs=True, norm_reward=True)
+        else:
+            raise ValueError(f"Unsupported policy: {config['policy']}")
 
     # Set the optimizer class
     config["policy_kwargs"]["optimizer_class"] = torch.optim.AdamW
