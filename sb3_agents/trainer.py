@@ -122,8 +122,19 @@ if __name__ == "__main__":
         config = load_hyperparams(args.env)
         # Create environment
         vec_env = make_vec_env(args.env, n_envs=config["n_envs"], seed=1234)
+        if config["policy"] == "CnnPolicy":
+            vec_env = VecTransposeImage(vec_env)
     else:
         raise ValueError(f"Unsupported emulator: {args.emulator}")
+
+    # Use normalization
+    if config["normalize"]:
+        if config["policy"] == "CnnPolicy":
+            vec_env = VecNormalize(vec_env, norm_obs=False, norm_reward=True)
+        elif config["policy"] == "MlpPolicy":
+            vec_env = VecNormalize(vec_env, norm_obs=True, norm_reward=True)
+        else:
+            raise ValueError(f"Unsupported policy: {config['policy']}")
 
     # Use deterministic actions for evaluation
     eval_callback = EvalCallback(
@@ -134,15 +145,6 @@ if __name__ == "__main__":
         deterministic=True,
         render=False,
     )
-
-    # Use normalization
-    if config["normalize"]:
-        if config["policy"] == "CnnPolicy":
-            vec_env = VecNormalize(vec_env, norm_obs=False, norm_reward=True)
-        elif config["policy"] == "MlpPolicy":
-            vec_env = VecNormalize(vec_env, norm_obs=True, norm_reward=True)
-        else:
-            raise ValueError(f"Unsupported policy: {config['policy']}")
 
     # Set the optimizer class
     config["policy_kwargs"]["optimizer_class"] = torch.optim.AdamW
