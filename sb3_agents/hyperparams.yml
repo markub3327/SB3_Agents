@@ -6,7 +6,7 @@ LunarLander-v3:
   n_timesteps: !!float 1e6
   policy: 'MlpPolicy'
   n_steps: 1024
-  batch_size: 256
+  batch_size: 64
   gae_lambda: 0.98
   gamma: 0.999
   n_epochs: 4
@@ -18,10 +18,12 @@ LunarLander-v3:
   max_grad_norm: 0.5
   policy_kwargs:
     ortho_init: true
-  eval_freq: 1_000
+  eval_freq: 1_024
 
 Acrobot-v1:
-  normalize: true
+  normalize:
+    norm_obs: true
+    norm_reward: false
   n_envs: 16
   n_timesteps: !!float 1e6
   policy: 'MlpPolicy'
@@ -38,7 +40,7 @@ Acrobot-v1:
   max_grad_norm: 0.5
   policy_kwargs:
     ortho_init: true
-  eval_freq: 1_000
+  eval_freq: 1_024
 
 CartPole-v1:
   normalize: false
@@ -58,14 +60,16 @@ CartPole-v1:
   max_grad_norm: 0.5
   policy_kwargs:
     ortho_init: true
-  eval_freq: 1_000
+  eval_freq: 1_024
 
 MountainCar-v0:
-  normalize: true
+  normalize:
+    norm_obs: true
+    norm_reward: false
   n_envs: 16
   n_timesteps: !!float 1e6
   policy: 'MlpPolicy'
-  n_steps: 32
+  n_steps: 16
   batch_size: 256
   gae_lambda: 0.98
   gamma: 0.99
@@ -78,7 +82,7 @@ MountainCar-v0:
   max_grad_norm: 0.5
   policy_kwargs:
     ortho_init: true
-  eval_freq: 1_000
+  eval_freq: 1_024
 
 ale:
   normalize: false
@@ -149,29 +153,3 @@ explorer-v1:
       eps: 1.0e-5
     ortho_init: true
   eval_freq: 10_000
-
-### https://minigrid.farama.org/
-MiniGrid-Empty-Random-5x5-v0: &minigrid-defaults
-  normalize: true
-  n_envs: 8 # number of environment copies running in parallel
-  n_timesteps: !!float 1e5
-  policy: 'MlpPolicy'
-  n_steps: 128 # batch size is n_steps * n_env
-  batch_size: 64 # Number of training minibatches per update
-  gae_lambda: 0.95 #  Factor for trade-off of bias vs variance for Generalized Advantage Estimator
-  gamma: 0.99
-  n_epochs: 10 #  Number of epoch when optimizing the surrogate
-  ent_coef: 0.0 # Entropy coefficient for the loss calculation
-  learning_rate: !!float 2.5e-4 # The learning rate, it can be a function
-  clip_range: 0.2 # Clipping parameter, it can be a function
-
-MiniGrid-DoorKey-5x5-v0:
-  <<: *minigrid-defaults
-  n_timesteps: !!float 1e5
-
-MiniGrid-Fetch-5x5-N2-v0:
-  <<: *minigrid-defaults
-  n_timesteps: !!float 5e6
-
-MiniGrid-Unlock-v0:
-  <<: *minigrid-defaults

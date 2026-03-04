@@ -129,12 +129,11 @@ if __name__ == "__main__":
 
     # Use normalization
     if config["normalize"]:
-        if config["policy"] == "CnnPolicy":
-            vec_env = VecNormalize(vec_env, norm_obs=False, norm_reward=True)
-        elif config["policy"] == "MlpPolicy":
-            vec_env = VecNormalize(vec_env, norm_obs=True, norm_reward=True)
-        else:
-            raise ValueError(f"Unsupported policy: {config['policy']}")
+        vec_env = VecNormalize(
+            vec_env,
+            norm_obs=config["normalize"]["norm_obs"],
+            norm_reward=config["normalize"]["norm_reward"],
+        )
 
     # Use deterministic actions for evaluation
     eval_callback = EvalCallback(
@@ -157,7 +156,7 @@ if __name__ == "__main__":
         gae_lambda=config["gae_lambda"],
         n_epochs=config["n_epochs"],
         batch_size=config["batch_size"],
-        learning_rate=cosine_schedule(config["learning_rate"]),
+        learning_rate=config["learning_rate"], # cosine_schedule(config["learning_rate"]),
         clip_range=config["clip_range"],
         vf_coef=config["vf_coef"],
         ent_coef=config["ent_coef"],
