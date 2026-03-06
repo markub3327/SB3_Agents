@@ -3,6 +3,8 @@ import torch
 from gymnasium import spaces
 from torch.distributions import Bernoulli, Categorical
 from vocab import ids_action_vocab
+import yaml
+
 
 
 def cumsum_with_reset(rewards, dones):
@@ -172,3 +174,16 @@ def rollout(
         np.stack(lives_list, axis=0),
         np.stack(imgs_embed_list, axis=0) if img_embed_model else [],
     )
+
+def load_hyperparams(env_name, file_path="./sb3_agents/hyperparams.yml"):
+    """
+    Loads hyperparameters for a specific environment from a YAML file.
+    """
+    with open(file_path, "r") as f:
+        # Loader=yaml.SafeLoader is recommended for security
+        all_params = yaml.load(f, Loader=yaml.SafeLoader)
+
+    if env_name not in all_params:
+        raise ValueError(f"Environment '{env_name}' not found in hyperparameters list")
+
+    return all_params[env_name]

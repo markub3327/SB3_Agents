@@ -11,7 +11,6 @@ import mars_explorer
 import ale_py
 import gymnasium
 import stable_retro as retro
-import yaml
 from gymnasium.wrappers import TimeLimit
 from schedule import cosine_schedule
 from stable_baselines3 import PPO
@@ -23,6 +22,7 @@ from stable_baselines3.common.monitor import Monitor
 from stable_baselines3.common.vec_env import (SubprocVecEnv, VecFrameStack,
                                               VecTransposeImage, VecNormalize)
 from wandb.integration.sb3 import WandbCallback
+from utils import load_hyperparams
 
 import wandb
 import torch
@@ -46,20 +46,6 @@ def make_retro_env(env_name):
         return env
 
     return _body
-
-
-def load_hyperparams(env_name, file_path="./sb3_agents/hyperparams.yml"):
-    """
-    Loads hyperparameters for a specific environment from a YAML file.
-    """
-    with open(file_path, "r") as f:
-        # Loader=yaml.SafeLoader is recommended for security
-        all_params = yaml.load(f, Loader=yaml.SafeLoader)
-
-    if env_name not in all_params:
-        raise ValueError(f"Environment '{env_name}' not found in hyperparameters list")
-
-    return all_params[env_name]
 
 
 if __name__ == "__main__":

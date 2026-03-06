@@ -5,8 +5,8 @@ envs=(
 #    "LunarLander-v3"
 #    "Acrobot-v1"
 #    "CartPole-v1"
-#    "MountainCar-v0"
-    "explorer-v1"
+    "MountainCar-v0"
+#    "explorer-v1"
 )
 
 # Loop through each environment and run the trainer
