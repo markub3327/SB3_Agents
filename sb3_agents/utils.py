@@ -2,14 +2,26 @@ import numpy as np
 import torch
 from gymnasium import spaces
 from torch.distributions import Bernoulli, Categorical
+from transformers import AutoImageProcessor, AutoModel
 from vocab import ids_action_vocab
 import yaml
 
 
+class ImageFilterForQueue:
+    _model_id = "facebook/dinov3-vitl16-pretrain-lvd1689m"    # ViT-0.3B (distilled)
 
-def cumsum_with_reset(rewards, dones):
-    cumsum = np.zeros_like(rewards, dtype=np.float32)
-    score = np.zeros_like(rewards[0], dtype=np.float32)
+    def __init__(self):
+        super().__init__()
+        # Image filter for redundant images in queue (DinoV3 Vision Transformer model)
+        self.processor = AutoImageProcessor.from_pretrained(self._model_id)
+        self.model = AutoModel.from_pretrained(self._model_id, device_map="cuda")
+
+    def get_embedding(self, inputs):
+        with torch.no_grad():  # Don't store gradients
+            inputs = self.processor(images=inputs, return_tensors="pt").to(self.model.device)
+            outputs = self.model(**inputs)
+        return outputs.pooler_output.cpu().numpy()
+
 
 def random_splits(
         states,
