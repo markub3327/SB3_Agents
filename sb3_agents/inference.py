@@ -371,6 +371,7 @@ if __name__ == "__main__":
 
             # load datasets from folder
             shards = list(range(args.n_envs))
+            cpus = os.cpu_count()
             dataset = Dataset.from_generator(
                 dataset_generator,
                 features=Features({
@@ -388,7 +389,7 @@ if __name__ == "__main__":
                     },
                     'images': Sequence(Image())
                 }),
-                num_proc=32,
+                num_proc=cpus if cpus <= args.n_envs else args.n_envs,
                 gen_kwargs={"shards": shards}
             )
             print(f"Total samples:", len(dataset))
