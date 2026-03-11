@@ -1,17 +1,20 @@
 .DS_Store
 .ipynb_checkpoints
-.venv
-venv
 .idea
-wandb
-logs
-ROMs
+
+wandb/
+
+logs/
+
+ROMs/
 
 *.err
 *.out
 
-slurm
+slurm/
 
-videos
+videos/
 
-dataset
+datasets/
+
+*.csv
