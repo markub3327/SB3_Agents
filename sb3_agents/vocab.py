@@ -24,7 +24,7 @@ full_action_space = bidict(
     }
 )
 ids_action_vocab = {
-    ### Atari 2600
+    # Atari 2600
     "GopherNoFrameskip-v4": bidict(
         {
             "noop": 0,
@@ -98,12 +98,7 @@ ids_action_vocab = {
     "BoxingNoFrameskip-v4": full_action_space,
     "FishingDerbyNoFrameskip-v4": full_action_space,
     "AtlantisNoFrameskip-v4": bidict(
-        {
-            "noop": 0,
-            "fire": 1,
-            "rightfire": 2,
-            "leftfire": 3
-        }
+        {"noop": 0, "fire": 1, "rightfire": 2, "leftfire": 3}
     ),
     "CrazyClimberNoFrameskip-v4": bidict(
         {
@@ -115,7 +110,7 @@ ids_action_vocab = {
             "upright": 5,
             "upleft": 6,
             "downright": 7,
-            "downleft": 8
+            "downleft": 8,
         }
     ),
     "DefenderNoFrameskip-v4": full_action_space,
@@ -146,15 +141,7 @@ ids_action_vocab = {
         }
     ),
     "BankHeistNoFrameskip-v4": full_action_space,
-    "AtlantisNoFrameskip-v4": bidict(
-        {
-            "noop": 0,
-            "fire": 1,
-            "rightfire": 2,
-            "leftfire": 3,
-        }
-    ),
-    "TutankhamNoFrameskip-v4":bidict(
+    "TutankhamNoFrameskip-v4": bidict(
         {
             "noop": 0,
             "up": 1,
@@ -218,7 +205,7 @@ ids_action_vocab = {
             "leftfire": 8,
         }
     ),
-    ### Classic control
+    # Classic control
     "CartPole-v1": bidict(
         {
             "left": 0,
@@ -239,7 +226,7 @@ ids_action_vocab = {
             "right": 2,
         }
     ),
-    ### Box2D
+    # Box2D
     "LunarLander-v3": bidict(
         {
             "noop": 0,

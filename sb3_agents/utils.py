@@ -1,14 +1,14 @@
 import numpy as np
 import torch
+import yaml
 from gymnasium import spaces
-from torch.distributions import Bernoulli, Categorical
+from torch.distributions import Bernoulli
 from transformers import AutoImageProcessor, AutoModel
 from vocab import ids_action_vocab
-import yaml
 
 
 class ImageFilterForQueue:
-    _model_id = "facebook/dinov3-vitl16-pretrain-lvd1689m"    # ViT-0.3B (distilled)
+    _model_id = "facebook/dinov3-vitl16-pretrain-lvd1689m"  # ViT-0.3B (distilled)
 
     def __init__(self):
         super().__init__()
@@ -18,27 +18,39 @@ class ImageFilterForQueue:
 
     def get_embedding(self, inputs):
         with torch.no_grad():  # Don't store gradients
-            inputs = self.processor(images=inputs, return_tensors="pt").to(self.model.device)
+            inputs = self.processor(images=inputs, return_tensors="pt").to(
+                self.model.device
+            )
             outputs = self.model(**inputs)
         return outputs.pooler_output.cpu().numpy()
 
 
 def random_splits(
-        states,
-        actions,
-        actions_logits,
-        rewards,
-        scores,
-        terminated,
-        truncated,
-        started,
-        lives,
-        imgs_embed,
-        *, min_size, max_size):
+    states,
+    actions,
+    actions_logits,
+    rewards,
+    scores,
+    terminated,
+    truncated,
+    started,
+    lives,
+    imgs_embed,
+    *,
+    min_size,
+    max_size,
+):
     # Check the shape of arrays before splitting
     assert (
-        len(states) == len(actions) == len(actions_logits) == len(rewards) ==
-        len(terminated) == len(truncated) == len(started) == len(lives) == len(imgs_embed)
+        len(states)
+        == len(actions)
+        == len(actions_logits)
+        == len(rewards)
+        == len(terminated)
+        == len(truncated)
+        == len(started)
+        == len(lives)
+        == len(imgs_embed)
     ), (
         f"Length mismatch in trajectory data: "
         f"states={len(states)}, actions={len(actions)}, "
@@ -53,10 +65,7 @@ def random_splits(
     while current_idx < n_steps:
         remaining = n_steps - current_idx
         if remaining > min_size:
-            current_idx += np.random.randint(
-                min_size,
-                min(remaining, max_size) + 1
-            )
+            current_idx += np.random.randint(min_size, min(remaining, max_size) + 1)
             indices.append(current_idx)
         else:
             break
@@ -76,14 +85,7 @@ def random_splits(
     )
 
 
-def rollout(
-        vec_env,
-        model,
-        episode_length,
-        *,
-        img_embed_model=None,
-        random=False
-):
+def rollout(vec_env, model, episode_length, *, img_embed_model=None, random=False):
     state_list = []
     action_list = []
     action_logits_list = []
@@ -97,11 +99,14 @@ def rollout(
 
     action_space = vec_env.action_space
 
-    ### Start of episode
+    # Start of episode
     obs, info = vec_env.reset()
     score = np.zeros(vec_env.num_envs, dtype=np.float32)
     lives = np.array(
-        [info[i]["lives"] if "lives" in info[0] else -1 for i in range(vec_env.num_envs)]
+        [
+            info[i]["lives"] if "lives" in info[0] else -1
+            for i in range(vec_env.num_envs)
+        ]
     )
     started = np.ones(vec_env.num_envs, dtype=np.bool)
 
@@ -120,7 +125,7 @@ def rollout(
                 action_logits_list.append(logits.cpu().numpy())
 
                 if isinstance(action_space, spaces.Discrete):
-                    action = torch.argmax(logits, dim=-1).cpu().numpy()     # hard labels
+                    action = torch.argmax(logits, dim=-1).cpu().numpy()  # hard labels
                 elif isinstance(action_space, spaces.MultiBinary):
                     action = Bernoulli(logits=logits).sample().cpu().numpy()
                 else:
@@ -133,9 +138,14 @@ def rollout(
             imgs_embed_list.append(img_embed_model.get_embedding(rendered_img))
 
         # Get action[t]
-        action_list.append(np.asarray([
-            ids_action_vocab[vec_env.env_name].inverse[action[i]] for i in range(vec_env.num_envs)
-        ]))
+        action_list.append(
+            np.asarray(
+                [
+                    ids_action_vocab[vec_env.env_name].inverse[action[i]]
+                    for i in range(vec_env.num_envs)
+                ]
+            )
+        )
 
         # Get lives[t]
         lives_list.append(lives)
@@ -148,7 +158,24 @@ def rollout(
 
         # Perform a step
         obs, reward, terminated, info = vec_env.step(action)
-        print("Game: ", vec_env.env_name, ", t=", t, ": action:", action, "reward:", reward, "score:", score, "terminated:", terminated, "started", started, "info:", info)
+        print(
+            "Game: ",
+            vec_env.env_name,
+            ", t=",
+            t,
+            ": action:",
+            action,
+            "reward:",
+            reward,
+            "score:",
+            score,
+            "terminated:",
+            terminated,
+            "started",
+            started,
+            "info:",
+            info,
+        )
 
         # Get reward[t] (reward for action taken)
         reward_list.append(reward.copy())
@@ -163,7 +190,10 @@ def rollout(
 
         # Update lives[t+1]
         lives = np.array(
-            [info[i]["lives"] if "lives" in info[0] else -1 for i in range(vec_env.num_envs)]
+            [
+                info[i]["lives"] if "lives" in info[0] else -1
+                for i in range(vec_env.num_envs)
+            ]
         )
 
         # Update score[t+1]
@@ -177,7 +207,7 @@ def rollout(
     return (
         np.stack(state_list, axis=0),
         np.stack(action_list, axis=0),
-        np.stack(action_logits_list, axis=0),
+        np.stack(action_logits_list, axis=0) if not random else [],
         np.stack(reward_list, axis=0),
         np.stack(score_list, axis=0),
         np.stack(terminated_list, axis=0),
@@ -186,6 +216,7 @@ def rollout(
         np.stack(lives_list, axis=0),
         np.stack(imgs_embed_list, axis=0) if img_embed_model else [],
     )
+
 
 def load_hyperparams(env_name, file_path="./sb3_agents/hyperparams.yml"):
     """

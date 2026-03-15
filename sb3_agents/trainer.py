@@ -6,28 +6,36 @@
 
 import argparse
 
-import minigrid
-import mars_explorer
 import ale_py
 import gymnasium
+import mars_explorer
+import minigrid
 import stable_retro as retro
+import torch
 from gymnasium.wrappers import TimeLimit
 from schedule import cosine_schedule
 from stable_baselines3 import PPO
-from stable_baselines3.common.atari_wrappers import (ClipRewardEnv,
-                                                     MaxAndSkipEnv, WarpFrame)
+from stable_baselines3.common.atari_wrappers import (
+    ClipRewardEnv,
+    MaxAndSkipEnv,
+    WarpFrame,
+)
 from stable_baselines3.common.callbacks import EvalCallback
 from stable_baselines3.common.env_util import make_atari_env, make_vec_env
 from stable_baselines3.common.monitor import Monitor
-from stable_baselines3.common.vec_env import (SubprocVecEnv, VecFrameStack,
-                                              VecTransposeImage, VecNormalize)
-from wandb.integration.sb3 import WandbCallback
+from stable_baselines3.common.vec_env import (
+    SubprocVecEnv,
+    VecFrameStack,
+    VecNormalize,
+    VecTransposeImage,
+)
 from utils import load_hyperparams
+from wandb.integration.sb3 import WandbCallback
 
 import wandb
-import torch
 
 gymnasium.register_envs(ale_py)
+gymnasium.register_envs(mars_explorer)
 
 # In[2]:
 
@@ -142,7 +150,7 @@ if __name__ == "__main__":
         gae_lambda=config["gae_lambda"],
         n_epochs=config["n_epochs"],
         batch_size=config["batch_size"],
-        learning_rate=config["learning_rate"], # cosine_schedule(config["learning_rate"]),
+        learning_rate=cosine_schedule(config["learning_rate"]),
         clip_range=config["clip_range"],
         vf_coef=config["vf_coef"],
         ent_coef=config["ent_coef"],
