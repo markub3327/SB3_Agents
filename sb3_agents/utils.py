@@ -100,6 +100,7 @@ def rollout(vec_env, model, episode_length, *, img_embed_model=None, random=Fals
     imgs_embed_list = []
     steps_list = []
 
+    step_per_venv = np.asarray([0] * vec_env.num_envs)
     action_space = vec_env.action_space
 
     # Start of episode
@@ -190,11 +191,13 @@ def rollout(vec_env, model, episode_length, *, img_embed_model=None, random=Fals
         truncated_list.append(
             [info[i]["TimeLimit.truncated"] for i in range(vec_env.num_envs)]
         )
+        end_of_game = np.logical_and(terminated, (lives < 1))
 
         # Get time
-        steps_list.append(
-            [info[i]["episode_frame_number"] for i in range(vec_env.num_envs)]
-        )
+        steps_list.append(step_per_venv)
+
+        # Update time
+        step_per_venv = np.where(end_of_game, 0, (step_per_venv + 1))
 
         # Update lives[t+1]
         lives = np.array(
@@ -205,7 +208,6 @@ def rollout(vec_env, model, episode_length, *, img_embed_model=None, random=Fals
         )
 
         # Update score[t+1]
-        end_of_game = np.logical_and(terminated, (lives < 1))
         score = np.where(end_of_game, 0.0, (score + reward))
 
         # Update started[t+1]
