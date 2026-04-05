@@ -25,7 +25,7 @@ class ImageFilterForQueue:
         return outputs.pooler_output.cpu().numpy()
 
 
-def random_splits(
+def window_splits(
     states,
     actions,
     actions_logits,
@@ -36,9 +36,9 @@ def random_splits(
     started,
     lives,
     imgs_embed,
+    steps,
     *,
-    min_size,
-    max_size,
+    size,
 ):
     # Check the shape of arrays before splitting
     assert (
@@ -51,12 +51,13 @@ def random_splits(
         == len(started)
         == len(lives)
         == len(imgs_embed)
+        == len(steps)
     ), (
         f"Length mismatch in trajectory data: "
         f"states={len(states)}, actions={len(actions)}, "
         f"actions_logits={len(actions_logits)}, rewards={len(rewards)}, "
         f"terminated={len(terminated)}, truncated={len(truncated)}, "
-        f"started={len(started)}, lives={len(lives)}, imgs_embed={len(imgs_embed)}"
+        f"started={len(started)}, lives={len(lives)}, imgs_embed={len(imgs_embed)}, steps={len(steps)}"
     )
 
     indices = []
@@ -64,8 +65,8 @@ def random_splits(
     n_steps = len(states)
     while current_idx < n_steps:
         remaining = n_steps - current_idx
-        if remaining > min_size:
-            current_idx += np.random.randint(min_size, min(remaining, max_size) + 1)
+        if remaining > size:
+            current_idx += size
             indices.append(current_idx)
         else:
             break
@@ -82,6 +83,7 @@ def random_splits(
         np.split(started, indices[:-1]),
         np.split(lives, indices[:-1]),
         np.split(imgs_embed, indices[:-1]),
+        np.split(steps, indices[:-1]),
     )
 
 
@@ -96,6 +98,7 @@ def rollout(vec_env, model, episode_length, *, img_embed_model=None, random=Fals
     started_list = []
     lives_list = []
     imgs_embed_list = []
+    steps_list = []
 
     action_space = vec_env.action_space
 
@@ -161,7 +164,7 @@ def rollout(vec_env, model, episode_length, *, img_embed_model=None, random=Fals
         print(
             "Game: ",
             vec_env.env_name,
-            ", t=",
+            ", step=",
             t,
             ": action:",
             action,
@@ -186,6 +189,11 @@ def rollout(vec_env, model, episode_length, *, img_embed_model=None, random=Fals
         # Get truncated[t] (truncated for action taken)
         truncated_list.append(
             [info[i]["TimeLimit.truncated"] for i in range(vec_env.num_envs)]
+        )
+
+        # Get time
+        steps_list.append(
+            [info[i]["episode_frame_number"] for i in range(vec_env.num_envs)]
         )
 
         # Update lives[t+1]
@@ -215,6 +223,7 @@ def rollout(vec_env, model, episode_length, *, img_embed_model=None, random=Fals
         np.stack(started_list, axis=0),
         np.stack(lives_list, axis=0),
         np.stack(imgs_embed_list, axis=0) if img_embed_model else [],
+        np.stack(steps_list, axis=0),
     )
 
 

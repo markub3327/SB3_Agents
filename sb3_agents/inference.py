@@ -23,7 +23,7 @@ from stable_baselines3.common.vec_env import (
     VecTransposeImage,
 )
 from tqdm import tqdm
-from utils import ImageFilterForQueue, load_hyperparams, random_splits, rollout
+from utils import ImageFilterForQueue, load_hyperparams, window_splits, rollout
 
 from datasets import Dataset, Features, Image, Sequence, Value
 
@@ -228,12 +228,6 @@ if __name__ == "__main__":
         help="Random seed for environment creation (default: 42).",
     )
     parser.add_argument(
-        "--window-size",
-        type=int,
-        default=128,
-        help="Max trajectory chunk length used when splitting rollouts into multiple samples. (default: 128).",
-    )
-    parser.add_argument(
         "--episode-length",
         type=int,
         default=8192,
@@ -333,6 +327,7 @@ if __name__ == "__main__":
             started,
             lives,
             imgs_embed,
+            steps,
         ) = rollout(
             vec_env,
             model,
@@ -346,8 +341,8 @@ if __name__ == "__main__":
             def dataset_generator(shards):
                 for env_id in shards:
                     print(f"Generating dataset for shard {env_id}")
-                    s, a, a_logits, r, score, term, trunc, start, l, img_embed = (
-                        random_splits(
+                    s, a, a_logits, r, score, term, trunc, start, l, img_embed, step = (
+                        window_splits(
                             states[:, env_id],
                             actions[:, env_id],
                             actions_logits[:, env_id],
@@ -358,10 +353,10 @@ if __name__ == "__main__":
                             started[:, env_id],
                             lives[:, env_id],
                             imgs_embed[:, env_id],
-                            min_size=(
-                                config["frame_stack"] if "frame_stack" in config else 2
+                            steps[:, env_id],
+                            size=(
+                                config["frame_stack"] if "frame_stack" in config else 4
                             ),
-                            max_size=args.window_size,
                         )
                     )
 
@@ -377,6 +372,7 @@ if __name__ == "__main__":
                         == len(start)
                         == len(l)
                         == len(img_embed)
+                        == len(step)
                     ), (
                         f"Split length mismatch: s={len(s)}, a={len(a)}, "
                         f"a_logits={len(a_logits)}, r={len(r)}, score={len(score)}, term={len(term)}, "
@@ -396,11 +392,12 @@ if __name__ == "__main__":
                             == len(start[idx])
                             == len(l[idx])
                             == len(img_embed[idx])
+                            == len(step[idx])
                             > 1
                         ), (
                             f"Split length mismatch: s={len(s[idx])}, a={len(a[idx])}, "
                             f"a_logits={len(a_logits[idx])}, r={len(r[idx])}, score={len(score[idx])}, term={len(term[idx])}, "
-                            f"trunc={len(trunc[idx])}, start={len(start[idx])}, l={len(l[idx])}, img_embed={len(img_embed[idx])}"
+                            f"trunc={len(trunc[idx])}, start={len(start[idx])}, l={len(l[idx])}, img_embed={len(img_embed[idx])}, step={len(step[idx])}"
                         )
 
                         example = {
@@ -415,6 +412,7 @@ if __name__ == "__main__":
                                 "started": start[idx],
                                 "lives": l[idx],
                                 "img_embed": img_embed[idx],
+                                "step": step[idx],
                             },
                             "images": s[idx],
                         }
@@ -439,6 +437,7 @@ if __name__ == "__main__":
                             "truncated": Sequence(Value("bool")),  # ok
                             "started": Sequence(Value("bool")),  # ok
                             "img_embed": Sequence(Sequence(Value("float32"))),  # ok
+                            "step": Sequence(Value("int64")),
                         },
                         "images": Sequence(Image()),
                     }
@@ -530,6 +529,16 @@ if __name__ == "__main__":
                     bgr_frame,
                     f"Truncated: {truncated[i, best_idx]}",
                     (10, 90),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.3,
+                    (112, 128, 144),  # Color (BGR)
+                    1,
+                    cv2.LINE_AA,
+                )
+                cv2.putText(
+                    bgr_frame,
+                    f"Step: {steps[i, best_idx]}",
+                    (10, 100),
                     cv2.FONT_HERSHEY_SIMPLEX,
                     0.3,
                     (112, 128, 144),  # Color (BGR)
