@@ -23,7 +23,7 @@ from stable_baselines3.common.vec_env import (
     VecTransposeImage,
 )
 from tqdm import tqdm
-from utils import ImageFilterForQueue, load_hyperparams, window_splits, rollout
+from utils import ImageFilterForQueue, load_hyperparams, rollout
 
 from datasets import Dataset, Features, Image, Sequence, Value
 
@@ -332,6 +332,7 @@ if __name__ == "__main__":
             vec_env,
             model,
             episode_length=args.episode_length,
+            n_stack=config["frame_stack"],
             img_embed_model=img_filter,
             random=args.with_random,
         )
@@ -456,9 +457,9 @@ if __name__ == "__main__":
             )
 
         # Store the results
-        results_agent[env_name] = np.max(
-            scores[np.where(np.logical_or(terminated, truncated))[0]], axis=0
-        ).tolist()
+        completed = np.logical_or(terminated, truncated)
+        max_scores = np.nanmax(np.where(completed, scores, np.nan), axis=0)
+        results_agent[env_name] = max_scores.tolist()
 
         # Recorder
         if args.save_video:
@@ -527,7 +528,7 @@ if __name__ == "__main__":
                 )
                 cv2.putText(
                     bgr_frame,
-                    f"Truncated: {truncated[i, best_idx]}",
+                    f"Terminated: {terminated[i, best_idx]}",
                     (10, 90),
                     cv2.FONT_HERSHEY_SIMPLEX,
                     0.3,
@@ -537,8 +538,18 @@ if __name__ == "__main__":
                 )
                 cv2.putText(
                     bgr_frame,
-                    f"Step: {steps[i, best_idx]}",
+                    f"Truncated: {truncated[i, best_idx]}",
                     (10, 100),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.3,
+                    (112, 128, 144),  # Color (BGR)
+                    1,
+                    cv2.LINE_AA,
+                )
+                cv2.putText(
+                    bgr_frame,
+                    f"Step: {steps[i, best_idx]}",
+                    (10, 110),
                     cv2.FONT_HERSHEY_SIMPLEX,
                     0.3,
                     (112, 128, 144),  # Color (BGR)
