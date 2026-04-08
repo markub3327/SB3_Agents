@@ -25,69 +25,7 @@ class ImageFilterForQueue:
         return outputs.pooler_output.cpu().numpy()
 
 
-def window_splits(
-    states,
-    actions,
-    actions_logits,
-    rewards,
-    scores,
-    terminated,
-    truncated,
-    started,
-    lives,
-    imgs_embed,
-    steps,
-    *,
-    size,
-):
-    # Check the shape of arrays before splitting
-    assert (
-        len(states)
-        == len(actions)
-        == len(actions_logits)
-        == len(rewards)
-        == len(terminated)
-        == len(truncated)
-        == len(started)
-        == len(lives)
-        == len(imgs_embed)
-        == len(steps)
-    ), (
-        f"Length mismatch in trajectory data: "
-        f"states={len(states)}, actions={len(actions)}, "
-        f"actions_logits={len(actions_logits)}, rewards={len(rewards)}, "
-        f"terminated={len(terminated)}, truncated={len(truncated)}, "
-        f"started={len(started)}, lives={len(lives)}, imgs_embed={len(imgs_embed)}, steps={len(steps)}"
-    )
-
-    indices = []
-    current_idx = 0
-    n_steps = len(states)
-    while current_idx < n_steps:
-        remaining = n_steps - current_idx
-        if remaining > size:
-            current_idx += size
-            indices.append(current_idx)
-        else:
-            break
-
-    # If there is a remainder, merge it into the final window
-    return (
-        np.split(states, indices[:-1]),
-        np.split(actions, indices[:-1]),
-        np.split(actions_logits, indices[:-1]),
-        np.split(rewards, indices[:-1]),
-        np.split(scores, indices[:-1]),
-        np.split(terminated, indices[:-1]),
-        np.split(truncated, indices[:-1]),
-        np.split(started, indices[:-1]),
-        np.split(lives, indices[:-1]),
-        np.split(imgs_embed, indices[:-1]),
-        np.split(steps, indices[:-1]),
-    )
-
-
-def rollout(vec_env, model, episode_length, *, img_embed_model=None, random=False):
+def rollout(vec_env, model, *, episode_length, n_stack, img_embed_model=None, random=False):
     state_list = []
     action_list = []
     action_logits_list = []
@@ -115,7 +53,7 @@ def rollout(vec_env, model, episode_length, *, img_embed_model=None, random=Fals
     started = np.ones(vec_env.num_envs, dtype=np.bool)
 
     # Perform rollout
-    for t in range(episode_length):
+    for _ in range(episode_length):
         if random:
             action = [vec_env.action_space.sample()] * vec_env.num_envs
         else:
@@ -215,17 +153,17 @@ def rollout(vec_env, model, episode_length, *, img_embed_model=None, random=Fals
 
     # Stack the Numpy arrays
     return (
-        np.stack(state_list, axis=0),
-        np.stack(action_list, axis=0),
-        np.stack(action_logits_list, axis=0) if not random else [],
-        np.stack(reward_list, axis=0),
-        np.stack(score_list, axis=0),
-        np.stack(terminated_list, axis=0),
-        np.stack(truncated_list, axis=0),
-        np.stack(started_list, axis=0),
-        np.stack(lives_list, axis=0),
-        np.stack(imgs_embed_list, axis=0) if img_embed_model else [],
-        np.stack(steps_list, axis=0),
+        state_list,
+        action_list,
+        action_logits_list,
+        reward_list,
+        score_list,
+        terminated_list,
+        truncated_list,
+        started_list,
+        lives_list,
+        imgs_embed_list,
+        steps_list,
     )
 
 
