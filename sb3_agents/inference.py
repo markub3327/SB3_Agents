@@ -248,6 +248,12 @@ if __name__ == "__main__":
         action="store_true",
         help="Record and save a video for the best-scoring environment instance to ./videos.",
     )
+    parser.add_argument(
+        "--window-size",
+        type=int,
+        default=4,
+        help="Fallback number of stacked frames when config does not define frame_stack.",
+    )
     args = parser.parse_args()
 
     if args.save_to_disk:
@@ -332,7 +338,7 @@ if __name__ == "__main__":
             vec_env,
             model,
             episode_length=args.episode_length,
-            n_stack=config["frame_stack"],
+            n_stack=config["frame_stack"] if "frame_stack" in config else args.window_size,
             img_embed_model=img_filter,
             random=args.with_random,
         )
@@ -340,110 +346,54 @@ if __name__ == "__main__":
         if args.save_to_disk:
 
             def dataset_generator(shards):
-                for env_id in shards:
-                    print(f"Generating dataset for shard {env_id}")
-                    s, a, a_logits, r, score, term, trunc, start, l, img_embed, step = (
-                        window_splits(
-                            states[:, env_id],
-                            actions[:, env_id],
-                            actions_logits[:, env_id],
-                            rewards[:, env_id],
-                            scores[:, env_id],
-                            terminated[:, env_id],
-                            truncated[:, env_id],
-                            started[:, env_id],
-                            lives[:, env_id],
-                            imgs_embed[:, env_id],
-                            steps[:, env_id],
-                            size=(
-                                config["frame_stack"] if "frame_stack" in config else 4
-                            ),
-                        )
-                    )
+                for shard in shards:
+                    env_id = shard // args.episode_length
+                    idx = shard % args.episode_length
+                    print(f"Generating dataset for shard {shard}, that repsersent env {env_id} at timestep {idx}")
+                    example = {
+                        "messages": {
+                            "name": env_name,
+                            "action": actions[idx][env_id],
+                            "action_logits": actions_logits[idx][env_id],
+                            "reward": rewards[idx][env_id],
+                            "score": scores[idx][env_id],
+                            "terminated": terminated[idx][env_id],
+                            "truncated": truncated[idx][env_id],
+                            "started": started[idx][env_id],
+                            "lives": lives[idx][env_id],
+                            "img_embed": imgs_embed[idx][env_id],
+                            "step": steps[idx][env_id],
+                        },
+                        "images": states[idx][env_id],
+                    }
+                    # print(example)
 
-                    # Check number of splits
-                    assert (
-                        len(s)
-                        == len(a)
-                        == len(a_logits)
-                        == len(r)
-                        == len(score)
-                        == len(term)
-                        == len(trunc)
-                        == len(start)
-                        == len(l)
-                        == len(img_embed)
-                        == len(step)
-                    ), (
-                        f"Split length mismatch: s={len(s)}, a={len(a)}, "
-                        f"a_logits={len(a_logits)}, r={len(r)}, score={len(score)}, term={len(term)}, "
-                        f"trunc={len(trunc)}, start={len(start)}, l={len(l)}, img_embed={len(img_embed)}"
-                    )
-
-                    for idx in range(len(s)):
-                        # Check minimal number frames for video
-                        assert (
-                            len(s[idx])
-                            == len(a[idx])
-                            == len(a_logits[idx])
-                            == len(r[idx])
-                            == len(score[idx])
-                            == len(term[idx])
-                            == len(trunc[idx])
-                            == len(start[idx])
-                            == len(l[idx])
-                            == len(img_embed[idx])
-                            == len(step[idx])
-                            > 1
-                        ), (
-                            f"Split length mismatch: s={len(s[idx])}, a={len(a[idx])}, "
-                            f"a_logits={len(a_logits[idx])}, r={len(r[idx])}, score={len(score[idx])}, term={len(term[idx])}, "
-                            f"trunc={len(trunc[idx])}, start={len(start[idx])}, l={len(l[idx])}, img_embed={len(img_embed[idx])}, step={len(step[idx])}"
-                        )
-
-                        example = {
-                            "messages": {
-                                "name": env_name.replace("NoFrameskip-v4", ""),
-                                "action": a[idx],
-                                "action_logits": a_logits[idx],
-                                "reward": r[idx],
-                                "score": score[idx],
-                                "terminated": term[idx],
-                                "truncated": trunc[idx],
-                                "started": start[idx],
-                                "lives": l[idx],
-                                "img_embed": img_embed[idx],
-                                "step": step[idx],
-                            },
-                            "images": s[idx],
-                        }
-
-                        yield example
+                    yield example
 
             # load datasets from folder
-            shards = list(range(args.n_envs))
+            shards = list(range(args.n_envs * states.shape[0]))
             cpus = os.cpu_count()
             dataset = Dataset.from_generator(
                 dataset_generator,
                 features=Features(
                     {
                         "messages": {
-                            "name": Value("string"),  # ok
-                            "action": Sequence(Value("string")),  # ok
-                            "action_logits": Sequence(Sequence(Value("float32"))),
-                            "reward": Sequence(Value("float32")),  # ok
-                            "score": Sequence(Value("float32")),  # ok
-                            "lives": Sequence(Value("int64")),  # ok
-                            "terminated": Sequence(Value("bool")),  # ok
-                            "truncated": Sequence(Value("bool")),  # ok
-                            "started": Sequence(Value("bool")),  # ok
-                            "img_embed": Sequence(Sequence(Value("float32"))),  # ok
-                            "step": Sequence(Value("int64")),
+                            "name": Value("string"),
+                            "action": Value("string"),
+                            "action_logits": Sequence(Value("float32")),
+                            "reward": Value("float32"),
+                            "score": Value("float32"),
+                            "lives": Value("int64"),
+                            "terminated": Value("bool"),
+                            "truncated": Value("bool"),
+                            "started": Value("bool"),
+                            "img_embed": Sequence(Sequence(Value("float32"))),
+                            "step": Value("int64"),
                         },
                         "images": Sequence(Image()),
                     }
                 ),
-                num_proc=cpus if cpus <= args.n_envs else args.n_envs,
+                num_proc=cpus,
                 gen_kwargs={"shards": shards},
             )
             print("Total samples:", len(dataset))
@@ -453,7 +403,7 @@ if __name__ == "__main__":
             os.makedirs(ds_path, exist_ok=True)
             dataset.save_to_disk(
                 os.path.join(ds_path, f"{env_name}"),
-                num_proc=min(args.n_envs, len(dataset)),
+                num_proc=cpus,
             )
 
         # Store the results
@@ -464,7 +414,7 @@ if __name__ == "__main__":
         # Recorder
         if args.save_video:
             best_idx = np.argmax(results_agent[env_name])
-            height, width, channels = states[0, best_idx].shape
+            height, width, channels = states[0, best_idx, -1].shape
             fourcc = cv2.VideoWriter_fourcc(*"mp4v")
             env_name = env_name.replace("ALE/", "")
             os.makedirs("./videos/", exist_ok=True)
@@ -473,7 +423,7 @@ if __name__ == "__main__":
             )
             for i in range(states.shape[0]):
                 # Convert RGB to BGR for OpenCV
-                bgr_frame = cv2.cvtColor(states[i, best_idx], cv2.COLOR_RGB2BGR)
+                bgr_frame = cv2.cvtColor(states[i, best_idx, -1], cv2.COLOR_RGB2BGR)
 
                 # Add text to the frame
                 cv2.putText(
