@@ -218,8 +218,8 @@ if __name__ == "__main__":
     parser.add_argument(
         "--n-envs",
         type=int,
-        default=8,
-        help="Number of parallel environments to run (default: 8).",
+        default=4,
+        help="Number of parallel environments to run (default: 4).",
     )
     parser.add_argument(
         "--seed",
