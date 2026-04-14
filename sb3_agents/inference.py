@@ -316,7 +316,7 @@ if __name__ == "__main__":
             PPO.load(
                 f"./save/{env_name}/best_model.zip",
                 env=vec_env,
-                custom_objects={"learning_rate": lambda _: 0.0},
+                custom_objects={"learning_rate": lambda _: 0.0, "_last_obs": None},
             )
             if not args.with_random
             else None
