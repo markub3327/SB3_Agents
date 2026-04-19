@@ -57,12 +57,13 @@ def dataset_generator(shards):
                     "confidence": sample["confidence"],
                     "reasoning": sample["reasoning"],
                     "step": sample["step"],
+                    "img_embed": None,
                 },
                 "images": [render_tictactoe_board_to_image(
                     sample["state"], width=200, height=200
                 )],
             }
-            # print(example)
+            print(example)
 
             yield example
 
@@ -86,6 +87,7 @@ dataset = Dataset.from_generator(
                 "confidence": Value("float32"),
                 "reasoning": Value("string"),
                 "step": Value("int64"),
+                "img_embed": Sequence(Sequence(Value("float32"))),
             },
             "images": Sequence(HFImage()),
         }
