@@ -1,0 +1,639 @@
+{
+  "name": "TicTacToe",
+  "samples": [
+    {
+      "sample_id": 1,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "A1",
+          "confidence": 88,
+          "reasoning": "Player A opens in corner A1 to keep row, column, and diagonal options available.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "A": 0,
+            "B": 0
+          },
+          "score": {
+            "A": 0,
+            "B": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "B2",
+          "confidence": 93,
+          "reasoning": "Player A takes the center to connect the corner and prepare a diagonal finish.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X |   |   |",
+            "  +---+---+---+",
+            "2 | O |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "A": 0,
+            "B": 0
+          },
+          "score": {
+            "A": 0,
+            "B": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "C3",
+          "confidence": 99,
+          "reasoning": "Player A completes the diagonal A1-B2-C3 and wins immediately.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | O |   |",
+            "  +---+---+---+",
+            "2 | O | X |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "A": 1,
+            "B": -1
+          },
+          "score": {
+            "A": 1,
+            "B": -1
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 2,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "C1",
+          "confidence": 86,
+          "reasoning": "Player A opens in the top-right corner to aim for a delayed column win.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "A": 0,
+            "B": 0
+          },
+          "score": {
+            "A": 0,
+            "B": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "A2",
+          "confidence": 79,
+          "reasoning": "Player A expands to A2 to stay flexible while keeping the C-column plan alive.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O |   | X |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "A": 0,
+            "B": 0
+          },
+          "score": {
+            "A": 0,
+            "B": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "C2",
+          "confidence": 91,
+          "reasoning": "Player A places on C2 to stack two marks in column C and set up the finish.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O | O | X |",
+            "  +---+---+---+",
+            "2 | X |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "A": 0,
+            "B": 0
+          },
+          "score": {
+            "A": 0,
+            "B": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 3,
+          "action": "C3",
+          "confidence": 98,
+          "reasoning": "Player A completes column C with C3 and wins on the fourth move.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O | O | X |",
+            "  +---+---+---+",
+            "2 | X |   | X |",
+            "  +---+---+---+",
+            "3 | O |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "A": 1,
+            "B": -1
+          },
+          "score": {
+            "A": 1,
+            "B": -1
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 3,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "A1",
+          "confidence": 87,
+          "reasoning": "Player A opens in the corner to keep a long-term column plan available.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "A": 0,
+            "B": 0
+          },
+          "score": {
+            "A": 0,
+            "B": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "C1",
+          "confidence": 82,
+          "reasoning": "Player A expands across the top row while avoiding an early finish.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | O |   |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "A": 0,
+            "B": 0
+          },
+          "score": {
+            "A": 0,
+            "B": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "A2",
+          "confidence": 84,
+          "reasoning": "Player A strengthens the A-column while still leaving the terminal move for later.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | O | X |",
+            "  +---+---+---+",
+            "2 |   | O |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "A": 0,
+            "B": 0
+          },
+          "score": {
+            "A": 0,
+            "B": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 3,
+          "action": "B3",
+          "confidence": 79,
+          "reasoning": "Player A blocks future pressure and keeps the final A-column win for the next move.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | O | X |",
+            "  +---+---+---+",
+            "2 | X | O | O |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "A": 0,
+            "B": 0
+          },
+          "score": {
+            "A": 0,
+            "B": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 4,
+          "action": "A3",
+          "confidence": 98,
+          "reasoning": "Player A completes A3 to finish the left column A1-A2-A3 and win after a longer rollout.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | O | X |",
+            "  +---+---+---+",
+            "2 | X | O | O |",
+            "  +---+---+---+",
+            "3 |   | X | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "A": 1,
+            "B": -1
+          },
+          "score": {
+            "A": 1,
+            "B": -1
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 4,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "A1",
+          "confidence": 84,
+          "reasoning": "Player A opens in the corner to start a balanced line that can end in a draw.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "A": 0,
+            "B": 0
+          },
+          "score": {
+            "A": 0,
+            "B": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "C1",
+          "confidence": 78,
+          "reasoning": "Player A balances the top row while avoiding any immediate winning line.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | O |   |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "A": 0,
+            "B": 0
+          },
+          "score": {
+            "A": 0,
+            "B": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "A2",
+          "confidence": 82,
+          "reasoning": "Player A improves the left side but keeps all lines incomplete.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | O | X |",
+            "  +---+---+---+",
+            "2 |   | O |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "A": 0,
+            "B": 0
+          },
+          "score": {
+            "A": 0,
+            "B": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 3,
+          "action": "B3",
+          "confidence": 80,
+          "reasoning": "Player A continues safely toward a full-board outcome without creating a win.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | O | X |",
+            "  +---+---+---+",
+            "2 | X | O | O |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "A": 0,
+            "B": 0
+          },
+          "score": {
+            "A": 0,
+            "B": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 4,
+          "action": "C3",
+          "confidence": 95,
+          "reasoning": "Player A fills the last empty square, and the final full board is a draw with no three-in-a-row.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | O | X |",
+            "  +---+---+---+",
+            "2 | X | O | O |",
+            "  +---+---+---+",
+            "3 | O | X |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "A": 0,
+            "B": 0
+          },
+          "score": {
+            "A": 0,
+            "B": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 5,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "B1",
+          "confidence": 83,
+          "reasoning": "Player A opens at the top center to build a shorter tactical win.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "A": 0,
+            "B": 0
+          },
+          "score": {
+            "A": 0,
+            "B": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "B2",
+          "confidence": 90,
+          "reasoning": "Player A stacks the middle column and prepares a vertical finish.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O | X |   |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "A": 0,
+            "B": 0
+          },
+          "score": {
+            "A": 0,
+            "B": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "A2",
+          "confidence": 81,
+          "reasoning": "Player A broadens control while keeping the column-B win available.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O | X | O |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "A": 0,
+            "B": 0
+          },
+          "score": {
+            "A": 0,
+            "B": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 3,
+          "action": "B3",
+          "confidence": 98,
+          "reasoning": "Player A completes B3 to finish the middle column B1-B2-B3 and win.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O | X | O |",
+            "  +---+---+---+",
+            "2 | X | X | O |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "A": 1,
+            "B": -1
+          },
+          "score": {
+            "A": 1,
+            "B": -1
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    }
+  ]
+}
