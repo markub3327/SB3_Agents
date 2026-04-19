@@ -48,8 +48,8 @@ def dataset_generator(shards):
                 "messages": {
                     "name": env_name,
                     "action": sample["action"],
-                    "reward": sample["reward"]["A"],
-                    "score": sample["score"]["A"],
+                    "reward": sample["reward"]["X"],
+                    "score": sample["score"]["X"],
                     "lives": -1,
                     "terminated": sample["status"]["terminated"],
                     "truncated": sample["status"]["truncated"],
