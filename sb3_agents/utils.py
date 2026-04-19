@@ -58,7 +58,7 @@ def rollout(vec_env, model, *, episode_length, n_stack, img_embed_model=None, ra
     score = np.zeros(vec_env.num_envs, dtype=np.float32)
     lives = np.array(
         [
-            info[i]["lives"] if "lives" in info[0] else -1
+            info[i]["lives"] if "lives" in info[0] else None
             for i in range(vec_env.num_envs)
         ]
     )
@@ -161,7 +161,7 @@ def rollout(vec_env, model, *, episode_length, n_stack, img_embed_model=None, ra
         # Update lives[t+1]
         lives = np.array(
             [
-                info[i]["lives"] if "lives" in info[0] else -1
+                info[i]["lives"] if "lives" in info[0] else None
                 for i in range(vec_env.num_envs)
             ]
         )

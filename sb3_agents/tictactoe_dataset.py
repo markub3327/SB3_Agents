@@ -50,7 +50,7 @@ def dataset_generator(shards):
                     "action": sample["action"],
                     "reward": sample["reward"]["X"],
                     "score": sample["score"]["X"],
-                    "lives": -1,
+                    "lives": None,
                     "terminated": sample["status"]["terminated"],
                     "truncated": sample["status"]["truncated"],
                     "started": sample["status"]["started"],
@@ -63,7 +63,7 @@ def dataset_generator(shards):
                     sample["state"], width=200, height=200
                 )],
             }
-            print(example)
+            # print(example)
 
             yield example
 
