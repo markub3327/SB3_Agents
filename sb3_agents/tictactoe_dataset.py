@@ -47,6 +47,7 @@ def dataset_generator(shards):
             example = {
                 "messages": {
                     "name": env_name,
+                    "state": '\n'.join(sample["state"]),
                     "action": sample["action"],
                     "reward": sample["reward"]["X"],
                     "score": sample["score"]["X"],
@@ -77,6 +78,7 @@ dataset = Dataset.from_generator(
         {
             "messages": {
                 "name": Value("string"),
+                "state": Value("string"),
                 "action": Value("string"),
                 "reward": Value("float32"),
                 "score": Value("float32"),
