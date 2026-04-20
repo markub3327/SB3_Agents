@@ -8177,13 +8177,13 @@
       ]
     },
     {
-      "sample_id": 99,
+      "sample_id": 100,
       "rollout": [
         {
           "step": 0,
-          "action": "B1",
+          "action": "A1",
           "confidence": 84,
-          "reasoning": "Player X opens on the top edge before O can seize the center, keeping the board flexible for a draw outcome.",
+          "reasoning": "Player X opens in the corner before O can take the center, keeping a safe path toward a drawn full board.",
           "state": [
             "    A   B   C",
             "  +---+---+---+",
