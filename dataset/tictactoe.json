@@ -8202,7 +8202,7 @@
           "step": 1,
           "action": "C1",
           "confidence": 82,
-          "reasoning": "With O on A1, Player X takes C1 to balance the top row instead of yielding full corner control to O.",
+          "reasoning": "With O on B1, Player X takes C1 to balance the top row and avoid giving O uncontested influence there.",
           "state": [
             "    A   B   C",
             "  +---+---+---+",
