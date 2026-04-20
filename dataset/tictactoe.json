@@ -8240,7 +8240,7 @@
           "step": 3,
           "action": "B3",
           "confidence": 82,
-          "reasoning": "With O on A1, B2, and C2 shaping the middle, Player X drops to A3 to keep the board balanced and avoid a forced tactical race.",
+          "reasoning": "With O on B1, B2, and C2 shaping the upper-middle and right side, Player X uses B3 to keep the game balanced and drawable.",
           "state": [
             "    A   B   C",
             "  +---+---+---+",
