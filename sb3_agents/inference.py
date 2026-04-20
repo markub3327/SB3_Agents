@@ -11,6 +11,7 @@ import mars_explorer
 import numpy as np
 import pandas as pd
 import stable_retro as retro
+from scipy.special import softmax
 from gymnasium.wrappers import TimeLimit
 from stable_baselines3 import PPO
 from stable_baselines3.common.atari_wrappers import MaxAndSkipEnv, WarpFrame
@@ -23,7 +24,7 @@ from stable_baselines3.common.vec_env import (
     VecTransposeImage,
 )
 from tqdm import tqdm
-from utils import ImageFilterForQueue, load_hyperparams, rollout
+from utils import ImageFilterForQueue, load_hyperparams, rollout, ids_action_vocab
 
 from datasets import Dataset, Features, Image, Sequence, Value
 
@@ -218,7 +219,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--n-envs",
         type=int,
-        default=4,
+        default=1,
         help="Number of parallel environments to run (default: 4).",
     )
     parser.add_argument(
@@ -230,7 +231,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--episode-length",
         type=int,
-        default=8192,
+        default=1000,
         help="Maximum length of a rollout episode (default: 8192).",
     )
     parser.add_argument(
