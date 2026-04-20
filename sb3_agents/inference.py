@@ -350,18 +350,26 @@ if __name__ == "__main__":
                     env_id = shard // args.episode_length
                     idx = shard % args.episode_length
                     print(f"Generating dataset for shard {shard}, that repsersent env {env_id} at timestep {idx}")
+                    confidence = (
+                        softmax(actions_logits[idx][env_id], axis=-1)[
+                            ids_action_vocab[env_name][actions[idx][env_id]]
+                        ]
+                        * 100.0
+                    )
+
                     example = {
                         "messages": {
                             "name": env_name,
                             "action": actions[idx][env_id],
-                            "action_logits": actions_logits[idx][env_id],
                             "reward": rewards[idx][env_id],
                             "score": scores[idx][env_id],
+                            "lives": lives[idx][env_id],
                             "terminated": terminated[idx][env_id],
                             "truncated": truncated[idx][env_id],
                             "started": started[idx][env_id],
-                            "lives": lives[idx][env_id],
                             "img_embed": imgs_embed[idx][env_id],
+                            "confidence": confidence,
+                            "reasoning": None,
                             "step": steps[idx][env_id],
                         },
                         "images": states[idx][env_id],
@@ -380,15 +388,16 @@ if __name__ == "__main__":
                         "messages": {
                             "name": Value("string"),
                             "action": Value("string"),
-                            "action_logits": Sequence(Value("float32")),
                             "reward": Value("float32"),
                             "score": Value("float32"),
                             "lives": Value("int64"),
                             "terminated": Value("bool"),
                             "truncated": Value("bool"),
                             "started": Value("bool"),
-                            "img_embed": Sequence(Sequence(Value("float32"))),
+                            "confidence": Value("float32"),
+                            "reasoning": Value("string"),
                             "step": Value("int64"),
+                            "img_embed": Sequence(Sequence(Value("float32"))),
                         },
                         "images": Sequence(Image()),
                     }
