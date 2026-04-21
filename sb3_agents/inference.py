@@ -324,6 +324,7 @@ if __name__ == "__main__":
         )
 
         (
+            obs,
             states,
             actions,
             actions_logits,
@@ -358,9 +359,17 @@ if __name__ == "__main__":
                         * 100.0
                     )
 
+                    if "CartPole" in env_name:
+                        state = f"State description: Cart Position = {obs[idx][env_id][0]:.3f}; Cart Velocity = {obs[idx][env_id][1]:.3f}; Pole Angle = {obs[idx][env_id][2]:.3f}; Pole Angular Velocity = {obs[idx][env_id][3]:.3f}."
+                    elif "LunarLander" in env_name:
+                        state = f"State: horizontal position = {obs[idx][env_id][0]:.3f}; vertical position = {obs[idx][env_id][1]:.3f}; horizontal speed = {obs[idx][env_id][2]:.3f}; vertical speed = {obs[idx][env_id][3]:.3f}; tilt angle = {obs[idx][env_id][4]:.3f}; rotation speed = {obs[idx][env_id][5]:.3f}; left leg touching ground = {obs[idx][env_id][6]:.3f}; right leg touching ground = {obs[idx][env_id][7]:.3f}."
+                    else:
+                        raise ValueError(f"Unknown environment: {env_name}")
+
                     example = {
                         "messages": {
                             "name": env_name,
+                            "state": state,
                             "action": actions[idx][env_id],
                             "reward": rewards[idx][env_id],
                             "score": scores[idx][env_id],
@@ -388,6 +397,7 @@ if __name__ == "__main__":
                     {
                         "messages": {
                             "name": Value("string"),
+                            "state": Value("string"),
                             "action": Value("string"),
                             "reward": Value("float32"),
                             "score": Value("float32"),

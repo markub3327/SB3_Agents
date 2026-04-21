@@ -6,7 +6,7 @@ from datasets import Dataset, Features, Image as HFImage, Sequence, Value
 
 # TicTacToe dataset
 with open(
-        "/mnt/data/home/makuke637/SB3_Agents/dataset/tictactoe.json",
+        "/tictactoe/tictactoe.json",
         "r",
 ) as f:
     tictactoe = json.load(f)

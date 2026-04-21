@@ -28,6 +28,7 @@ class ImageFilterForQueue:
 
 
 def rollout(vec_env, model, *, episode_length, n_stack, img_embed_model=None, random=False):
+    obs_list = []
     state_list = []
     action_list = []
     action_logits_list = []
@@ -86,6 +87,7 @@ def rollout(vec_env, model, *, episode_length, n_stack, img_embed_model=None, ra
                     raise ValueError()
 
         # Get state[t]
+        obs_list.append(obs.copy())
         state_list.append(rendered_img)
         if img_embed_model:
             img_batch = rendered_img.reshape(-1, rendered_img.shape[2], rendered_img.shape[3], rendered_img.shape[4])
@@ -186,6 +188,7 @@ def rollout(vec_env, model, *, episode_length, n_stack, img_embed_model=None, ra
 
     # Stack the Numpy arrays
     return (
+        np.stack(obs_list, axis=0),
         np.stack(state_list, axis=0),
         np.stack(action_list, axis=0),
         np.stack(action_logits_list, axis=0) if not random else [],
