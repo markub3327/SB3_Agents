@@ -229,12 +229,6 @@ if __name__ == "__main__":
         help="Random seed for environment creation (default: 42).",
     )
     parser.add_argument(
-        "--episode-length",
-        type=int,
-        default=1000,
-        help="Maximum length of a rollout episode (default: 8192).",
-    )
-    parser.add_argument(
         "--with-random",
         action="store_true",
         help="Include a random agent that selects actions uniformly at random",
@@ -339,18 +333,17 @@ if __name__ == "__main__":
         ) = rollout(
             vec_env,
             model,
-            episode_length=args.episode_length,
+            episode_length=config["episode_steps"],
             n_stack=config["frame_stack"] if "frame_stack" in config else args.window_size,
             img_embed_model=img_filter,
             random=args.with_random,
         )
 
         if args.save_to_disk:
-
             def dataset_generator(shards):
                 for shard in shards:
-                    env_id = shard // args.episode_length
-                    idx = shard % args.episode_length
+                    env_id = shard // config["episode_steps"]
+                    idx = shard % config["episode_steps"]
                     print(f"Generating dataset for shard {shard}, that repsersent env {env_id} at timestep {idx}")
                     confidence = (
                         softmax(actions_logits[idx][env_id], axis=-1)[
