@@ -203,7 +203,6 @@ env_names = [
 def make_retro_env(env_name):
     def _init():
         env = retro.make(env_name, retro.State.DEFAULT, render_mode="rgb_array")
-        env = TimeLimit(env, max_episode_steps=8192)
         env = Monitor(env)
         env = MaxAndSkipEnv(env, skip=4)
         env = WarpFrame(env, width=96, height=96)
@@ -227,6 +226,12 @@ if __name__ == "__main__":
         type=int,
         default=42,
         help="Random seed for environment creation (default: 42).",
+    )
+    parser.add_argument(
+        "--episode-length",
+        type=int,
+        default=8192,
+        help="Maximum length of a rollout episode (default: 8192).",
     )
     parser.add_argument(
         "--with-random",
@@ -333,7 +338,7 @@ if __name__ == "__main__":
         ) = rollout(
             vec_env,
             model,
-            episode_length=config["episode_steps"],
+            episode_length=args.episode_length,
             n_stack=config["frame_stack"] if "frame_stack" in config else args.window_size,
             img_embed_model=img_filter,
             random=args.with_random,
@@ -342,8 +347,8 @@ if __name__ == "__main__":
         if args.save_to_disk:
             def dataset_generator(shards):
                 for shard in shards:
-                    env_id = shard // config["episode_steps"]
-                    idx = shard % config["episode_steps"]
+                    env_id = shard // args.episode_length
+                    idx = shard % args.episode_length
                     print(f"Generating dataset for shard {shard}, that repsersent env {env_id} at timestep {idx}")
                     confidence = (
                         softmax(actions_logits[idx][env_id], axis=-1)[

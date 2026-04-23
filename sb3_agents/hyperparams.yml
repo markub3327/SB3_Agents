@@ -19,7 +19,6 @@ LunarLander-v3:
   policy_kwargs:
     ortho_init: true
   eval_freq: 1_024
-  episode_steps: 1000
 
 Acrobot-v1:
   normalize:
@@ -62,7 +61,6 @@ CartPole-v1:
   policy_kwargs:
     ortho_init: true
   eval_freq: 1_024
-  episode_steps: 500
 
 MountainCar-v0:
   normalize:
