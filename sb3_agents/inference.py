@@ -44,9 +44,7 @@ env_names = [
     "KungFuMasterNoFrameskip-v4",
 
     "LunarLander-v3",
-    "Acrobot-v1",
     "CartPole-v1",
-    "MountainCar-v0",
 ]
 
 
