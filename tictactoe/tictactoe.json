@@ -8484,8 +8484,8 @@
             "O": -1
           },
           "score": {
-            "X": 1,
-            "O": -1
+            "X": 0,
+            "O": 0
           },
           "status": {
             "terminated": true,
@@ -8634,8 +8634,8 @@
         "O": -1
       },
       "score": {
-        "X": 1,
-        "O": -1
+        "X": 0,
+        "O": 0
       },
       "status": {
         "terminated": true,
@@ -8755,8 +8755,8 @@
         "O": -1
       },
       "score": {
-        "X": 1,
-        "O": -1
+        "X": 0,
+        "O": 0
       },
       "status": {
         "terminated": true,
@@ -8847,8 +8847,8 @@
         "O": -1
       },
       "score": {
-        "X": 1,
-        "O": -1
+        "X": 0,
+        "O": 0
       },
       "status": {
         "terminated": true,
@@ -8968,8 +8968,8 @@
         "O": -1
       },
       "score": {
-        "X": 1,
-        "O": -1
+        "X": 0,
+        "O": 0
       },
       "status": {
         "terminated": true,
@@ -9089,8 +9089,8 @@
         "O": -1
       },
       "score": {
-        "X": 1,
-        "O": -1
+        "X": 0,
+        "O": 0
       },
       "status": {
         "terminated": true,
@@ -9210,8 +9210,8 @@
         "O": -1
       },
       "score": {
-        "X": 1,
-        "O": -1
+        "X": 0,
+        "O": 0
       },
       "status": {
         "terminated": true,
@@ -9302,8 +9302,8 @@
         "O": -1
       },
       "score": {
-        "X": 1,
-        "O": -1
+        "X": 0,
+        "O": 0
       },
       "status": {
         "terminated": true,
@@ -9423,8 +9423,8 @@
         "O": -1
       },
       "score": {
-        "X": 1,
-        "O": -1
+        "X": 0,
+        "O": 0
       },
       "status": {
         "terminated": true,
@@ -9515,8 +9515,8 @@
         "O": -1
       },
       "score": {
-        "X": 1,
-        "O": -1
+        "X": 0,
+        "O": 0
       },
       "status": {
         "terminated": true,
@@ -9665,8 +9665,8 @@
         "O": -1
       },
       "score": {
-        "X": 1,
-        "O": -1
+        "X": 0,
+        "O": 0
       },
       "status": {
         "terminated": true,
@@ -9815,8 +9815,8 @@
         "O": -1
       },
       "score": {
-        "X": 1,
-        "O": -1
+        "X": 0,
+        "O": 0
       },
       "status": {
         "terminated": true,
@@ -9936,8 +9936,8 @@
         "O": -1
       },
       "score": {
-        "X": 1,
-        "O": -1
+        "X": 0,
+        "O": 0
       },
       "status": {
         "terminated": true,
@@ -10178,8 +10178,8 @@
         "O": -1
       },
       "score": {
-        "X": 1,
-        "O": -1
+        "X": 0,
+        "O": 0
       },
       "status": {
         "terminated": true,
@@ -10299,8 +10299,8 @@
         "O": -1
       },
       "score": {
-        "X": 1,
-        "O": -1
+        "X": 0,
+        "O": 0
       },
       "status": {
         "terminated": true,
@@ -10420,8 +10420,8 @@
         "O": -1
       },
       "score": {
-        "X": 1,
-        "O": -1
+        "X": 0,
+        "O": 0
       },
       "status": {
         "terminated": true,
@@ -10541,8 +10541,8 @@
         "O": -1
       },
       "score": {
-        "X": 1,
-        "O": -1
+        "X": 0,
+        "O": 0
       },
       "status": {
         "terminated": true,
@@ -10841,8 +10841,8 @@
         "O": -1
       },
       "score": {
-        "X": 1,
-        "O": -1
+        "X": 0,
+        "O": 0
       },
       "status": {
         "terminated": true,
@@ -10962,8 +10962,8 @@
         "O": -1
       },
       "score": {
-        "X": 1,
-        "O": -1
+        "X": 0,
+        "O": 0
       },
       "status": {
         "terminated": true,
@@ -11054,8 +11054,8 @@
         "O": -1
       },
       "score": {
-        "X": 1,
-        "O": -1
+        "X": 0,
+        "O": 0
       },
       "status": {
         "terminated": true,
@@ -11175,8 +11175,8 @@
         "O": -1
       },
       "score": {
-        "X": 1,
-        "O": -1
+        "X": 0,
+        "O": 0
       },
       "status": {
         "terminated": true,
@@ -11296,8 +11296,8 @@
         "O": -1
       },
       "score": {
-        "X": 1,
-        "O": -1
+        "X": 0,
+        "O": 0
       },
       "status": {
         "terminated": true,
@@ -11417,8 +11417,8 @@
         "O": -1
       },
       "score": {
-        "X": 1,
-        "O": -1
+        "X": 0,
+        "O": 0
       },
       "status": {
         "terminated": true,
@@ -11567,8 +11567,8 @@
         "O": -1
       },
       "score": {
-        "X": 1,
-        "O": -1
+        "X": 0,
+        "O": 0
       },
       "status": {
         "terminated": true,
@@ -11659,8 +11659,8 @@
         "O": -1
       },
       "score": {
-        "X": 1,
-        "O": -1
+        "X": 0,
+        "O": 0
       },
       "status": {
         "terminated": true,
@@ -11751,8 +11751,8 @@
         "O": -1
       },
       "score": {
-        "X": 1,
-        "O": -1
+        "X": 0,
+        "O": 0
       },
       "status": {
         "terminated": true,
@@ -11872,8 +11872,8 @@
         "O": -1
       },
       "score": {
-        "X": 1,
-        "O": -1
+        "X": 0,
+        "O": 0
       },
       "status": {
         "terminated": true,
@@ -11993,8 +11993,8 @@
         "O": -1
       },
       "score": {
-        "X": 1,
-        "O": -1
+        "X": 0,
+        "O": 0
       },
       "status": {
         "terminated": true,
@@ -12114,8 +12114,8 @@
         "O": -1
       },
       "score": {
-        "X": 1,
-        "O": -1
+        "X": 0,
+        "O": 0
       },
       "status": {
         "terminated": true,
@@ -12126,8 +12126,8 @@
   ]
 },
     {
-              "sample_id": 133,
-  "rollout": [
+      "sample_id": 133,
+      "rollout": [
     {
       "step": 0,
       "action": "B1",
@@ -12235,8 +12235,8 @@
         "O": -1
       },
       "score": {
-        "X": 1,
-        "O": -1
+        "X": 0,
+        "O": 0
       },
       "status": {
         "terminated": true,
