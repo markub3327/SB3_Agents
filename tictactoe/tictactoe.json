@@ -883,156 +883,6 @@
       ]
     },
     {
-      "sample_id": 10,
-      "rollout": [
-        {
-          "step": 0,
-          "action": "B1",
-          "confidence": 84,
-          "reasoning": "Player X opens on the top edge before O can dominate the center, keeping the position flexible for a safe result.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 |   |   |   |",
-            "  +---+---+---+",
-            "2 |   |   |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": {
-            "X": 0,
-            "O": 0
-          },
-          "score": {
-            "X": 0,
-            "O": 0
-          },
-          "status": {
-            "terminated": false,
-            "truncated": false,
-            "started": true
-          }
-        },
-        {
-          "step": 1,
-          "action": "C1",
-          "confidence": 82,
-          "reasoning": "With O on A1, Player X takes C1 to spread control across the top and avoid letting O own both initiative and corner structure.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | O | X |   |",
-            "  +---+---+---+",
-            "2 |   |   |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": {
-            "X": 0,
-            "O": 0
-          },
-          "score": {
-            "X": 0,
-            "O": 0
-          },
-          "status": {
-            "terminated": false,
-            "truncated": false,
-            "started": false
-          }
-        },
-        {
-          "step": 2,
-          "action": "A2",
-          "confidence": 79,
-          "reasoning": "With O on A1 and B2, Player X expands to A2 to keep the left side stable instead of ceding it to O.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | O | X | X |",
-            "  +---+---+---+",
-            "2 |   | O |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": {
-            "X": 0,
-            "O": 0
-          },
-          "score": {
-            "X": 0,
-            "O": 0
-          },
-          "status": {
-            "terminated": false,
-            "truncated": false,
-            "started": false
-          }
-        },
-        {
-          "step": 3,
-          "action": "A3",
-          "confidence": 81,
-          "reasoning": "With O on A1, B2, and C2 controlling the middle corridor, Player X plays A3 to stay safe and deny O an easy finishing setup.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | O | X | X |",
-            "  +---+---+---+",
-            "2 | X | O | O |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": {
-            "X": 0,
-            "O": 0
-          },
-          "score": {
-            "X": 0,
-            "O": 0
-          },
-          "status": {
-            "terminated": false,
-            "truncated": false,
-            "started": false
-          }
-        },
-        {
-          "step": 4,
-          "action": "C3",
-          "confidence": 95,
-          "reasoning": "With O also on B3, Player X fills C3 as the last safe square so no winning line appears and the game ends in a draw.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | O | X | X |",
-            "  +---+---+---+",
-            "2 | X | O | O |",
-            "  +---+---+---+",
-            "3 | X | O |   |",
-            "  +---+---+---+"
-          ],
-          "reward": {
-            "X": 0,
-            "O": 0
-          },
-          "score": {
-            "X": 0,
-            "O": 0
-          },
-          "status": {
-            "terminated": true,
-            "truncated": false,
-            "started": false
-          }
-        }
-      ]
-    },
-    {
       "sample_id": 11,
       "rollout": [
         {
@@ -5349,206 +5199,6 @@
       ]
     },
     {
-      "sample_id": 66,
-      "rollout": [
-        {
-          "step": 0,
-          "action": "C1",
-          "confidence": 85,
-          "reasoning": "Player X opens in the top-right corner before O can dominate the center, keeping balanced draw paths available.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 |   |   |   |",
-            "  +---+---+---+",
-            "2 |   |   |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": true }
-        },
-        {
-          "step": 1,
-          "action": "A1",
-          "confidence": 83,
-          "reasoning": "With O on B1, Player X takes A1 to share the top row without giving O uncontested control of the upper side.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 |   | O | X |",
-            "  +---+---+---+",
-            "2 |   |   |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 2,
-          "action": "B3",
-          "confidence": 80,
-          "reasoning": "With O on B1 and B2 controlling the center file, Player X shifts to B3 to stay balanced and avoid feeding O a simple plan.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | X | O | X |",
-            "  +---+---+---+",
-            "2 |   | O |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 3,
-          "action": "A2",
-          "confidence": 82,
-          "reasoning": "With O on B1, B2, and A3 pressuring the left side, Player X takes A2 to keep O from gaining a direct advantage.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | X | O | X |",
-            "  +---+---+---+",
-            "2 |   | O |   |",
-            "  +---+---+---+",
-            "3 | O | X |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 4,
-          "action": "C3",
-          "confidence": 96,
-          "reasoning": "With O also on C2, Player X fills C3 as the last safe square so neither side gets three in a row and the result stays a draw.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | X | O | X |",
-            "  +---+---+---+",
-            "2 | X | O | O |",
-            "  +---+---+---+",
-            "3 | O | X |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": true, "truncated": false, "started": false }
-        }
-      ]
-    },
-    {
-      "sample_id": 67,
-      "rollout": [
-        {
-          "step": 0,
-          "action": "B1",
-          "confidence": 84,
-          "reasoning": "Player X opens on the top edge before O can take the center, keeping multiple safe draw continuations available.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 |   |   |   |",
-            "  +---+---+---+",
-            "2 |   |   |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": true }
-        },
-        {
-          "step": 1,
-          "action": "C1",
-          "confidence": 82,
-          "reasoning": "With O on A1, Player X takes C1 to balance the top row instead of yielding both corner structure and tempo to O.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | O | X |   |",
-            "  +---+---+---+",
-            "2 |   |   |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 2,
-          "action": "A2",
-          "confidence": 80,
-          "reasoning": "With O on A1 and C2 controlling the right side, Player X adds A2 to keep the left column stable and avoid falling behind.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | O | X | X |",
-            "  +---+---+---+",
-            "2 |   |   | O |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 3,
-          "action": "C3",
-          "confidence": 81,
-          "reasoning": "With O on A1, C2, and A3 occupying the lower-left side, Player X uses C3 to keep the position drawable and deny O easy momentum.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | O | X | X |",
-            "  +---+---+---+",
-            "2 | X |   | O |",
-            "  +---+---+---+",
-            "3 | O |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 4,
-          "action": "B2",
-          "confidence": 95,
-          "reasoning": "With O also on B3, Player X fills B2 as the final safe square so no winning line appears and the board ends drawn.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | O | X | X |",
-            "  +---+---+---+",
-            "2 | X |   | O |",
-            "  +---+---+---+",
-            "3 | O | O | X |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": true, "truncated": false, "started": false }
-        }
-      ]
-    },
-    {
       "sample_id": 68,
       "rollout": [
         {
@@ -5643,587 +5293,6 @@
             "  +---+---+---+"
           ],
           "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": true, "truncated": false, "started": false }
-        }
-      ]
-    },
-    {
-      "sample_id": 69,
-      "rollout": [
-        {
-          "step": 0,
-          "action": "C1",
-          "confidence": 84,
-          "reasoning": "Player X opens in the top-right corner before O can take the center, keeping broad control over the top edge.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 |   |   |   |",
-            "  +---+---+---+",
-            "2 |   |   |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": true }
-        },
-        {
-          "step": 1,
-          "action": "B1",
-          "confidence": 82,
-          "reasoning": "With O on A1, Player X takes B1 to balance the top row instead of letting O hold the whole upper-left structure.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | O |   | X |",
-            "  +---+---+---+",
-            "2 |   |   |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 2,
-          "action": "A2",
-          "confidence": 80,
-          "reasoning": "With O on A1 and B2, Player X adds A2 to keep the left side balanced and avoid ceding the file to O.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | O | X | X |",
-            "  +---+---+---+",
-            "2 |   | O |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 3,
-          "action": "A3",
-          "confidence": 82,
-          "reasoning": "With O on A1, B2, and C2 controlling the middle, Player X uses A3 to keep the board stable and deny O an easy continuation.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | O | X | X |",
-            "  +---+---+---+",
-            "2 | X | O | O |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 4,
-          "action": "B3",
-          "confidence": 95,
-          "reasoning": "With O also on C3, Player X fills B3 as the final safe square so no winning line appears and the board ends drawn.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | O | X | X |",
-            "  +---+---+---+",
-            "2 | X | O | O |",
-            "  +---+---+---+",
-            "3 | X |   | O |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": true, "truncated": false, "started": false }
-        }
-      ]
-    },
-    {
-      "sample_id": 70,
-      "rollout": [
-        {
-          "step": 0,
-          "action": "A1",
-          "confidence": 84,
-          "reasoning": "Player X opens in the corner before O can secure the center, keeping the board flexible for a safe outcome.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 |   |   |   |",
-            "  +---+---+---+",
-            "2 |   |   |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": true }
-        },
-        {
-          "step": 1,
-          "action": "C2",
-          "confidence": 82,
-          "reasoning": "With O on C1, Player X takes C2 to stay active on the right side and avoid letting O own the whole file.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | X |   | O |",
-            "  +---+---+---+",
-            "2 |   |   |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 2,
-          "action": "B1",
-          "confidence": 80,
-          "reasoning": "With O on C1 and A2 controlling the left side, Player X takes B1 to keep the top row balanced instead of drifting into O's structure.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | X |   | O |",
-            "  +---+---+---+",
-            "2 | O |   | X |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 3,
-          "action": "A3",
-          "confidence": 82,
-          "reasoning": "With O on C1, A2, and B2 shaping the center, Player X drops to A3 to keep the left side safe and preserve the draw path.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | X | X | O |",
-            "  +---+---+---+",
-            "2 | O | O | X |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 4,
-          "action": "C3",
-          "confidence": 96,
-          "reasoning": "With O also on B3, Player X fills C3 as the final safe square so neither side completes a line and the game ends in a draw.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | X | X | O |",
-            "  +---+---+---+",
-            "2 | O | O | X |",
-            "  +---+---+---+",
-            "3 | X | O |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": true, "truncated": false, "started": false }
-        }
-      ]
-    },
-    {
-      "sample_id": 71,
-      "rollout": [
-        {
-          "step": 0,
-          "action": "B1",
-          "confidence": 84,
-          "reasoning": "Player X opens on the top edge before O can control the center, keeping the board balanced for a draw route.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 |   |   |   |",
-            "  +---+---+---+",
-            "2 |   |   |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": true }
-        },
-        {
-          "step": 1,
-          "action": "A2",
-          "confidence": 82,
-          "reasoning": "With O on A1, Player X takes A2 to keep the left side active instead of letting O own that column uncontested.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | O | X |   |",
-            "  +---+---+---+",
-            "2 |   |   |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 2,
-          "action": "B2",
-          "confidence": 80,
-          "reasoning": "With O on A1 and C1 controlling the top corners, Player X takes B2 to deny O the center and preserve balance.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | O | X | O |",
-            "  +---+---+---+",
-            "2 | X |   |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 3,
-          "action": "A3",
-          "confidence": 82,
-          "reasoning": "With O on A1, C1, and C2 pressuring the right side, Player X drops to A3 to keep the left edge stable and avoid losing initiative.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | O | X | O |",
-            "  +---+---+---+",
-            "2 | X | X | O |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 4,
-          "action": "C3",
-          "confidence": 95,
-          "reasoning": "With O also on B3, Player X fills C3 as the final safe square so the board stays balanced and ends in a draw.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | O | X | O |",
-            "  +---+---+---+",
-            "2 | X | X | O |",
-            "  +---+---+---+",
-            "3 | X | O |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": true, "truncated": false, "started": false }
-        }
-      ]
-    },
-    {
-      "sample_id": 73,
-      "rollout": [
-        {
-          "step": 0,
-          "action": "A2",
-          "confidence": 84,
-          "reasoning": "Player X opens on the middle-left cell before O can control the center, keeping row two and corner balance available.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 |   |   |   |",
-            "  +---+---+---+",
-            "2 |   |   |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": true }
-        },
-        {
-          "step": 1,
-          "action": "C1",
-          "confidence": 82,
-          "reasoning": "With O on A1, Player X takes C1 to keep the top side balanced and prevent O from owning both the corner and the file.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | O |   |   |",
-            "  +---+---+---+",
-            "2 | X |   |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 2,
-          "action": "B2",
-          "confidence": 80,
-          "reasoning": "With O on A1 and C2 shaping the right side, Player X takes B2 to secure the center and keep the game under control.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | O |   | X |",
-            "  +---+---+---+",
-            "2 | X |   | O |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 3,
-          "action": "B1",
-          "confidence": 82,
-          "reasoning": "With O on A1, C2, and A3 occupying the lower-left side, Player X uses B1 to avoid giving O free top-side momentum.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | O |   | X |",
-            "  +---+---+---+",
-            "2 | X | X | O |",
-            "  +---+---+---+",
-            "3 | O |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 4,
-          "action": "C3",
-          "confidence": 95,
-          "reasoning": "With O also on B3, Player X fills C3 as the last safe square so the board remains balanced and ends in a draw.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | O | X | X |",
-            "  +---+---+---+",
-            "2 | X | X | O |",
-            "  +---+---+---+",
-            "3 | O | O |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": true, "truncated": false, "started": false }
-        }
-      ]
-    },
-    {
-      "sample_id": 75,
-      "rollout": [
-        {
-          "step": 0,
-          "action": "B1",
-          "confidence": 84,
-          "reasoning": "Player X opens on the top edge before O can control the center, keeping the board flexible for a safe finish.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 |   |   |   |",
-            "  +---+---+---+",
-            "2 |   |   |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": true }
-        },
-        {
-          "step": 1,
-          "action": "A1",
-          "confidence": 82,
-          "reasoning": "With O on C1, Player X takes A1 to balance the top row and avoid giving O uncontested corner pressure.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 |   | X | O |",
-            "  +---+---+---+",
-            "2 |   |   |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 2,
-          "action": "B2",
-          "confidence": 80,
-          "reasoning": "With O on C1 and A2 controlling the left side, Player X takes B2 to secure the center and keep the board balanced.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | X | X | O |",
-            "  +---+---+---+",
-            "2 | O |   |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 3,
-          "action": "C2",
-          "confidence": 82,
-          "reasoning": "With O on C1, A2, and B3 shaping the lower side, Player X uses C2 to avoid handing O a simple tactical edge.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | X | X | O |",
-            "  +---+---+---+",
-            "2 | O | X |   |",
-            "  +---+---+---+",
-            "3 |   | O |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 4,
-          "action": "A3",
-          "confidence": 95,
-          "reasoning": "With O also on C3, Player X fills A3 as the last safe square so the final board has no three-in-a-row and the result is a draw.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | X | X | O |",
-            "  +---+---+---+",
-            "2 | O | X | X |",
-            "  +---+---+---+",
-            "3 |   | O | O |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": true, "truncated": false, "started": false }
-        }
-      ]
-    },
-    {
-      "sample_id": 76,
-      "rollout": [
-        {
-          "step": 0,
-          "action": "B2",
-          "confidence": 88,
-          "reasoning": "Player X opens in the center before O can seize the key hub, keeping several strong win routes available.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 |   |   |   |",
-            "  +---+---+---+",
-            "2 |   |   |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": true }
-        },
-        {
-          "step": 1,
-          "action": "A1",
-          "confidence": 90,
-          "reasoning": "With O on A2, Player X takes A1 to build top-row pressure while denying O easy control of the left side.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 |   |   |   |",
-            "  +---+---+---+",
-            "2 | O | X |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 2,
-          "action": "C1",
-          "confidence": 84,
-          "reasoning": "With O on A2 and C2 shaping the middle row, Player X takes C1 to own both top corners and stay ahead on row one.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | X |   |   |",
-            "  +---+---+---+",
-            "2 | O | X | O |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 3,
-          "action": "B1",
-          "confidence": 98,
-          "reasoning": "With O on A2, C2, and A3 pressuring the left side, Player X closes B1 immediately to complete the top row before O can react.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | X |   | X |",
-            "  +---+---+---+",
-            "2 | O | X | O |",
-            "  +---+---+---+",
-            "3 | O |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 1, "O": -1 },
           "score": { "X": 0, "O": 0 },
           "status": { "terminated": true, "truncated": false, "started": false }
         }
@@ -7792,556 +6861,6 @@
           "reward": { "X": 1, "O": -1 },
           "score": { "X": 0, "O": 0 },
           "status": { "terminated": true, "truncated": false, "started": false }
-        }
-      ]
-    },
-    {
-      "sample_id": 96,
-      "rollout": [
-        {
-          "step": 0,
-          "action": "A1",
-          "confidence": 84,
-          "reasoning": "Player X opens in the corner before O can claim the center, keeping a safe full-board draw route available.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 |   |   |   |",
-            "  +---+---+---+",
-            "2 |   |   |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": true }
-        },
-        {
-          "step": 1,
-          "action": "B1",
-          "confidence": 82,
-          "reasoning": "With O on C1, Player X takes B1 to balance the top row instead of giving O the whole upper edge.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | X |   | O |",
-            "  +---+---+---+",
-            "2 |   |   |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 2,
-          "action": "C2",
-          "confidence": 80,
-          "reasoning": "With O on C1 and A2 controlling the left side, Player X uses C2 to keep the right file active without creating a losing imbalance.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | X | X | O |",
-            "  +---+---+---+",
-            "2 | O |   |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 3,
-          "action": "A3",
-          "confidence": 82,
-          "reasoning": "With O on C1, A2, and B2 controlling the center-left side, Player X drops to A3 to preserve the full-board draw structure.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | X | X | O |",
-            "  +---+---+---+",
-            "2 | O | O | X |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 4,
-          "action": "C3",
-          "confidence": 95,
-          "reasoning": "With O also on B3, Player X fills C3 as the last safe square so neither side completes a line and the game ends in a draw.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | X | X | O |",
-            "  +---+---+---+",
-            "2 | O | O | X |",
-            "  +---+---+---+",
-            "3 | X | O |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": true, "truncated": false, "started": false }
-        }
-      ]
-    },
-    {
-      "sample_id": 97,
-      "rollout": [
-        {
-          "step": 0,
-          "action": "A1",
-          "confidence": 84,
-          "reasoning": "Player X opens in the corner before O can seize the center, keeping a balanced route to a full-board draw.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 |   |   |   |",
-            "  +---+---+---+",
-            "2 |   |   |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": true }
-        },
-        {
-          "step": 1,
-          "action": "C1",
-          "confidence": 82,
-          "reasoning": "With O on B1, Player X takes C1 to balance the top row and avoid giving O complete upper-side control.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | X | O |   |",
-            "  +---+---+---+",
-            "2 |   |   |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 2,
-          "action": "B2",
-          "confidence": 80,
-          "reasoning": "With O on B1 and C2 controlling the right side, Player X secures B2 to deny O the center and keep the board stable.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | X | O | X |",
-            "  +---+---+---+",
-            "2 |   |   | O |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 3,
-          "action": "A2",
-          "confidence": 82,
-          "reasoning": "With O on B1, C2, and A3 shaping the left-lower side, Player X adds A2 to preserve the full-board draw pattern.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | X | O | X |",
-            "  +---+---+---+",
-            "2 |   | X | O |",
-            "  +---+---+---+",
-            "3 | O |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 4,
-          "action": "B3",
-          "confidence": 95,
-          "reasoning": "With O also on C3, Player X fills B3 as the last safe square so the final board has no three-in-a-row and the game ends drawn.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | X | O | X |",
-            "  +---+---+---+",
-            "2 | X | X | O |",
-            "  +---+---+---+",
-            "3 | O |   | O |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": true, "truncated": false, "started": false }
-        }
-      ]
-    },
-    {
-      "sample_id": 98,
-      "rollout": [
-        {
-          "step": 0,
-          "action": "B1",
-          "confidence": 84,
-          "reasoning": "Player X opens on the top edge before O can control the center, keeping safe draw continuations available.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 |   |   |   |",
-            "  +---+---+---+",
-            "2 |   |   |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": true }
-        },
-        {
-          "step": 1,
-          "action": "A2",
-          "confidence": 82,
-          "reasoning": "With O on A1, Player X takes A2 to keep the left side active instead of conceding that file to O.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | O | X |   |",
-            "  +---+---+---+",
-            "2 |   |   |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 2,
-          "action": "C2",
-          "confidence": 80,
-          "reasoning": "With O on A1 and C1 controlling the top corners, Player X adds C2 to keep the right side balanced and avoid losing initiative.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | O | X | O |",
-            "  +---+---+---+",
-            "2 | X |   |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 3,
-          "action": "A3",
-          "confidence": 82,
-          "reasoning": "With O on A1, C1, and B2 shaping the center, Player X drops to A3 to preserve the draw structure on the left side.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | O | X | O |",
-            "  +---+---+---+",
-            "2 | X | O | X |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 4,
-          "action": "C3",
-          "confidence": 95,
-          "reasoning": "With O also on B3, Player X fills C3 as the last safe square so no line is completed and the game ends in a draw.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | O | X | O |",
-            "  +---+---+---+",
-            "2 | X | O | X |",
-            "  +---+---+---+",
-            "3 | X | O |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": true, "truncated": false, "started": false }
-        }
-      ]
-    },
-    {
-      "sample_id": 100,
-      "rollout": [
-        {
-          "step": 0,
-          "action": "A1",
-          "confidence": 84,
-          "reasoning": "Player X opens in the corner before O can take the center, keeping a safe path toward a drawn full board.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 |   |   |   |",
-            "  +---+---+---+",
-            "2 |   |   |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": true }
-        },
-        {
-          "step": 1,
-          "action": "C1",
-          "confidence": 82,
-          "reasoning": "With O on B1, Player X takes C1 to balance the top row and avoid giving O uncontested influence there.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | X | O |   |",
-            "  +---+---+---+",
-            "2 |   |   |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 2,
-          "action": "A2",
-          "confidence": 80,
-          "reasoning": "With O on B1 and B2 controlling the center file, Player X adds A2 to stabilize the left side and preserve the draw structure.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | X | O | X |",
-            "  +---+---+---+",
-            "2 |   | O |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 3,
-          "action": "B3",
-          "confidence": 82,
-          "reasoning": "With O on B1, B2, and C2 shaping the upper-middle and right side, Player X uses B3 to keep the game balanced and drawable.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | X | O | X |",
-            "  +---+---+---+",
-            "2 | X | O | O |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": false, "truncated": false, "started": false }
-        },
-        {
-          "step": 4,
-          "action": "C3",
-          "confidence": 95,
-          "reasoning": "With O also on A3, Player X fills C3 as the last safe square so no row, column, or diagonal is completed and the result is a draw.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | X | O | X |",
-            "  +---+---+---+",
-            "2 | X | O | O |",
-            "  +---+---+---+",
-            "3 | O | X |   |",
-            "  +---+---+---+"
-          ],
-          "reward": { "X": 0, "O": 0 },
-          "score": { "X": 0, "O": 0 },
-          "status": { "terminated": true, "truncated": false, "started": false }
-        }
-      ]
-    },
-    {
-      "sample_id": 101,
-      "rollout": [
-        {
-          "step": 0,
-          "action": "C1",
-          "confidence": 88,
-          "reasoning": "Player X opens in the top-right corner to keep the right column and top row available for future pressure.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 |   |   |   |",
-            "  +---+---+---+",
-            "2 |   |   |   |",
-            "  +---+---+---+",
-            "3 |   |   |   |",
-            "  +---+---+---+"
-          ],
-          "reward": {
-            "X": 0,
-            "O": 0
-          },
-          "score": {
-            "X": 0,
-            "O": 0
-          },
-          "status": {
-            "terminated": false,
-            "truncated": false,
-            "started": true
-          }
-        },
-        {
-          "step": 1,
-          "action": "A2",
-          "confidence": 83,
-          "reasoning": "With O on C3, Player X takes A2 to build on the left side and keep multiple continuations open.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 |   |   | X |",
-            "  +---+---+---+",
-            "2 |   |   |   |",
-            "  +---+---+---+",
-            "3 |   |   | O |",
-            "  +---+---+---+"
-          ],
-          "reward": {
-            "X": 0,
-            "O": 0
-          },
-          "score": {
-            "X": 0,
-            "O": 0
-          },
-          "status": {
-            "terminated": false,
-            "truncated": false,
-            "started": false
-          }
-        },
-        {
-          "step": 2,
-          "action": "B1",
-          "confidence": 79,
-          "reasoning": "After O takes A1, Player X plays B1 to connect the top side and increase short-term pressure.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | O |   | X |",
-            "  +---+---+---+",
-            "2 | X |   |   |",
-            "  +---+---+---+",
-            "3 |   |   | O |",
-            "  +---+---+---+"
-          ],
-          "reward": {
-            "X": 0,
-            "O": 0
-          },
-          "score": {
-            "X": 0,
-            "O": 0
-          },
-          "status": {
-            "terminated": false,
-            "truncated": false,
-            "started": false
-          }
-        },
-        {
-          "step": 3,
-          "action": "A3",
-          "confidence": 74,
-          "reasoning": "With O on B3 and C3, Player X plays A3 to block the immediate bottom-row threat and keep a draw path open.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | O | X | X |",
-            "  +---+---+---+",
-            "2 | X |   |   |",
-            "  +---+---+---+",
-            "3 |   | O | O |",
-            "  +---+---+---+"
-          ],
-          "reward": {
-            "X": 0,
-            "O": 0
-          },
-          "score": {
-            "X": 0,
-            "O": 0
-          },
-          "status": {
-            "terminated": false,
-            "truncated": false,
-            "started": false
-          }
-        },
-        {
-          "step": 4,
-          "action": "B2",
-          "confidence": 96,
-          "reasoning": "After O places C2, Player X fills B2 as the last empty square, and the full board ends in a draw with no three-in-a-row.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | O | X | X |",
-            "  +---+---+---+",
-            "2 | X |   | O |",
-            "  +---+---+---+",
-            "3 | X | O | O |",
-            "  +---+---+---+"
-          ],
-          "reward": {
-            "X": 0,
-            "O": 0
-          },
-          "score": {
-            "X": 0,
-            "O": 0
-          },
-          "status": {
-            "terminated": true,
-            "truncated": false,
-            "started": false
-          }
         }
       ]
     },
@@ -9948,156 +8467,6 @@
   ]
 },
 {
-	      "sample_id": 115,
-  "rollout": [
-    {
-      "step": 0,
-      "action": "C1",
-      "confidence": 87,
-      "reasoning": "Player X opens in the top-right corner before O can secure the center, keeping the right column available for future plays.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 |   |   |   |",
-        "  +---+---+---+",
-        "2 |   |   |   |",
-        "  +---+---+---+",
-        "3 |   |   |   |",
-        "  +---+---+---+"
-      ],
-      "reward": {
-        "X": 0,
-        "O": 0
-      },
-      "score": {
-        "X": 0,
-        "O": 0
-      },
-      "status": {
-        "terminated": false,
-        "truncated": false,
-        "started": true
-      }
-    },
-    {
-      "step": 1,
-      "action": "B3",
-      "confidence": 82,
-      "reasoning": "With O on A3, Player X takes B3 to own the bottom row and keep several safe continuations available.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 |   |   | X |",
-        "  +---+---+---+",
-        "2 |   |   |   |",
-        "  +---+---+---+",
-        "3 | O |   |   |",
-        "  +---+---+---+"
-      ],
-      "reward": {
-        "X": 0,
-        "O": 0
-      },
-      "score": {
-        "X": 0,
-        "O": 0
-      },
-      "status": {
-        "terminated": false,
-        "truncated": false,
-        "started": false
-      }
-    },
-    {
-      "step": 2,
-      "action": "C3",
-      "confidence": 84,
-      "reasoning": "With O on B2 and A3, Player X plays C3 to strengthen the bottom side while keeping the game under control.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 |   |   | X |",
-        "  +---+---+---+",
-        "2 |   | O |   |",
-        "  +---+---+---+",
-        "3 | O | X |   |",
-        "  +---+---+---+"
-      ],
-      "reward": {
-        "X": 0,
-        "O": 0
-      },
-      "score": {
-        "X": 0,
-        "O": 0
-      },
-      "status": {
-        "terminated": false,
-        "truncated": false,
-        "started": false
-      }
-    },
-    {
-      "step": 3,
-      "action": "A2",
-      "confidence": 96,
-      "reasoning": "With O on B2 and C2, Player X plays A2 to secure the left side and preserve the draw.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 |   |   | X |",
-        "  +---+---+---+",
-        "2 |   | O | O |",
-        "  +---+---+---+",
-        "3 | O | X | X |",
-        "  +---+---+---+"
-      ],
-      "reward": {
-        "X": 0,
-        "O": 0
-      },
-      "score": {
-        "X": 0,
-        "O": 0
-      },
-      "status": {
-        "terminated": false,
-        "truncated": false,
-        "started": false
-      }
-    },
-    {
-      "step": 4,
-      "action": "A1",
-      "confidence": 99,
-      "reasoning": "After O places B1, Player X fills A1 as the last remaining square; the full board has no three-in-a-row, so the game ends in a draw.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 |   | O | X |",
-        "  +---+---+---+",
-        "2 | X | O | O |",
-        "  +---+---+---+",
-        "3 | O | X | X |",
-        "  +---+---+---+"
-      ],
-      "reward": {
-        "X": 0,
-        "O": 0
-      },
-      "score": {
-        "X": 0,
-        "O": 0
-      },
-      "status": {
-        "terminated": true,
-        "truncated": false,
-        "started": false
-      }
-    }
-  ]
-},
-{
 	      "sample_id": 116,
   "rollout": [
     {
@@ -10539,156 +8908,6 @@
       "reward": {
         "X": 1,
         "O": -1
-      },
-      "score": {
-        "X": 0,
-        "O": 0
-      },
-      "status": {
-        "terminated": true,
-        "truncated": false,
-        "started": false
-      }
-    }
-  ]
-},
-{
-	      "sample_id": 120,
-  "rollout": [
-    {
-      "step": 0,
-      "action": "C1",
-      "confidence": 87,
-      "reasoning": "Player X opens in the top-right corner before O can secure the center, keeping the right column available for future plays.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 |   |   |   |",
-        "  +---+---+---+",
-        "2 |   |   |   |",
-        "  +---+---+---+",
-        "3 |   |   |   |",
-        "  +---+---+---+"
-      ],
-      "reward": {
-        "X": 0,
-        "O": 0
-      },
-      "score": {
-        "X": 0,
-        "O": 0
-      },
-      "status": {
-        "terminated": false,
-        "truncated": false,
-        "started": true
-      }
-    },
-    {
-      "step": 1,
-      "action": "A3",
-      "confidence": 82,
-      "reasoning": "With O on B2, Player X plays A3 to keep the left column active and avoid letting O control the center unchecked.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 |   |   | X |",
-        "  +---+---+---+",
-        "2 |   | O |   |",
-        "  +---+---+---+",
-        "3 |   |   |   |",
-        "  +---+---+---+"
-      ],
-      "reward": {
-        "X": 0,
-        "O": 0
-      },
-      "score": {
-        "X": 0,
-        "O": 0
-      },
-      "status": {
-        "terminated": false,
-        "truncated": false,
-        "started": false
-      }
-    },
-    {
-      "step": 2,
-      "action": "B1",
-      "confidence": 97,
-      "reasoning": "With O on B2 and B3, Player X must play B1 to block the immediate column-B threat while keeping the top row alive.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 |   |   | X |",
-        "  +---+---+---+",
-        "2 |   | O |   |",
-        "  +---+---+---+",
-        "3 | X | O |   |",
-        "  +---+---+---+"
-      ],
-      "reward": {
-        "X": 0,
-        "O": 0
-      },
-      "score": {
-        "X": 0,
-        "O": 0
-      },
-      "status": {
-        "terminated": false,
-        "truncated": false,
-        "started": false
-      }
-    },
-    {
-      "step": 3,
-      "action": "C3",
-      "confidence": 96,
-      "reasoning": "After O blocks the top row with A1, Player X must play C3 to block O's diagonal threat on A1-B2-C3 and preserve the draw path.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 | O | X | X |",
-        "  +---+---+---+",
-        "2 |   | O |   |",
-        "  +---+---+---+",
-        "3 | X | O |   |",
-        "  +---+---+---+"
-      ],
-      "reward": {
-        "X": 0,
-        "O": 0
-      },
-      "score": {
-        "X": 0,
-        "O": 0
-      },
-      "status": {
-        "terminated": false,
-        "truncated": false,
-        "started": false
-      }
-    },
-    {
-      "step": 4,
-      "action": "A2",
-      "confidence": 99,
-      "reasoning": "After O places C2, Player X fills A2; the final full board has no three-in-a-row, so the game ends in a draw.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 | O | X | X |",
-        "  +---+---+---+",
-        "2 |   | O | O |",
-        "  +---+---+---+",
-        "3 | X | O | X |",
-        "  +---+---+---+"
-      ],
-      "reward": {
-        "X": 0,
-        "O": 0
       },
       "score": {
         "X": 0,
@@ -12228,6 +10447,795 @@
         "2 | O | X | O |",
         "  +---+---+---+",
         "3 |   |   | O |",
+        "  +---+---+---+"
+      ],
+      "reward": {
+        "X": 1,
+        "O": -1
+      },
+      "score": {
+        "X": 0,
+        "O": 0
+      },
+      "status": {
+        "terminated": true,
+        "truncated": false,
+        "started": false
+      }
+    }
+  ]
+},
+{
+        "sample_id": 134,
+  "rollout": [
+    {
+      "step": 0,
+      "action": "C1",
+      "confidence": 87,
+      "reasoning": "Player X opens in the top-right corner to start from a strong corner square and keep multiple winning lines available.",
+      "state": [
+        "    A   B   C",
+        "  +---+---+---+",
+        "1 |   |   |   |",
+        "  +---+---+---+",
+        "2 |   |   |   |",
+        "  +---+---+---+",
+        "3 |   |   |   |",
+        "  +---+---+---+"
+      ],
+      "reward": {
+        "X": 0,
+        "O": 0
+      },
+      "score": {
+        "X": 0,
+        "O": 0
+      },
+      "status": {
+        "terminated": false,
+        "truncated": false,
+        "started": true
+      }
+    },
+    {
+      "step": 1,
+      "action": "B2",
+      "confidence": 95,
+      "reasoning": "With O on B1, Player X takes the center to increase control and set up the diagonal A3-B2-C1 as a direct winning route.",
+      "state": [
+        "    A   B   C",
+        "  +---+---+---+",
+        "1 |   | O | X |",
+        "  +---+---+---+",
+        "2 |   |   |   |",
+        "  +---+---+---+",
+        "3 |   |   |   |",
+        "  +---+---+---+"
+      ],
+      "reward": {
+        "X": 0,
+        "O": 0
+      },
+      "score": {
+        "X": 0,
+        "O": 0
+      },
+      "status": {
+        "terminated": false,
+        "truncated": false,
+        "started": false
+      }
+    },
+    {
+      "step": 2,
+      "action": "A3",
+      "confidence": 99,
+      "reasoning": "With X already on C1 and B2, Player X plays A3 to complete the diagonal A3-B2-C1 and win immediately.",
+      "state": [
+        "    A   B   C",
+        "  +---+---+---+",
+        "1 | O | O | X |",
+        "  +---+---+---+",
+        "2 |   | X |   |",
+        "  +---+---+---+",
+        "3 |   |   |   |",
+        "  +---+---+---+"
+      ],
+      "reward": {
+        "X": 1,
+        "O": -1
+      },
+      "score": {
+        "X": 0,
+        "O": 0
+      },
+      "status": {
+        "terminated": true,
+        "truncated": false,
+        "started": false
+      }
+    }
+  ]
+},
+    {
+            "sample_id": 135,
+  "rollout": [
+    {
+      "step": 0,
+      "action": "C1",
+      "confidence": 87,
+      "reasoning": "Player X opens in the top-right corner before O can claim the center, keeping column C as a clean route.",
+      "state": [
+        "    A   B   C",
+        "  +---+---+---+",
+        "1 |   |   |   |",
+        "  +---+---+---+",
+        "2 |   |   |   |",
+        "  +---+---+---+",
+        "3 |   |   |   |",
+        "  +---+---+---+"
+      ],
+      "reward": {
+        "X": 0,
+        "O": 0
+      },
+      "score": {
+        "X": 0,
+        "O": 0
+      },
+      "status": {
+        "terminated": false,
+        "truncated": false,
+        "started": true
+      }
+    },
+    {
+      "step": 1,
+      "action": "A1",
+      "confidence": 83,
+      "reasoning": "With O on B1, Player X takes A1 to share the top row and avoid giving O full control of the upper side.",
+      "state": [
+        "    A   B   C",
+        "  +---+---+---+",
+        "1 |   | O | X |",
+        "  +---+---+---+",
+        "2 |   |   |   |",
+        "  +---+---+---+",
+        "3 |   |   |   |",
+        "  +---+---+---+"
+      ],
+      "reward": {
+        "X": 0,
+        "O": 0
+      },
+      "score": {
+        "X": 0,
+        "O": 0
+      },
+      "status": {
+        "terminated": false,
+        "truncated": false,
+        "started": false
+      }
+    },
+    {
+      "step": 2,
+      "action": "A2",
+      "confidence": 79,
+      "reasoning": "With O on B1 and B3 controlling the center file, Player X shifts to A2 to strengthen the left side and create a direct threat on column A.",
+      "state": [
+        "    A   B   C",
+        "  +---+---+---+",
+        "1 | X | O | X |",
+        "  +---+---+---+",
+        "2 |   |   |   |",
+        "  +---+---+---+",
+        "3 |   | O |   |",
+        "  +---+---+---+"
+      ],
+      "reward": {
+        "X": 0,
+        "O": 0
+      },
+      "score": {
+        "X": 0,
+        "O": 0
+      },
+      "status": {
+        "terminated": false,
+        "truncated": false,
+        "started": false
+      }
+    },
+    {
+      "step": 3,
+      "action": "A3",
+      "confidence": 98,
+      "reasoning": "After O plays C2 instead of blocking column A, Player X takes A3 to complete the A-column and win immediately.",
+      "state": [
+        "    A   B   C",
+        "  +---+---+---+",
+        "1 | X | O | X |",
+        "  +---+---+---+",
+        "2 | X |   | O |",
+        "  +---+---+---+",
+        "3 |   | O |   |",
+        "  +---+---+---+"
+      ],
+      "reward": {
+        "X": 1,
+        "O": -1
+      },
+      "score": {
+        "X": 0,
+        "O": 0
+      },
+      "status": {
+        "terminated": true,
+        "truncated": false,
+        "started": false
+      }
+    }
+  ]
+},
+    {
+            "sample_id": 136,
+  "rollout": [
+    {
+      "step": 0,
+      "action": "C1",
+      "confidence": 87,
+      "reasoning": "Player X opens in the top-right corner before O can establish central control, setting up the anti-diagonal route.",
+      "state": [
+        "    A   B   C",
+        "  +---+---+---+",
+        "1 |   |   |   |",
+        "  +---+---+---+",
+        "2 |   |   |   |",
+        "  +---+---+---+",
+        "3 |   |   |   |",
+        "  +---+---+---+"
+      ],
+      "reward": {
+        "X": 0,
+        "O": 0
+      },
+      "score": {
+        "X": 0,
+        "O": 0
+      },
+      "status": {
+        "terminated": false,
+        "truncated": false,
+        "started": true
+      }
+    },
+    {
+      "step": 1,
+      "action": "B2",
+      "confidence": 96,
+      "reasoning": "The previous move C1 is invalid because C1 is already occupied by X. Player X correctly takes the center at B2, which is the strongest legal move and prepares the anti-diagonal A3-B2-C1.",
+      "state": [
+        "    A   B   C",
+        "  +---+---+---+",
+        "1 |   |   | X |",
+        "  +---+---+---+",
+        "2 |   |   |   |",
+        "  +---+---+---+",
+        "3 |   |   | O |",
+        "  +---+---+---+"
+      ],
+      "reward": {
+        "X": 0,
+        "O": 0
+      },
+      "score": {
+        "X": 0,
+        "O": 0
+      },
+      "status": {
+        "terminated": false,
+        "truncated": false,
+        "started": false
+      }
+    },
+    {
+      "step": 2,
+      "action": "A3",
+      "confidence": 99,
+      "reasoning": "With X already on C1 and B2, Player X places at A3 to complete the anti-diagonal A3-B2-C1 and win immediately.",
+      "state": [
+        "    A   B   C",
+        "  +---+---+---+",
+        "1 |   |   | X |",
+        "  +---+---+---+",
+        "2 | O | X |   |",
+        "  +---+---+---+",
+        "3 |   |   | O |",
+        "  +---+---+---+"
+      ],
+      "reward": {
+        "X": 1,
+        "O": -1
+      },
+      "score": {
+        "X": 0,
+        "O": 0
+      },
+      "status": {
+        "terminated": true,
+        "truncated": false,
+        "started": false
+      }
+    }
+  ]
+},
+    {
+            "sample_id": 137,
+  "rollout": [
+    {
+      "step": 0,
+      "action": "B2",
+      "confidence": 91,
+      "reasoning": "Player X opens in the center before O can claim it, maximizing control and keeping the most winning lines available.",
+      "state": [
+        "    A   B   C",
+        "  +---+---+---+",
+        "1 |   |   |   |",
+        "  +---+---+---+",
+        "2 |   |   |   |",
+        "  +---+---+---+",
+        "3 |   |   |   |",
+        "  +---+---+---+"
+      ],
+      "reward": {
+        "X": 0,
+        "O": 0
+      },
+      "score": {
+        "X": 0,
+        "O": 0
+      },
+      "status": {
+        "terminated": false,
+        "truncated": false,
+        "started": true
+      }
+    },
+    {
+      "step": 1,
+      "action": "A3",
+      "confidence": 84,
+      "reasoning": "With O on C1, Player X adds A3 to keep multiple routes open through the center and the left side.",
+      "state": [
+        "    A   B   C",
+        "  +---+---+---+",
+        "1 |   |   | O |",
+        "  +---+---+---+",
+        "2 |   | X |   |",
+        "  +---+---+---+",
+        "3 |   |   |   |",
+        "  +---+---+---+"
+      ],
+      "reward": {
+        "X": 0,
+        "O": 0
+      },
+      "score": {
+        "X": 0,
+        "O": 0
+      },
+      "status": {
+        "terminated": false,
+        "truncated": false,
+        "started": false
+      }
+    },
+    {
+      "step": 2,
+      "action": "C3",
+      "confidence": 99,
+      "reasoning": "With O on C1 and C2 threatening the right column, Player X must play C3 to block the immediate loss. This also creates a fork: X will threaten both A1 on the diagonal and B3 on the bottom row.",
+      "state": [
+        "    A   B   C",
+        "  +---+---+---+",
+        "1 |   |   | O |",
+        "  +---+---+---+",
+        "2 |   | X | O |",
+        "  +---+---+---+",
+        "3 | X |   |   |",
+        "  +---+---+---+"
+      ],
+      "reward": {
+        "X": 0,
+        "O": 0
+      },
+      "score": {
+        "X": 0,
+        "O": 0
+      },
+      "status": {
+        "terminated": false,
+        "truncated": false,
+        "started": false
+      }
+    },
+    {
+      "step": 3,
+      "action": "B3",
+      "confidence": 99,
+      "reasoning": "After O blocks A1, Player X plays B3 to complete the bottom row A3-B3-C3 and win. The previous move created two threats, so O could only stop one.",
+      "state": [
+        "    A   B   C",
+        "  +---+---+---+",
+        "1 | O |   | O |",
+        "  +---+---+---+",
+        "2 |   | X | O |",
+        "  +---+---+---+",
+        "3 | X |   | X |",
+        "  +---+---+---+"
+      ],
+      "reward": {
+        "X": 1,
+        "O": -1
+      },
+      "score": {
+        "X": 0,
+        "O": 0
+      },
+      "status": {
+        "terminated": true,
+        "truncated": false,
+        "started": false
+      }
+    }
+  ]
+},
+    {
+            "sample_id": 138,
+  "rollout": [
+    {
+      "step": 0,
+      "action": "A3",
+      "confidence": 86,
+      "reasoning": "Player X opens in the bottom-left corner before O can seize the center, targeting column A from there.",
+      "state": [
+        "    A   B   C",
+        "  +---+---+---+",
+        "1 |   |   |   |",
+        "  +---+---+---+",
+        "2 |   |   |   |",
+        "  +---+---+---+",
+        "3 |   |   |   |",
+        "  +---+---+---+"
+      ],
+      "reward": {
+        "X": 0,
+        "O": 0
+      },
+      "score": {
+        "X": 0,
+        "O": 0
+      },
+      "status": {
+        "terminated": false,
+        "truncated": false,
+        "started": true
+      }
+    },
+    {
+      "step": 1,
+      "action": "A2",
+      "confidence": 84,
+      "reasoning": "With O on C1, Player X adds A2 to build direct pressure on column A and keep a fast winning path available.",
+      "state": [
+        "    A   B   C",
+        "  +---+---+---+",
+        "1 |   |   | O |",
+        "  +---+---+---+",
+        "2 |   |   |   |",
+        "  +---+---+---+",
+        "3 | X |   |   |",
+        "  +---+---+---+"
+      ],
+      "reward": {
+        "X": 0,
+        "O": 0
+      },
+      "score": {
+        "X": 0,
+        "O": 0
+      },
+      "status": {
+        "terminated": false,
+        "truncated": false,
+        "started": false
+      }
+    },
+    {
+      "step": 2,
+      "action": "A1",
+      "confidence": 99,
+      "reasoning": "With X already on A2 and A3, Player X must place at A1 to complete column A immediately and win. Repeating A3 would be invalid because A3 is already occupied.",
+      "state": [
+        "    A   B   C",
+        "  +---+---+---+",
+        "1 |   |   | O |",
+        "  +---+---+---+",
+        "2 | X |   | O |",
+        "  +---+---+---+",
+        "3 | X |   |   |",
+        "  +---+---+---+"
+      ],
+      "reward": {
+        "X": 1,
+        "O": -1
+      },
+      "score": {
+        "X": 0,
+        "O": 0
+      },
+      "status": {
+        "terminated": true,
+        "truncated": false,
+        "started": false
+      }
+    }
+  ]
+},
+    {
+            "sample_id": 139,
+  "rollout": [
+    {
+      "step": 0,
+      "action": "B2",
+      "confidence": 91,
+      "reasoning": "Player X opens in the center before O can claim the bottom side, building column B from the middle outwards.",
+      "state": [
+        "    A   B   C",
+        "  +---+---+---+",
+        "1 |   |   |   |",
+        "  +---+---+---+",
+        "2 |   |   |   |",
+        "  +---+---+---+",
+        "3 |   |   |   |",
+        "  +---+---+---+"
+      ],
+      "reward": {
+        "X": 0,
+        "O": 0
+      },
+      "score": {
+        "X": 0,
+        "O": 0
+      },
+      "status": {
+        "terminated": false,
+        "truncated": false,
+        "started": true
+      }
+    },
+    {
+      "step": 1,
+      "action": "A1",
+      "confidence": 84,
+      "reasoning": "With O on C2, Player X plays A1 to start a diagonal structure through the center.",
+      "state": [
+        "    A   B   C",
+        "  +---+---+---+",
+        "1 |   |   |   |",
+        "  +---+---+---+",
+        "2 |   | X | O |",
+        "  +---+---+---+",
+        "3 |   |   |   |",
+        "  +---+---+---+"
+      ],
+      "reward": {
+        "X": 0,
+        "O": 0
+      },
+      "score": {
+        "X": 0,
+        "O": 0
+      },
+      "status": {
+        "terminated": false,
+        "truncated": false,
+        "started": false
+      }
+    },
+    {
+      "step": 2,
+      "action": "A3",
+      "confidence": 76,
+      "reasoning": "With O on C1 and C2, Player X adds A3 to keep the left side active while preserving the diagonal win route.",
+      "state": [
+        "    A   B   C",
+        "  +---+---+---+",
+        "1 | X |   | O |",
+        "  +---+---+---+",
+        "2 |   | X | O |",
+        "  +---+---+---+",
+        "3 |   |   |   |",
+        "  +---+---+---+"
+      ],
+      "reward": {
+        "X": 0,
+        "O": 0
+      },
+      "score": {
+        "X": 0,
+        "O": 0
+      },
+      "status": {
+        "terminated": false,
+        "truncated": false,
+        "started": false
+      }
+    },
+    {
+      "step": 3,
+      "action": "C3",
+      "confidence": 99,
+      "reasoning": "A3 is already occupied, so the correct move is C3. This completes the diagonal A1-B2-C3 and wins immediately.",
+      "state": [
+        "    A   B   C",
+        "  +---+---+---+",
+        "1 | X |   | O |",
+        "  +---+---+---+",
+        "2 | O | X | O |",
+        "  +---+---+---+",
+        "3 | X |   |   |",
+        "  +---+---+---+"
+      ],
+      "reward": {
+        "X": 1,
+        "O": -1
+      },
+      "score": {
+        "X": 0,
+        "O": 0
+      },
+      "status": {
+        "terminated": true,
+        "truncated": false,
+        "started": false
+      }
+    }
+  ]
+},
+    {
+            "sample_id": 140,
+  "rollout": [
+    {
+      "step": 0,
+      "action": "B2",
+      "confidence": 91,
+      "reasoning": "Player X opens in the center before O can seize the edge, keeping column B as the main avenue.",
+      "state": [
+        "    A   B   C",
+        "  +---+---+---+",
+        "1 |   |   |   |",
+        "  +---+---+---+",
+        "2 |   |   |   |",
+        "  +---+---+---+",
+        "3 |   |   |   |",
+        "  +---+---+---+"
+      ],
+      "reward": {
+        "X": 0,
+        "O": 0
+      },
+      "score": {
+        "X": 0,
+        "O": 0
+      },
+      "status": {
+        "terminated": false,
+        "truncated": false,
+        "started": true
+      }
+    },
+    {
+      "step": 1,
+      "action": "B3",
+      "confidence": 79,
+      "reasoning": "With O on B1, Player X takes B3 to add pressure through column B and keep central control.",
+      "state": [
+        "    A   B   C",
+        "  +---+---+---+",
+        "1 |   | O |   |",
+        "  +---+---+---+",
+        "2 |   | X |   |",
+        "  +---+---+---+",
+        "3 |   |   |   |",
+        "  +---+---+---+"
+      ],
+      "reward": {
+        "X": 0,
+        "O": 0
+      },
+      "score": {
+        "X": 0,
+        "O": 0
+      },
+      "status": {
+        "terminated": false,
+        "truncated": false,
+        "started": false
+      }
+    },
+    {
+      "step": 2,
+      "action": "A1",
+      "confidence": 77,
+      "reasoning": "With O on B1 and C1, Player X takes A1 to contest the top row and add a diagonal option.",
+      "state": [
+        "    A   B   C",
+        "  +---+---+---+",
+        "1 |   | O | O |",
+        "  +---+---+---+",
+        "2 |   | X |   |",
+        "  +---+---+---+",
+        "3 |   | X |   |",
+        "  +---+---+---+"
+      ],
+      "reward": {
+        "X": 0,
+        "O": 0
+      },
+      "score": {
+        "X": 0,
+        "O": 0
+      },
+      "status": {
+        "terminated": false,
+        "truncated": false,
+        "started": false
+      }
+    },
+    {
+      "step": 3,
+      "action": "A2",
+      "confidence": 73,
+      "reasoning": "With O on C1 and C3, Player X plays A2 to prepare a horizontal win on row 2 while keeping the board flexible.",
+      "state": [
+        "    A   B   C",
+        "  +---+---+---+",
+        "1 | X | O | O |",
+        "  +---+---+---+",
+        "2 |   | X |   |",
+        "  +---+---+---+",
+        "3 |   | X | O |",
+        "  +---+---+---+"
+      ],
+      "reward": {
+        "X": 0,
+        "O": 0
+      },
+      "score": {
+        "X": 0,
+        "O": 0
+      },
+      "status": {
+        "terminated": false,
+        "truncated": false,
+        "started": false
+      }
+    },
+    {
+      "step": 4,
+      "action": "C2",
+      "confidence": 99,
+      "reasoning": "With X already on A2 and B2, the correct final move is C2. This completes row 2 (A2-B2-C2) and wins immediately. Repeating A2 would be invalid because A2 is already occupied by X.",
+      "state": [
+        "    A   B   C",
+        "  +---+---+---+",
+        "1 | X | O | O |",
+        "  +---+---+---+",
+        "2 | X | X |   |",
+        "  +---+---+---+",
+        "3 | O | X | O |",
         "  +---+---+---+"
       ],
       "reward": {
