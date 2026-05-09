@@ -802,7 +802,7 @@
           "step": 0,
           "action": "B2",
           "confidence": 85,
-          "reasoning": "Player X opens in the center before O can lock it down, keeping balanced draw lines available.",
+          "reasoning": "X opens in the center to control diagonals and future winning lines.",
           "state": [
             "    A   B   C",
             "  +---+---+---+",
@@ -831,7 +831,7 @@
           "step": 1,
           "action": "A1",
           "confidence": 83,
-          "reasoning": "With O on B1, Player X takes A1 to share the top-left structure and avoid giving O the whole upper edge.",
+          "reasoning": "X takes a corner to build the main diagonal through the center.",
           "state": [
             "    A   B   C",
             "  +---+---+---+",
@@ -860,7 +860,7 @@
           "step": 2,
           "action": "A3",
           "confidence": 80,
-          "reasoning": "With O on B1 and C1 controlling the top row, Player X drops to A3 to keep the left side balanced and avoid a forced race.",
+          "reasoning": "X reinforces the left column while keeping diagonal pressure.",
           "state": [
             "    A   B   C",
             "  +---+---+---+",
@@ -887,9 +887,9 @@
         },
         {
           "step": 3,
-          "action": "C2",
-          "confidence": 82,
-          "reasoning": "With O on B1, C1, and A2 pressuring the left side, Player X uses C2 to keep the board stable and avoid giving O initiative.",
+          "action": "C3",
+          "confidence": 99,
+          "reasoning": "C3 completes the diagonal A1–B2–C3, giving player X an immediate win.",
           "state": [
             "    A   B   C",
             "  +---+---+---+",
@@ -901,37 +901,8 @@
             "  +---+---+---+"
           ],
           "reward": {
-            "X": 0,
-            "O": 0
-          },
-          "score": {
-            "X": 0,
-            "O": 0
-          },
-          "status": {
-            "terminated": false,
-            "truncated": false,
-            "started": false
-          }
-        },
-        {
-          "step": 4,
-          "action": "B3",
-          "confidence": 96,
-          "reasoning": "With O also on C3, Player X fills B3 as the last safe square so O gets no winning line and the result stays a draw.",
-          "state": [
-            "    A   B   C",
-            "  +---+---+---+",
-            "1 | X | O | O |",
-            "  +---+---+---+",
-            "2 | O | X | X |",
-            "  +---+---+---+",
-            "3 | X |   | O |",
-            "  +---+---+---+"
-          ],
-          "reward": {
-            "X": 0,
-            "O": 0
+            "X": 1,
+            "O": -1
           },
           "score": {
             "X": 0,
@@ -1552,7 +1523,7 @@
           "step": 4,
           "action": "C2",
           "confidence": 99,
-          "reasoning": "With X already on A2 and B2, the correct final move is C2. This completes row 2 (A2-B2-C2) and wins immediately. Repeating A2 would be invalid because A2 is already occupied by X.",
+          "reasoning": "With X already on A2 and B2, the correct final move is C2. This completes row 2 (A2-B2-C2) and wins immediately.",
           "state": [
             "    A   B   C",
             "  +---+---+---+",
@@ -1581,475 +1552,3745 @@
     },
     {
       "sample_id": 141,
-  "rollout": [
-    {
-      "step": 0,
-      "action": "B2",
-      "confidence": 95,
-      "reasoning": "The starting player chooses the center to maximize board control.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 |   |   |   |",
-        "  +---+---+---+",
-        "2 |   |   |   |",
-        "  +---+---+---+",
-        "3 |   |   |   |",
-        "  +---+---+---+"
-      ],
-      "status": {
-        "terminated": false,
-        "truncated": false,
-        "started": true
-      }
+      "rollout": [
+        {
+          "step": 0,
+          "action": "B2",
+          "confidence": 98,
+          "reasoning": "X takes the center to keep diagonal and fork options open.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "A1",
+          "confidence": 95,
+          "reasoning": "X takes a corner to threaten the main diagonal.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "C1",
+          "confidence": 96,
+          "reasoning": "After O correctly blocks the diagonal, X repositions to set up a fork.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X |   |   |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 |   |   | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 3,
+          "action": "A3",
+          "confidence": 99,
+          "reasoning": "X creates a fork that O cannot block on the next response.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | O | X |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 |   |   | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 1,
+            "O": -1
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
     },
-    {
-      "step": 1,
-      "action": "A1",
-      "confidence": 90,
-      "reasoning": "X responds by taking a corner to preserve future winning paths.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 |   |   |   |",
-        "  +---+---+---+",
-        "2 |   | O |   |",
-        "  +---+---+---+",
-        "3 |   |   |   |",
-        "  +---+---+---+"
-      ],
-      "status": {
-        "terminated": false,
-        "truncated": false,
-        "started": false
-      }
-    },
-    {
-      "step": 2,
-      "action": "C3",
-      "confidence": 88,
-      "reasoning": "The opponent plays the opposite corner to apply diagonal pressure.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 | X |   |   |",
-        "  +---+---+---+",
-        "2 |   | O |   |",
-        "  +---+---+---+",
-        "3 |   |   |   |",
-        "  +---+---+---+"
-      ],
-      "status": {
-        "terminated": false,
-        "truncated": false,
-        "started": false
-      }
-    },
-    {
-      "step": 3,
-      "action": "A3",
-      "confidence": 92,
-      "reasoning": "X takes another corner to prevent fork opportunities.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 | X |   |   |",
-        "  +---+---+---+",
-        "2 |   | O |   |",
-        "  +---+---+---+",
-        "3 |   |   | O |",
-        "  +---+---+---+"
-      ],
-      "status": {
-        "terminated": false,
-        "truncated": false,
-        "started": false
-      }
-    },
-    {
-      "step": 4,
-      "action": "A2",
-      "confidence": 85,
-      "reasoning": "The opponent expands control along the left column.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 | X |   |   |",
-        "  +---+---+---+",
-        "2 |   | O |   |",
-        "  +---+---+---+",
-        "3 | X |   | O |",
-        "  +---+---+---+"
-      ],
-      "status": {
-        "terminated": false,
-        "truncated": false,
-        "started": false
-      }
-    },
-    {
-      "step": 5,
-      "action": "C2",
-      "confidence": 93,
-      "reasoning": "X blocks a potential winning line on the middle row.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 | X |   |   |",
-        "  +---+---+---+",
-        "2 | O | O |   |",
-        "  +---+---+---+",
-        "3 | X |   | O |",
-        "  +---+---+---+"
-      ],
-      "status": {
-        "terminated": false,
-        "truncated": false,
-        "started": false
-      }
-    },
-    {
-      "step": 6,
-      "action": "B1",
-      "confidence": 80,
-      "reasoning": "The opponent attempts to create pressure on the top row.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 | X |   |   |",
-        "  +---+---+---+",
-        "2 | O | O | X |",
-        "  +---+---+---+",
-        "3 | X |   | O |",
-        "  +---+---+---+"
-      ],
-      "status": {
-        "terminated": false,
-        "truncated": false,
-        "started": false
-      }
-    },
-    {
-      "step": 7,
-      "action": "B3",
-      "confidence": 94,
-      "reasoning": "X blocks remaining threats and forces a draw scenario.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 | X | O |   |",
-        "  +---+---+---+",
-        "2 | O | O | X |",
-        "  +---+---+---+",
-        "3 | X |   | O |",
-        "  +---+---+---+"
-      ],
-      "status": {
-        "terminated": false,
-        "truncated": false,
-        "started": false
-      }
-    },
-    {
-      "step": 8,
-      "action": "C1",
-      "confidence": 75,
-      "reasoning": "The last available move fills the board, resulting in a draw.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 | X | O |   |",
-        "  +---+---+---+",
-        "2 | O | O | X |",
-        "  +---+---+---+",
-        "3 | X | X | O |",
-        "  +---+---+---+"
-      ],
-      "reward": {
-        "X": 0,
-        "O": 0
-      },
-      "score": {
-        "X": 0,
-        "O": 0
-      },
-      "status": {
-        "terminated": true,
-        "truncated": false,
-        "started": false
-      }
-    }
-  ]
-},
-
     {
       "sample_id": 142,
-  "rollout": [
-    {
-      "step": 0,
-      "action": "B2",
-      "confidence": 98,
-      "reasoning": "X starts in the center to enable diagonal and fork opportunities.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 |   |   |   |",
-        "  +---+---+---+",
-        "2 |   |   |   |",
-        "  +---+---+---+",
-        "3 |   |   |   |",
-        "  +---+---+---+"
-      ],
-      "status": { "terminated": false, "truncated": false, "started": true }
+      "rollout": [
+        {
+          "step": 0,
+          "action": "B2",
+          "confidence": 99,
+          "reasoning": "X starts in the center to control all diagonals and future forks.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "A1",
+          "confidence": 95,
+          "reasoning": "After O responds on an edge, X takes a corner to build a diagonal threat.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   | O |   |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "C3",
+          "confidence": 99,
+          "reasoning": "C3 is empty and completes the diagonal A1–B2–C3, resulting in an immediate win for X.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | O |   |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 1,
+            "O": -1
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
     },
     {
-      "step": 1,
-      "action": "A1",
-      "confidence": 95,
-      "reasoning": "X takes a corner to threaten the main diagonal.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 |   |   |   |",
-        "  +---+---+---+",
-        "2 |   | X |   |",
-        "  +---+---+---+",
-        "3 |   |   |   |",
-        "  +---+---+---+"
-      ],
-      "status": { "terminated": false, "truncated": false, "started": false }
+      "sample_id": 143,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "A1",
+          "confidence": 95,
+          "reasoning": "With O occupying the center, X takes a corner to keep multiple winning paths available.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   | O |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "A3",
+          "confidence": 92,
+          "reasoning": "After O responds on the opposite corner, X stacks the left column to create a vertical threat.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X |   |   |",
+            "  +---+---+---+",
+            "2 |   | O |   |",
+            "  +---+---+---+",
+            "3 |   |   | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "A2",
+          "confidence": 99,
+          "reasoning": "A2 is empty and completes column A, giving X an immediate win.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X |   |   |",
+            "  +---+---+---+",
+            "2 |   | O |   |",
+            "  +---+---+---+",
+            "3 | X |   | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 1,
+            "O": -1
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
     },
     {
-      "step": 2,
-      "action": "C3",
-      "confidence": 90,
-      "reasoning": "The opponent correctly blocks the diagonal threat.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 | X |   |   |",
-        "  +---+---+---+",
-        "2 |   | X |   |",
-        "  +---+---+---+",
-        "3 |   |   |   |",
-        "  +---+---+---+"
-      ],
-      "status": { "terminated": false, "truncated": false, "started": false }
+      "sample_id": 144,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "A1",
+          "confidence": 95,
+          "reasoning": "X takes a corner against O's center opening to prepare pressure on column A.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   | O |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "A3",
+          "confidence": 92,
+          "reasoning": "X stacks column A, creating a direct vertical winning threat.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X |   |   |",
+            "  +---+---+---+",
+            "2 |   | O |   |",
+            "  +---+---+---+",
+            "3 |   |   | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "A2",
+          "confidence": 99,
+          "reasoning": "A2 completes column A (A1–A2–A3), giving player X an immediate win.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X |   | O |",
+            "  +---+---+---+",
+            "2 |   | O |   |",
+            "  +---+---+---+",
+            "3 | X |   | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 1,
+            "O": -1
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
     },
     {
-      "step": 3,
-      "action": "C1",
-      "confidence": 96,
-      "reasoning": "X creates a fork, threatening both a row and a column.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 | X |   |   |",
-        "  +---+---+---+",
-        "2 |   | X |   |",
-        "  +---+---+---+",
-        "3 |   |   | O |",
-        "  +---+---+---+"
-      ],
-      "status": { "terminated": false, "truncated": false, "started": false }
+      "sample_id": 146,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "A1",
+          "confidence": 95,
+          "reasoning": "X takes a corner against O's center opening to keep multiple winning paths available.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   | O |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "B1",
+          "confidence": 96,
+          "reasoning": "B1 is optimal: X builds pressure on the top row and blocks future threats on column B.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X |   |   |",
+            "  +---+---+---+",
+            "2 |   | O |   |",
+            "  +---+---+---+",
+            "3 |   |   | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "C1",
+          "confidence": 99,
+          "reasoning": "C1 completes the top row A1–B1–C1, giving X an immediate win.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | X |   |",
+            "  +---+---+---+",
+            "2 |   | O |   |",
+            "  +---+---+---+",
+            "3 |   |   | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 1,
+            "O": -1
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
     },
     {
-      "step": 4,
-      "action": "B1",
-      "confidence": 60,
-      "reasoning": "The opponent blocks only one threat and cannot stop both winning lines.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 | X |   | X |",
-        "  +---+---+---+",
-        "2 |   | X |   |",
-        "  +---+---+---+",
-        "3 |   |   | O |",
-        "  +---+---+---+"
-      ],
-      "status": { "terminated": false, "truncated": false, "started": false }
+      "sample_id": 147,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "A1",
+          "confidence": 94,
+          "reasoning": "X takes a corner to prepare a vertical structure.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   | O |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "A2",
+          "confidence": 93,
+          "reasoning": "X commits to column A while O does not contest it.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X |   |   |",
+            "  +---+---+---+",
+            "2 |   | O |   |",
+            "  +---+---+---+",
+            "3 |   |   | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "A3",
+          "confidence": 99,
+          "reasoning": "A3 completes column A (A1–A2–A3), resulting in a win for X.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X |   |   |",
+            "  +---+---+---+",
+            "2 | X | O |   |",
+            "  +---+---+---+",
+            "3 |   |   | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 1,
+            "O": -1
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
     },
     {
-      "step": 5,
-      "action": "A3",
-      "confidence": 99,
-      "reasoning": "X completes the remaining winning line and wins via fork.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 | X | O | X |",
-        "  +---+---+---+",
-        "2 |   | X |   |",
-        "  +---+---+---+",
-        "3 |   |   | O |",
-        "  +---+---+---+"
-      ],
-      "reward": { "X": 1, "O": -1 },
-      "score": { "X": 1, "O": -1 },
-      "status": { "terminated": true, "truncated": false, "started": false }
+      "sample_id": 148,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "C1",
+          "confidence": 94,
+          "reasoning": "With O starting in the center, X chooses a corner to build a vertical win path on column C.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   | O |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "C2",
+          "confidence": 95,
+          "reasoning": "X commits to column C after O plays away from it, creating a strong vertical threat.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   | X |",
+            "  +---+---+---+",
+            "2 |   | O |   |",
+            "  +---+---+---+",
+            "3 | O |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "C3",
+          "confidence": 99,
+          "reasoning": "C3 completes the vertical line C1–C2–C3, giving X an immediate win.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   | X |",
+            "  +---+---+---+",
+            "2 |   | O | X |",
+            "  +---+---+---+",
+            "3 | O |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 1,
+            "O": -1
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 149,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "B2",
+          "confidence": 99,
+          "reasoning": "X starts in the center to maximize control over rows and columns.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "B1",
+          "confidence": 96,
+          "reasoning": "After O responds in a corner, X commits to column B, creating a vertical winning threat.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O |   |   |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "B3",
+          "confidence": 99,
+          "reasoning": "B3 completes the column B (B1–B2–B3), giving player X an immediate win.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O | X |   |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 |   |   | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 1,
+            "O": -1
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 150,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "B2",
+          "confidence": 99,
+          "reasoning": "X starts in the center to keep all strategic options open.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "A1",
+          "confidence": 95,
+          "reasoning": "X takes a corner to begin building a vertical win path.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   | O |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "A2",
+          "confidence": 94,
+          "reasoning": "X commits to column A while O fails to contest it.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X |   | O |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 |   | O |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 3,
+          "action": "A3",
+          "confidence": 99,
+          "reasoning": "A3 completes the column A (A1–A2–A3), giving X an immediate win.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X |   | O |",
+            "  +---+---+---+",
+            "2 | X | X |   |",
+            "  +---+---+---+",
+            "3 |   | O |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 1,
+            "O": -1
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 151,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "B2",
+          "confidence": 99,
+          "reasoning": "X starts in the center to maximize control over all diagonals and future winning lines.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "A1",
+          "confidence": 95,
+          "reasoning": "X takes a corner to prepare the main diagonal through the center.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   | O |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "C3",
+          "confidence": 99,
+          "reasoning": "C3 completes the diagonal A1–B2–C3, giving player X an immediate win.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X |   | O |",
+            "  +---+---+---+",
+            "2 |   | X | O |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 1,
+            "O": -1
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 146,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "C1",
+          "confidence": 95,
+          "reasoning": "X takes the top-right corner against O's center opening to start pressure on column C.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   | O |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "C2",
+          "confidence": 94,
+          "reasoning": "X extends column C while O fails to contest the vertical threat.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   | X |",
+            "  +---+---+---+",
+            "2 |   | O |   |",
+            "  +---+---+---+",
+            "3 | O |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "C3",
+          "confidence": 99,
+          "reasoning": "C3 completes column C (C1–C2–C3), giving player X an immediate win.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O |   | X |",
+            "  +---+---+---+",
+            "2 |   | O | X |",
+            "  +---+---+---+",
+            "3 | O |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 1,
+            "O": -1
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 147,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "B2",
+          "confidence": 99,
+          "reasoning": "X starts in the center to maximize control over all potential winning lines.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "A1",
+          "confidence": 95,
+          "reasoning": "X takes a corner while O occupies the top edge, keeping diagonal and row options balanced.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   | O |   |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "C1",
+          "confidence": 93,
+          "reasoning": "X claims the opposite top corner, but O has already blocked the top row through B1.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | O |   |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 |   |   | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 3,
+          "action": "A2",
+          "confidence": 92,
+          "reasoning": "X extends column A, but the diagonal and top-row wins remain blocked.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | O | X |",
+            "  +---+---+---+",
+            "2 |   | X | O |",
+            "  +---+---+---+",
+            "3 |   |   | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 4,
+          "action": "B3",
+          "confidence": 96,
+          "reasoning": "B3 fills the final empty square and blocks O's bottom-row threat, resulting in a full-board draw.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | O | X |",
+            "  +---+---+---+",
+            "2 | X | X | O |",
+            "  +---+---+---+",
+            "3 | O |   | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 153,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "B2",
+          "confidence": 99,
+          "reasoning": "O starts in a corner, so X takes the center to control the strongest lines.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O |   |   |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "B1",
+          "confidence": 97,
+          "reasoning": "B1 blocks O's top-row threat A1–B1–C1 and creates a column-B threat for X.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O |   | O |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "B3",
+          "confidence": 99,
+          "reasoning": "B3 completes column B (B1–B2–B3), giving player X an immediate win.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O | X | O |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 | O |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 1,
+            "O": -1
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 154,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "B2",
+          "confidence": 99,
+          "reasoning": "O starts in a corner, so X takes the center to maximize defensive control and prevent early fork threats.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O |   |   |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "B1",
+          "confidence": 96,
+          "reasoning": "B1 blocks O's top-row threat A1–B1–C1 while keeping X active in column B.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O |   | O |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "C3",
+          "confidence": 97,
+          "reasoning": "C3 blocks O's column-C threat C1–C2–C3 and prevents an immediate loss.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O | X | O |",
+            "  +---+---+---+",
+            "2 |   | X | O |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 3,
+          "action": "A2",
+          "confidence": 94,
+          "reasoning": "A2 is the final safe X move; after O's forced final move on A3, the board is full with no three-in-a-row.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O | X | O |",
+            "  +---+---+---+",
+            "2 |   | X | O |",
+            "  +---+---+---+",
+            "3 |   | O | X |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 152,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "A1",
+          "confidence": 95,
+          "reasoning": "With O starting in the center, X takes a corner to begin pressure on column A.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   | O |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "A3",
+          "confidence": 94,
+          "reasoning": "X stacks column A after O plays the opposite corner and fails to contest the vertical threat.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X |   |   |",
+            "  +---+---+---+",
+            "2 |   | O |   |",
+            "  +---+---+---+",
+            "3 |   |   | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "A2",
+          "confidence": 99,
+          "reasoning": "A2 completes column A (A1–A2–A3), giving player X an immediate win.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | O |   |",
+            "  +---+---+---+",
+            "2 |   | O |   |",
+            "  +---+---+---+",
+            "3 | X |   | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 1,
+            "O": -1
+          },
+          "score": {
+            "X": 1,
+            "O": -1
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 156,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "B2",
+          "confidence": 98,
+          "reasoning": "With O starting on C1, X takes the center to control the strongest remaining lines.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   | O |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "B1",
+          "confidence": 95,
+          "reasoning": "X begins building column B while O fails to contest the central file.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O |   | O |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "B3",
+          "confidence": 99,
+          "reasoning": "B3 completes column B (B1–B2–B3), giving player X an immediate win.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O | X | O |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 |   |   | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 1,
+            "O": -1
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 157,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "B2",
+          "confidence": 98,
+          "reasoning": "With O starting on B1, X takes the center to control row 2 and both diagonals.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   | O |   |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "C2",
+          "confidence": 95,
+          "reasoning": "X extends row 2 while O focuses on the top row instead of blocking the horizontal threat.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O | O |   |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "A2",
+          "confidence": 99,
+          "reasoning": "A2 completes row 2 (A2–B2–C2), giving player X an immediate win.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O | O |   |",
+            "  +---+---+---+",
+            "2 |   | X | X |",
+            "  +---+---+---+",
+            "3 |   |   | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 1,
+            "O": -1
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 158,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "B1",
+          "confidence": 94,
+          "reasoning": "O starts in the top-left corner, so X takes B1 to contest the top row immediately.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O |   |   |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "C1",
+          "confidence": 92,
+          "reasoning": "X takes C1 to keep the top row blocked and avoid giving O a clean edge structure.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O | X |   |",
+            "  +---+---+---+",
+            "2 |   | O |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "A2",
+          "confidence": 96,
+          "reasoning": "A2 blocks O's row-two threat from B2 and C2, preventing an immediate O win.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O | X | X |",
+            "  +---+---+---+",
+            "2 |   | O | O |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 3,
+          "action": "C3",
+          "confidence": 94,
+          "reasoning": "C3 is the final safe X move; after O's forced final move on B3, the board ends with no winning line.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O | X | X |",
+            "  +---+---+---+",
+            "2 | X | O | O |",
+            "  +---+---+---+",
+            "3 | O |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 159,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "A1",
+          "confidence": 94,
+          "reasoning": "O starts in the top-right corner, so X takes A1 to contest the top row from the opposite side.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   | O |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "B1",
+          "confidence": 92,
+          "reasoning": "X takes B1 to keep the top row contested and prevent O from controlling the edge.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X |   | O |",
+            "  +---+---+---+",
+            "2 |   | O |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "C2",
+          "confidence": 96,
+          "reasoning": "C2 blocks O's row-two threat from A2 and B2, preventing an immediate O win.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | X | O |",
+            "  +---+---+---+",
+            "2 | O | O |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 3,
+          "action": "A3",
+          "confidence": 94,
+          "reasoning": "A3 is the final safe X move; after O's forced final move on B3, the board ends with no winning line.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | X | O |",
+            "  +---+---+---+",
+            "2 | O | O | X |",
+            "  +---+---+---+",
+            "3 |   |   | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 160,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "B2",
+          "confidence": 98,
+          "reasoning": "O starts on the top edge, so X takes the center to control the strongest remaining lines.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   | O |   |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "A1",
+          "confidence": 94,
+          "reasoning": "X takes A1 while O controls C3, keeping the main diagonal blocked.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   | O |   |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 |   |   | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "C1",
+          "confidence": 96,
+          "reasoning": "C1 blocks O's column-C threat from C2 and C3, preventing an immediate O win.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | O |   |",
+            "  +---+---+---+",
+            "2 |   | X | O |",
+            "  +---+---+---+",
+            "3 |   |   | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 3,
+          "action": "B3",
+          "confidence": 96,
+          "reasoning": "B3 blocks O's bottom-row threat from A3 and C3; after O's forced final move on A2, the board ends in a draw.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | O | X |",
+            "  +---+---+---+",
+            "2 |   | X | O |",
+            "  +---+---+---+",
+            "3 | O |   | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 159,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "A1",
+          "confidence": 94,
+          "reasoning": "O starts in the top-right corner, so X takes A1 to contest the top row from the opposite side.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   | O |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "B1",
+          "confidence": 92,
+          "reasoning": "X takes B1 to keep the top row contested and prevent O from controlling the edge.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X |   | O |",
+            "  +---+---+---+",
+            "2 |   | O |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "A3",
+          "confidence": 97,
+          "reasoning": "A3 blocks O's diagonal threat C1–B2–A3 and prevents an immediate O win.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | X | O |",
+            "  +---+---+---+",
+            "2 |   | O |   |",
+            "  +---+---+---+",
+            "3 |   | O |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 3,
+          "action": "C2",
+          "confidence": 96,
+          "reasoning": "C2 blocks O's row-two threat A2–B2–C2; after O's forced final move on C3, the board is full with no winning line.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | X | O |",
+            "  +---+---+---+",
+            "2 | O | O |   |",
+            "  +---+---+---+",
+            "3 | X | O |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 159,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "A1",
+          "confidence": 94,
+          "reasoning": "O starts in the top-right corner, so X takes A1 to contest the top row from the opposite side.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   | O |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "A3",
+          "confidence": 98,
+          "reasoning": "A3 blocks O's immediate diagonal threat C1–B2–A3.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X |   | O |",
+            "  +---+---+---+",
+            "2 |   | O |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "C2",
+          "confidence": 97,
+          "reasoning": "C2 blocks O's row-two threat A2–B2–C2 and prevents an immediate O win.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X |   | O |",
+            "  +---+---+---+",
+            "2 | O | O |   |",
+            "  +---+---+---+",
+            "3 | X |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 3,
+          "action": "B3",
+          "confidence": 96,
+          "reasoning": "B3 blocks O's column-B threat B1–B2–B3; after O's forced final move on C3, the board ends with no winning line.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | O | O |",
+            "  +---+---+---+",
+            "2 | O | O | X |",
+            "  +---+---+---+",
+            "3 | X |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 161,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "B2",
+          "confidence": 99,
+          "reasoning": "O starts in a corner, so X takes the center to control the strongest lines.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O |   |   |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "B1",
+          "confidence": 96,
+          "reasoning": "B1 blocks O's top-row threat and starts a vertical column-B threat for X.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O |   | O |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "B3",
+          "confidence": 99,
+          "reasoning": "B3 completes column B (B1–B2–B3), giving player X an immediate win.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O | X | O |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 | O |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 1,
+            "O": -1
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 163,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "A1",
+          "confidence": 94,
+          "reasoning": "O starts in the top-right corner, so X takes A1 to contest the top row from the opposite side.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   | O |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "A3",
+          "confidence": 98,
+          "reasoning": "A3 blocks O's immediate diagonal threat C1–B2–A3.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X |   | O |",
+            "  +---+---+---+",
+            "2 |   | O |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "C2",
+          "confidence": 97,
+          "reasoning": "C2 blocks O's row-two threat A2–B2–C2 and prevents an immediate O win.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X |   | O |",
+            "  +---+---+---+",
+            "2 | O | O |   |",
+            "  +---+---+---+",
+            "3 | X |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 3,
+          "action": "B3",
+          "confidence": 96,
+          "reasoning": "B3 blocks O's column-B threat B1–B2–B3; after O's forced final move on C3, the board is full with no winning line.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | O | O |",
+            "  +---+---+---+",
+            "2 | O | O | X |",
+            "  +---+---+---+",
+            "3 | X |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 164,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "B2",
+          "confidence": 98,
+          "reasoning": "O starts on the top edge, so X takes the center to control the strongest remaining lines.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   | O |   |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "A1",
+          "confidence": 94,
+          "reasoning": "X takes A1 while O controls A2, keeping the left column contested.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   | O |   |",
+            "  +---+---+---+",
+            "2 | O | X |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "C1",
+          "confidence": 94,
+          "reasoning": "X takes C1 to contest the top row and avoid giving O edge control.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | O |   |",
+            "  +---+---+---+",
+            "2 | O | X | O |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 3,
+          "action": "B3",
+          "confidence": 96,
+          "reasoning": "B3 blocks O's bottom-row threat after A3; after O's forced final move on C3, the board ends in a draw.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | O | X |",
+            "  +---+---+---+",
+            "2 | O | X | O |",
+            "  +---+---+---+",
+            "3 | O |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 162,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "B2",
+          "confidence": 98,
+          "reasoning": "O starts in the bottom-right corner, so X takes the center to control the strongest lines.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "B3",
+          "confidence": 99,
+          "reasoning": "B3 blocks O's immediate bottom-row threat A3–B3–C3.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 | O |   | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "B1",
+          "confidence": 99,
+          "reasoning": "B1 completes column B (B1–B2–B3), giving player X an immediate win.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   | O |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 | O | X | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 1,
+            "O": -1
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 164,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "B2",
+          "confidence": 98,
+          "reasoning": "O starts on the top edge, so X takes the center to control the strongest remaining lines.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   | O |   |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "A1",
+          "confidence": 94,
+          "reasoning": "X takes A1 to build diagonal pressure through the center.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   | O |   |",
+            "  +---+---+---+",
+            "2 | O | X |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "C1",
+          "confidence": 94,
+          "reasoning": "X takes C1 to contest the top row while keeping the diagonal threat through B2 active.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | O |   |",
+            "  +---+---+---+",
+            "2 | O | X | O |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 3,
+          "action": "C3",
+          "confidence": 99,
+          "reasoning": "C3 completes the diagonal A1–B2–C3, giving player X an immediate win.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | O | X |",
+            "  +---+---+---+",
+            "2 | O | X | O |",
+            "  +---+---+---+",
+            "3 | O |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 1,
+            "O": -1
+          },
+          "score": {
+            "X": 1,
+            "O": -1
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 166,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "C1",
+          "confidence": 94,
+          "reasoning": "O starts on the bottom edge, so X takes C1 to contest a corner and avoid early center traps.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   | O |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "B1",
+          "confidence": 97,
+          "reasoning": "B1 blocks O's column-B threat from B2 and B3.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   | X |",
+            "  +---+---+---+",
+            "2 |   | O |   |",
+            "  +---+---+---+",
+            "3 |   | O |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "C3",
+          "confidence": 97,
+          "reasoning": "C3 blocks O's diagonal threat A1–B2–C3.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O | X | X |",
+            "  +---+---+---+",
+            "2 |   | O |   |",
+            "  +---+---+---+",
+            "3 |   | O |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 3,
+          "action": "A2",
+          "confidence": 96,
+          "reasoning": "A2 blocks O's row-two threat B2–C2–A2; after O's forced final move on A3, the board ends in a draw.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O | X | X |",
+            "  +---+---+---+",
+            "2 |   | O | O |",
+            "  +---+---+---+",
+            "3 |   | O | X |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 165,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "B2",
+          "confidence": 99,
+          "reasoning": "O starts in the lower-left corner, so X takes the center to control the main lines.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 | O |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "B3",
+          "confidence": 99,
+          "reasoning": "B3 blocks O's immediate bottom-row threat A3–B3–C3.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 | O |   | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "A1",
+          "confidence": 94,
+          "reasoning": "X takes A1 while O blocks column B from above, keeping the position drawable.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   | O |   |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 | O | X | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 3,
+          "action": "C2",
+          "confidence": 98,
+          "reasoning": "C2 blocks O's column-C threat C1–C2–C3; after O's forced final move on A2, the board ends in a draw.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | O | O |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 | O | X | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 168,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "B2",
+          "confidence": 99,
+          "reasoning": "O starts in the lower-left corner, so X takes the center to control the strongest lines.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 | O |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "B3",
+          "confidence": 99,
+          "reasoning": "B3 blocks O's immediate bottom-row threat A3–B3–C3.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 | O |   | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "B1",
+          "confidence": 99,
+          "reasoning": "B1 completes column B (B1–B2–B3), giving player X an immediate win.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O |   |   |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 | O | X | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 1,
+            "O": -1
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 169,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "A1",
+          "confidence": 95,
+          "reasoning": "O starts on the right edge, so X takes A1 to begin pressure on column A.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   |   | O |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "A3",
+          "confidence": 94,
+          "reasoning": "X stacks column A while O fails to contest the vertical threat.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | O |   |",
+            "  +---+---+---+",
+            "2 |   |   | O |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "A2",
+          "confidence": 99,
+          "reasoning": "A2 completes column A (A1–A2–A3), giving player X an immediate win.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | O | O |",
+            "  +---+---+---+",
+            "2 |   |   | O |",
+            "  +---+---+---+",
+            "3 | X |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 1,
+            "O": -1
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 170,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "A3",
+          "confidence": 95,
+          "reasoning": "O starts on the left edge, so X takes A3 to begin bottom-row pressure.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 | O |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "C3",
+          "confidence": 94,
+          "reasoning": "X claims C3 to create a direct bottom-row threat.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   | O |   |",
+            "  +---+---+---+",
+            "2 | O |   |   |",
+            "  +---+---+---+",
+            "3 | X |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "B3",
+          "confidence": 99,
+          "reasoning": "B3 completes the bottom row A3–B3–C3, giving player X an immediate win.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   | O | O |",
+            "  +---+---+---+",
+            "2 | O |   |   |",
+            "  +---+---+---+",
+            "3 | X |   | X |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 1,
+            "O": -1
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 173,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "B2",
+          "confidence": 99,
+          "reasoning": "X starts in the center to maximize control over both diagonals.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "A1",
+          "confidence": 95,
+          "reasoning": "X takes A1 to build the main diagonal through the center.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   | O |   |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "C3",
+          "confidence": 99,
+          "reasoning": "C3 completes the diagonal A1–B2–C3, giving player X an immediate win.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | O |   |",
+            "  +---+---+---+",
+            "2 |   | X | O |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 1,
+            "O": -1
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 174,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "B2",
+          "confidence": 99,
+          "reasoning": "X starts in the center to control the board and prepare multiple lines.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "C1",
+          "confidence": 95,
+          "reasoning": "X takes C1 to begin pressure on column C.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O |   |   |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "C2",
+          "confidence": 94,
+          "reasoning": "X extends column C while O does not contest the vertical threat.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O |   | X |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 |   | O |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 3,
+          "action": "C3",
+          "confidence": 99,
+          "reasoning": "C3 completes column C (C1–C2–C3), giving player X an immediate win.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O |   | X |",
+            "  +---+---+---+",
+            "2 | O | X | X |",
+            "  +---+---+---+",
+            "3 |   | O |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 1,
+            "O": -1
+          },
+          "score": {
+            "X": 1,
+            "O": -1
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 176,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "B2",
+          "confidence": 99,
+          "reasoning": "X starts in the center to control the strongest lines.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "B1",
+          "confidence": 94,
+          "reasoning": "X takes B1 while O starts from A1, keeping column B active.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O |   |   |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "A2",
+          "confidence": 94,
+          "reasoning": "X takes A2 while O blocks the top row through C1.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O | X | O |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 3,
+          "action": "C3",
+          "confidence": 99,
+          "reasoning": "C3 blocks O's immediate column-C threat C1–C2–C3.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O | X | O |",
+            "  +---+---+---+",
+            "2 | X | X | O |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 4,
+          "action": "A3",
+          "confidence": 96,
+          "reasoning": "A3 fills the final safe square and leaves no winning line for either player.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O | X | O |",
+            "  +---+---+---+",
+            "2 | X | X | O |",
+            "  +---+---+---+",
+            "3 |   | O | X |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
     }
-  ]
-},
-{
-  "sample_id": 143,
-  "rollout": [
-    {
-      "step": 0,
-      "action": "B2",
-      "confidence": 99,
-      "reasoning": "X starts in the center to maximize control over all potential winning lines.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 |   |   |   |",
-        "  +---+---+---+",
-        "2 |   |   |   |",
-        "  +---+---+---+",
-        "3 |   |   |   |",
-        "  +---+---+---+"
-      ],
-      "status": { "terminated": false, "truncated": false, "started": true }
-    },
-    {
-      "step": 1,
-      "action": "A1",
-      "confidence": 95,
-      "reasoning": "X takes a corner to apply diagonal pressure.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 |   |   |   |",
-        "  +---+---+---+",
-        "2 |   | X |   |",
-        "  +---+---+---+",
-        "3 |   |   |   |",
-        "  +---+---+---+"
-      ],
-      "status": { "terminated": false, "truncated": false, "started": false }
-    },
-    {
-      "step": 2,
-      "action": "C3",
-      "confidence": 97,
-      "reasoning": "The opponent immediately blocks the diagonal threat.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 | X |   |   |",
-        "  +---+---+---+",
-        "2 |   | X |   |",
-        "  +---+---+---+",
-        "3 |   |   |   |",
-        "  +---+---+---+"
-      ],
-      "status": { "terminated": false, "truncated": false, "started": false }
-    },
-    {
-      "step": 3,
-      "action": "C1",
-      "confidence": 90,
-      "reasoning": "X switches sides to avoid overcommitting to a blocked diagonal.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 | X |   |   |",
-        "  +---+---+---+",
-        "2 |   | X |   |",
-        "  +---+---+---+",
-        "3 |   |   | O |",
-        "  +---+---+---+"
-      ],
-      "status": { "terminated": false, "truncated": false, "started": false }
-    },
-    {
-      "step": 4,
-      "action": "C2",
-      "confidence": 95,
-      "reasoning": "The opponent blocks the vertical threat on column C.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 | X |   | X |",
-        "  +---+---+---+",
-        "2 |   | X |   |",
-        "  +---+---+---+",
-        "3 |   |   | O |",
-        "  +---+---+---+"
-      ],
-      "status": { "terminated": false, "truncated": false, "started": false }
-    },
-    {
-      "step": 5,
-      "action": "A3",
-      "confidence": 88,
-      "reasoning": "X creates pressure on the left column without enabling a fork.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 | X |   | X |",
-        "  +---+---+---+",
-        "2 |   | X | O |",
-        "  +---+---+---+",
-        "3 |   |   | O |",
-        "  +---+---+---+"
-      ],
-      "status": { "terminated": false, "truncated": false, "started": false }
-    },
-    {
-      "step": 6,
-      "action": "A2",
-      "confidence": 96,
-      "reasoning": "The opponent blocks the final vertical threat correctly.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 | X |   | X |",
-        "  +---+---+---+",
-        "2 |   | X | O |",
-        "  +---+---+---+",
-        "3 | X |   | O |",
-        "  +---+---+---+"
-      ],
-      "status": { "terminated": false, "truncated": false, "started": false }
-    },
-    {
-      "step": 7,
-      "action": "B1",
-      "confidence": 90,
-      "reasoning": "X fills a safe square with no winning continuation.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 | X |   | X |",
-        "  +---+---+---+",
-        "2 | O | X | O |",
-        "  +---+---+---+",
-        "3 | X |   | O |",
-        "  +---+---+---+"
-      ],
-      "status": { "terminated": false, "truncated": false, "started": false }
-    },
-    {
-      "step": 8,
-      "action": "B3",
-      "confidence": 92,
-      "reasoning": "The final move fills the board with no three in a row, resulting in a draw.",
-      "state": [
-        "    A   B   C",
-        "  +---+---+---+",
-        "1 | X | X | X |",
-        "  +---+---+---+",
-        "2 | O | X | O |",
-        "  +---+---+---+",
-        "3 | X |   | O |",
-        "  +---+---+---+"
-      ],
-      "reward": { "X": 0, "O": 0 },
-      "score": { "X": 0, "O": 0 },
-      "status": { "terminated": true, "truncated": false, "started": false }
-    }
-  ]
-}
   ]
 }
