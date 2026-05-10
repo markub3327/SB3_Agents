@@ -85,7 +85,6 @@ dataset = Dataset.from_generator(
                 "terminated": Value("bool"),
                 "truncated": Value("bool"),
                 "started": Value("bool"),
-                "confidence": Value("float32"),
                 "reasoning": Value("string"),
                 "step": Value("int64"),
                 "img_embed": Sequence(Sequence(Value("float32"))),
