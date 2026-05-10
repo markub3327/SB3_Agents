@@ -7261,6 +7261,212 @@
           }
         }
       ]
+    },
+    {
+      "sample_id": 420,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "B2",
+          "reasoning": "X starts in the center to control the strongest lines.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "A1",
+          "reasoning": "X takes a corner to begin pressure on column A.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 |   |   | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "C2",
+          "reasoning": "X blocks O's column C threat C1-C2-C3.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X |   | O |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 |   |   | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 3,
+          "action": "A2",
+          "reasoning": "X completes row A2-B2-C2 to win.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | O | O |",
+            "  +---+---+---+",
+            "2 |   | X | X |",
+            "  +---+---+---+",
+            "3 |   |   | O |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 1,
+            "O": -1
+          },
+          "score": {
+            "X": 1,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 195,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "B2",
+          "reasoning": "X starts in the center to control the strongest lines.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "A1",
+          "reasoning": "X takes a corner while O occupies the bottom edge, keeping the main diagonal active.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 |   | O |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 0,
+            "O": 0
+          },
+          "score": {
+            "X": 0,
+            "O": 0
+          },
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "C3",
+          "reasoning": "X takes C3 to complete the main diagonal A1-B2-C3 and win.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | O |   |",
+            "  +---+---+---+",
+            "2 |   | X |   |",
+            "  +---+---+---+",
+            "3 |   | O |   |",
+            "  +---+---+---+"
+          ],
+          "reward": {
+            "X": 1,
+            "O": -1
+          },
+          "score": {
+            "X": 1,
+            "O": 0
+          },
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
     }
   ]
 }
