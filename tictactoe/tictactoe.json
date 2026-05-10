@@ -4158,7 +4158,6 @@
     {
       "step": 0,
       "action": "B2",
-      "confidence": 92,
       "reasoning": "Player X opens in the center to maximize control and prepare the main diagonal toward A1 and C3.",
       "state": [
         "    A   B   C",
@@ -4187,7 +4186,6 @@
     {
       "step": 1,
       "action": "A1",
-      "confidence": 88,
       "reasoning": "With O on B1, Player X takes A1 to connect with the center and set up the diagonal toward C3.",
       "state": [
         "    A   B   C",
@@ -4216,7 +4214,6 @@
     {
       "step": 2,
       "action": "C3",
-      "confidence": 99,
       "reasoning": "With O on B1 and C1, Player X places at C3 to complete the diagonal A1-B2-C3 and win immediately.",
       "state": [
         "    A   B   C",
