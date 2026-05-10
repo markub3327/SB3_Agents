@@ -55,7 +55,6 @@ def dataset_generator(shards):
                     "terminated": sample["status"]["terminated"],
                     "truncated": sample["status"]["truncated"],
                     "started": sample["status"]["started"],
-                    "confidence": sample["confidence"],
                     "reasoning": sample["reasoning"],
                     "step": sample["step"],
                     "img_embed": None,
