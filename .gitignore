@@ -15,6 +15,6 @@ slurm/
 
 videos/
 
-datasets/
+dataset/
 
 *.csv
