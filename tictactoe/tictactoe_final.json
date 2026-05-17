@@ -103,7 +103,53 @@
                 "truncated": false,
                 "started": true
               }
+            },
+            {
+              "step": 1,
+              "action": "A2",
+              "reasoning": "With X on A1, Player O expands to A2 to start row-two pressure while denying X easy influence over the left side.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 | X |   |   |",
+                "  +---+---+---+",
+                "2 |   | O |   |",
+                "  +---+---+---+",
+                "3 |   |   |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 0,
+              "score": 0,
+              "status": {
+                "terminated": false,
+                "truncated": false,
+                "started": false
+              }
+            },
+            {
+              "step": 2,
+              "action": "C2",
+              "reasoning": "With X on A1 and C1 controlling both top corners, Player O finishes C2 immediately so Y cannot use that structure on the next move.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 | X |   | X |",
+                "  +---+---+---+",
+                "2 | O | O |   |",
+                "  +---+---+---+",
+                "3 |   |   |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 1,
+              "score": 0,
+              "status": {
+                "terminated": true,
+                "truncated": false,
+                "started": false
+              }
             }
+          ]
+        }
           ]
         }
       ]
