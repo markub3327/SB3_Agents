@@ -1,0 +1,69 @@
+{
+  "games": [
+    {
+      "name": "TicTacToe_X",
+      "samples": [
+        {
+          "sample_id": 1,
+          "rollout": [
+            {
+              "step": 0,
+              "action": "B2",
+              "reasoning": "Player X opens in the center before O can claim the board's key hub, setting up the fastest middle-row route.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 |   |   |   |",
+                "  +---+---+---+",
+                "2 |   |   |   |",
+                "  +---+---+---+",
+                "3 |   |   |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 0,
+              "score": 0,
+              "status": {
+                "terminated": false,
+                "truncated": false,
+                "started": true
+              }
+            },
+
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TicTacToe_O",
+      "samples": [
+        {
+          "sample_id": 1,
+          "rollout": [
+            {
+              "step": 0,
+              "action": "B2",
+              "reasoning": "Player O opens in the center before X can claim the board's key hub, setting up the fastest middle-row route.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 |   |   |   |",
+                "  +---+---+---+",
+                "2 |   |   |   |",
+                "  +---+---+---+",
+                "3 |   |   |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 0,
+              "score": 0,
+              "status": {
+                "terminated": false,
+                "truncated": false,
+                "started": true
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
