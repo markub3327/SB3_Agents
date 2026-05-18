@@ -600,14 +600,8 @@
                 "3 |   |   | O |",
                 "  +---+---+---+"
               ],
-              "reward": {
-                "X": 0,
-                "O": 0
-              },
-              "score": {
-                "X": 0,
-                "O": 0
-              },
+              "reward": 0,
+              "score": 0,
               "status": {
                 "terminated": false,
                 "truncated": false,
@@ -628,14 +622,8 @@
                 "3 |   | O | O |",
                 "  +---+---+---+"
               ],
-              "reward": {
-                "X": 0,
-                "O": 0
-              },
-              "score": {
-                "X": 0,
-                "O": 0
-              },
+              "reward": 0,
+              "score": 0,
               "status": {
                 "terminated": false,
                 "truncated": false,
@@ -656,14 +644,8 @@
                 "3 | X | O | O |",
                 "  +---+---+---+"
               ],
-              "reward": {
-                "X": 0,
-                "O": 0
-              },
-              "score": {
-                "X": 0,
-                "O": 0
-              },
+              "reward": 0,
+              "score": 0,
               "status": {
                 "terminated": false,
                 "truncated": false,
@@ -684,14 +666,79 @@
                 "3 | X | O | O |",
                 "  +---+---+---+"
               ],
-              "reward": {
-                "X": 0,
-                "O": 0
-              },
-              "score": {
-                "X": 0,
-                "O": 0
-              },
+              "reward": 0,
+              "score": 0,
+              "status": {
+                "terminated": true,
+                "truncated": false,
+                "started": false
+              }
+            }
+          ]
+        },
+        {
+          "sample_id": 8,
+          "rollout": [
+            {
+              "step": 0,
+              "action": "B2",
+              "reasoning": "Player X opens at B2, the board's key hub, because the center gives the most possible winning lines before O can claim it.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 |   |   |   |",
+                "  +---+---+---+",
+                "2 |   |   |   |",
+                "  +---+---+---+",
+                "3 |   |   |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 0,
+              "score": 0,
+              "status": {
+                "terminated": false,
+                "truncated": false,
+                "started": true
+              }
+            },
+            {
+              "step": 1,
+              "action": "A1",
+              "reasoning": "With Player O on B3, Player X plays A1 to secure the top-left corner and maintain a potential winning diagonal from A1 through the center B2 toward C3.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 |   |   |   |",
+                "  +---+---+---+",
+                "2 |   | X |   |",
+                "  +---+---+---+",
+                "3 |   | O |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 0,
+              "score": 0,
+              "status": {
+                "terminated": false,
+                "truncated": false,
+                "started": false
+              }
+            },
+            {
+              "step": 2,
+              "action": "C3",
+              "reasoning": "With Player O on B1 and B3, and Player X already on A1 and B2, Player X plays C3 to complete the main diagonal A1-B2-C3 and secure an immediate win.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 | X | O |   |",
+                "  +---+---+---+",
+                "2 |   | X |   |",
+                "  +---+---+---+",
+                "3 |   | O |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 1,
+              "score": 0,
               "status": {
                 "terminated": true,
                 "truncated": false,
@@ -1304,14 +1351,8 @@
             "3 |   |   | X |",
             "  +---+---+---+"
           ],
-          "reward": {
-            "X": 0,
-            "O": 0
-          },
-          "score": {
-            "X": 0,
-            "O": 0
-          },
+          "reward": 0,
+          "score": 0,
           "status": {
             "terminated": false,
             "truncated": false,
@@ -1332,14 +1373,8 @@
             "3 |   | X | X |",
             "  +---+---+---+"
           ],
-          "reward": {
-            "X": 0,
-            "O": 0
-          },
-          "score": {
-            "X": 0,
-            "O": 0
-          },
+          "reward": 0,
+          "score": 0,
           "status": {
             "terminated": false,
             "truncated": false,
@@ -1360,14 +1395,8 @@
             "3 | O | X | X |",
             "  +---+---+---+"
           ],
-          "reward": {
-            "X": 0,
-            "O": 0
-          },
-          "score": {
-            "X": 0,
-            "O": 0
-          },
+          "reward": 0,
+          "score": 0,
           "status": {
             "terminated": false,
             "truncated": false,
@@ -1388,14 +1417,79 @@
             "3 | O | X | X |",
             "  +---+---+---+"
           ],
-          "reward": {
-            "X": 0,
-            "O": 0
-          },
-          "score": {
-            "X": 0,
-            "O": 0
-          },
+          "reward": 0,
+          "score": 0,
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": 8,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "B2",
+          "reasoning": "Player O opens at B2, the board's key hub, because the center gives the most possible winning lines before X can claim it.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": 0,
+          "score": 0,
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "A1",
+          "reasoning": "With Player X on B3, Player O plays A1 to secure the top-left corner and maintain a potential winning diagonal from A1 through the center B2 toward C3.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   | O |   |",
+            "  +---+---+---+",
+            "3 |   | X |   |",
+            "  +---+---+---+"
+          ],
+          "reward": 0,
+          "score": 0,
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "C3",
+          "reasoning": "With Player X on B1 and B3, and Player O already on A1 and B2, Player O plays C3 to complete the main diagonal A1-B2-C3 and secure an immediate win.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | O | X |   |",
+            "  +---+---+---+",
+            "2 |   | O |   |",
+            "  +---+---+---+",
+            "3 |   | X |   |",
+            "  +---+---+---+"
+          ],
+          "reward": 1,
+          "score": 0,
           "status": {
             "terminated": true,
             "truncated": false,
