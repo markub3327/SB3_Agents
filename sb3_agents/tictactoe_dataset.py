@@ -55,7 +55,6 @@ def dataset_wrapper(game):
                         "truncated": sample["status"]["truncated"],
                         "started": sample["status"]["started"],
                         "reasoning": sample["reasoning"],
-                        "step": sample["step"],
                         "img_embed": None,
                     },
                     "images": [render_tictactoe_board_to_image(
@@ -91,7 +90,6 @@ for game in tictactoe["games"]:
                     "truncated": Value("bool"),
                     "started": Value("bool"),
                     "reasoning": Value("string"),
-                    "step": Value("int64"),
                     "img_embed": Sequence(Sequence(Value("float32"))),
                 },
                 "images": Sequence(HFImage()),
