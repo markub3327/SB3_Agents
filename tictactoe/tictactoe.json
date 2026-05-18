@@ -78,28 +78,6 @@
           "sample_id": 2,
           "rollout": [
             {
-              "step": 0,
-              "action": "B2",
-              "reasoning": "Player X opens at B2, the board's key hub, because the center gives the most possible winning lines before O can claim it.",
-              "state": [
-                "    A   B   C",
-                "  +---+---+---+",
-                "1 |   |   |   |",
-                "  +---+---+---+",
-                "2 |   |   |   |",
-                "  +---+---+---+",
-                "3 |   |   |   |",
-                "  +---+---+---+"
-              ],
-              "reward": 0,
-              "score": 0,
-              "status": {
-                "terminated": false,
-                "truncated": false,
-                "started": true
-              }
-            },
-            {
               "step": 1,
               "action": "C2",
               "reasoning": "With O on C1, Player X plays C2 to strengthen control of the second row, connect with the center at B2, and prevent O from freely expanding down the right side.",
@@ -193,28 +171,6 @@
           "sample_id": 3,
           "rollout": [
             {
-              "step": 0,
-              "action": "B2",
-              "reasoning": "Player X opens at B2, the board's key hub, because the center gives the most possible winning lines before O can claim it.",
-              "state": [
-                "    A   B   C",
-                "  +---+---+---+",
-                "1 |   |   |   |",
-                "  +---+---+---+",
-                "2 |   |   |   |",
-                "  +---+---+---+",
-                "3 |   |   |   |",
-                "  +---+---+---+"
-              ],
-              "reward": 0,
-              "score": 0,
-              "status": {
-                "terminated": false,
-                "truncated": false,
-                "started": true
-              }
-            },
-            {
               "step": 1,
               "action": "A1",
               "reasoning": "With O on C2, Player X plays A1 to claim a key corner, maintain a potential winning diagonal through the center B2 toward C3, and improve X's long-term position.",
@@ -263,28 +219,6 @@
         {
           "sample_id": 4,
           "rollout": [
-            {
-              "step": 0,
-              "action": "B2",
-              "reasoning": "Player X opens at B2, the board's key hub, because the center gives the most possible winning lines before O can claim it.",
-              "state": [
-                "    A   B   C",
-                "  +---+---+---+",
-                "1 |   |   |   |",
-                "  +---+---+---+",
-                "2 |   |   |   |",
-                "  +---+---+---+",
-                "3 |   |   |   |",
-                "  +---+---+---+"
-              ],
-              "reward": 0,
-              "score": 0,
-              "status": {
-                "terminated": false,
-                "truncated": false,
-                "started": true
-              }
-            },
             {
               "step": 1,
               "action": "C1",
@@ -379,28 +313,6 @@
           "sample_id": 5,
           "rollout": [
             {
-              "step": 0,
-              "action": "B2",
-              "reasoning": "Player X opens at B2, the board's key hub, because the center gives the most possible winning lines before O can claim it.",
-              "state": [
-                "    A   B   C",
-                "  +---+---+---+",
-                "1 |   |   |   |",
-                "  +---+---+---+",
-                "2 |   |   |   |",
-                "  +---+---+---+",
-                "3 |   |   |   |",
-                "  +---+---+---+"
-              ],
-              "reward": 0,
-              "score": 0,
-              "status": {
-                "terminated": false,
-                "truncated": false,
-                "started": true
-              }
-            },
-            {
               "step": 1,
               "action": "A1",
               "reasoning": "With Player O on A2, Player X takes A1 to prevent O from controlling column A, secure the top-left corner, and gain a diagonal advantage through the center B2 toward C3.",
@@ -449,28 +361,6 @@
         {
           "sample_id": 6,
           "rollout": [
-            {
-              "step": 0,
-              "action": "B2",
-              "reasoning": "Player X opens at B2, the board's key hub, because the center gives the most possible winning lines before O can claim it.",
-              "state": [
-                "    A   B   C",
-                "  +---+---+---+",
-                "1 |   |   |   |",
-                "  +---+---+---+",
-                "2 |   |   |   |",
-                "  +---+---+---+",
-                "3 |   |   |   |",
-                "  +---+---+---+"
-              ],
-              "reward": 0,
-              "score": 0,
-              "status": {
-                "terminated": false,
-                "truncated": false,
-                "started": true
-              }
-            },
             {
               "step": 1,
               "action": "B1",
@@ -565,28 +455,6 @@
           "sample_id": 7,
           "rollout": [
             {
-              "step": 0,
-              "action": "B2",
-              "reasoning": "Player X opens at B2, the board's key hub, because the center gives the most possible winning lines before O can claim it.",
-              "state": [
-                "    A   B   C",
-                "  +---+---+---+",
-                "1 |   |   |   |",
-                "  +---+---+---+",
-                "2 |   |   |   |",
-                "  +---+---+---+",
-                "3 |   |   |   |",
-                "  +---+---+---+"
-              ],
-              "reward": 0,
-              "score": 0,
-              "status": {
-                "terminated": false,
-                "truncated": false,
-                "started": true
-              }
-            },
-            {
               "step": 1,
               "action": "B1",
               "reasoning": "With Player O on C3, Player X plays B1 to strengthen column B through the center B2 and gain a clear positional advantage toward B3.",
@@ -679,28 +547,6 @@
         {
           "sample_id": 8,
           "rollout": [
-            {
-              "step": 0,
-              "action": "B2",
-              "reasoning": "Player X opens at B2, the board's key hub, because the center gives the most possible winning lines before O can claim it.",
-              "state": [
-                "    A   B   C",
-                "  +---+---+---+",
-                "1 |   |   |   |",
-                "  +---+---+---+",
-                "2 |   |   |   |",
-                "  +---+---+---+",
-                "3 |   |   |   |",
-                "  +---+---+---+"
-              ],
-              "reward": 0,
-              "score": 0,
-              "status": {
-                "terminated": false,
-                "truncated": false,
-                "started": true
-              }
-            },
             {
               "step": 1,
               "action": "A1",
