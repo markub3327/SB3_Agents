@@ -11,8 +11,6 @@ with open(
 ) as f:
     tictactoe = json.load(f)
 
-env_name = tictactoe["name"]
-
 
 def render_tictactoe_board_to_image(board_state, width, height):
     # Create a white image
@@ -38,69 +36,76 @@ def render_tictactoe_board_to_image(board_state, width, height):
     return img
 
 
-def dataset_generator(shards):
-    for shard in shards:
-        sample_group = tictactoe["samples"][shard]
-        print(f"Generating dataset for sample {sample_group['sample_id']}")
+def dataset_wrapper(game):
+    def dataset_generator(shards):
+        for shard in shards:
+            sample_group = game["samples"][shard]
+            print(f"Generating dataset for sample {sample_group['sample_id']}")
 
-        for sample in sample_group["rollout"]:
-            example = {
+            for sample in sample_group["rollout"]:
+                example = {
+                    "messages": {
+                        "name": env_name,
+                        "state": '\n'.join(sample["state"]),
+                        "action": sample["action"],
+                        "reward": sample["reward"],
+                        "score": sample["score"],
+                        "lives": None,
+                        "terminated": sample["status"]["terminated"],
+                        "truncated": sample["status"]["truncated"],
+                        "started": sample["status"]["started"],
+                        "reasoning": sample["reasoning"],
+                        "step": sample["step"],
+                        "img_embed": None,
+                    },
+                    "images": [render_tictactoe_board_to_image(
+                        sample["state"], width=200, height=200
+                    )],
+                }
+                print(example)
+
+                yield example
+
+    return dataset_generator
+
+
+for game in tictactoe["games"]:
+    env_name = game["name"]
+    print(env_name)
+
+    # load datasets from folder
+    shards = list(range(len(game["samples"])))
+    cpus = os.cpu_count()
+    dataset = Dataset.from_generator(
+        dataset_wrapper(game),
+        features=Features(
+            {
                 "messages": {
-                    "name": env_name,
-                    "state": '\n'.join(sample["state"]),
-                    "action": sample["action"],
-                    "reward": sample["reward"]["X"],
-                    "score": sample["score"]["X"],
-                    "lives": None,
-                    "terminated": sample["status"]["terminated"],
-                    "truncated": sample["status"]["truncated"],
-                    "started": sample["status"]["started"],
-                    "reasoning": sample["reasoning"],
-                    "step": sample["step"],
-                    "img_embed": None,
+                    "name": Value("string"),
+                    "state": Value("string"),
+                    "action": Value("string"),
+                    "reward": Value("float32"),
+                    "score": Value("float32"),
+                    "lives": Value("int64"),
+                    "terminated": Value("bool"),
+                    "truncated": Value("bool"),
+                    "started": Value("bool"),
+                    "reasoning": Value("string"),
+                    "step": Value("int64"),
+                    "img_embed": Sequence(Sequence(Value("float32"))),
                 },
-                "images": [render_tictactoe_board_to_image(
-                    sample["state"], width=200, height=200
-                )],
+                "images": Sequence(HFImage()),
             }
-            # print(example)
+        ),
+        num_proc=cpus,
+        gen_kwargs={"shards": shards},
+    )
+    print("Total samples:", len(dataset))
 
-            yield example
-
-
-# load datasets from folder
-shards = list(range(len(tictactoe["samples"])))
-cpus = os.cpu_count()
-dataset = Dataset.from_generator(
-    dataset_generator,
-    features=Features(
-        {
-            "messages": {
-                "name": Value("string"),
-                "state": Value("string"),
-                "action": Value("string"),
-                "reward": Value("float32"),
-                "score": Value("float32"),
-                "lives": Value("int64"),
-                "terminated": Value("bool"),
-                "truncated": Value("bool"),
-                "started": Value("bool"),
-                "reasoning": Value("string"),
-                "step": Value("int64"),
-                "img_embed": Sequence(Sequence(Value("float32"))),
-            },
-            "images": Sequence(HFImage()),
-        }
-    ),
-    num_proc=cpus,
-    gen_kwargs={"shards": shards},
-)
-print("Total samples:", len(dataset))
-
-# Save the dataset
-ds_path = "/mnt/data/home/makuke637/SB3_Agents/dataset"
-os.makedirs(ds_path, exist_ok=True)
-dataset.save_to_disk(
-    os.path.join(ds_path, f"{env_name}"),
-    num_proc=cpus,
-)
+    # Save the dataset
+    ds_path = "/mnt/data/home/makuke637/SB3_Agents/dataset"
+    os.makedirs(ds_path, exist_ok=True)
+    dataset.save_to_disk(
+        os.path.join(ds_path, f"{env_name}"),
+        num_proc=cpus,
+    )
