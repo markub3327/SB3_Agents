@@ -168,7 +168,7 @@
             {
               "step": 4,
               "action": "A3",
-              "reasoning": "With Player O on B1, C1, A2, and C3, Player X fills the final square at A3, completing the board with no three-in-a-row and resulting in a draw.",
+              "reasoning": "With Player O on B1, C1, A2, and C3, Player X fills the final empty square at A3, completing the board with no three-in-a-row and resulting in a draw.",
               "state": [
                 "    A   B   C",
                 "  +---+---+---+",
@@ -354,7 +354,7 @@
             {
               "step": 4,
               "action": "A2",
-              "reasoning": "With Player O on B1, C2, A3, and C3, Player X fills the final square at A2, completing the board with no three-in-a-row and resulting in a draw.",
+              "reasoning": "With Player O on B1, C2, A3, and C3, Player X fills the final empty square at A2, completing the board with no three-in-a-row and resulting in a draw.",
               "state": [
                 "    A   B   C",
                 "  +---+---+---+",
@@ -540,7 +540,7 @@
             {
               "step": 4,
               "action": "C1",
-              "reasoning": "With Player O on A1, C2, A3, and B3, Player X fills the final square at C1, completing the board without any row, column, or diagonal three-in-a-row, resulting in a draw.",
+              "reasoning": "With Player O on A1, C2, A3, and B3, Player X fills the final empty square at C1, completing the board without any row, column, or diagonal three-in-a-row, resulting in a draw.",
               "state": [
                 "    A   B   C",
                 "  +---+---+---+",
@@ -655,7 +655,7 @@
             {
               "step": 4,
               "action": "A1",
-              "reasoning": "With Player O on C1, A2, B3, and C3, Player X fills the final square at A1, completing the board without any row, column, or diagonal three-in-a-row, resulting in a draw.",
+              "reasoning": "With Player O on C1, A2, B3, and C3, Player X fills the final empty square at A1, completing the board without any row, column, or diagonal three-in-a-row, resulting in a draw.",
               "state": [
                 "    A   B   C",
                 "  +---+---+---+",
@@ -917,7 +917,7 @@
             {
               "step": 4,
               "action": "A3",
-              "reasoning": "With Player X on B1, C1, A2, and C3, Player O fills the final square at A3, completing the board with no three-in-a-row and resulting in a draw.",
+              "reasoning": "With Player X on B1, C1, A2, and C3, Player O fills the final empty square at A3, completing the board with no three-in-a-row and resulting in a draw.",
               "state": [
                 "    A   B   C",
                 "  +---+---+---+",
@@ -1103,7 +1103,7 @@
             {
               "step": 4,
               "action": "A2",
-              "reasoning": "With Player X on B1, C2, A3, and C3, Player O fills the final square at A2, completing the board with no three-in-a-row and resulting in a draw.",
+              "reasoning": "With Player X on B1, C2, A3, and C3, Player O fills the final empty square at A2, completing the board with no three-in-a-row and resulting in a draw.",
               "state": [
                 "    A   B   C",
                 "  +---+---+---+",
@@ -1289,7 +1289,7 @@
             {
               "step": 4,
               "action": "C1",
-              "reasoning": "With Player X on A1, C2, A3, and B3, Player O fills the final square at C1, completing the board without any row, column, or diagonal three-in-a-row, resulting in a draw.",
+              "reasoning": "With Player X on A1, C2, A3, and B3, Player O fills the final empty square at C1, completing the board without any row, column, or diagonal three-in-a-row, resulting in a draw.",
               "state": [
                 "    A   B   C",
                 "  +---+---+---+",
@@ -1404,7 +1404,7 @@
             {
               "step": 4,
               "action": "A1",
-              "reasoning": "With Player X on C1, A2, B3, and C3, Player O fills the final square at A1, completing the board without any row, column, or diagonal three-in-a-row, resulting in a draw.",
+              "reasoning": "With Player X on C1, A2, B3, and C3, Player O fills the final empty square at A1, completing the board without any row, column, or diagonal three-in-a-row, resulting in a draw.",
               "state": [
                 "    A   B   C",
                 "  +---+---+---+",
