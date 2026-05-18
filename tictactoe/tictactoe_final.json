@@ -374,6 +374,192 @@
               }
             }
           ]
+        },
+        {
+          "sample_id": 5,
+          "rollout": [
+            {
+              "step": 0,
+              "action": "B2",
+              "reasoning": "Player X opens at B2, the board's key hub, because the center gives the most possible winning lines before O can claim it.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 |   |   |   |",
+                "  +---+---+---+",
+                "2 |   |   |   |",
+                "  +---+---+---+",
+                "3 |   |   |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 0,
+              "score": 0,
+              "status": {
+                "terminated": false,
+                "truncated": false,
+                "started": true
+              }
+            },
+            {
+              "step": 1,
+              "action": "A1",
+              "reasoning": "With Player O on A2, Player X takes A1 to prevent O from controlling column A, secure the top-left corner, and create a diagonal winning threat through the center B2 toward C3.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 |   |   |   |",
+                "  +---+---+---+",
+                "2 | O | X |   |",
+                "  +---+---+---+",
+                "3 |   |   |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 0,
+              "score": 0,
+              "status": {
+                "terminated": false,
+                "truncated": false,
+                "started": false
+              }
+            },
+            {
+              "step": 2,
+              "action": "C3",
+              "reasoning": "With Player O on A2 and C1, Player X plays C3 to complete the diagonal A1-B2-C3 and secure an immediate win.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 | X |   | O |",
+                "  +---+---+---+",
+                "2 | O | X |   |",
+                "  +---+---+---+",
+                "3 |   |   |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 1,
+              "score": 0,
+              "status": {
+                "terminated": true,
+                "truncated": false,
+                "started": false
+              }
+            }
+          ]
+        },
+        {
+          "sample_id": 6,
+          "rollout": [
+            {
+              "step": 0,
+              "action": "B2",
+              "reasoning": "Player X opens at B2, the board's key hub, because the center gives the most possible winning lines before O can claim it.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 |   |   |   |",
+                "  +---+---+---+",
+                "2 |   |   |   |",
+                "  +---+---+---+",
+                "3 |   |   |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 0,
+              "score": 0,
+              "status": {
+                "terminated": false,
+                "truncated": false,
+                "started": true
+              }
+            },
+            {
+              "step": 1,
+              "action": "B1",
+              "reasoning": "With Player O on A3, Player X plays B1 to extend control through the center B2, strengthen column B, and create a direct winning threat toward B3.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 |   |   |   |",
+                "  +---+---+---+",
+                "2 |   | X |   |",
+                "  +---+---+---+",
+                "3 | O |   |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 0,
+              "score": 0,
+              "status": {
+                "terminated": false,
+                "truncated": false,
+                "started": false
+              }
+            },
+            {
+              "step": 2,
+              "action": "C3",
+              "reasoning": "With Player O occupying A3 and B3, Player X must play C3 to block O's immediate bottom-row threat A3-B3-C3, preventing O from completing row 3 and winning on the next move.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 |   | X |   |",
+                "  +---+---+---+",
+                "2 |   | X |   |",
+                "  +---+---+---+",
+                "3 | O | O |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 0,
+              "score": 0,
+              "status": {
+                "terminated": false,
+                "truncated": false,
+                "started": false
+              }
+            },
+            {
+              "step": 3,
+              "action": "A2",
+              "reasoning": "With Player O occupying A1 and A3, Player X must play A2 to block the missing square in A1-A2-A3, preventing O from completing column A and winning immediately.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 | O | X |   |",
+                "  +---+---+---+",
+                "2 |   | X |   |",
+                "  +---+---+---+",
+                "3 | O | O | X |",
+                "  +---+---+---+"
+              ],
+              "reward": 0,
+              "score": 0,
+              "status": {
+                "terminated": false,
+                "truncated": false,
+                "started": false
+              }
+            },
+            {
+              "step": 4,
+              "action": "C1",
+              "reasoning": "With Player O on A1, C2, A3, and B3, Player X fills the final square at C1, completing the board without any row, column, or diagonal three-in-a-row, resulting in a draw.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 | O | X |   |",
+                "  +---+---+---+",
+                "2 | X | X | O |",
+                "  +---+---+---+",
+                "3 | O | O | X |",
+                "  +---+---+---+"
+              ],
+              "reward": 0,
+              "score": 0,
+              "status": {
+                "terminated": true,
+                "truncated": false,
+                "started": false
+              }
+            }
+          ]
         }
       ]
     },
@@ -751,6 +937,192 @@
               }
             }
           ]
+        },
+        {
+          "sample_id": 5,
+          "rollout": [
+            {
+              "step": 0,
+              "action": "B2",
+              "reasoning": "Player O opens at B2, the board's key hub, because the center gives the most possible winning lines before X can claim it.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 |   |   |   |",
+                "  +---+---+---+",
+                "2 |   |   |   |",
+                "  +---+---+---+",
+                "3 |   |   |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 0,
+              "score": 0,
+              "status": {
+                "terminated": false,
+                "truncated": false,
+                "started": true
+              }
+            },
+            {
+              "step": 1,
+              "action": "A1",
+              "reasoning": "With Player X on A2, Player O takes A1 to prevent X from controlling column A, secure the top-left corner, and create a diagonal winning threat through the center B2 toward C3.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 |   |   |   |",
+                "  +---+---+---+",
+                "2 | X | O |   |",
+                "  +---+---+---+",
+                "3 |   |   |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 0,
+              "score": 0,
+              "status": {
+                "terminated": false,
+                "truncated": false,
+                "started": false
+              }
+            },
+            {
+              "step": 2,
+              "action": "C3",
+              "reasoning": "With Player X on A2 and C1, Player O plays C3 to complete the diagonal A1-B2-C3 and secure an immediate win.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 | O |   | X |",
+                "  +---+---+---+",
+                "2 | X | O |   |",
+                "  +---+---+---+",
+                "3 |   |   |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 1,
+              "score": 0,
+              "status": {
+                "terminated": true,
+                "truncated": false,
+                "started": false
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample_id": 6,
+      "rollout": [
+        {
+          "step": 0,
+          "action": "B2",
+          "reasoning": "Player O opens at B2, the board's key hub, because the center gives the most possible winning lines before X can claim it.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   |   |   |",
+            "  +---+---+---+",
+            "3 |   |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": 0,
+          "score": 0,
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": true
+          }
+        },
+        {
+          "step": 1,
+          "action": "B1",
+          "reasoning": "With Player X on A3, Player O plays B1 to extend control through the center B2, strengthen column B, and create a direct winning threat toward B3.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   |   |   |",
+            "  +---+---+---+",
+            "2 |   | O |   |",
+            "  +---+---+---+",
+            "3 | X |   |   |",
+            "  +---+---+---+"
+          ],
+          "reward": 0,
+          "score": 0,
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 2,
+          "action": "C3",
+          "reasoning": "With Player X occupying A3 and B3, Player O must play C3 to block X's immediate bottom-row threat A3-B3-C3, preventing X from completing row 3 and winning on the next move.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 |   | O |   |",
+            "  +---+---+---+",
+            "2 |   | O |   |",
+            "  +---+---+---+",
+            "3 | X | X |   |",
+            "  +---+---+---+"
+          ],
+          "reward": 0,
+          "score": 0,
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 3,
+          "action": "A2",
+          "reasoning": "With Player X occupying A1 and A3, Player O must play A2 to block the missing square in A1-A2-A3, preventing X from completing column A and winning immediately.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | O |   |",
+            "  +---+---+---+",
+            "2 |   | O |   |",
+            "  +---+---+---+",
+            "3 | X | X | O |",
+            "  +---+---+---+"
+          ],
+          "reward": 0,
+          "score": 0,
+          "status": {
+            "terminated": false,
+            "truncated": false,
+            "started": false
+          }
+        },
+        {
+          "step": 4,
+          "action": "C1",
+          "reasoning": "With Player X on A1, C2, A3, and B3, Player O fills the final square at C1, completing the board without any row, column, or diagonal three-in-a-row, resulting in a draw.",
+          "state": [
+            "    A   B   C",
+            "  +---+---+---+",
+            "1 | X | O |   |",
+            "  +---+---+---+",
+            "2 | O | O | X |",
+            "  +---+---+---+",
+            "3 | X | X | O |",
+            "  +---+---+---+"
+          ],
+          "reward": 0,
+          "score": 0,
+          "status": {
+            "terminated": true,
+            "truncated": false,
+            "started": false
+          }
         }
       ]
     }
