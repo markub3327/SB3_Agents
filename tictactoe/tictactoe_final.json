@@ -9,7 +9,7 @@
             {
               "step": 0,
               "action": "B2",
-              "reasoning": "Player X opens in the center before O can claim the board's key hub, setting up the fastest middle-row route.",
+              "reasoning": "Player X opens at B2, the board's key hub, because the center gives the most possible winning lines before O can claim it.",
               "state": [
                 "    A   B   C",
                 "  +---+---+---+",
@@ -53,7 +53,7 @@
             {
               "step": 2,
               "action": "C2",
-              "reasoning": "With O on A1 and C1 controlling both top corners, Player X finishes C2 immediately so O cannot use that structure on the next move.",
+              "reasoning": "With O occupying both top corners A1 and C1, Player X plays C2 immediately to complete the middle row A2-B2-C2 and secure an immediate win before O can use that structure on the next move.",
               "state": [
                 "    A   B   C",
                 "  +---+---+---+",
@@ -85,7 +85,7 @@
             {
               "step": 0,
               "action": "B2",
-              "reasoning": "Player O opens in the center before X can claim the board's key hub, setting up the fastest middle-row route.",
+              "reasoning": "Player O opens at B2, the board's key hub, because the center gives the most possible winning lines before X can claim it.",
               "state": [
                 "    A   B   C",
                 "  +---+---+---+",
@@ -129,8 +129,7 @@
             {
               "step": 2,
               "action": "C2",
-              "reasoning": "With X on A1 and C1 controlling both top corners, Player O finishes C2 immediately so Y cannot use that structure on the next move.",
-              "state": [
+              "reasoning": "With X occupying both top corners A1 and C1, Player O plays C2 immediately to complete the middle row A2-B2-C2 and secure an immediate win before X can use that structure on the next move.",              "state": [
                 "    A   B   C",
                 "  +---+---+---+",
                 "1 | X |   | X |",
