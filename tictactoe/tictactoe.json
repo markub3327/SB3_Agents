@@ -761,6 +761,109 @@
               }
             }
           ]
+        },
+        {
+          "sample_id": 12,
+          "rollout": [
+            {
+              "step": 2,
+              "action": "A2",
+              "reasoning": "With Player O on B1 and C1, Player X plays A2 to complete the second row A2-B2-C2 and secure an immediate win.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 |   | O | O |",
+                "  +---+---+---+",
+                "2 |   | X | X |",
+                "  +---+---+---+",
+                "3 |   |   |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 1,
+              "score": 0,
+              "status": {
+                "terminated": true,
+                "truncated": false,
+                "started": false
+              }
+            }
+          ]
+        },
+        {
+          "sample_id": 13,
+          "rollout": [
+            {
+              "step": 2,
+              "action": "A2",
+              "reasoning": "With Player O on B1 and A3, Player X plays A2 to strengthen the second row through B2 and create a direct winning opportunity toward C2.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 |   | O | X |",
+                "  +---+---+---+",
+                "2 |   | X |   |",
+                "  +---+---+---+",
+                "3 | O |   |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 0,
+              "score": 0,
+              "status": {
+                "terminated": false,
+                "truncated": false,
+                "started": false
+              }
+            },
+            {
+              "step": 3,
+              "action": "C2",
+              "reasoning": "With Player X already on A2 and B2, Player X plays C2 to complete the second row A2-B2-C2 and secure an immediate win.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 | O | O | X |",
+                "  +---+---+---+",
+                "2 | X | X |   |",
+                "  +---+---+---+",
+                "3 | O |   |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 1,
+              "score": 0,
+              "status": {
+                "terminated": true,
+                "truncated": false,
+                "started": false
+              }
+            }
+          ]
+        },
+        {
+          "sample_id": 14,
+          "rollout": [
+            {
+              "step": 2,
+              "action": "B3",
+              "reasoning": "With Player O on A3 and C3, and Player X already on B1 and B2, Player X plays B3 to complete column B1-B2-B3 and secure an immediate win.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 |   | X |   |",
+                "  +---+---+---+",
+                "2 |   | X |   |",
+                "  +---+---+---+",
+                "3 | O |   | O |",
+                "  +---+---+---+"
+              ],
+              "reward": 1,
+              "score": 0,
+              "status": {
+                "terminated": true,
+                "truncated": false,
+                "started": false
+              }
+            }
+          ]
         }
       ]
     },
@@ -1517,6 +1620,109 @@
                 "  +---+---+---+"
               ],
               "reward": 0,
+              "score": 0,
+              "status": {
+                "terminated": true,
+                "truncated": false,
+                "started": false
+              }
+            }
+          ]
+        },
+        {
+          "sample_id": 12,
+          "rollout": [
+            {
+              "step": 2,
+              "action": "A2",
+              "reasoning": "With Player X on B1 and C1, Player O plays A2 to complete the second row A2-B2-C2 and secure an immediate win.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 |   | X | X |",
+                "  +---+---+---+",
+                "2 |   | O | O |",
+                "  +---+---+---+",
+                "3 |   |   |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 1,
+              "score": 0,
+              "status": {
+                "terminated": true,
+                "truncated": false,
+                "started": false
+              }
+            }
+          ]
+        },
+        {
+          "sample_id": 13,
+          "rollout": [
+            {
+              "step": 2,
+              "action": "A2",
+              "reasoning": "With Player X on B1 and A3, Player O plays A2 to strengthen the second row through B2 and create a direct winning opportunity toward C2.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 |   | X | O |",
+                "  +---+---+---+",
+                "2 |   | O |   |",
+                "  +---+---+---+",
+                "3 | X |   |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 0,
+              "score": 0,
+              "status": {
+                "terminated": false,
+                "truncated": false,
+                "started": false
+              }
+            },
+            {
+              "step": 3,
+              "action": "C2",
+              "reasoning": "With Player O already on A2 and B2, Player O plays C2 to complete the second row A2-B2-C2 and secure an immediate win.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 | X | X | O |",
+                "  +---+---+---+",
+                "2 | O | O |   |",
+                "  +---+---+---+",
+                "3 | X |   |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 1,
+              "score": 0,
+              "status": {
+                "terminated": true,
+                "truncated": false,
+                "started": false
+              }
+            }
+          ]
+        },
+        {
+          "sample_id": 14,
+          "rollout": [
+            {
+              "step": 2,
+              "action": "B3",
+              "reasoning": "With Player X on A3 and C3, and Player O already on B1 and B2, Player O plays B3 to complete column B1-B2-B3 and secure an immediate win.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 |   | O |   |",
+                "  +---+---+---+",
+                "2 |   | O |   |",
+                "  +---+---+---+",
+                "3 | X |   | X |",
+                "  +---+---+---+"
+              ],
+              "reward": 1,
               "score": 0,
               "status": {
                 "terminated": true,
