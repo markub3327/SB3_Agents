@@ -864,6 +864,256 @@
               }
             }
           ]
+        },
+        {
+          "sample_id": 15,
+          "rollout": [
+            {
+              "step": 2,
+              "action": "C3",
+              "reasoning": "With Player O on C2 and B3, Player X plays C3 to secure a key corner, gain a diagonal advantage through B2 toward A1, and prevent O from expanding through row 3 or column C.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 |   |   |   |",
+                "  +---+---+---+",
+                "2 | X | X | O |",
+                "  +---+---+---+",
+                "3 |   | O |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 0,
+              "score": 0,
+              "status": {
+                "terminated": false,
+                "truncated": false,
+                "started": false
+              }
+            },
+            {
+              "step": 3,
+              "action": "C1",
+              "reasoning": "With Player O on A1, C2, and B3, Player X plays C1 to block O from building across row 1 while creating a diagonal winning opportunity from C1 through the center B2 toward A3.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 | O |   |   |",
+                "  +---+---+---+",
+                "2 | X | X | O |",
+                "  +---+---+---+",
+                "3 |   | O | X |",
+                "  +---+---+---+"
+              ],
+              "reward": 0,
+              "score": 0,
+              "status": {
+                "terminated": false,
+                "truncated": false,
+                "started": false
+              }
+            },
+            {
+              "step": 4,
+              "action": "B1",
+              "reasoning": "With Player O on A1, C2, A3, and B3, Player X plays B1 as the final empty cell, filling the board with no three-in-a-row and resulting in a draw.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 | O |   | X |",
+                "  +---+---+---+",
+                "2 | X | X | O |",
+                "  +---+---+---+",
+                "3 | O | O | X |",
+                "  +---+---+---+"
+              ],
+              "reward": 0,
+              "score": 0,
+              "status": {
+                "terminated": true,
+                "truncated": false,
+                "started": false
+              }
+            }
+          ]
+        },
+        {
+          "sample_id": 16,
+          "rollout": [
+            {
+              "step": 2,
+              "action": "C3",
+              "reasoning": "With Player O on B1 and C2, and Player X already on A1 and B2, Player X plays C3 to complete the main diagonal A1-B2-C3 and secure an immediate win.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 | X | O |   |",
+                "  +---+---+---+",
+                "2 |   | X | O |",
+                "  +---+---+---+",
+                "3 |   |   |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 1,
+              "score": 0,
+              "status": {
+                "terminated": true,
+                "truncated": false,
+                "started": false
+              }
+            }
+          ]
+        },
+        {
+          "sample_id": 17,
+          "rollout": [
+            {
+              "step": 2,
+              "action": "C3",
+              "reasoning": "With Player O on A2 and B1, and Player X already on A1 and B2, Player X plays C3 to complete the diagonal A1-B2-C3 and secure an immediate win.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 | X | O |   |",
+                "  +---+---+---+",
+                "2 | O | X |   |",
+                "  +---+---+---+",
+                "3 |   |   |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 1,
+              "score": 0,
+              "status": {
+                "terminated": true,
+                "truncated": false,
+                "started": false
+              }
+            }
+          ]
+        },
+        {
+          "sample_id": 18,
+          "rollout": [
+            {
+              "step": 2,
+              "action": "B3",
+              "reasoning": "With Player O on A2 and A3, and Player X already on B1 and B2, Player X plays B3 to complete column B1-B2-B3 and secure an immediate win before O can extend column A.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 |   | X |   |",
+                "  +---+---+---+",
+                "2 | O | X |   |",
+                "  +---+---+---+",
+                "3 | O |   |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 1,
+              "score": 0,
+              "status": {
+                "terminated": true,
+                "truncated": false,
+                "started": false
+              }
+            }
+          ]
+        },
+        {
+          "sample_id": 19,
+          "rollout": [
+            {
+              "step": 2,
+              "action": "B3",
+              "reasoning": "With Player O on A1 and A3, and Player X already on B1 and B2, Player X plays B3 to complete column B1-B2-B3 and secure an immediate win before O can complete column A.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 | O | X |   |",
+                "  +---+---+---+",
+                "2 |   | X |   |",
+                "  +---+---+---+",
+                "3 | O |   |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 1,
+              "score": 0,
+              "status": {
+                "terminated": true,
+                "truncated": false,
+                "started": false
+              }
+            }
+          ]
+        },
+        {
+          "sample_id": 20,
+          "rollout": [
+            {
+              "step": 2,
+              "action": "A1",
+              "reasoning": "With Player O on B1 and A3, Player X plays A1 to secure the top-left corner and gain a diagonal advantage from A1 through the center B2 toward C3.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 |   | O | X |",
+                "  +---+---+---+",
+                "2 |   | X |   |",
+                "  +---+---+---+",
+                "3 | O |   |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 0,
+              "score": 0,
+              "status": {
+                "terminated": false,
+                "truncated": false,
+                "started": false
+              }
+            },
+            {
+              "step": 3,
+              "action": "B3",
+              "reasoning": "With Player O on B1, A3, and C3, Player X plays B3 to occupy the center of row 3 and prevent O from completing A3-B3-C3.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 | X | O | X |",
+                "  +---+---+---+",
+                "2 |   | X |   |",
+                "  +---+---+---+",
+                "3 | O |   | O |",
+                "  +---+---+---+"
+              ],
+              "reward": 0,
+              "score": 0,
+              "status": {
+                "terminated": false,
+                "truncated": false,
+                "started": false
+              }
+            },
+            {
+              "step": 4,
+              "action": "A2",
+              "reasoning": "With Player O on B1, C2, A3, and C3, Player X plays A2 as the final empty cell, filling the board with no three-in-a-row and resulting in a draw.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 | X | O | X |",
+                "  +---+---+---+",
+                "2 |   | X | O |",
+                "  +---+---+---+",
+                "3 | O | X | O |",
+                "  +---+---+---+"
+              ],
+              "reward": 0,
+              "score": 0,
+              "status": {
+                "terminated": true,
+                "truncated": false,
+                "started": false
+              }
+            }
+          ]
         }
       ]
     },
@@ -1723,6 +1973,256 @@
                 "  +---+---+---+"
               ],
               "reward": 1,
+              "score": 0,
+              "status": {
+                "terminated": true,
+                "truncated": false,
+                "started": false
+              }
+            }
+          ]
+        },
+        {
+          "sample_id": 15,
+          "rollout": [
+            {
+              "step": 2,
+              "action": "C3",
+              "reasoning": "With Player X on C2 and B3, Player O plays C3 to secure a key corner, gain a diagonal advantage through B2 toward A1, and prevent X from expanding through row 3 or column C.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 |   |   |   |",
+                "  +---+---+---+",
+                "2 | O | O | X |",
+                "  +---+---+---+",
+                "3 |   | X |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 0,
+              "score": 0,
+              "status": {
+                "terminated": false,
+                "truncated": false,
+                "started": false
+              }
+            },
+            {
+              "step": 3,
+              "action": "C1",
+              "reasoning": "With Player X on A1, C2, and B3, Player O plays C1 to block X from building across row 1 while creating a diagonal winning opportunity from C1 through the center B2 toward A3.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 | X |   |   |",
+                "  +---+---+---+",
+                "2 | O | O | X |",
+                "  +---+---+---+",
+                "3 |   | X | O |",
+                "  +---+---+---+"
+              ],
+              "reward": 0,
+              "score": 0,
+              "status": {
+                "terminated": false,
+                "truncated": false,
+                "started": false
+              }
+            },
+            {
+              "step": 4,
+              "action": "B1",
+              "reasoning": "With Player X on A1, C2, A3, and B3, Player O plays B1 as the final empty cell, filling the board with no three-in-a-row and resulting in a draw.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 | X |   | O |",
+                "  +---+---+---+",
+                "2 | O | O | X |",
+                "  +---+---+---+",
+                "3 | X | X | O |",
+                "  +---+---+---+"
+              ],
+              "reward": 0,
+              "score": 0,
+              "status": {
+                "terminated": true,
+                "truncated": false,
+                "started": false
+              }
+            }
+          ]
+        },
+        {
+          "sample_id": 16,
+          "rollout": [
+            {
+              "step": 2,
+              "action": "C3",
+              "reasoning": "With Player X on B1 and C2, and Player O already on A1 and B2, Player O plays C3 to complete the main diagonal A1-B2-C3 and secure an immediate win.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 | O | X |   |",
+                "  +---+---+---+",
+                "2 |   | O | X |",
+                "  +---+---+---+",
+                "3 |   |   |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 1,
+              "score": 0,
+              "status": {
+                "terminated": true,
+                "truncated": false,
+                "started": false
+              }
+            }
+          ]
+        },
+        {
+          "sample_id": 17,
+          "rollout": [
+            {
+              "step": 2,
+              "action": "C3",
+              "reasoning": "With Player X on A2 and B1, and Player O already on A1 and B2, Player O plays C3 to complete the diagonal A1-B2-C3 and secure an immediate win.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 | O | X |   |",
+                "  +---+---+---+",
+                "2 | X | O |   |",
+                "  +---+---+---+",
+                "3 |   |   |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 1,
+              "score": 0,
+              "status": {
+                "terminated": true,
+                "truncated": false,
+                "started": false
+              }
+            }
+          ]
+        },
+        {
+          "sample_id": 18,
+          "rollout": [
+            {
+              "step": 2,
+              "action": "B3",
+              "reasoning": "With Player X on A2 and A3, and Player O already on B1 and B2, Player O plays B3 to complete column B1-B2-B3 and secure an immediate win before X can extend column A.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 |   | O |   |",
+                "  +---+---+---+",
+                "2 | X | O |   |",
+                "  +---+---+---+",
+                "3 | X |   |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 1,
+              "score": 0,
+              "status": {
+                "terminated": true,
+                "truncated": false,
+                "started": false
+              }
+            }
+          ]
+        },
+        {
+          "sample_id": 19,
+          "rollout": [
+            {
+              "step": 2,
+              "action": "B3",
+              "reasoning": "With Player X on A1 and A3, and Player O already on B1 and B2, Player O plays B3 to complete column B1-B2-B3 and secure an immediate win before X can complete column A.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 | X | O |   |",
+                "  +---+---+---+",
+                "2 |   | O |   |",
+                "  +---+---+---+",
+                "3 | X |   |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 1,
+              "score": 0,
+              "status": {
+                "terminated": true,
+                "truncated": false,
+                "started": false
+              }
+            }
+          ]
+        },
+        {
+          "sample_id": 20,
+          "rollout": [
+            {
+              "step": 2,
+              "action": "A1",
+              "reasoning": "With Player X on B1 and A3, Player O plays A1 to secure the top-left corner and create a potential diagonal opportunity from A1 through the center B2 toward C3.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 |   | X | O |",
+                "  +---+---+---+",
+                "2 |   | O |   |",
+                "  +---+---+---+",
+                "3 | X |   |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 0,
+              "score": 0,
+              "status": {
+                "terminated": false,
+                "truncated": false,
+                "started": false
+              }
+            },
+            {
+              "step": 3,
+              "action": "B3",
+              "reasoning": "With Player X on B1, A3, and C3, Player O plays B3 to occupy the center of row 3 and prevent X from completing A3-B3-C3.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 | O | X | O |",
+                "  +---+---+---+",
+                "2 |   | O |   |",
+                "  +---+---+---+",
+                "3 | X |   | X |",
+                "  +---+---+---+"
+              ],
+              "reward": 0,
+              "score": 0,
+              "status": {
+                "terminated": false,
+                "truncated": false,
+                "started": false
+              }
+            },
+            {
+              "step": 4,
+              "action": "A2",
+              "reasoning": "With Player X on B1, C2, A3, and C3, Player O plays A2 as the final empty cell, filling the board with no three-in-a-row and resulting in a draw.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 | O | X | O |",
+                "  +---+---+---+",
+                "2 |   | O | X |",
+                "  +---+---+---+",
+                "3 | X | O | X |",
+                "  +---+---+---+"
+              ],
+              "reward": 0,
               "score": 0,
               "status": {
                 "terminated": true,
