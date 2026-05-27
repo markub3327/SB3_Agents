@@ -1114,6 +1114,60 @@
               }
             }
           ]
+        },
+        {
+          "sample_id": 21,
+          "rollout": [
+            {
+              "step": 2,
+              "action": "C3",
+              "reasoning": "With Player O on A2 and A3, Player X plays C3 to complete the diagonal A1-B2-C3 and secure an immediate win.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 | X |   |   |",
+                "  +---+---+---+",
+                "2 | O | X | O |",
+                "  +---+---+---+",
+                "3 |   |   |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 1,
+              "score": 0,
+              "status": {
+                "terminated": true,
+                "truncated": false,
+                "started": false
+              }
+            }
+          ]
+        },
+        {
+          "sample_id": 22,
+          "rollout": [
+            {
+              "step": 2,
+              "action": "C3",
+              "reasoning": "With Player O on A2 and A3, Player X plays C3 to complete the diagonal A1-B2-C3 and secure an immediate win.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 | X |   |   |",
+                "  +---+---+---+",
+                "2 | O | X |   |",
+                "  +---+---+---+",
+                "3 | O |   |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 1,
+              "score": 0,
+              "status": {
+                "terminated": true,
+                "truncated": false,
+                "started": false
+              }
+            }
+          ]
         }
       ]
     },
@@ -2223,6 +2277,60 @@
                 "  +---+---+---+"
               ],
               "reward": 0,
+              "score": 0,
+              "status": {
+                "terminated": true,
+                "truncated": false,
+                "started": false
+              }
+            }
+          ]
+        },
+        {
+          "sample_id": 21,
+          "rollout": [
+            {
+              "step": 2,
+              "action": "C3",
+              "reasoning": "With Player X on A2 and A3, Player O plays C3 to complete the diagonal A1-B2-C3 and secure an immediate win.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 | O |   |   |",
+                "  +---+---+---+",
+                "2 | X | O | X |",
+                "  +---+---+---+",
+                "3 |   |   |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 1,
+              "score": 0,
+              "status": {
+                "terminated": true,
+                "truncated": false,
+                "started": false
+              }
+            }
+          ]
+        },
+        {
+          "sample_id": 22,
+          "rollout": [
+            {
+              "step": 2,
+              "action": "C3",
+              "reasoning": "With Player X on A2 and A3, Player O plays C3 to complete the diagonal A1-B2-C3 and secure an immediate win.",
+              "state": [
+                "    A   B   C",
+                "  +---+---+---+",
+                "1 | O |   |   |",
+                "  +---+---+---+",
+                "2 | X | O |   |",
+                "  +---+---+---+",
+                "3 | X |   |   |",
+                "  +---+---+---+"
+              ],
+              "reward": 1,
               "score": 0,
               "status": {
                 "terminated": true,
