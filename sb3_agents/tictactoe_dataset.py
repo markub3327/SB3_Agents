@@ -100,6 +100,10 @@ for game in tictactoe["games"]:
     )
     print("Total samples:", len(dataset))
 
+    # Shuffle the dataset once before saving
+    dataset = dataset.shuffle(seed=42)
+    print(f"Dataset shuffled with seed 42")
+
     # Save the dataset
     ds_path = "/mnt/data/home/makuke637/SB3_Agents/dataset"
     os.makedirs(ds_path, exist_ok=True)
