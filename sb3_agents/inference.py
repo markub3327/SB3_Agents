@@ -360,7 +360,7 @@ if __name__ == "__main__":
                     elif "LunarLander" in env_name:
                         state = f"State: horizontal position = {obs[idx][env_id][0]:.3f}; vertical position = {obs[idx][env_id][1]:.3f}; horizontal speed = {obs[idx][env_id][2]:.3f}; vertical speed = {obs[idx][env_id][3]:.3f}; tilt angle = {obs[idx][env_id][4]:.3f}; rotation speed = {obs[idx][env_id][5]:.3f}; left leg touching ground = {obs[idx][env_id][6]:.3f}; right leg touching ground = {obs[idx][env_id][7]:.3f}."
                     else:
-                        raise ValueError(f"Unknown environment: {env_name}")
+                        state = None
 
                     example = {
                         "messages": {
@@ -421,6 +421,10 @@ if __name__ == "__main__":
                 os.path.join(ds_path, f"{env_name}"),
                 num_proc=cpus,
             )
+
+        # Shuffle the dataset once before saving
+        dataset = dataset.shuffle(seed=42)
+        print(f"Dataset shuffled with seed 42")
 
         # Store the results
         completed = np.logical_or(terminated, truncated)
