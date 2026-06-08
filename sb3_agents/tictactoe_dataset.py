@@ -77,7 +77,7 @@ for game in tictactoe["games"]:
     for sample_group in game["samples"]:
         for sample in sample_group["rollout"]:
             img = render_tictactoe_board_to_image(sample["state"], width=width, height=height)
-            sample["img"] = np.asarray(img)
+            sample["img"] = np.asarray([img], dtype=np.uint8)
 
     # load datasets from folder
     shards = list(range(len(game["samples"])))
@@ -97,9 +97,9 @@ for game in tictactoe["games"]:
                     "truncated": Value("bool"),
                     "started": Value("bool"),
                     "reasoning": Value("string"),
-                    "img_embed": Sequence(Value("float32")),
+                    "img_embed": Sequence(Sequence(Value("float32"))),
                 },
-                "images": HFImage(),
+                "images": Sequence(HFImage()),
             }
         ),
         num_proc=cpus,
@@ -127,7 +127,7 @@ for game in tictactoe["games"]:
     for samples in game["samples"]:
         for sample in samples["rollout"]:
             # Convert RGB to BGR for OpenCV
-            bgr_frame = cv2.cvtColor(sample["img"], cv2.COLOR_RGB2BGR)
+            bgr_frame = cv2.cvtColor(sample["img"][0], cv2.COLOR_RGB2BGR)
 
             action = sample["action"]
             reward = sample["reward"]
