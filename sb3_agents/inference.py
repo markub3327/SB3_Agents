@@ -371,10 +371,9 @@ if __name__ == "__main__":
                             "truncated": Value("bool"),
                             "started": Value("bool"),
                             "reasoning": Value("string"),
-                            "step": Value("int64"),
-                            "img_embed": Sequence(Sequence(Value("float32"))),
+                            "img_embed": Sequence(Value("float32")),
                         },
-                        "images": Sequence(Image()),
+                        "images": Image(),
                     }
                 ),
                 num_proc=cpus,
