@@ -307,6 +307,7 @@ if __name__ == "__main__":
         ) = rollout(
             vec_env,
             model,
+            n_stack=config["frame_stack"],
             episode_length=args.episode_length,
             img_embed_model=img_filter,
             random=args.with_random,
