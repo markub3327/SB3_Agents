@@ -26,8 +26,7 @@ class ImageFilterForQueue:
         return outputs.pooler_output.cpu().numpy()
 
 
-def rollout(vec_env, model, *, episode_length, n_stack, img_embed_model=None, random=False):
-    obs_list = []
+def rollout(vec_env, model, *, episode_length, img_embed_model=None, random=False):
     state_list = []
     action_list = []
     action_logits_list = []
@@ -38,9 +37,7 @@ def rollout(vec_env, model, *, episode_length, n_stack, img_embed_model=None, ra
     started_list = []
     lives_list = []
     imgs_embed_list = []
-    steps_list = []
 
-    step_per_venv = np.zeros(vec_env.num_envs, dtype=np.int64)
     action_space = vec_env.action_space
 
     # Start of episode
@@ -77,13 +74,12 @@ def rollout(vec_env, model, *, episode_length, n_stack, img_embed_model=None, ra
                     raise ValueError()
 
         # Get state[t]
-        obs_list.append(obs.copy())
         state_list.append(rendered_img)
         if img_embed_model:
-            img_batch = rendered_img.reshape(-1, rendered_img.shape[2], rendered_img.shape[3], rendered_img.shape[4])
+            x = np.asarray(rendered_img)
+            img_batch = np.reshape(x, (-1, *x.shape[2:])) if x.ndim > 3 else x
             print(img_batch.shape)
             img_embed = img_embed_model.get_embedding(img_batch)
-            img_embed = np.stack(np.split(img_embed, vec_env.num_envs, axis=0), axis=0)
             print(img_embed.shape)
             imgs_embed_list.append(img_embed)
 
@@ -106,21 +102,11 @@ def rollout(vec_env, model, *, episode_length, n_stack, img_embed_model=None, ra
         # Get started[t]
         started_list.append(started)
 
-        # Get step[t]
-        if "episode_frame_number" in info[0]:
-            steps_list.append(
-                [info[i]["episode_frame_number"] for i in range(vec_env.num_envs)]
-            )
-        else:
-            steps_list.append(step_per_venv)
-
         # Perform a step
         obs, reward, terminated, info = vec_env.step(action)
         print(
             "Game: ",
             vec_env.env_name,
-            ", step=",
-            [info[i]["episode_frame_number"] for i in range(vec_env.num_envs)] if "episode_frame_number" in info[0] else step_per_venv,
             "action:",
             action,
             "reward:",
@@ -150,9 +136,6 @@ def rollout(vec_env, model, *, episode_length, n_stack, img_embed_model=None, ra
             [info[i]["TimeLimit.truncated"] for i in range(vec_env.num_envs)]
         )
 
-        # Update step[t+1]
-        step_per_venv = np.where(end_of_game, 0, (step_per_venv + 1))
-
         # Update lives[t+1]
         lives = np.array(
             [
@@ -172,7 +155,6 @@ def rollout(vec_env, model, *, episode_length, n_stack, img_embed_model=None, ra
 
     # Stack the Numpy arrays
     return (
-        np.stack(obs_list, axis=0),
         np.stack(state_list, axis=0),
         np.stack(action_list, axis=0),
         np.stack(action_logits_list, axis=0) if not random else [],
@@ -183,7 +165,6 @@ def rollout(vec_env, model, *, episode_length, n_stack, img_embed_model=None, ra
         np.stack(started_list, axis=0),
         np.stack(lives_list, axis=0),
         np.stack(imgs_embed_list, axis=0) if img_embed_model else [],
-        np.stack(steps_list, axis=0),
     )
 
 
