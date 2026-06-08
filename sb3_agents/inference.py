@@ -215,7 +215,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--n-envs",
         type=int,
-        default=1,
+        default=4,
         help="Number of parallel environments to run (default: 4).",
     )
     parser.add_argument(
@@ -402,7 +402,7 @@ if __name__ == "__main__":
         # Recorder
         if args.save_video:
             best_idx = np.argmax(results_agent[env_name])
-            height, width, channels = states[0, best_idx, -1].shape
+            height, width, channels = states[0, best_idx].shape
             fourcc = cv2.VideoWriter_fourcc(*"mp4v")
             env_name = env_name.replace("ALE/", "")
             os.makedirs("./videos/", exist_ok=True)
