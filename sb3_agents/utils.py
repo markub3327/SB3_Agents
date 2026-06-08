@@ -6,7 +6,6 @@ from gymnasium.spaces import Box
 from torch.distributions import Bernoulli
 from transformers import AutoImageProcessor, AutoModel
 from vocab import ids_action_vocab
-from stable_baselines3.common.vec_env.stacked_observations import StackedObservations
 
 
 class ImageFilterForQueue:
@@ -47,14 +46,6 @@ def rollout(vec_env, model, *, episode_length, n_stack, img_embed_model=None, ra
     # Start of episode
     obs, info = vec_env.reset()
     rendered_img = vec_env.env_method("render")
-    stacked_obs =  StackedObservations(
-        vec_env.num_envs,
-        n_stack,
-        Box(0, 255, rendered_img[0].shape, dtype=np.uint8),
-    )
-    rendered_img = stacked_obs.reset(
-        np.asarray(rendered_img, dtype=np.uint8)
-    )
     rendered_img = np.stack(np.split(rendered_img, n_stack, axis=-1), axis=1)
     score = np.zeros(vec_env.num_envs, dtype=np.float32)
     lives = np.array(
@@ -173,12 +164,6 @@ def rollout(vec_env, model, *, episode_length, n_stack, img_embed_model=None, ra
 
         # Update state[t+1]
         rendered_img = vec_env.env_method("render")
-        rendered_img, _ = stacked_obs.update(
-            np.asarray(rendered_img, dtype=np.uint8),
-            terminated,
-            ([{}] * vec_env.num_envs)
-        )
-        rendered_img = np.stack(np.split(rendered_img, n_stack, axis=-1), axis=1)
 
         # Update score[t+1]
         score = np.where(end_of_game, 0.0, (score + reward))
