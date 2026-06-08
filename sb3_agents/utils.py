@@ -46,7 +46,6 @@ def rollout(vec_env, model, *, episode_length, n_stack, img_embed_model=None, ra
     # Start of episode
     obs, info = vec_env.reset()
     rendered_img = vec_env.env_method("render")
-    rendered_img = np.stack(np.split(rendered_img, n_stack, axis=-1), axis=1)
     score = np.zeros(vec_env.num_envs, dtype=np.float32)
     lives = np.array(
         [
