@@ -20,7 +20,6 @@ from stable_baselines3.common.monitor import Monitor
 from stable_baselines3.common.vec_env import (
     SubprocVecEnv,
     VecFrameStack,
-    VecNormalize,
     VecTransposeImage,
 )
 from tqdm import tqdm
@@ -269,12 +268,13 @@ if __name__ == "__main__":
             # Load PPO configuration
             config = load_hyperparams("retro")
             # Create environment
-            vec_env = VecTransposeImage(
-                VecFrameStack(
-                    SubprocVecEnv([make_retro_env(env_name)] * args.n_envs),
-                    n_stack=config["frame_stack"],
-                )
+            # Frame-stacking with 4 frames
+            vec_env = VecFrameStack(
+                SubprocVecEnv([make_retro_env(env_name)] * args.n_envs),
+                n_stack=config["frame_stack"]
             )
+            vec_env = VecTransposeImage(vec_env)
+
         # Atari 2600
         elif "NoFrameskip" in env_name or "ALE" in env_name:
             # Load PPO configuration
@@ -297,14 +297,6 @@ if __name__ == "__main__":
             vec_env = make_vec_env(env_name, n_envs=args.n_envs, seed=args.seed)
             if config["policy"] == "CnnPolicy":
                 vec_env = VecTransposeImage(vec_env)
-
-        # Use normalization
-        if config["normalize"]:
-            vec_env = VecNormalize(
-                vec_env,
-                norm_obs=config["normalize"]["norm_obs"],
-                norm_reward=config["normalize"]["norm_reward"],
-            )
 
         # Store env name on vec_env for later use (logging/saving).
         setattr(vec_env, "env_name", env_name)
@@ -443,7 +435,7 @@ if __name__ == "__main__":
             )
             for i in range(states.shape[0]):
                 # Convert RGB to BGR for OpenCV
-                bgr_frame = cv2.cvtColor(states[i, best_idx, -1], cv2.COLOR_RGB2BGR)
+                bgr_frame = cv2.cvtColor(states[i, best_idx], cv2.COLOR_RGB2BGR)
 
                 # Add text to the frame
                 cv2.putText(
