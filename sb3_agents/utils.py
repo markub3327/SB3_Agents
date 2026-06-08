@@ -87,10 +87,8 @@ def rollout(vec_env, model, *, episode_length, n_stack, img_embed_model=None, ra
         state_list.append(rendered_img)
         if img_embed_model:
             img_batch = rendered_img.reshape(-1, rendered_img.shape[2], rendered_img.shape[3], rendered_img.shape[4])
-            print(img_batch.shape)
             img_embed = img_embed_model.get_embedding(img_batch)
             img_embed = np.stack(np.split(img_embed, vec_env.num_envs, axis=0), axis=0)
-            print(img_embed.shape)
             imgs_embed_list.append(img_embed)
 
         # Get action[t]
