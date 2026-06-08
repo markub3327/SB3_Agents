@@ -73,8 +73,8 @@ def rollout(vec_env, model, *, episode_length, n_stack, img_embed_model=None, ra
                 # Get features from the policy network
                 features = model.policy.extract_features(obs_tensor)
                 latent_pi = model.policy.mlp_extractor.forward_actor(features)
-                logits = model.policy.action_net(latent_pi).cpu().numpy()
-                action_logits_list.append(logits)
+                logits = model.policy.action_net(latent_pi)
+                action_logits_list.append(logits.cpu().numpy())
 
                 if isinstance(action_space, spaces.Discrete):
                     action = torch.argmax(logits, dim=-1).cpu().numpy()  # hard labels
