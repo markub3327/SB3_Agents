@@ -30,7 +30,6 @@ class ImageFilterForQueue:
 def rollout(vec_env, model, *, episode_length, n_stack, img_embed_model=None, random=False):
     state_list = []
     action_list = []
-    action_logits_list = []
     reward_list = []
     score_list = []
     terminated_list = []
@@ -160,7 +159,6 @@ def rollout(vec_env, model, *, episode_length, n_stack, img_embed_model=None, ra
     return (
         np.stack(state_list, axis=0),
         np.stack(action_list, axis=0),
-        np.stack(action_logits_list, axis=0) if not random else [],
         np.stack(reward_list, axis=0),
         np.stack(score_list, axis=0),
         np.stack(terminated_list, axis=0),
