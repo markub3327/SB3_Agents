@@ -67,21 +67,8 @@ def rollout(vec_env, model, *, episode_length, n_stack, img_embed_model=None, ra
         if random:
             action = [vec_env.action_space.sample()] * vec_env.num_envs
         else:
-            # Get the policy distribution and extract logits
             obs_tensor = torch.as_tensor(obs).to(model.device)
-            with torch.no_grad():
-                # Get features from the policy network
-                features = model.policy.extract_features(obs_tensor)
-                latent_pi = model.policy.mlp_extractor.forward_actor(features)
-                logits = model.policy.action_net(latent_pi)
-                action_logits_list.append(logits.cpu().numpy())
-
-                if isinstance(action_space, spaces.Discrete):
-                    action = torch.argmax(logits, dim=-1).cpu().numpy()  # hard labels
-                elif isinstance(action_space, spaces.MultiBinary):
-                    action = Bernoulli(logits=logits).sample().cpu().numpy()
-                else:
-                    raise ValueError()
+            action, _ = model.predict(obs, deterministic=False)
 
         # Get state[t]
         state_list.append(rendered_img)
