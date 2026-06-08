@@ -136,11 +136,10 @@ def rollout(vec_env, model, *, episode_length, n_stack, img_embed_model=None, ra
 
         # Get terminated[t] (terminated for action taken)
         terminated_list.append(terminated)
-        for l in lives:
-            if l:
-                end_of_game = np.logical_and(terminated, (lives < 1))
-            else:
-                end_of_game = terminated
+        if lives:
+            end_of_game = np.logical_and(terminated, (lives < 1))
+        else:
+            end_of_game = terminated
 
         # Get truncated[t] (truncated for action taken)
         truncated_list.append(
