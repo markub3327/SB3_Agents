@@ -296,7 +296,6 @@ if __name__ == "__main__":
         (
             states,
             actions,
-            actions_logits,
             rewards,
             scores,
             terminated,
