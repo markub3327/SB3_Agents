@@ -332,12 +332,6 @@ if __name__ == "__main__":
                     env_id = shard // args.episode_length
                     idx = shard % args.episode_length
                     print(f"Generating dataset for shard {shard}, that repsersent env {env_id} at timestep {idx}")
-                    confidence = (
-                        softmax(actions_logits[idx][env_id], axis=-1)[
-                            ids_action_vocab[env_name][actions[idx][env_id]]
-                        ]
-                        * 100.0
-                    )
 
                     example = {
                         "messages": {
@@ -351,7 +345,6 @@ if __name__ == "__main__":
                             "truncated": truncated[idx][env_id],
                             "started": started[idx][env_id],
                             "img_embed": imgs_embed[idx][env_id],
-                            "confidence": confidence,
                             "reasoning": None,
                         },
                         "images": states[idx][env_id],
@@ -377,7 +370,6 @@ if __name__ == "__main__":
                             "terminated": Value("bool"),
                             "truncated": Value("bool"),
                             "started": Value("bool"),
-                            "confidence": Value("float32"),
                             "reasoning": Value("string"),
                             "step": Value("int64"),
                             "img_embed": Sequence(Sequence(Value("float32"))),

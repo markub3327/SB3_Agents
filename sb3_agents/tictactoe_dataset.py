@@ -54,14 +54,14 @@ def dataset_wrapper(game):
                         "terminated": sample["status"]["terminated"],
                         "truncated": sample["status"]["truncated"],
                         "started": sample["status"]["started"],
-                        "reasoning": sample["reasoning"],
                         "img_embed": None,
+                        "reasoning": sample["reasoning"],
                     },
                     "images": [render_tictactoe_board_to_image(
                         sample["state"], width=200, height=200
                     )],
                 }
-                print(example)
+                # print(example)
 
                 yield example
 
