@@ -223,8 +223,8 @@ if __name__ == "__main__":
     parser.add_argument(
         "--episode-length",
         type=int,
-        default=8192,
-        help="Maximum length of a rollout episode (default: 8192).",
+        default=1000,
+        help="Maximum length of a rollout episode (default: 1000).",
     )
     parser.add_argument(
         "--with-random",
@@ -319,10 +319,6 @@ if __name__ == "__main__":
                     idx = shard % args.episode_length
                     print(f"Generating dataset for shard {shard}, that repsersent env {env_id} at timestep {idx}")
 
-                    # Skip negative samples
-                    if rewards[idx][env_id] < 0:
-                        continue
-
                     example = {
                         "messages": {
                             "name": env_name,
@@ -399,83 +395,82 @@ if __name__ == "__main__":
                 f"./videos/{env_name}.mp4", fourcc, 60, (width, height)
             )
             for i in range(states.shape[0]):
-                if rewards[i, best_idx] >= 0:
-                    # Convert RGB to BGR for OpenCV
-                    bgr_frame = cv2.cvtColor(states[i, best_idx, -1], cv2.COLOR_RGB2BGR)
+                # Convert RGB to BGR for OpenCV
+                bgr_frame = cv2.cvtColor(states[i, best_idx, -1], cv2.COLOR_RGB2BGR)
 
-                    # Add text to the frame
-                    cv2.putText(
-                        bgr_frame,
-                        f"Action: {actions[i, best_idx]}",
-                        (10, 40),
-                        cv2.FONT_HERSHEY_SIMPLEX,
-                        0.3,
-                        (112, 128, 144),  # Color (BGR)
-                        1,
-                        cv2.LINE_AA,
-                    )
-                    cv2.putText(
-                        bgr_frame,
-                        f"Reward: {rewards[i, best_idx]}",
-                        (10, 50),
-                        cv2.FONT_HERSHEY_SIMPLEX,
-                        0.3,
-                        (112, 128, 144),  # Color (BGR)
-                        1,
-                        cv2.LINE_AA,
-                    )
-                    cv2.putText(
-                        bgr_frame,
-                        f"Score: {scores[i, best_idx]}",
-                        (10, 60),
-                        cv2.FONT_HERSHEY_SIMPLEX,
-                        0.3,
-                        (112, 128, 144),  # Color (BGR)
-                        1,
-                        cv2.LINE_AA,
-                    )
-                    cv2.putText(
-                        bgr_frame,
-                        f"Lives: {lives[i, best_idx]}",
-                        (10, 70),
-                        cv2.FONT_HERSHEY_SIMPLEX,
-                        0.3,
-                        (112, 128, 144),  # Color (BGR)
-                        1,
-                        cv2.LINE_AA,
-                    )
-                    cv2.putText(
-                        bgr_frame,
-                        f"Started: {started[i, best_idx]}",
-                        (10, 80),
-                        cv2.FONT_HERSHEY_SIMPLEX,
-                        0.3,
-                        (112, 128, 144),  # Color (BGR)
-                        1,
-                        cv2.LINE_AA,
-                    )
-                    cv2.putText(
-                        bgr_frame,
-                        f"Terminated: {terminated[i, best_idx]}",
-                        (10, 90),
-                        cv2.FONT_HERSHEY_SIMPLEX,
-                        0.3,
-                        (112, 128, 144),  # Color (BGR)
-                        1,
-                        cv2.LINE_AA,
-                    )
-                    cv2.putText(
-                        bgr_frame,
-                        f"Truncated: {truncated[i, best_idx]}",
-                        (10, 100),
-                        cv2.FONT_HERSHEY_SIMPLEX,
-                        0.3,
-                        (112, 128, 144),  # Color (BGR)
-                        1,
-                        cv2.LINE_AA,
-                    )
+                # Add text to the frame
+                cv2.putText(
+                    bgr_frame,
+                    f"Action: {actions[i, best_idx]}",
+                    (10, 40),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.3,
+                    (112, 128, 144),  # Color (BGR)
+                    1,
+                    cv2.LINE_AA,
+                )
+                cv2.putText(
+                    bgr_frame,
+                    f"Reward: {rewards[i, best_idx]}",
+                    (10, 50),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.3,
+                    (112, 128, 144),  # Color (BGR)
+                    1,
+                    cv2.LINE_AA,
+                )
+                cv2.putText(
+                    bgr_frame,
+                    f"Score: {scores[i, best_idx]}",
+                    (10, 60),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.3,
+                    (112, 128, 144),  # Color (BGR)
+                    1,
+                    cv2.LINE_AA,
+                )
+                cv2.putText(
+                    bgr_frame,
+                    f"Lives: {lives[i, best_idx]}",
+                    (10, 70),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.3,
+                    (112, 128, 144),  # Color (BGR)
+                    1,
+                    cv2.LINE_AA,
+                )
+                cv2.putText(
+                    bgr_frame,
+                    f"Started: {started[i, best_idx]}",
+                    (10, 80),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.3,
+                    (112, 128, 144),  # Color (BGR)
+                    1,
+                    cv2.LINE_AA,
+                )
+                cv2.putText(
+                    bgr_frame,
+                    f"Terminated: {terminated[i, best_idx]}",
+                    (10, 90),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.3,
+                    (112, 128, 144),  # Color (BGR)
+                    1,
+                    cv2.LINE_AA,
+                )
+                cv2.putText(
+                    bgr_frame,
+                    f"Truncated: {truncated[i, best_idx]}",
+                    (10, 100),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.3,
+                    (112, 128, 144),  # Color (BGR)
+                    1,
+                    cv2.LINE_AA,
+                )
 
-                    video.write(bgr_frame)
+                video.write(bgr_frame)
             video.release()
             print("Video recorded.")
 
