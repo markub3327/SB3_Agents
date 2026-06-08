@@ -17,11 +17,7 @@ from stable_baselines3 import PPO
 from stable_baselines3.common.atari_wrappers import MaxAndSkipEnv, WarpFrame
 from stable_baselines3.common.env_util import make_atari_env, make_vec_env
 from stable_baselines3.common.monitor import Monitor
-from stable_baselines3.common.vec_env import (
-    SubprocVecEnv,
-    VecFrameStack,
-    VecTransposeImage,
-)
+from stable_baselines3.common.vec_env import SubprocVecEnv
 from tqdm import tqdm
 from utils import ImageFilterForQueue, load_hyperparams, rollout, ids_action_vocab
 
@@ -35,12 +31,12 @@ gymnasium.register_envs(mars_explorer)
 
 # Optimized game list
 env_names = [
-    "AssaultNoFrameskip-v4",
-    "BreakoutNoFrameskip-v4",
-    "QbertNoFrameskip-v4",
-    "PhoenixNoFrameskip-v4",
-    "GopherNoFrameskip-v4",
-    "KungFuMasterNoFrameskip-v4",
+    # "AssaultNoFrameskip-v4",
+    # "BreakoutNoFrameskip-v4",
+    # "QbertNoFrameskip-v4",
+    # "PhoenixNoFrameskip-v4",
+    # "GopherNoFrameskip-v4",
+    # "KungFuMasterNoFrameskip-v4",
 
     "LunarLander-v3",
     "CartPole-v1",
@@ -264,12 +260,7 @@ if __name__ == "__main__":
             config = load_hyperparams("retro")
             # Create environment
             # Frame-stacking with 4 frames
-            vec_env = VecFrameStack(
-                SubprocVecEnv([make_retro_env(env_name)] * args.n_envs),
-                n_stack=config["frame_stack"]
-            )
-            vec_env = VecTransposeImage(vec_env)
-
+            vec_env = SubprocVecEnv([make_retro_env(env_name)] * args.n_envs)
         # Atari 2600
         elif "NoFrameskip" in env_name or "ALE" in env_name:
             # Load PPO configuration
@@ -281,17 +272,12 @@ if __name__ == "__main__":
                 seed=args.seed,
                 wrapper_kwargs={"clip_reward": False},
             )
-            # Frame-stacking with 4 frames
-            vec_env = VecFrameStack(vec_env, n_stack=config["frame_stack"])
-            vec_env = VecTransposeImage(vec_env)
         # Classic
         else:
             # Load PPO configuration
             config = load_hyperparams(env_name)
             # Create environment
             vec_env = make_vec_env(env_name, n_envs=args.n_envs, seed=args.seed)
-            if config["policy"] == "CnnPolicy":
-                vec_env = VecTransposeImage(vec_env)
 
         # Store env name on vec_env for later use (logging/saving).
         setattr(vec_env, "env_name", env_name)
