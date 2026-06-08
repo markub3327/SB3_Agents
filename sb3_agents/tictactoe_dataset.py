@@ -1,7 +1,9 @@
 import json
 import os
+import numpy as np
 from PIL import Image as PILImage, ImageDraw, ImageFont
 from datasets import Dataset, Features, Image as HFImage, Sequence, Value
+import cv2
 
 
 # TicTacToe dataset
@@ -57,9 +59,7 @@ def dataset_wrapper(game):
                         "img_embed": None,
                         "reasoning": sample["reasoning"],
                     },
-                    "images": [render_tictactoe_board_to_image(
-                        sample["state"], width=200, height=200
-                    )],
+                    "images": sample["img"],
                 }
                 # print(example)
 
@@ -71,6 +71,13 @@ def dataset_wrapper(game):
 for game in tictactoe["games"]:
     env_name = game["name"]
     print(env_name)
+
+    # Create states for all samples
+    width, height = 400, 400
+    for sample_group in game["samples"]:
+        for sample in sample_group["rollout"]:
+            img = render_tictactoe_board_to_image(sample["state"], width=width, height=height)
+            sample["img"] = np.asarray(img)
 
     # load datasets from folder
     shards = list(range(len(game["samples"])))
@@ -90,9 +97,9 @@ for game in tictactoe["games"]:
                     "truncated": Value("bool"),
                     "started": Value("bool"),
                     "reasoning": Value("string"),
-                    "img_embed": Sequence(Sequence(Value("float32"))),
+                    "img_embed": Sequence(Value("float32")),
                 },
-                "images": Sequence(HFImage()),
+                "images": HFImage(),
             }
         ),
         num_proc=cpus,
@@ -111,3 +118,86 @@ for game in tictactoe["games"]:
         os.path.join(ds_path, f"{env_name}"),
         num_proc=cpus,
     )
+
+    os.makedirs("./videos/", exist_ok=True)
+    fourcc = cv2.VideoWriter_fourcc(*"mp4v")
+    video = cv2.VideoWriter(
+        f"./videos/{env_name}.mp4", fourcc, 10, (width, height)
+    )
+    for samples in game["samples"]:
+        for sample in samples["rollout"]:
+            # Convert RGB to BGR for OpenCV
+            bgr_frame = cv2.cvtColor(sample["img"], cv2.COLOR_RGB2BGR)
+
+            action = sample["action"]
+            reward = sample["reward"]
+            score = sample["score"]
+            started = sample["status"]["started"]
+            terminated = sample["status"]["terminated"]
+            truncated = sample["status"]["truncated"]
+
+            # Add text to the frame
+            cv2.putText(
+                bgr_frame,
+                f"Action: {action}",
+                (10, 40),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.3,
+                (112, 128, 144),
+                1,
+                cv2.LINE_AA,
+            )
+            cv2.putText(
+                bgr_frame,
+                f"Reward: {reward}",
+                (10, 50),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.3,
+                (112, 128, 144),
+                1,
+                cv2.LINE_AA,
+            )
+            cv2.putText(
+                bgr_frame,
+                f"Score: {score}",
+                (10, 60),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.3,
+                (112, 128, 144),
+                1,
+                cv2.LINE_AA,
+            )
+            cv2.putText(
+                bgr_frame,
+                f"Started: {started}",
+                (10, 80),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.3,
+                (112, 128, 144),
+                1,
+                cv2.LINE_AA,
+            )
+            cv2.putText(
+                bgr_frame,
+                f"Terminated: {terminated}",
+                (10, 90),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.3,
+                (112, 128, 144),
+                1,
+                cv2.LINE_AA,
+            )
+            cv2.putText(
+                bgr_frame,
+                f"Truncated: {truncated}",
+                (10, 100),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.3,
+                (112, 128, 144),
+                1,
+                cv2.LINE_AA,
+            )
+
+            video.write(bgr_frame)
+    video.release()
+    print("Video recorded.")
