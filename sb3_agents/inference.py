@@ -357,9 +357,9 @@ if __name__ == "__main__":
                             "truncated": Value("bool"),
                             "started": Value("bool"),
                             "reasoning": Value("string"),
-                            "img_embed": Sequence(Value("float32")),
+                            "img_embed": Sequence(Sequence(Value("float32"))),
                         },
-                        "images": Image(),
+                        "images": Sequence(Image()),
                     }
                 ),
                 num_proc=cpus,
@@ -387,7 +387,7 @@ if __name__ == "__main__":
         # Recorder
         if args.save_video:
             best_idx = np.argmax(results_agent[env_name])
-            height, width, channels = states[0, best_idx].shape
+            height, width, channels = states[0, 0, best_idx].shape
             fourcc = cv2.VideoWriter_fourcc(*"mp4v")
             env_name = env_name.replace("ALE/", "")
             os.makedirs("./videos/", exist_ok=True)
@@ -396,7 +396,7 @@ if __name__ == "__main__":
             )
             for i in range(states.shape[0]):
                 # Convert RGB to BGR for OpenCV
-                bgr_frame = cv2.cvtColor(states[i, best_idx], cv2.COLOR_RGB2BGR)
+                bgr_frame = cv2.cvtColor(states[i, best_idx, -1], cv2.COLOR_RGB2BGR)
 
                 # Add text to the frame
                 cv2.putText(
