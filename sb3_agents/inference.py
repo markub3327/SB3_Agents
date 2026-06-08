@@ -245,12 +245,7 @@ if __name__ == "__main__":
         action="store_true",
         help="Record and save a video for the best-scoring environment instance to ./videos.",
     )
-    parser.add_argument(
-        "--window-size",
-        type=int,
-        default=4,
-        help="Fallback number of stacked frames when config does not define frame_stack.",
-    )
+
     args = parser.parse_args()
 
     if args.save_to_disk:
@@ -313,7 +308,6 @@ if __name__ == "__main__":
         )
 
         (
-            obs,
             states,
             actions,
             actions_logits,
@@ -324,12 +318,10 @@ if __name__ == "__main__":
             started,
             lives,
             imgs_embed,
-            steps,
         ) = rollout(
             vec_env,
             model,
             episode_length=args.episode_length,
-            n_stack=config["frame_stack"] if "frame_stack" in config else args.window_size,
             img_embed_model=img_filter,
             random=args.with_random,
         )
@@ -347,17 +339,10 @@ if __name__ == "__main__":
                         * 100.0
                     )
 
-                    if "CartPole" in env_name:
-                        state = f"State description: Cart Position = {obs[idx][env_id][0]:.3f}; Cart Velocity = {obs[idx][env_id][1]:.3f}; Pole Angle = {obs[idx][env_id][2]:.3f}; Pole Angular Velocity = {obs[idx][env_id][3]:.3f}."
-                    elif "LunarLander" in env_name:
-                        state = f"State: horizontal position = {obs[idx][env_id][0]:.3f}; vertical position = {obs[idx][env_id][1]:.3f}; horizontal speed = {obs[idx][env_id][2]:.3f}; vertical speed = {obs[idx][env_id][3]:.3f}; tilt angle = {obs[idx][env_id][4]:.3f}; rotation speed = {obs[idx][env_id][5]:.3f}; left leg touching ground = {obs[idx][env_id][6]:.3f}; right leg touching ground = {obs[idx][env_id][7]:.3f}."
-                    else:
-                        state = None
-
                     example = {
                         "messages": {
                             "name": env_name,
-                            "state": state,
+                            "state": None,
                             "action": actions[idx][env_id],
                             "reward": rewards[idx][env_id],
                             "score": scores[idx][env_id],
@@ -368,7 +353,6 @@ if __name__ == "__main__":
                             "img_embed": imgs_embed[idx][env_id],
                             "confidence": confidence,
                             "reasoning": None,
-                            "step": steps[idx][env_id],
                         },
                         "images": states[idx][env_id],
                     }
@@ -502,16 +486,6 @@ if __name__ == "__main__":
                     bgr_frame,
                     f"Truncated: {truncated[i, best_idx]}",
                     (10, 100),
-                    cv2.FONT_HERSHEY_SIMPLEX,
-                    0.3,
-                    (112, 128, 144),  # Color (BGR)
-                    1,
-                    cv2.LINE_AA,
-                )
-                cv2.putText(
-                    bgr_frame,
-                    f"Step: {steps[i, best_idx]}",
-                    (10, 110),
                     cv2.FONT_HERSHEY_SIMPLEX,
                     0.3,
                     (112, 128, 144),  # Color (BGR)
