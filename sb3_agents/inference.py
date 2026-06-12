@@ -20,7 +20,6 @@ from utils import ImageFilterForQueue, load_hyperparams
 from datasets import Dataset, Features, Value, Image, Sequence
 from gymnasium.spaces import Box
 
-from datasets import Dataset, Features, Image, Sequence, Value
 
 # Use a dummy audio driver
 os.environ["SDL_AUDIODRIVER"] = "dummy"
