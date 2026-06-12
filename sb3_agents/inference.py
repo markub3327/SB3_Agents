@@ -5,21 +5,20 @@ import argparse
 import os
 
 import ale_py
-import cv2
 import gymnasium
 import mars_explorer
 import numpy as np
-import pandas as pd
 import stable_retro as retro
-from scipy.special import softmax
-from gymnasium.wrappers import TimeLimit
 from stable_baselines3 import PPO
 from stable_baselines3.common.atari_wrappers import MaxAndSkipEnv, WarpFrame
+from stable_baselines3.common.vec_env.stacked_observations import StackedObservations
 from stable_baselines3.common.env_util import make_atari_env, make_vec_env
 from stable_baselines3.common.monitor import Monitor
 from stable_baselines3.common.vec_env import SubprocVecEnv
 from tqdm import tqdm
-from utils import ImageFilterForQueue, load_hyperparams, rollout, ids_action_vocab
+from utils import ImageFilterForQueue, load_hyperparams
+from datasets import Dataset, Features, Value, Image, Sequence
+from gymnasium.spaces import Box
 
 from datasets import Dataset, Features, Image, Sequence, Value
 
@@ -223,8 +222,8 @@ if __name__ == "__main__":
     parser.add_argument(
         "--episode-length",
         type=int,
-        default=1000,
-        help="Maximum length of a rollout episode (default: 1000).",
+        default=8192,
+        help="Maximum length of a rollout episode (default: 8192).",
     )
     parser.add_argument(
         "--with-random",
@@ -250,7 +249,6 @@ if __name__ == "__main__":
     else:
         img_filter = None
 
-    results_agent = {}
     for env_name in tqdm(env_names):
         print(f"Generating the dataset for {env_name} environment.")
 
@@ -286,61 +284,84 @@ if __name__ == "__main__":
         model = (
             PPO.load(
                 f"./save/{env_name}/best_model.zip",
-                env=vec_env,
                 custom_objects={"learning_rate": lambda _: 0.0, "_last_obs": None},
             )
             if not args.with_random
             else None
         )
 
-        (
-            states,
-            actions,
-            rewards,
-            scores,
-            terminated,
-            truncated,
-            started,
-            lives,
-            imgs_embed,
-        ) = rollout(
-            vec_env,
-            model,
-            n_stack=config["frame_stack"],
-            episode_length=args.episode_length,
-            img_embed_model=img_filter,
-            random=args.with_random,
+        state_list = []
+        action_list = []
+        reward_list = []
+        score_list = []
+        done_list = []
+
+        score = np.zeros((vec_env.num_envs,))
+        obs, _ = vec_env.reset()
+
+        rendered_img = vec_env.env_method("render")
+        stacked_obs = StackedObservations(
+            vec_env.num_envs,
+            config["frame_stack"],
+            Box(0, 255, rendered_img[0].shape, dtype=np.uint8),
         )
+        rendered_img = stacked_obs.reset(
+            np.asarray(rendered_img, dtype=np.uint8)
+        )
+
+        for i in range(1000):
+            action, _ = model.predict(obs, deterministic=True)
+            state_list.extend(rendered_img)
+            action_list.extend(action)
+            obs, reward, done, info = vec_env.step(action)
+            reward_list.extend(reward)
+            done_list.extend(done)
+            score_list.extend(score)
+            score += reward
+            print("action", action, "reward", reward, "score", score, "done", done, "info", info)
+
+            rendered_img = vec_env.env_method("render")
+            rendered_img, _ = stacked_obs.update(
+                np.asarray(rendered_img, dtype=np.uint8),
+                done,
+                # info
+                ([{}] * vec_env.num_envs)
+            )
+            rendered_img = np.stack(np.split(rendered_img, config["frame_stack"], axis=-1), axis=1)
+            print(rendered_img.shape)
+
+            # Reset score counter
+            finished = np.where(done)[0]
+            if len(finished) > 0:
+                print(f"Finished envs: {finished}")
+                score[finished] = 0
+
+        # Close envs
+        vec_env.close()
+
+        print(len(state_list), len(action_list), len(reward_list), len(done_list), len(score_list))
 
         if args.save_to_disk:
             def dataset_generator(shards):
                 for shard in shards:
-                    env_id = shard // args.episode_length
-                    idx = shard % args.episode_length
-                    print(f"Generating dataset for shard {shard}, that repsersent env {env_id} at timestep {idx}")
+                    print(f"Generating dataset for shard {shard}")
 
                     example = {
                         "messages": {
                             "name": env_name,
-                            "state": None,
-                            "action": actions[idx][env_id],
-                            "reward": rewards[idx][env_id],
-                            "score": scores[idx][env_id],
-                            "lives": lives[idx][env_id],
-                            "terminated": terminated[idx][env_id],
-                            "truncated": truncated[idx][env_id],
-                            "started": started[idx][env_id],
-                            "img_embed": imgs_embed[idx][env_id],
-                            "reasoning": None,
+                            "action": action_list[shard],
+                            "reward": reward_list[shard],
+                            "score": score_list[shard],
+                            "done": done_list[shard],
                         },
-                        "images": states[idx][env_id],
+                        "images": state_list[shard],
                     }
                     # print(example)
 
                     yield example
 
             # load datasets from folder
-            shards = list(range(args.n_envs * states.shape[0]))
+            shards = list(range(len(state_list)))
             cpus = os.cpu_count()
             dataset = Dataset.from_generator(
                 dataset_generator,
@@ -348,16 +369,10 @@ if __name__ == "__main__":
                     {
                         "messages": {
                             "name": Value("string"),
-                            "state": Value("string"),
-                            "action": Value("string"),
+                            "action": Value("int32"),
                             "reward": Value("float32"),
                             "score": Value("float32"),
-                            "lives": Value("int64"),
-                            "terminated": Value("bool"),
-                            "truncated": Value("bool"),
-                            "started": Value("bool"),
-                            "reasoning": Value("string"),
-                            "img_embed": Sequence(Sequence(Value("float32"))),
+                            "done": Value("bool"),
                         },
                         "images": Sequence(Image()),
                     }
@@ -376,108 +391,5 @@ if __name__ == "__main__":
             )
 
         # Shuffle the dataset once before saving
-        dataset = dataset.shuffle(seed=42)
-        print(f"Dataset shuffled with seed 42")
-
-        # Store the results
-        completed = np.logical_or(terminated, truncated)
-        max_scores = np.nanmax(np.where(completed, scores, np.nan), axis=0)
-        results_agent[env_name] = max_scores.tolist()
-
-        # Recorder
-        if args.save_video:
-            best_idx = np.argmax(results_agent[env_name])
-            height, width, channels = states[0, 0, best_idx].shape
-            fourcc = cv2.VideoWriter_fourcc(*"mp4v")
-            env_name = env_name.replace("ALE/", "")
-            os.makedirs("./videos/", exist_ok=True)
-            video = cv2.VideoWriter(
-                f"./videos/{env_name}.mp4", fourcc, 60, (width, height)
-            )
-            for i in range(states.shape[0]):
-                # Convert RGB to BGR for OpenCV
-                bgr_frame = cv2.cvtColor(states[i, best_idx, -1], cv2.COLOR_RGB2BGR)
-
-                # Add text to the frame
-                cv2.putText(
-                    bgr_frame,
-                    f"Action: {actions[i, best_idx]}",
-                    (10, 40),
-                    cv2.FONT_HERSHEY_SIMPLEX,
-                    0.3,
-                    (112, 128, 144),  # Color (BGR)
-                    1,
-                    cv2.LINE_AA,
-                )
-                cv2.putText(
-                    bgr_frame,
-                    f"Reward: {rewards[i, best_idx]}",
-                    (10, 50),
-                    cv2.FONT_HERSHEY_SIMPLEX,
-                    0.3,
-                    (112, 128, 144),  # Color (BGR)
-                    1,
-                    cv2.LINE_AA,
-                )
-                cv2.putText(
-                    bgr_frame,
-                    f"Score: {scores[i, best_idx]}",
-                    (10, 60),
-                    cv2.FONT_HERSHEY_SIMPLEX,
-                    0.3,
-                    (112, 128, 144),  # Color (BGR)
-                    1,
-                    cv2.LINE_AA,
-                )
-                cv2.putText(
-                    bgr_frame,
-                    f"Lives: {lives[i, best_idx]}",
-                    (10, 70),
-                    cv2.FONT_HERSHEY_SIMPLEX,
-                    0.3,
-                    (112, 128, 144),  # Color (BGR)
-                    1,
-                    cv2.LINE_AA,
-                )
-                cv2.putText(
-                    bgr_frame,
-                    f"Started: {started[i, best_idx]}",
-                    (10, 80),
-                    cv2.FONT_HERSHEY_SIMPLEX,
-                    0.3,
-                    (112, 128, 144),  # Color (BGR)
-                    1,
-                    cv2.LINE_AA,
-                )
-                cv2.putText(
-                    bgr_frame,
-                    f"Terminated: {terminated[i, best_idx]}",
-                    (10, 90),
-                    cv2.FONT_HERSHEY_SIMPLEX,
-                    0.3,
-                    (112, 128, 144),  # Color (BGR)
-                    1,
-                    cv2.LINE_AA,
-                )
-                cv2.putText(
-                    bgr_frame,
-                    f"Truncated: {truncated[i, best_idx]}",
-                    (10, 100),
-                    cv2.FONT_HERSHEY_SIMPLEX,
-                    0.3,
-                    (112, 128, 144),  # Color (BGR)
-                    1,
-                    cv2.LINE_AA,
-                )
-
-                video.write(bgr_frame)
-            video.release()
-            print("Video recorded.")
-
-        # Close envs
-        vec_env.close()
-
-    # Save to CSV file
-    print(results_agent)
-    df = pd.DataFrame(results_agent).T
-    df.to_csv("results.csv")
+        # dataset = dataset.shuffle(seed=42)
+        # print(f"Dataset shuffled with seed 42")
