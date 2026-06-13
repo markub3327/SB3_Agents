@@ -294,6 +294,7 @@ if __name__ == "__main__":
         reward_list = []
         score_list = []
         done_list = []
+        imgs_embed_list = []
 
         score = np.zeros((vec_env.num_envs,))
         obs, _ = vec_env.reset()
