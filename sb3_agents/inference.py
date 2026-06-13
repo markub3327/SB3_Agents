@@ -294,9 +294,11 @@ if __name__ == "__main__":
         reward_list = []
         score_list = []
         done_list = []
+        started_list = []
         imgs_embed_list = []
 
         score = np.zeros((vec_env.num_envs,))
+        started_list.extend(np.ones((vec_env.num_envs,), dtype=np.bool))
         obs, _ = vec_env.reset()
 
         rendered_img = vec_env.env_method("render")
@@ -308,10 +310,21 @@ if __name__ == "__main__":
         rendered_img = stacked_obs.reset(
             np.asarray(rendered_img, dtype=np.uint8)
         )
+        rendered_img = np.stack(np.split(rendered_img, config["frame_stack"], axis=-1), axis=1)
 
         for i in range(1000):
             action, _ = model.predict(obs, deterministic=True)
             state_list.extend(rendered_img)
+
+            if img_filter:
+                print("rendered_img", rendered_img.shape)
+                img_batch = rendered_img.reshape(-1, rendered_img.shape[2], rendered_img.shape[3], rendered_img.shape[4])
+                img_embed = img_filter.get_embedding(img_batch)
+                print("img_embed shape", img_embed.shape)
+                img_embed = np.stack(np.split(img_embed, vec_env.num_envs, axis=0), axis=0)
+                print("img_embed shape", img_embed.shape)
+                imgs_embed_list.extend(img_embed)
+
             action_list.extend(action)
             obs, reward, done, info = vec_env.step(action)
             reward_list.extend(reward)
@@ -336,10 +349,12 @@ if __name__ == "__main__":
                 print(f"Finished envs: {finished}")
                 score[finished] = 0
 
+            started_list.extend(done)
+
         # Close envs
         vec_env.close()
 
-        print(len(state_list), len(action_list), len(reward_list), len(done_list), len(score_list))
+        print(len(state_list), len(action_list), len(reward_list), len(done_list), len(score_list), started_list)
 
         if args.save_to_disk:
             def dataset_generator(shards):
@@ -353,6 +368,7 @@ if __name__ == "__main__":
                             "reward": reward_list[shard],
                             "score": score_list[shard],
                             "done": done_list[shard],
+                            "started": started_list[shard],
                         },
                         "images": state_list[shard],
                     }
@@ -373,6 +389,7 @@ if __name__ == "__main__":
                             "reward": Value("float32"),
                             "score": Value("float32"),
                             "done": Value("bool"),
+                            "started": Value("bool"),
                         },
                         "images": Sequence(Image()),
                     }
