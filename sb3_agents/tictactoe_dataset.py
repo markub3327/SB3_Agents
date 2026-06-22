@@ -52,11 +52,8 @@ def dataset_wrapper(game):
                         "action": sample["action"],
                         "reward": sample["reward"],
                         "score": sample["score"],
-                        "lives": None,
-                        "terminated": sample["status"]["terminated"],
-                        "truncated": sample["status"]["truncated"],
+                        "done": sample["status"]["terminated"],
                         "started": sample["status"]["started"],
-                        "img_embed": None,
                         "reasoning": sample["reasoning"],
                     },
                     "images": sample["img"],
@@ -92,12 +89,9 @@ for game in tictactoe["games"]:
                     "action": Value("string"),
                     "reward": Value("float32"),
                     "score": Value("float32"),
-                    "lives": Value("int64"),
-                    "terminated": Value("bool"),
-                    "truncated": Value("bool"),
+                    "done": Value("bool"),
                     "started": Value("bool"),
                     "reasoning": Value("string"),
-                    "img_embed": Sequence(Sequence(Value("float32"))),
                 },
                 "images": Sequence(HFImage()),
             }
@@ -134,7 +128,6 @@ for game in tictactoe["games"]:
             score = sample["score"]
             started = sample["status"]["started"]
             terminated = sample["status"]["terminated"]
-            truncated = sample["status"]["truncated"]
 
             # Add text to the frame
             cv2.putText(

@@ -24,7 +24,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": true
               }
             },
@@ -46,7 +45,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -68,7 +66,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -95,7 +92,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -117,7 +113,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -139,7 +134,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -161,7 +155,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -188,7 +181,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -210,7 +202,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -237,7 +228,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -259,7 +249,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -281,7 +270,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -303,7 +291,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -330,7 +317,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -352,7 +338,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -379,7 +364,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -401,7 +385,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -423,7 +406,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -445,7 +427,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -472,7 +453,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -494,7 +474,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -516,7 +495,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -538,7 +516,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -565,7 +542,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -587,7 +563,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -614,7 +589,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -636,7 +610,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -658,7 +631,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -685,7 +657,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -712,7 +683,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -739,7 +709,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -766,7 +735,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -788,7 +756,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -810,7 +777,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -837,7 +803,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -864,7 +829,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -891,7 +855,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -918,7 +881,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -945,7 +907,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -972,7 +933,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -999,7 +959,6 @@
       "score": 0,
       "status": {
         "terminated": true,
-        "truncated": false,
         "started": false
       }
     }
@@ -1032,7 +991,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": true
               }
             },
@@ -1054,7 +1012,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -1076,7 +1033,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -1103,7 +1059,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -1125,7 +1080,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -1147,7 +1101,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -1169,7 +1122,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -1196,7 +1148,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -1218,7 +1169,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -1245,7 +1195,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -1267,7 +1216,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -1289,7 +1237,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -1311,7 +1258,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -1338,7 +1284,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -1360,7 +1305,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -1387,7 +1331,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -1409,7 +1352,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -1431,7 +1373,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -1453,7 +1394,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -1480,7 +1420,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -1502,7 +1441,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -1524,7 +1462,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -1546,7 +1483,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -1573,7 +1509,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -1595,7 +1530,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -1622,7 +1556,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -1644,7 +1577,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -1666,7 +1598,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -1693,7 +1624,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -1720,7 +1650,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -1747,7 +1676,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -1774,7 +1702,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -1796,7 +1723,6 @@
               "score": 0,
               "status": {
                 "terminated": false,
-                "truncated": false,
                 "started": false
               }
             },
@@ -1818,7 +1744,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -1845,7 +1770,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -1872,7 +1796,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -1899,7 +1822,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -1926,7 +1848,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -1953,7 +1874,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
@@ -1980,7 +1900,6 @@
               "score": 0,
               "status": {
                 "terminated": true,
-                "truncated": false,
                 "started": false
               }
             }
