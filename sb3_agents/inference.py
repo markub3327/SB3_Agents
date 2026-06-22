@@ -14,11 +14,12 @@ from stable_baselines3.common.atari_wrappers import MaxAndSkipEnv, WarpFrame
 from stable_baselines3.common.vec_env.stacked_observations import StackedObservations
 from stable_baselines3.common.env_util import make_atari_env, make_vec_env
 from stable_baselines3.common.monitor import Monitor
-from stable_baselines3.common.vec_env import SubprocVecEnv
+from stable_baselines3.common.vec_env import SubprocVecEnv, VecFrameStack, VecTransposeImage
 from tqdm import tqdm
 from utils import ImageFilterForQueue, load_hyperparams
 from datasets import Dataset, Features, Value, Image, Sequence
 from gymnasium.spaces import Box
+from vocab import ids_action_vocab
 
 
 # Use a dummy audio driver
@@ -29,12 +30,12 @@ gymnasium.register_envs(mars_explorer)
 
 # Optimized game list
 env_names = [
-    # "AssaultNoFrameskip-v4",
-    # "BreakoutNoFrameskip-v4",
-    # "QbertNoFrameskip-v4",
-    # "PhoenixNoFrameskip-v4",
-    # "GopherNoFrameskip-v4",
-    # "KungFuMasterNoFrameskip-v4",
+    "AssaultNoFrameskip-v4",
+    "BreakoutNoFrameskip-v4",
+    "QbertNoFrameskip-v4",
+    "PhoenixNoFrameskip-v4",
+    "GopherNoFrameskip-v4",
+    "KungFuMasterNoFrameskip-v4",
 
     "LunarLander-v3",
     "CartPole-v1",
@@ -269,6 +270,8 @@ if __name__ == "__main__":
                 seed=args.seed,
                 wrapper_kwargs={"clip_reward": False},
             )
+            vec_env = VecFrameStack(vec_env, n_stack=config["frame_stack"])
+            vec_env = VecTransposeImage(vec_env)
         # Classic
         else:
             # Load PPO configuration
@@ -325,7 +328,7 @@ if __name__ == "__main__":
                 print("img_embed shape", img_embed.shape)
                 imgs_embed_list.extend(img_embed)
 
-            action_list.extend(action)
+            action_list.extend([ids_action_vocab[env_name].inverse[a]] for a in action)
             obs, reward, done, info = vec_env.step(action)
             reward_list.extend(reward)
             done_list.extend(done)
@@ -364,11 +367,13 @@ if __name__ == "__main__":
                     example = {
                         "messages": {
                             "name": env_name,
+                            "state": None,
                             "action": action_list[shard],
                             "reward": reward_list[shard],
                             "score": score_list[shard],
                             "done": done_list[shard],
                             "started": started_list[shard],
+                            "reasoning": None
                         },
                         "images": state_list[shard],
                     }
@@ -385,11 +390,13 @@ if __name__ == "__main__":
                     {
                         "messages": {
                             "name": Value("string"),
-                            "action": Value("int32"),
+                            "state": Value("string"),
+                            "action": Value("string"),
                             "reward": Value("float32"),
                             "score": Value("float32"),
                             "done": Value("bool"),
                             "started": Value("bool"),
+                            "reasoning": Value("string"),
                         },
                         "images": Sequence(Image()),
                     }
@@ -399,6 +406,10 @@ if __name__ == "__main__":
             )
             print("Total samples:", len(dataset))
 
+            # Shuffle the dataset once before saving
+            dataset = dataset.shuffle(seed=42)
+            print(f"Dataset shuffled with seed 42")
+
             # Save the dataset
             ds_path = "/mnt/data/home/makuke637/SB3_Agents/dataset"
             os.makedirs(ds_path, exist_ok=True)
@@ -406,7 +417,3 @@ if __name__ == "__main__":
                 os.path.join(ds_path, f"{env_name}"),
                 num_proc=cpus,
             )
-
-        # Shuffle the dataset once before saving
-        # dataset = dataset.shuffle(seed=42)
-        # print(f"Dataset shuffled with seed 42")
