@@ -180,16 +180,6 @@ for game in tictactoe["games"]:
                 1,
                 cv2.LINE_AA,
             )
-            cv2.putText(
-                bgr_frame,
-                f"Truncated: {truncated}",
-                (10, 100),
-                cv2.FONT_HERSHEY_SIMPLEX,
-                0.3,
-                (112, 128, 144),
-                1,
-                cv2.LINE_AA,
-            )
 
             video.write(bgr_frame)
     video.release()
