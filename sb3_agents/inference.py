@@ -3,7 +3,7 @@
 
 import argparse
 import os
-
+import cv2
 import ale_py
 import gymnasium
 import mars_explorer
@@ -252,6 +252,13 @@ if __name__ == "__main__":
     for env_name in tqdm(env_names):
         print(f"Generating the dataset for {env_name} environment.")
 
+        video_out = cv2.VideoWriter(
+            os.path.join("./videos/", f"{env_name}.mp4"),
+            cv2.VideoWriter_fourcc(*"mp4v"),
+            30,
+            (400, 400),
+        )
+
         # Stable Retro
         if "-Genesis" in env_name or "-Nes" in env_name or "-Snes" in env_name:
             # Load PPO configuration
@@ -315,7 +322,7 @@ if __name__ == "__main__":
         )
         rendered_img = np.stack(np.split(rendered_img, config["frame_stack"], axis=-1), axis=1)
 
-        for i in range(1000):
+        for i in range(args.episode_length):
             action, _ = model.predict(obs, deterministic=True)
             state_list.extend(rendered_img)
 
@@ -328,6 +335,8 @@ if __name__ == "__main__":
                 print("img_embed shape", img_embed.shape)
                 imgs_embed_list.extend(img_embed)
 
+            frame = cv2.resize(rendered_img[0, -1], (400, 400))
+            video_out.write(cv2.cvtColor(frame, cv2.COLOR_RGB2BGR))
             action_list.extend([ids_action_vocab[env_name].inverse[a]] for a in action)
             obs, reward, done, info = vec_env.step(action)
             reward_list.extend(reward)
@@ -356,6 +365,7 @@ if __name__ == "__main__":
 
         # Close envs
         vec_env.close()
+        video_out.release()
 
         print(len(state_list), len(action_list), len(reward_list), len(done_list), len(score_list), started_list)
 
