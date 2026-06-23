@@ -341,6 +341,7 @@ if __name__ == "__main__":
             reward_list.extend(reward)
             done_list.extend(done)
             score_list.extend(score)
+            score += reward
             print("action", action, "reward", reward, "score", score, "done", done, "info", info)
 
             print(rendered_img.shape)
