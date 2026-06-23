@@ -302,12 +302,10 @@ if __name__ == "__main__":
         state_list = []
         action_list = []
         reward_list = []
-        score_list = []
         done_list = []
         started_list = []
         imgs_embed_list = []
 
-        score = np.zeros((vec_env.num_envs,))
         started_list.extend(np.ones((vec_env.num_envs,), dtype=np.bool))
         obs, _ = vec_env.reset()
 
@@ -340,9 +338,7 @@ if __name__ == "__main__":
             action_list.extend(action)
             reward_list.extend(reward)
             done_list.extend(done)
-            score_list.extend(score)
-            score += reward
-            print("action", action, "reward", reward, "score", score, "done", done, "info", info)
+            print("action", action, "reward", reward, "done", done, "info", info)
 
             print(rendered_img.shape)
             for k in range(vec_env.num_envs):
@@ -363,16 +359,6 @@ if __name__ == "__main__":
                         frame,
                         f"Reward: {reward}",
                         (10, 50),
-                        cv2.FONT_HERSHEY_SIMPLEX,
-                        0.2,
-                        (112, 128, 144),
-                        1,
-                        cv2.LINE_AA,
-                    )
-                    cv2.putText(
-                        frame,
-                        f"Score: {score}",
-                        (10, 60),
                         cv2.FONT_HERSHEY_SIMPLEX,
                         0.2,
                         (112, 128, 144),
@@ -431,19 +417,13 @@ if __name__ == "__main__":
             rendered_img = np.stack(np.split(rendered_img, config["frame_stack"], axis=-1), axis=1)
             print(rendered_img.shape)
 
-            # Reset score counter
-            finished = np.where(done)[0]
-            if len(finished) > 0:
-                print(f"Finished envs: {finished}")
-                score[finished] = 0
-
             started_list.extend(done)
 
         # Close envs
         vec_env.close()
         video_out.release()
 
-        print(len(state_list), len(action_list), len(reward_list), len(done_list), len(score_list), started_list)
+        print(len(state_list), len(action_list), len(reward_list), len(done_list), started_list)
 
         if args.save_to_disk:
             def dataset_generator(shards):
@@ -456,7 +436,6 @@ if __name__ == "__main__":
                             "state": None,
                             "action": action_list[shard],
                             "reward": reward_list[shard],
-                            "score": score_list[shard],
                             "done": done_list[shard],
                             "started": started_list[shard],
                             "reasoning": None
@@ -479,7 +458,6 @@ if __name__ == "__main__":
                             "state": Value("string"),
                             "action": Value("string"),
                             "reward": Value("float32"),
-                            "score": Value("float32"),
                             "done": Value("bool"),
                             "started": Value("bool"),
                             "reasoning": Value("string"),
