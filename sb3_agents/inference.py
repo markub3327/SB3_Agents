@@ -222,7 +222,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--episode-length",
         type=int,
-        default=2048,
+        default=8192,
         help="Maximum length of a rollout episode (default: 8192).",
     )
     parser.add_argument(
@@ -306,7 +306,7 @@ if __name__ == "__main__":
         started_list = []
         imgs_embed_list = []
 
-        started_list.extend(np.ones((vec_env.num_envs,), dtype=np.bool))
+        started_list.append(np.ones((vec_env.num_envs,), dtype=np.bool))
         obs, _ = vec_env.reset()
 
         rendered_img = vec_env.env_method("render")
@@ -321,7 +321,7 @@ if __name__ == "__main__":
         rendered_img = np.stack(np.split(rendered_img, config["frame_stack"], axis=-1), axis=1)
 
         for i in range(args.episode_length):
-            state_list.extend(rendered_img)
+            state_list.append(rendered_img)
 
             if img_filter:
                 print("rendered_img", rendered_img.shape)
@@ -330,7 +330,7 @@ if __name__ == "__main__":
                 print("img_embed shape", img_embed.shape)
                 img_embed = np.stack(np.split(img_embed, vec_env.num_envs, axis=0), axis=0)
                 print("img_embed shape", img_embed.shape)
-                imgs_embed_list.extend(img_embed)
+                imgs_embed_list.append(img_embed)
 
             # Predict action
             action, _ = model.predict(obs, deterministic=True)
@@ -339,79 +339,79 @@ if __name__ == "__main__":
             obs, reward, done, info = vec_env.step(action)
 
             # Information
-            action_name = [[ids_action_vocab[env_name].inverse[a]] for a in action]
-            action_list.extend(action_name)
+            action_name = [ids_action_vocab[env_name].inverse[a] for a in action]
+            action_list.append(action_name)
             reward = np.round(reward, 2)
-            reward_list.extend(reward)
-            done_list.extend(done)
+            reward_list.append(reward)
+            done_list.append(done)
             print("action", action_name, "reward", reward, "done", done)
 
-            print(rendered_img.shape)
-            for k in range(vec_env.num_envs):
-                for j, img in enumerate([rendered_img[k][-1]]):
-                    frame = cv2.resize(img, (200, 200))
-                    # Add text to the frame
-                    cv2.putText(
-                        frame,
-                        f"Action: {action_name}",
-                        (10, 40),
-                        cv2.FONT_HERSHEY_SIMPLEX,
-                        0.2,
-                        (112, 128, 144),
-                        1,
-                        cv2.LINE_AA,
-                    )
-                    cv2.putText(
-                        frame,
-                        f"Reward: {reward}",
-                        (10, 50),
-                        cv2.FONT_HERSHEY_SIMPLEX,
-                        0.2,
-                        (112, 128, 144),
-                        1,
-                        cv2.LINE_AA,
-                    )
-                    cv2.putText(
-                        frame,
-                        f"Terminated: {done}",
-                        (10, 80),
-                        cv2.FONT_HERSHEY_SIMPLEX,
-                        0.2,
-                        (112, 128, 144),
-                        1,
-                        cv2.LINE_AA,
-                    )
-                    cv2.putText(
-                        frame,
-                        f"Started: {started_list[-vec_env.num_envs:]}",
-                        (10, 90),
-                        cv2.FONT_HERSHEY_SIMPLEX,
-                        0.2,
-                        (112, 128, 144),
-                        1,
-                        cv2.LINE_AA,
-                    )
-                    cv2.putText(
-                        frame,
-                        f"Frame ID: {j}",
-                        (10, 100),
-                        cv2.FONT_HERSHEY_SIMPLEX,
-                        0.2,
-                        (112, 128, 144),
-                        1,
-                        cv2.LINE_AA,
-                    )
-                    cv2.putText(
-                        frame,
-                        f"Env ID: {k}",
-                        (10, 110),
-                        cv2.FONT_HERSHEY_SIMPLEX,
-                        0.2,
-                        (112, 128, 144),
-                        1,
-                        cv2.LINE_AA,
-                    )
-                    video_out.write(cv2.cvtColor(frame, cv2.COLOR_RGB2BGR))
+            # print(rendered_img.shape)
+            # for k in range(vec_env.num_envs):
+            #     for j, img in enumerate([rendered_img[k][-1]]):
+            #         frame = cv2.resize(img, (200, 200))
+            #         # Add text to the frame
+            #         cv2.putText(
+            #             frame,
+            #             f"Action: {action_name}",
+            #             (10, 40),
+            #             cv2.FONT_HERSHEY_SIMPLEX,
+            #             0.2,
+            #             (112, 128, 144),
+            #             1,
+            #             cv2.LINE_AA,
+            #         )
+            #         cv2.putText(
+            #             frame,
+            #             f"Reward: {reward}",
+            #             (10, 50),
+            #             cv2.FONT_HERSHEY_SIMPLEX,
+            #             0.2,
+            #             (112, 128, 144),
+            #             1,
+            #             cv2.LINE_AA,
+            #         )
+            #         cv2.putText(
+            #             frame,
+            #             f"Terminated: {done}",
+            #             (10, 80),
+            #             cv2.FONT_HERSHEY_SIMPLEX,
+            #             0.2,
+            #             (112, 128, 144),
+            #             1,
+            #             cv2.LINE_AA,
+            #         )
+            #         cv2.putText(
+            #             frame,
+            #             f"Started: {started_list[-vec_env.num_envs:]}",
+            #             (10, 90),
+            #             cv2.FONT_HERSHEY_SIMPLEX,
+            #             0.2,
+            #             (112, 128, 144),
+            #             1,
+            #             cv2.LINE_AA,
+            #         )
+            #         cv2.putText(
+            #             frame,
+            #             f"Frame ID: {j}",
+            #             (10, 100),
+            #             cv2.FONT_HERSHEY_SIMPLEX,
+            #             0.2,
+            #             (112, 128, 144),
+            #             1,
+            #             cv2.LINE_AA,
+            #         )
+            #         cv2.putText(
+            #             frame,
+            #             f"Env ID: {k}",
+            #             (10, 110),
+            #             cv2.FONT_HERSHEY_SIMPLEX,
+            #             0.2,
+            #             (112, 128, 144),
+            #             1,
+            #             cv2.LINE_AA,
+            #         )
+            #         video_out.write(cv2.cvtColor(frame, cv2.COLOR_RGB2BGR))
 
             # Update image
             rendered_img = vec_env.env_method("render")
@@ -425,7 +425,7 @@ if __name__ == "__main__":
             print(rendered_img.shape)
 
             # Update started
-            started_list.extend(done)
+            started_list.append(done)
 
         # Close envs
         vec_env.close()
@@ -436,23 +436,26 @@ if __name__ == "__main__":
         if args.save_to_disk:
             def dataset_generator(shards):
                 for shard in shards:
-                    print(f"Generating dataset for shard {shard}")
+                    for i in range(args.n_envs):
+                        print(f"Generating dataset for shard {shard}, env {i}")
 
-                    example = {
-                        "messages": {
-                            "name": env_name,
-                            "state": None,
-                            "action": action_list[shard],
-                            "reward": reward_list[shard],
-                            "done": done_list[shard],
-                            "started": started_list[shard],
-                            "reasoning": None
-                        },
-                        "images": state_list[shard],
-                    }
-                    # print(example)
+                        example = {
+                            "messages": {
+                                "name": env_name,
+                                "state": None,
+                                "action": action_list[shard][i],
+                                "reward": reward_list[shard][i],
+                                "done": done_list[shard][i],
+                                "started": started_list[shard][i],
+                                "reasoning": None
+                            },
+                            "images": state_list[shard][i],
+                        }
+                        # print(type(env_name), type(state_list[shard]), type(action_list[shard]), type(reward_list[shard]),
+                        #       type(done_list[shard]), type(started_list[shard]))
+                        # print(example)
 
-                    yield example
+                        yield example
 
             # load datasets from folder
             shards = list(range(len(state_list)))
@@ -477,10 +480,6 @@ if __name__ == "__main__":
                 gen_kwargs={"shards": shards},
             )
             print("Total samples:", len(dataset))
-
-            # Shuffle the dataset once before saving
-            dataset = dataset.shuffle(seed=42)
-            print(f"Dataset shuffled with seed 42")
 
             # Save the dataset
             ds_path = "/mnt/data/home/makuke637/SB3_Agents/dataset"
