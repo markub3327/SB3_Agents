@@ -62,16 +62,6 @@ for i in range(0, len(dataset), 7):
         )
         cv2.putText(
             frame,
-            f"Score: {data['messages']['score']}",
-            (10, 60),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.3,
-            (112, 128, 144),
-            1,
-            cv2.LINE_AA,
-        )
-        cv2.putText(
-            frame,
             f"Started: {data['messages']['started']}",
             (10, 70),
             cv2.FONT_HERSHEY_SIMPLEX,
