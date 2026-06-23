@@ -123,7 +123,6 @@ for game in tictactoe["games"]:
 
             action = sample["action"]
             reward = sample["reward"]
-            score = sample["score"]
             started = sample["status"]["started"]
             terminated = sample["status"]["terminated"]
 
@@ -142,16 +141,6 @@ for game in tictactoe["games"]:
                 bgr_frame,
                 f"Reward: {reward}",
                 (10, 50),
-                cv2.FONT_HERSHEY_SIMPLEX,
-                0.3,
-                (112, 128, 144),
-                1,
-                cv2.LINE_AA,
-            )
-            cv2.putText(
-                bgr_frame,
-                f"Score: {score}",
-                (10, 60),
                 cv2.FONT_HERSHEY_SIMPLEX,
                 0.3,
                 (112, 128, 144),
