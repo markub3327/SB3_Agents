@@ -335,13 +335,16 @@ if __name__ == "__main__":
             # Predict action
             action, _ = model.predict(obs, deterministic=True)
 
+            # Make step
             obs, reward, done, info = vec_env.step(action)
-            action = [[ids_action_vocab[env_name].inverse[a]] for a in action]
-            action_list.extend(action)
+
+            # Information
+            action_name = [[ids_action_vocab[env_name].inverse[a]] for a in action]
+            action_list.extend(action_name)
             reward = np.round(reward, 2)
             reward_list.extend(reward)
             done_list.extend(done)
-            print("action", action, "reward", reward, "done", done, "info", info)
+            print("action", action_name, "reward", reward, "done", done)
 
             print(rendered_img.shape)
             for k in range(vec_env.num_envs):
@@ -350,7 +353,7 @@ if __name__ == "__main__":
                     # Add text to the frame
                     cv2.putText(
                         frame,
-                        f"Action: {action}",
+                        f"Action: {action_name}",
                         (10, 40),
                         cv2.FONT_HERSHEY_SIMPLEX,
                         0.2,
@@ -410,6 +413,7 @@ if __name__ == "__main__":
                     )
                     video_out.write(cv2.cvtColor(frame, cv2.COLOR_RGB2BGR))
 
+            # Update image
             rendered_img = vec_env.env_method("render")
             rendered_img, _ = stacked_obs.update(
                 np.asarray(rendered_img, dtype=np.uint8),
