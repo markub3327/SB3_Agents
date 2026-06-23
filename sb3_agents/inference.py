@@ -210,7 +210,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--n-envs",
         type=int,
-        default=4,
+        default=8,
         help="Number of parallel environments to run (default: 4).",
     )
     parser.add_argument(
@@ -222,7 +222,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--episode-length",
         type=int,
-        default=8192,
+        default=2048,
         help="Maximum length of a rollout episode (default: 8192).",
     )
     parser.add_argument(
@@ -348,7 +348,7 @@ if __name__ == "__main__":
 
             print(rendered_img.shape)
             for k in range(vec_env.num_envs):
-                for j, img in enumerate(rendered_img[k]):
+                for j, img in enumerate([rendered_img[k][-1]]):
                     frame = cv2.resize(img, (200, 200))
                     # Add text to the frame
                     cv2.putText(
