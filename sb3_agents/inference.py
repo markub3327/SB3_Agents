@@ -321,7 +321,6 @@ if __name__ == "__main__":
         rendered_img = np.stack(np.split(rendered_img, config["frame_stack"], axis=-1), axis=1)
 
         for i in range(args.episode_length):
-            action, _ = model.predict(obs, deterministic=True)
             state_list.extend(rendered_img)
 
             if img_filter:
@@ -333,9 +332,12 @@ if __name__ == "__main__":
                 print("img_embed shape", img_embed.shape)
                 imgs_embed_list.extend(img_embed)
 
+            # Predict action
+            action, _ = model.predict(obs, deterministic=True)
+            action_list.extend(action)
+
             obs, reward, done, info = vec_env.step(action)
             action = [[ids_action_vocab[env_name].inverse[a]] for a in action]
-            action_list.extend(action)
             reward_list.extend(reward)
             done_list.extend(done)
             print("action", action, "reward", reward, "done", done, "info", info)
@@ -417,6 +419,7 @@ if __name__ == "__main__":
             rendered_img = np.stack(np.split(rendered_img, config["frame_stack"], axis=-1), axis=1)
             print(rendered_img.shape)
 
+            # Update started
             started_list.extend(done)
 
         # Close envs
