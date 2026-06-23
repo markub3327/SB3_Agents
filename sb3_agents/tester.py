@@ -11,7 +11,6 @@ dataset_paths = list_leaf_dirs("/mnt/data/home/makuke637/SB3_Agents/dataset/")
 print(f"Dataset paths: {dataset_paths}")
 dataset = interleave_datasets(
     datasets=[load_from_disk(path) for path in dataset_paths],
-    seed=42,
     stopping_strategy="all_exhausted",
 )
 print(f"Dataset examples: {len(dataset)}")
@@ -110,8 +109,6 @@ for i in range(0, len(dataset), 7):
             1,
             cv2.LINE_AA,
         )
-
-
         video_out.write(cv2.cvtColor(frame, cv2.COLOR_RGB2BGR))
 
 
