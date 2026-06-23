@@ -321,15 +321,16 @@ if __name__ == "__main__":
         rendered_img = np.stack(np.split(rendered_img, config["frame_stack"], axis=-1), axis=1)
 
         for i in range(args.episode_length):
-            state_list.append(rendered_img)
+            print(f"Step {i}")
 
+            state_list.append(rendered_img)
             if img_filter:
-                print("rendered_img", rendered_img.shape)
+                # print("rendered_img", rendered_img.shape)
                 img_batch = rendered_img.reshape(-1, rendered_img.shape[2], rendered_img.shape[3], rendered_img.shape[4])
                 img_embed = img_filter.get_embedding(img_batch)
-                print("img_embed shape", img_embed.shape)
+                # print("img_embed shape", img_embed.shape)
                 img_embed = np.stack(np.split(img_embed, vec_env.num_envs, axis=0), axis=0)
-                print("img_embed shape", img_embed.shape)
+                # print("img_embed shape", img_embed.shape)
                 imgs_embed_list.append(img_embed)
 
             # Predict action
@@ -422,7 +423,7 @@ if __name__ == "__main__":
                 ([{}] * vec_env.num_envs)
             )
             rendered_img = np.stack(np.split(rendered_img, config["frame_stack"], axis=-1), axis=1)
-            print(rendered_img.shape)
+            # print(rendered_img.shape)
 
             # Update started
             started_list.append(done)
