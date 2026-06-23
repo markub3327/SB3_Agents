@@ -1,4 +1,5 @@
 import numpy as np
+import os
 import torch
 import yaml
 from gymnasium import spaces
@@ -39,3 +40,11 @@ def load_hyperparams(env_name, file_path="./sb3_agents/hyperparams.yml"):
         raise ValueError(f"Environment '{env_name}' not found in hyperparameters list")
 
     return all_params[env_name]
+
+
+def list_leaf_dirs(base_path):
+    result = []
+    for root, dirs, files in os.walk(base_path):
+        if not dirs:
+            result.append(root)
+    return sorted(result)
