@@ -334,7 +334,6 @@ if __name__ == "__main__":
 
             # Predict action
             action, _ = model.predict(obs, deterministic=True)
-            action_list.extend(action)
 
             obs, reward, done, info = vec_env.step(action)
             action = [[ids_action_vocab[env_name].inverse[a]] for a in action]
