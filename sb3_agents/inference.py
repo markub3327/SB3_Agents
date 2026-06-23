@@ -338,6 +338,8 @@ if __name__ == "__main__":
 
             obs, reward, done, info = vec_env.step(action)
             action = [[ids_action_vocab[env_name].inverse[a]] for a in action]
+            action_list.extend(action)
+            reward = np.round(reward, 2)
             reward_list.extend(reward)
             done_list.extend(done)
             print("action", action, "reward", reward, "done", done, "info", info)
