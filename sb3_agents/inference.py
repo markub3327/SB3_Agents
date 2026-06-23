@@ -335,15 +335,90 @@ if __name__ == "__main__":
                 print("img_embed shape", img_embed.shape)
                 imgs_embed_list.extend(img_embed)
 
-            frame = cv2.resize(rendered_img[0, -1], (400, 400))
-            video_out.write(cv2.cvtColor(frame, cv2.COLOR_RGB2BGR))
-            action_list.extend([ids_action_vocab[env_name].inverse[a]] for a in action)
             obs, reward, done, info = vec_env.step(action)
+            action = [[ids_action_vocab[env_name].inverse[a]] for a in action]
+            action_list.extend(action)
             reward_list.extend(reward)
             done_list.extend(done)
             score_list.extend(score)
-            score += reward
             print("action", action, "reward", reward, "score", score, "done", done, "info", info)
+
+            print(rendered_img.shape)
+            for k in range(vec_env.num_envs):
+                for j, img in enumerate(rendered_img[k]):
+                    frame = cv2.resize(img, (200, 200))
+                    # Add text to the frame
+                    cv2.putText(
+                        frame,
+                        f"Action: {action}",
+                        (10, 40),
+                        cv2.FONT_HERSHEY_SIMPLEX,
+                        0.3,
+                        (112, 128, 144),
+                        1,
+                        cv2.LINE_AA,
+                    )
+                    cv2.putText(
+                        frame,
+                        f"Reward: {reward}",
+                        (10, 50),
+                        cv2.FONT_HERSHEY_SIMPLEX,
+                        0.3,
+                        (112, 128, 144),
+                        1,
+                        cv2.LINE_AA,
+                    )
+                    cv2.putText(
+                        frame,
+                        f"Score: {score}",
+                        (10, 60),
+                        cv2.FONT_HERSHEY_SIMPLEX,
+                        0.3,
+                        (112, 128, 144),
+                        1,
+                        cv2.LINE_AA,
+                    )
+                    cv2.putText(
+                        frame,
+                        f"Terminated: {done}",
+                        (10, 80),
+                        cv2.FONT_HERSHEY_SIMPLEX,
+                        0.3,
+                        (112, 128, 144),
+                        1,
+                        cv2.LINE_AA,
+                    )
+                    cv2.putText(
+                        frame,
+                        f"Started: {started_list}",
+                        (10, 90),
+                        cv2.FONT_HERSHEY_SIMPLEX,
+                        0.3,
+                        (112, 128, 144),
+                        1,
+                        cv2.LINE_AA,
+                    )
+                    cv2.putText(
+                        frame,
+                        f"Frame ID: {j}",
+                        (10, 100),
+                        cv2.FONT_HERSHEY_SIMPLEX,
+                        0.3,
+                        (112, 128, 144),
+                        1,
+                        cv2.LINE_AA,
+                    )
+                    cv2.putText(
+                        frame,
+                        f"Env ID: {k}",
+                        (10, 100),
+                        cv2.FONT_HERSHEY_SIMPLEX,
+                        0.3,
+                        (112, 128, 144),
+                        1,
+                        cv2.LINE_AA,
+                    )
+                    video_out.write(cv2.cvtColor(frame, cv2.COLOR_RGB2BGR))
 
             rendered_img = vec_env.env_method("render")
             rendered_img, _ = stacked_obs.update(
