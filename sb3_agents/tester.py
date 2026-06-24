@@ -30,7 +30,7 @@ video_out = cv2.VideoWriter(
     (400, 400),
 )
 
-for i in range(0, len(dataset), 7):
+for i in range(0, len(dataset)):
     data = dataset[i]
     print(f"Processing sample {i+1}...")
 
