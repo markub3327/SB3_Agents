@@ -348,7 +348,6 @@ if __name__ == "__main__":
             action_name = [ids_action_vocab[env_name].inverse[a] for a in action]
             action_history.append(action_name)
             action_list.append(np.transpose(np.asarray(action_history), (1, 0)))
-            reward = np.round(reward, 2)
             reward_list.append(reward)
             done_list.append(done)
             print("action", action_history, "reward", reward, "done", done)
