@@ -49,7 +49,7 @@ def dataset_wrapper(game):
                     "messages": {
                         "name": env_name,
                         "state": '\n'.join(sample["state"]),
-                        "action": sample["action"],
+                        "action": [sample["action"]],
                         "reward": sample["reward"],
                         "done": sample["status"]["terminated"],
                         "started": sample["status"]["started"],
@@ -85,7 +85,7 @@ for game in tictactoe["games"]:
                 "messages": {
                     "name": Value("string"),
                     "state": Value("string"),
-                    "action": Value("string"),
+                    "action": Sequence(Value("string")),
                     "reward": Value("float32"),
                     "done": Value("bool"),
                     "started": Value("bool"),
