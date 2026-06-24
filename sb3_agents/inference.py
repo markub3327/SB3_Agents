@@ -355,12 +355,12 @@ if __name__ == "__main__":
 
             # print(rendered_img.shape)
             # for k in range(vec_env.num_envs):
-            #     for j, img in enumerate([rendered_img[k][-1]]):
+            #     for j, img in enumerate(rendered_img[k]):
             #         frame = cv2.resize(img, (200, 200))
             #         # Add text to the frame
             #         cv2.putText(
             #             frame,
-            #             f"Action: {action_name}",
+            #             f"Action: {action_history}",
             #             (10, 40),
             #             cv2.FONT_HERSHEY_SIMPLEX,
             #             0.2,
@@ -474,7 +474,7 @@ if __name__ == "__main__":
                         "messages": {
                             "name": Value("string"),
                             "state": Value("string"),
-                            "action": Value("string"),
+                            "action": Sequence(Value("string")),
                             "reward": Value("float32"),
                             "done": Value("bool"),
                             "started": Value("bool"),
