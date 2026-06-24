@@ -445,6 +445,10 @@ if __name__ == "__main__":
                     for i in range(args.n_envs):
                         print(f"Generating dataset for shard {shard}, env {i}")
 
+                        # Don't include negative rewards
+                        if reward_list[shard][i] < 0:
+                            continue
+
                         example = {
                             "messages": {
                                 "name": env_name,
