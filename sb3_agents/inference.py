@@ -20,6 +20,7 @@ from utils import ImageFilterForQueue, load_hyperparams
 from datasets import Dataset, Features, Value, Image, Sequence
 from gymnasium.spaces import Box
 from vocab import ids_action_vocab
+from collections import deque
 
 
 # Use a dummy audio driver
@@ -309,6 +310,7 @@ if __name__ == "__main__":
         started_list.append(np.ones((vec_env.num_envs,), dtype=np.bool))
         obs, _ = vec_env.reset()
 
+        # State
         rendered_img = vec_env.env_method("render")
         stacked_obs = StackedObservations(
             vec_env.num_envs,
@@ -319,6 +321,9 @@ if __name__ == "__main__":
             np.asarray(rendered_img, dtype=np.uint8)
         )
         rendered_img = np.stack(np.split(rendered_img, config["frame_stack"], axis=-1), axis=1)
+
+        # Action
+        action_history = deque(iterable=([[None] * vec_env.num_envs] * config["frame_stack"]), maxlen=(config["frame_stack"] + 1))
 
         for i in range(args.episode_length):
             print(f"Step {i}")
@@ -341,11 +346,12 @@ if __name__ == "__main__":
 
             # Information
             action_name = [ids_action_vocab[env_name].inverse[a] for a in action]
-            action_list.append(action_name)
+            action_history.append(action_name)
+            action_list.append(np.transpose(np.asarray(action_history), (1, 0)))
             reward = np.round(reward, 2)
             reward_list.append(reward)
             done_list.append(done)
-            print("action", action_name, "reward", reward, "done", done)
+            print("action", action_history, "reward", reward, "done", done)
 
             # print(rendered_img.shape)
             # for k in range(vec_env.num_envs):
@@ -432,7 +438,7 @@ if __name__ == "__main__":
         vec_env.close()
         video_out.release()
 
-        print(len(state_list), len(action_list), len(reward_list), len(done_list), started_list)
+        print(len(state_list), len(action_list), len(reward_list), len(done_list), len(started_list))
 
         if args.save_to_disk:
             def dataset_generator(shards):
