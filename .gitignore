@@ -16,3 +16,9 @@ slurm/
 dataset/
 
 *.csv
+
+.*
+
+videos/
+
+*.pyc

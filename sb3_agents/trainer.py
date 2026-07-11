@@ -10,6 +10,7 @@ import ale_py
 import gymnasium
 import mars_explorer
 import minigrid
+import highway_env
 import stable_retro as retro
 import torch
 from gymnasium.wrappers import TimeLimit
@@ -64,8 +65,8 @@ if __name__ == "__main__":
         "--emulator",
         type=str,
         required=True,
-        choices=["ale", "retro", "classic", "minigrid"],
-        help="The name of the emulator ['ale', 'retro', 'classic']",
+        choices=["ale", "retro", "classic", "minigrid", "other"],
+        help="The name of the emulator ['ale', 'retro', 'classic', 'minigrid'] or 'other' for other environments",
     )
     parser.add_argument(
         "--env",
@@ -119,7 +120,12 @@ if __name__ == "__main__":
         if config["policy"] == "CnnPolicy":
             vec_env = VecTransposeImage(vec_env)
     else:
-        raise ValueError(f"Unsupported emulator: {args.emulator}")
+        # Load PPO configuration
+        config = load_hyperparams("other")
+        # Create environment
+        vec_env = make_vec_env(args.env, n_envs=config["n_envs"], seed=1234)
+        if config["policy"] == "CnnPolicy":
+            vec_env = VecTransposeImage(vec_env)
 
     # Use normalization
     if config["normalize"]:

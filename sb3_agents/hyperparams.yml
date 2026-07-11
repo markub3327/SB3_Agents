@@ -157,3 +157,24 @@ explorer-v1:
       eps: 1.0e-5
     ortho_init: true
   eval_freq: 10_000
+
+other:
+  normalize: false
+  frame_stack: 4
+  n_envs: 16
+  n_timesteps: !!float 2e4
+  policy: 'MlpPolicy'
+  n_steps: 1024
+  batch_size: 64
+  gae_lambda: 0.98
+  gamma: 0.8
+  n_epochs: 4
+  ent_coef: 0.01
+  learning_rate: !!float 5e-4
+  clip_range: 0.2
+  vf_coef: 0.5
+  normalize_advantage: true
+  max_grad_norm: 0.5
+  policy_kwargs:
+    ortho_init: true
+  eval_freq: 1_024
