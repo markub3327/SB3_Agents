@@ -16,7 +16,7 @@ from stable_baselines3.common.env_util import make_atari_env, make_vec_env
 from stable_baselines3.common.monitor import Monitor
 from stable_baselines3.common.vec_env import SubprocVecEnv, VecFrameStack, VecTransposeImage
 from tqdm import tqdm
-from utils import ImageFilterForQueue, load_hyperparams
+from utils import load_hyperparams
 from datasets import Dataset, Features, Value, Image, Sequence
 from gymnasium.spaces import Box
 from vocab import ids_action_vocab
@@ -30,29 +30,26 @@ gymnasium.register_envs(ale_py)
 gymnasium.register_envs(mars_explorer)
 
 # Optimized game list
-env_names = [
-    "AssaultNoFrameskip-v4",
-    "BreakoutNoFrameskip-v4",
-    "QbertNoFrameskip-v4",
-    "PhoenixNoFrameskip-v4",
-    "GopherNoFrameskip-v4",
-    "KungFuMasterNoFrameskip-v4",
-
-    "LunarLander-v3",
-    "CartPole-v1",
-]
+# env_names = [
+#     # "AssaultNoFrameskip-v4",
+#     # "BreakoutNoFrameskip-v4",
+#     # "QbertNoFrameskip-v4",
+#     # "PhoenixNoFrameskip-v4",
+#     # "GopherNoFrameskip-v4",
+#     # "KungFuMasterNoFrameskip-v4",
+#     "LunarLander-v3",
+#     "CartPole-v1",
+# ]
 
 
 # The best policies from mini PPO agent compared to [https://slm-lab.gitbook.io/slm-lab/benchmark-results/atari-benchmark]
 
 # Classic
 # env_names = [
-# "LunarLander-v3",
-# "Taxi-v3",
-# "FrozenLake-v1",
-# "Acrobot-v1",
-# "CartPole-v1",
-# "MountainCar-v0",
+#     "LunarLander-v3",
+#     "Acrobot-v1",
+#     "CartPole-v1",
+#     "MountainCar-v0",
 # ]
 
 # Stable-retro
@@ -139,7 +136,7 @@ env_names = [
 # ]
 
 # Full Atari version
-# env_names = [
+env_names = (
 #     "AssaultNoFrameskip-v4",
 #     "AtlantisNoFrameskip-v4",
 #     "BankHeistNoFrameskip-v4",
@@ -167,30 +164,85 @@ env_names = [
 #     "UpNDownNoFrameskip-v4",
 #     "VideoPinballNoFrameskip-v4",
 
-# "ALE/Blackjack-v5",
-# "ALE/VideoChess-v5",
-# "ALE/Turmoil-v5",
-# "ALE/Trondead-v5",
-# "ALE/TicTacToe3D-v5",
-# "ALE/Tetris-v5",
-# "ALE/Surround-v5",
-# "ALE/Superman-v5",
-# "ALE/SpaceWar-v5",
-# "ALE/Othello-v5",
-# "ALE/MrDo-v5",
-# "ALE/MiniatureGolf-v5",
-# "ALE/LostLuggage-v5",
-# "ALE/LaserGates-v5",
-# "ALE/KingKong-v5",
-# "ALE/KeystoneKapers-v5",
-# "ALE/Kaboom-v5",
-# "ALE/Hangman-v5",
-# "ALE/Galaxian-v5",
-# "ALE/Frogger-v5",
-# "ALE/DonkeyKong-v5",
-# "ALE/Casino-v5",
-# "ALE/BasicMath-v5",
-# ]
+    # "ALE/Blackjack-v5",
+    # "ALE/VideoChess-v5",
+    # "ALE/Turmoil-v5",
+    # "ALE/Trondead-v5",
+    # "ALE/TicTacToe3D-v5",
+    # "ALE/Tetris-v5",
+    # "ALE/Surround-v5",
+    # "ALE/Superman-v5",
+    # "ALE/SpaceWar-v5",
+    # "ALE/Othello-v5",
+    # "ALE/MrDo-v5",
+    # "ALE/MiniatureGolf-v5",
+    # "ALE/LostLuggage-v5",
+    # "ALE/LaserGates-v5",
+    # "ALE/KingKong-v5",
+    # "ALE/KeystoneKapers-v5",
+    # "ALE/Kaboom-v5",
+    # "ALE/Hangman-v5",
+    # "ALE/Galaxian-v5",
+    # "ALE/Frogger-v5",
+    # "ALE/DonkeyKong-v5",
+    # "ALE/Casino-v5",
+    # "ALE/BasicMath-v5",
+
+     "AdventureNoFrameskip-v4"
+     "AirRaidNoFrameskip-v4"
+     "AlienNoFrameskip-v4"
+     "AmidarNoFrameskip-v4"
+     "AsterixNoFrameskip-v4"
+     "AsteroidsNoFrameskip-v4"
+     "Atlantis2NoFrameskip-v4"
+     "BackgammonNoFrameskip-v4"
+     "BattleZoneNoFrameskip-v4"
+     "BeamRiderNoFrameskip-v4"
+     "BerzerkNoFrameskip-v4"
+     "BowlingNoFrameskip-v4"
+     "CarnivalNoFrameskip-v4"
+     "CentipedeNoFrameskip-v4"
+     "ChopperCommandNoFrameskip-v4"
+     "CrossbowNoFrameskip-v4"
+     "DarkchambersNoFrameskip-v4"
+     "EarthworldNoFrameskip-v4"
+     "ElevatorActionNoFrameskip-v4"
+     "EntombedNoFrameskip-v4"
+     "EtNoFrameskip-v4"
+     "FlagCaptureNoFrameskip-v4"
+     "FrostbiteNoFrameskip-v4"
+     "GravitarNoFrameskip-v4"
+     "HauntedHouseNoFrameskip-v4"
+     "HeroNoFrameskip-v4"
+     "HumanCannonballNoFrameskip-v4"
+     "IceHockeyNoFrameskip-v4"
+     "JourneyEscapeNoFrameskip-v4"
+     "KlaxNoFrameskip-v4"
+     "KoolaidNoFrameskip-v4"
+     "MarioBrosNoFrameskip-v4"
+     "MontezumaRevengeNoFrameskip-v4"
+     "MsPacmanNoFrameskip-v4"
+     "PacmanNoFrameskip-v4"
+     "PitfallNoFrameskip-v4"
+     "Pitfall2NoFrameskip-v4"
+     "PooyanNoFrameskip-v4"
+     "PrivateEyeNoFrameskip-v4"
+     "RiverraidNoFrameskip-v4"
+     "RobotankNoFrameskip-v4"
+     "SeaquestNoFrameskip-v4"
+     "SirLancelotNoFrameskip-v4"
+     "SkiingNoFrameskip-v4"
+     "SolarisNoFrameskip-v4"
+     "SpaceInvadersNoFrameskip-v4"
+     "TennisNoFrameskip-v4"
+     "TimePilotNoFrameskip-v4"
+     "VentureNoFrameskip-v4"
+     "VideoCubeNoFrameskip-v4"
+     "WizardOfWorNoFrameskip-v4"
+     "WordZapperNoFrameskip-v4"
+     "YarsRevengeNoFrameskip-v4"
+     "ZaxxonNoFrameskip-v4"
+)
 
 
 def make_retro_env(env_name):
@@ -244,20 +296,14 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    if args.save_to_disk:
-        # Load the Vision model
-        img_filter = ImageFilterForQueue()
-    else:
-        img_filter = None
-
     for env_name in tqdm(env_names):
         print(f"Generating the dataset for {env_name} environment.")
 
         video_out = cv2.VideoWriter(
-            os.path.join("./videos/", f"{env_name}.mp4"),
+            os.path.join("./videos/", f"{env_name}.mp4".replace("/", "_")),
             cv2.VideoWriter_fourcc(*"mp4v"),
             30,
-            (200, 200),
+            (400, 400),
         )
 
         # Stable Retro
@@ -305,7 +351,6 @@ if __name__ == "__main__":
         reward_list = []
         done_list = []
         started_list = []
-        imgs_embed_list = []
 
         started_list.append(np.ones((vec_env.num_envs,), dtype=np.bool))
         obs, _ = vec_env.reset()
@@ -329,14 +374,6 @@ if __name__ == "__main__":
             print(f"Step {i}")
 
             state_list.append(rendered_img)
-            if img_filter:
-                # print("rendered_img", rendered_img.shape)
-                img_batch = rendered_img.reshape(-1, rendered_img.shape[2], rendered_img.shape[3], rendered_img.shape[4])
-                img_embed = img_filter.get_embedding(img_batch)
-                # print("img_embed shape", img_embed.shape)
-                img_embed = np.stack(np.split(img_embed, vec_env.num_envs, axis=0), axis=0)
-                # print("img_embed shape", img_embed.shape)
-                imgs_embed_list.append(img_embed)
 
             # Predict action
             action, _ = model.predict(obs, deterministic=True)
@@ -351,73 +388,6 @@ if __name__ == "__main__":
             reward_list.append(reward)
             done_list.append(done)
             print("action", action_history, "reward", reward, "done", done)
-
-            # print(rendered_img.shape)
-            # for k in range(vec_env.num_envs):
-            #     for j, img in enumerate(rendered_img[k]):
-            #         frame = cv2.resize(img, (200, 200))
-            #         # Add text to the frame
-            #         cv2.putText(
-            #             frame,
-            #             f"Action: {action_history}",
-            #             (10, 40),
-            #             cv2.FONT_HERSHEY_SIMPLEX,
-            #             0.2,
-            #             (112, 128, 144),
-            #             1,
-            #             cv2.LINE_AA,
-            #         )
-            #         cv2.putText(
-            #             frame,
-            #             f"Reward: {reward}",
-            #             (10, 50),
-            #             cv2.FONT_HERSHEY_SIMPLEX,
-            #             0.2,
-            #             (112, 128, 144),
-            #             1,
-            #             cv2.LINE_AA,
-            #         )
-            #         cv2.putText(
-            #             frame,
-            #             f"Terminated: {done}",
-            #             (10, 80),
-            #             cv2.FONT_HERSHEY_SIMPLEX,
-            #             0.2,
-            #             (112, 128, 144),
-            #             1,
-            #             cv2.LINE_AA,
-            #         )
-            #         cv2.putText(
-            #             frame,
-            #             f"Started: {started_list[-vec_env.num_envs:]}",
-            #             (10, 90),
-            #             cv2.FONT_HERSHEY_SIMPLEX,
-            #             0.2,
-            #             (112, 128, 144),
-            #             1,
-            #             cv2.LINE_AA,
-            #         )
-            #         cv2.putText(
-            #             frame,
-            #             f"Frame ID: {j}",
-            #             (10, 100),
-            #             cv2.FONT_HERSHEY_SIMPLEX,
-            #             0.2,
-            #             (112, 128, 144),
-            #             1,
-            #             cv2.LINE_AA,
-            #         )
-            #         cv2.putText(
-            #             frame,
-            #             f"Env ID: {k}",
-            #             (10, 110),
-            #             cv2.FONT_HERSHEY_SIMPLEX,
-            #             0.2,
-            #             (112, 128, 144),
-            #             1,
-            #             cv2.LINE_AA,
-            #         )
-            #         video_out.write(cv2.cvtColor(frame, cv2.COLOR_RGB2BGR))
 
             # Update image
             rendered_img = vec_env.env_method("render")
@@ -435,19 +405,71 @@ if __name__ == "__main__":
 
         # Close envs
         vec_env.close()
-        video_out.release()
 
         print(len(state_list), len(action_list), len(reward_list), len(done_list), len(started_list))
+
+        for k in range(args.episode_length):
+            # print(state_list[k][0].shape)
+            frame = cv2.resize(state_list[k][0][0], (400, 400))
+            # Add text to the frame
+            cv2.putText(
+                frame,
+                f"Action: {action_list[k][0]}",
+                (10, 40),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.3,
+                (112, 128, 144),
+                1,
+                cv2.LINE_AA,
+            )
+            cv2.putText(
+                frame,
+                f"Reward: {reward_list[k][0]}",
+                (10, 50),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.3,
+                (112, 128, 144),
+                1,
+                cv2.LINE_AA,
+            )
+            cv2.putText(
+                frame,
+                f"Terminated: {done_list[k][0]}",
+                (10, 80),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.3,
+                (112, 128, 144),
+                1,
+                cv2.LINE_AA,
+            )
+            cv2.putText(
+                frame,
+                f"Started: {started_list[k][0]}",
+                (10, 90),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.3,
+                (112, 128, 144),
+                1,
+                cv2.LINE_AA,
+            )
+            cv2.putText(
+                frame,
+                f"Env ID: {k}",
+                (10, 110),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.3,
+                (112, 128, 144),
+                1,
+                cv2.LINE_AA,
+            )
+            video_out.write(cv2.cvtColor(frame, cv2.COLOR_RGB2BGR))
+        video_out.release()
 
         if args.save_to_disk:
             def dataset_generator(shards):
                 for shard in shards:
                     for i in range(args.n_envs):
                         print(f"Generating dataset for shard {shard}, env {i}")
-
-                        # Don't include negative rewards
-                        if reward_list[shard][i] < 0:
-                            continue
 
                         example = {
                             "messages": {
@@ -461,9 +483,6 @@ if __name__ == "__main__":
                             },
                             "images": state_list[shard][i],
                         }
-                        # print(type(env_name), type(state_list[shard]), type(action_list[shard]), type(reward_list[shard]),
-                        #       type(done_list[shard]), type(started_list[shard]))
-                        # print(example)
 
                         yield example
 
