@@ -1,0 +1,75 @@
++ source /mnt/home/makuke637/miniconda3/etc/profile.d/conda.sh
+++ export CONDA_EXE=/mnt/data/home/makuke637/miniconda3/bin/conda
+++ CONDA_EXE=/mnt/data/home/makuke637/miniconda3/bin/conda
+++ export _CONDA_EXE=/mnt/data/home/makuke637/miniconda3/bin/conda
+++ _CONDA_EXE=/mnt/data/home/makuke637/miniconda3/bin/conda
+++ export _CE_M=
+++ _CE_M=
+++ export _CE_CONDA=
+++ _CE_CONDA=
+++ export CONDA_PYTHON_EXE=/mnt/data/home/makuke637/miniconda3/bin/python
+++ CONDA_PYTHON_EXE=/mnt/data/home/makuke637/miniconda3/bin/python
+++ export _CONDA_ROOT=/mnt/data/home/makuke637/miniconda3
+++ _CONDA_ROOT=/mnt/data/home/makuke637/miniconda3
+++ '[' -z '' ']'
+++ export CONDA_SHLVL=0
+++ CONDA_SHLVL=0
+++ '[' -n '' ']'
+++++ dirname /mnt/data/home/makuke637/miniconda3/bin/conda
++++ dirname /mnt/data/home/makuke637/miniconda3/bin
+++ PATH=/mnt/data/home/makuke637/miniconda3/condabin:/mnt/data/home/makuke637/miniconda3/bin:/opt/clmgr/sbin:/opt/clmgr/bin:/opt/sgi/sbin:/opt/sgi/bin:/usr/mpi/gcc/openmpi-4.1.7rc1/bin:/mnt/home/makuke637/.vscode-server/cli/servers/Stable-e4c7e7b1d6d060162f4aa7f8225271b67ce1df75/server/bin/remote-cli:/mnt/data/home/makuke637/miniconda3/bin:/opt/clmgr/sbin:/opt/clmgr/bin:/opt/sgi/sbin:/opt/sgi/bin:/usr/mpi/gcc/openmpi-4.1.7rc1/bin:/mnt/data/home/makuke637/miniconda3/bin:/mnt/home/makuke637/.local/bin:/mnt/home/makuke637/bin:/opt/clmgr/sbin:/opt/clmgr/bin:/opt/sgi/sbin:/opt/sgi/bin:/usr/mpi/gcc/openmpi-4.1.7rc1/bin:/usr/share/Modules/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/c3/bin
+++ export PATH
+++ '[' -z '' ']'
+++ PS1=
++ conda activate ai_env
++ local cmd=activate
++ case "$cmd" in
++ __conda_activate activate ai_env
++ '[' -n '' ']'
++ local ask_conda
+++ PS1=
+++ __conda_exe shell.posix activate ai_env
+++ '[' -n '' ']'
+++ /mnt/data/home/makuke637/miniconda3/bin/conda shell.posix activate ai_env
+/mnt/home/makuke637/miniconda3/etc/profile.d/conda.sh: line 15: /mnt/data/home/makuke637/miniconda3/bin/conda: No such file or directory
++ ask_conda=
++ return
++ echo 'Job ID:    73480'
++ echo 'Job Name:  ppo_agent'
+++ hostname
++ echo 'Node:      gpu06'
++ echo 'GPUs:      0'
++ echo ═══════════════════════════════════════════════════════════
++ export OMP_NUM_THREADS=128
++ OMP_NUM_THREADS=128
++ export WANDB_API_KEY=eebd20787e3c9bbde2069bb042f2c1e1e94c1bcd
++ WANDB_API_KEY=eebd20787e3c9bbde2069bb042f2c1e1e94c1bcd
++ export HF_TOKEN=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
++ HF_TOKEN=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
++ python3 -m stable_retro.import /mnt/data/home/makuke637/SB3_Agents/ROMs/
+/usr/bin/python3: Error while finding module specification for 'stable_retro.import' (ModuleNotFoundError: No module named 'stable_retro')
++ python3 /mnt/home/makuke637/SB3_Agents/sb3_agents/inference.py --save-video --save-to-disk
+Traceback (most recent call last):
+  File "/mnt/home/makuke637/SB3_Agents/sb3_agents/inference.py", line 6, in <module>
+    import cv2
+ModuleNotFoundError: No module named 'cv2'
++ python3 /mnt/home/makuke637/SB3_Agents/sb3_agents/tictactoe_dataset.py
+Traceback (most recent call last):
+  File "/mnt/home/makuke637/SB3_Agents/sb3_agents/tictactoe_dataset.py", line 3, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+++ date
++ echo 'Job finished at: Wed Aug 12 02:02:45 PM CEST 2026'
++ conda deactivate
++ local cmd=deactivate
++ case "$cmd" in
++ __conda_activate deactivate
++ '[' -n '' ']'
++ local ask_conda
+++ PS1=
+++ __conda_exe shell.posix deactivate
+++ '[' -n '' ']'
+++ /mnt/data/home/makuke637/miniconda3/bin/conda shell.posix deactivate
+/mnt/home/makuke637/miniconda3/etc/profile.d/conda.sh: line 15: /mnt/data/home/makuke637/miniconda3/bin/conda: No such file or directory
++ ask_conda=
++ return

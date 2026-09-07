@@ -8,7 +8,7 @@ import cv2
 
 # TicTacToe dataset
 with open(
-        "/mnt/data/home/makuke637/SB3_Agents/tictactoe/tictactoe.json",
+        "/mnt/home/makuke637/SB3_Agents/tictactoe/tictactoe.json",
         "r",
 ) as f:
     tictactoe = json.load(f)
@@ -49,11 +49,13 @@ def dataset_wrapper(game):
                     "messages": {
                         "name": env_name,
                         "state": '\n'.join(sample["state"]),
-                        "action": [sample["action"]],
+                        "action": sample["action"],
                         "reward": sample["reward"],
+                        "value": None,  # Placeholder for value, can be computed if needed
                         "done": sample["status"]["terminated"],
                         "started": sample["status"]["started"],
                         "reasoning": sample["reasoning"],
+                        "img_embed": None,  # Placeholder for image embedding, can be computed if needed
                     },
                     "images": sample["img"],
                 }
@@ -83,13 +85,15 @@ for game in tictactoe["games"]:
         features=Features(
             {
                 "messages": {
-                    "name": Value("string"),
-                    "state": Value("string"),
-                    "action": Sequence(Value("string")),
-                    "reward": Value("float32"),
-                    "done": Value("bool"),
-                    "started": Value("bool"),
-                    "reasoning": Value("string"),
+                            "name": Value("string"),
+                            "state": Value("string"),
+                            "action": Value("string"),
+                            "reward": Value("float32"),
+                            "value": Value("float32"),
+                            "done": Value("bool"),
+                            "started": Value("bool"),
+                            "reasoning": Value("string"),
+                            "img_embed": Sequence(Sequence(Value("float32")))
                 },
                 "images": Sequence(HFImage()),
             }
@@ -104,7 +108,7 @@ for game in tictactoe["games"]:
     print(f"Dataset shuffled with seed 42")
 
     # Save the dataset
-    ds_path = "/mnt/data/home/makuke637/SB3_Agents/dataset"
+    ds_path = "/mnt/home/makuke637/SB3_Agents/dataset"
     os.makedirs(ds_path, exist_ok=True)
     dataset.save_to_disk(
         os.path.join(ds_path, f"{env_name}"),

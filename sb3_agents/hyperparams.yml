@@ -95,7 +95,7 @@ ale:
   n_envs: 128
   n_steps: 128
   gamma: 0.99
-  gae_lambda: 0.85
+  gae_lambda: 0.95
   n_epochs: 4
   batch_size: 256
   n_timesteps: !!float 1e7
@@ -161,20 +161,22 @@ explorer-v1:
 other:
   normalize: false
   frame_stack: 4
-  n_envs: 16
-  n_timesteps: !!float 2e4
   policy: 'MlpPolicy'
-  n_steps: 1024
-  batch_size: 64
-  gae_lambda: 0.98
+  n_envs: 16
+  n_steps: 128
   gamma: 0.8
+  gae_lambda: 0.95
   n_epochs: 4
-  ent_coef: 0.01
+  batch_size: 64
+  n_timesteps: !!float 2e4
   learning_rate: !!float 5e-4
-  clip_range: 0.2
+  clip_range: 0.1
   vf_coef: 0.5
+  ent_coef: 0.01
   normalize_advantage: true
   max_grad_norm: 0.5
   policy_kwargs:
+    optimizer_kwargs:
+      eps: 1.0e-5
     ortho_init: true
-  eval_freq: 1_024
+  eval_freq: 10

@@ -1,24 +1,7 @@
-.DS_Store
-.ipynb_checkpoints
-.idea
-
-wandb/
-
-logs/
-
 ROMs/
 
-*.err
-*.out
+save/
 
 slurm/
 
-dataset/
-
-*.csv
-
-.*
-
 videos/
-
-*.pyc

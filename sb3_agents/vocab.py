@@ -37,16 +37,6 @@ ids_action_vocab = {
             "leftfire": 7,
         }
     ),
-    "NameThisGameNoFrameskip-v4": bidict(
-        {
-            "noop": 0,
-            "fire": 1,
-            "right": 2,
-            "left": 3,
-            "rightfire": 4,
-            "leftfire": 5,
-        }
-    ),
     "RoadRunnerNoFrameskip-v4": full_action_space,
     "QbertNoFrameskip-v4": bidict(
         {
@@ -98,7 +88,12 @@ ids_action_vocab = {
     "BoxingNoFrameskip-v4": full_action_space,
     "FishingDerbyNoFrameskip-v4": full_action_space,
     "AtlantisNoFrameskip-v4": bidict(
-        {"noop": 0, "fire": 1, "rightfire": 2, "leftfire": 3}
+        {
+            "noop": 0,
+            "fire": 1,
+            "rightfire": 2,
+            "leftfire": 3
+        }
     ),
     "CrazyClimberNoFrameskip-v4": bidict(
         {
@@ -114,6 +109,7 @@ ids_action_vocab = {
         }
     ),
     "DefenderNoFrameskip-v4": full_action_space,
+    "DoubleDunkNoFrameskip-v4": full_action_space,
     "EnduroNoFrameskip-v4": bidict(
         {
             "noop": 0,
@@ -141,6 +137,7 @@ ids_action_vocab = {
         }
     ),
     "BankHeistNoFrameskip-v4": full_action_space,
+    "KrullNoFrameskip-v4": full_action_space,
     "TutankhamNoFrameskip-v4": bidict(
         {
             "noop": 0,
@@ -203,36 +200,6 @@ ids_action_vocab = {
             "upfire": 6,
             "rightfire": 7,
             "leftfire": 8,
-        }
-    ),
-    # Classic control
-    "CartPole-v1": bidict(
-        {
-            "left": 0,
-            "right": 1,
-        }
-    ),
-    "MountainCar-v0": bidict(
-        {
-            "left": 0,
-            "noop": 1,
-            "right": 2,
-        }
-    ),
-    "Acrobot-v1": bidict(
-        {
-            "left": 0,
-            "noop": 1,
-            "right": 2,
-        }
-    ),
-    # Box2D
-    "LunarLander-v3": bidict(
-        {
-            "noop": 0,
-            "left": 1,
-            "up": 2,
-            "right": 3,
         }
     ),
 }
