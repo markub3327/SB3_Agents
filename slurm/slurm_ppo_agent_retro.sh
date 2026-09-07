@@ -31,9 +31,6 @@ export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 # ═══════════════════════════════════════════════════════════
 # Your Code
 # ═══════════════════════════════════════════════════════════
-export WANDB_API_KEY=eebd20787e3c9bbde2069bb042f2c1e1e94c1bcd
-export HF_TOKEN="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"
-
 python3 -m stable_retro.import /mnt/data/home/makuke637/SB3_Agents/ROMs/
 
 bash ~/SB3_Agents/run_retro_training.sh
