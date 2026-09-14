@@ -150,7 +150,7 @@ if __name__ == "__main__":
         normalize_advantage=config["normalize_advantage"],
         max_grad_norm=config["max_grad_norm"],
         policy_kwargs=policy_kwargs,
-        verbose=1,
+        verbose=0,
         tensorboard_log=f"./logs/{run.id}",
     )
 
