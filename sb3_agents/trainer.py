@@ -1,20 +1,9 @@
-#!/usr/bin/env python3
-# coding: utf-8
-
-# In[1]:
-
-
 import argparse
-
 import ale_py
 import gymnasium
-import mars_explorer
-import minigrid
-import highway_env
 import stable_retro as retro
-import torch
 from gymnasium.wrappers import TimeLimit
-from schedule import cosine_schedule
+from schedule import CosineAnnealingLR
 from stable_baselines3 import PPO
 from stable_baselines3.common.atari_wrappers import (
     ClipRewardEnv,
@@ -32,13 +21,12 @@ from stable_baselines3.common.vec_env import (
 )
 from utils import load_hyperparams
 from wandb.integration.sb3 import WandbCallback
-
 import wandb
+import torch
 
+
+# Register environments
 gymnasium.register_envs(ale_py)
-gymnasium.register_envs(mars_explorer)
-
-# In[2]:
 
 
 def make_retro_env(env_name):
@@ -58,6 +46,7 @@ def make_retro_env(env_name):
 
 
 if __name__ == "__main__":
+    # Parse command-line arguments
     parser = argparse.ArgumentParser(
         description="Reinforcement Learning project training PPO agents on Atari, Retro (Sonic, Mario) or classic environments using Stable Baselines 3, featuring dataset generation and WanDB experiment tracking."
     )
@@ -65,8 +54,8 @@ if __name__ == "__main__":
         "--emulator",
         type=str,
         required=True,
-        choices=["ale", "retro", "classic", "minigrid", "other"],
-        help="The name of the emulator ['ale', 'retro', 'classic', 'minigrid'] or 'other' for other environments",
+        choices=["ale", "retro", "classic"],
+        help="The name of the emulator ['ale', 'retro', 'classic']",
     )
     parser.add_argument(
         "--env",
@@ -79,51 +68,40 @@ if __name__ == "__main__":
     # Initialize WanDB
     run = wandb.init(
         project="ppo-sb3",
-        config={"env_name": args.env},
+        config={
+            "policy_type": config["policy"],
+            "total_timesteps": config["n_timesteps"],
+            "env_name": args.env,
+        },
         sync_tensorboard=True,  # auto-upload sb3's tensorboard metrics
         monitor_gym=False,  # auto-upload the videos of agents playing the game
-        save_code=False,  # optional
+        save_code=False,
     )
 
     # For Atari console
     if "ale" in args.emulator.lower():
         # Load PPO configuration
-        config = load_hyperparams(args.emulator)
+        config = load_hyperparams(args.emulator, "./sb3_agents/hyperparams.yml")
         # Create environment
-        vec_env = make_atari_env(args.env, n_envs=config["n_envs"], seed=1234)
+        vec_env = make_atari_env(args.env, n_envs=config["n_envs"], seed=42)
         vec_env = VecFrameStack(vec_env, n_stack=config["frame_stack"])
         vec_env = VecTransposeImage(vec_env)
     # For stable-retro consoles
     elif "retro" in args.emulator.lower():
         # Load PPO configuration
-        config = load_hyperparams(args.emulator)
+        config = load_hyperparams(args.emulator, "./sb3_agents/hyperparams.yml")
         # Create environment
         vec_env = SubprocVecEnv([make_retro_env(args.env)] * config["n_envs"])
         vec_env = VecFrameStack(vec_env, n_stack=config["frame_stack"])
         vec_env = VecTransposeImage(vec_env)
-        vec_env.action_space.seed(1234)
-        vec_env.seed(1234)
-    # For MiniGrid
-    elif "minigrid" in args.emulator.lower():
-        # Load PPO configuration
-        config = load_hyperparams(args.env)
-        # Create environment
-        vec_env = make_vec_env(args.env, n_envs=config["n_envs"], seed=1234)
-        # Use MiniGrid wrapper
-        vec_env = minigrid.wrappers.FlatObsWrapper(vec_env)
+        vec_env.action_space.seed(42)
+        vec_env.seed(42)
     # For Classic
     elif "classic" in args.emulator.lower():
         # Load PPO configuration
-        config = load_hyperparams(args.env)
+        config = load_hyperparams(args.env, "./sb3_agents/hyperparams.yml")
         # Create environment
-        vec_env = make_vec_env(args.env, n_envs=config["n_envs"], seed=1234)
-        if config["policy"] == "CnnPolicy":
-            vec_env = VecTransposeImage(vec_env)
-    else:
-        # Load PPO configuration
-        config = load_hyperparams("other")
-        # Create environment
-        vec_env = make_vec_env(args.env, n_envs=config["n_envs"], seed=1234)
+        vec_env = make_vec_env(args.env, n_envs=config["n_envs"], seed=42)
         if config["policy"] == "CnnPolicy":
             vec_env = VecTransposeImage(vec_env)
 
@@ -131,23 +109,32 @@ if __name__ == "__main__":
     if config["normalize"]:
         vec_env = VecNormalize(
             vec_env,
+            training=True,
             norm_obs=config["normalize"]["norm_obs"],
             norm_reward=config["normalize"]["norm_reward"],
+            gamma=config["gamma"],
         )
 
     # Use deterministic actions for evaluation
     eval_callback = EvalCallback(
         vec_env,
+        n_eval_episodes=10,
+        eval_freq=max(config["eval_freq"] // config["n_envs"], 1),
         best_model_save_path=f"./save/{args.env}",
-        log_path=f"./logs/{args.env}",
-        eval_freq=config["eval_freq"],
         deterministic=True,
         render=False,
+        verbose=1,
     )
 
-    # Set the optimizer class
-    config["policy_kwargs"]["optimizer_class"] = torch.optim.AdamW
-
+    # Define policy keyword arguments
+    policy_kwargs = {
+        'optimizer_class': torch.optim.AdamW if config['policy_kwargs']['optimizer_class'].lower() == 'adamw' else torch.optim.Adam,
+        'optimizer_kwargs': config['policy_kwargs']['optimizer_kwargs'],
+        'ortho_init': config['policy_kwargs']['ortho_init'],
+        'activation_fn': torch.nn.ReLU if config['policy_kwargs']['activation_fn'].lower() == 'relu' else torch.nn.Tanh
+    }
+    
+    # Create the PPO model
     model = PPO(
         policy=config["policy"],
         env=vec_env,
@@ -156,20 +143,23 @@ if __name__ == "__main__":
         gae_lambda=config["gae_lambda"],
         n_epochs=config["n_epochs"],
         batch_size=config["batch_size"],
-        learning_rate=cosine_schedule(config["learning_rate"]),
+        learning_rate=CosineAnnealingLR(config["learning_rate"]),
         clip_range=config["clip_range"],
         vf_coef=config["vf_coef"],
         ent_coef=config["ent_coef"],
         normalize_advantage=config["normalize_advantage"],
         max_grad_norm=config["max_grad_norm"],
-        policy_kwargs=config["policy_kwargs"],
-        verbose=0,
-        tensorboard_log=f"./logs/{args.env}",
+        policy_kwargs=policy_kwargs,
+        verbose=1,
+        tensorboard_log=f"./logs/{run.id}",
     )
+
+    # Train the model
     model.learn(
         total_timesteps=config["n_timesteps"],
-        callback=[eval_callback, WandbCallback(verbose=2)],
+        callback=[eval_callback, WandbCallback(verbose=1)],
         progress_bar=True,
     )
 
+    # Finish the WanDB run
     run.finish()

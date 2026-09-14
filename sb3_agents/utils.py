@@ -1,13 +1,6 @@
-import numpy as np
-import os
 import torch
 import yaml
-from gymnasium import spaces
-from gymnasium.spaces import Box
-from torch.distributions import Bernoulli
 from transformers import AutoImageProcessor, AutoModel
-from vocab import ids_action_vocab
-from stable_baselines3.common.vec_env.stacked_observations import StackedObservations
 
 
 class ImageFilterForQueue:
@@ -27,24 +20,14 @@ class ImageFilterForQueue:
             outputs = self.model(**inputs)
         return outputs.pooler_output.cpu().numpy()
 
-
-def load_hyperparams(env_name, file_path="./sb3_agents/hyperparams.yml"):
+def load_hyperparams(env_name, file_path):
     """
     Loads hyperparameters for a specific environment from a YAML file.
     """
     with open(file_path, "r") as f:
-        # Loader=yaml.SafeLoader is recommended for security
         all_params = yaml.load(f, Loader=yaml.SafeLoader)
 
     if env_name not in all_params:
         raise ValueError(f"Environment '{env_name}' not found in hyperparameters list")
 
     return all_params[env_name]
-
-
-def list_leaf_dirs(base_path):
-    result = []
-    for root, dirs, files in os.walk(base_path):
-        if not dirs:
-            result.append(root)
-    return sorted(result)
