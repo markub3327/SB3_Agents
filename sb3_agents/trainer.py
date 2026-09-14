@@ -65,19 +65,6 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    # Initialize WanDB
-    run = wandb.init(
-        project="ppo-sb3",
-        config={
-            "policy_type": config["policy"],
-            "total_timesteps": config["n_timesteps"],
-            "env_name": args.env,
-        },
-        sync_tensorboard=True,  # auto-upload sb3's tensorboard metrics
-        monitor_gym=False,  # auto-upload the videos of agents playing the game
-        save_code=False,
-    )
-
     # For Atari console
     if "ale" in args.emulator.lower():
         # Load PPO configuration
@@ -114,6 +101,19 @@ if __name__ == "__main__":
             norm_reward=config["normalize"]["norm_reward"],
             gamma=config["gamma"],
         )
+
+    # Initialize WanDB
+    run = wandb.init(
+        project="ppo-sb3",
+        config={
+            "policy_type": config["policy"],
+            "total_timesteps": config["n_timesteps"],
+            "env_name": args.env,
+        },
+        sync_tensorboard=True,  # auto-upload sb3's tensorboard metrics
+        monitor_gym=False,  # auto-upload the videos of agents playing the game
+        save_code=False,
+    )
 
     # Use deterministic actions for evaluation
     eval_callback = EvalCallback(

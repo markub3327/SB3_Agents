@@ -35,6 +35,9 @@ export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 # ===================================================================
 # Your code
 # ===================================================================
+export WANDB_API_KEY=eebd20787e3c9bbde2069bb042f2c1e1e94c1bcd
+export HF_TOKEN="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"
+
 nvidia-smi
 
 ### Atari 2600

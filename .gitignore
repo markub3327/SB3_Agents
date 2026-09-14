@@ -7,3 +7,7 @@ slurm/
 videos/
 
 logs/
+
+wandb/
+
+__pycache__/
