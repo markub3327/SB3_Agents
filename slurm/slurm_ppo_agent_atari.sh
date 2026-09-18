@@ -5,12 +5,12 @@
 #SBATCH --qos=perun2601343
 #SBATCH --output=logs/%x_%j.out
 #SBATCH --error=logs/%x_%j.err
-#SBATCH --partition=gpu_short
+#SBATCH --partition=gpu_long
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=32
 #SBATCH --gres=gpu:1
-#SBATCH --time=1-00:00:00
+#SBATCH --time=4-00:00:00
 
 # Initialize Conda
 source ~/miniconda3/etc/profile.d/conda.sh

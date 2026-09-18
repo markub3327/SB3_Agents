@@ -3,20 +3,23 @@ import yaml
 from transformers import AutoImageProcessor, AutoModel
 
 
-class ImageFilterForQueue:
-    _model_id = "facebook/dinov3-vitl16-pretrain-lvd1689m"  # ViT-0.3B (distilled)
+class FrameFilterForQueue:
+    # DinoV3 Vision Transformer model
+    _model_id = "facebook/dinov3-vith16plus-pretrain-lvd1689m"  # ViT-0.8B
 
     def __init__(self):
         super().__init__()
-        # Image filter for redundant images in queue (DinoV3 Vision Transformer model)
+        # Image filter for redundant images in queue
         self.processor = AutoImageProcessor.from_pretrained(self._model_id)
-        self.model = AutoModel.from_pretrained(self._model_id, device_map="cuda")
+        self.model = AutoModel.from_pretrained(self._model_id, device_map="auto")
 
-    def get_embedding(self, inputs):
-        with torch.no_grad():  # Don't store gradients
-            inputs = self.processor(images=inputs, return_tensors="pt").to(
-                self.model.device
-            )
+    def get_embedding(self, images):
+        if not isinstance(images, list):
+            images = list(images)
+        inputs = self.processor(images=images, return_tensors="pt").to(
+            self.model.device
+        )
+        with torch.inference_mode():
             outputs = self.model(**inputs)
         return outputs.pooler_output.cpu().numpy()
 

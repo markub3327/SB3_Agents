@@ -69,34 +69,54 @@ if __name__ == "__main__":
     if "ale" in args.emulator.lower():
         # Load PPO configuration
         config = load_hyperparams(args.emulator, "./sb3_agents/hyperparams.yml")
-        # Create environment
-        vec_env = make_atari_env(args.env, n_envs=config["n_envs"], seed=42)
-        vec_env = VecFrameStack(vec_env, n_stack=config["frame_stack"])
-        vec_env = VecTransposeImage(vec_env)
+        # Create train environment
+        train_env = make_atari_env(args.env, n_envs=config["n_envs"], wrapper_kwargs={"terminal_on_life_loss": True}, seed=42)
+        train_env = VecFrameStack(train_env, n_stack=config["frame_stack"])
+        train_env = VecTransposeImage(train_env)
+        # Create eval environment
+        eval_env = make_atari_env(args.env, n_envs=config["n_envs"], wrapper_kwargs={"terminal_on_life_loss": False}, seed=42)
+        eval_env = VecFrameStack(eval_env, n_stack=config["frame_stack"])
+        eval_env = VecTransposeImage(eval_env)
     # For stable-retro consoles
     elif "retro" in args.emulator.lower():
         # Load PPO configuration
         config = load_hyperparams(args.emulator, "./sb3_agents/hyperparams.yml")
-        # Create environment
-        vec_env = SubprocVecEnv([make_retro_env(args.env)] * config["n_envs"])
-        vec_env = VecFrameStack(vec_env, n_stack=config["frame_stack"])
-        vec_env = VecTransposeImage(vec_env)
-        vec_env.action_space.seed(42)
-        vec_env.seed(42)
+        # Create train environment
+        train_env = SubprocVecEnv([make_retro_env(args.env)] * config["n_envs"])
+        train_env = VecFrameStack(train_env, n_stack=config["frame_stack"])
+        train_env = VecTransposeImage(train_env)
+        train_env.action_space.seed(42)
+        train_env.seed(42)
+        # Create eval environment
+        eval_env = SubprocVecEnv([make_retro_env(args.env)] * config["n_envs"])
+        eval_env = VecFrameStack(eval_env, n_stack=config["frame_stack"])
+        eval_env = VecTransposeImage(eval_env)
+        eval_env.action_space.seed(42)
+        eval_env.seed(42)
     # For Classic
     elif "classic" in args.emulator.lower():
         # Load PPO configuration
         config = load_hyperparams(args.env, "./sb3_agents/hyperparams.yml")
-        # Create environment
-        vec_env = make_vec_env(args.env, n_envs=config["n_envs"], seed=42)
+        # Create train environment
+        train_env = make_vec_env(args.env, n_envs=config["n_envs"], seed=42)
+        # Create eval environment
+        eval_env = make_vec_env(args.env, n_envs=config["n_envs"], seed=42)
         if config["policy"] == "CnnPolicy":
-            vec_env = VecTransposeImage(vec_env)
+            train_env = VecTransposeImage(train_env)
+            eval_env = VecTransposeImage(eval_env)
 
     # Use normalization
     if config["normalize"]:
-        vec_env = VecNormalize(
-            vec_env,
+        train_env = VecNormalize(
+            train_env,
             training=True,
+            norm_obs=config["normalize"]["norm_obs"],
+            norm_reward=config["normalize"]["norm_reward"],
+            gamma=config["gamma"],
+        )
+        eval_env = VecNormalize(
+            eval_env,
+            training=False,
             norm_obs=config["normalize"]["norm_obs"],
             norm_reward=config["normalize"]["norm_reward"],
             gamma=config["gamma"],
@@ -117,7 +137,7 @@ if __name__ == "__main__":
 
     # Use deterministic actions for evaluation
     eval_callback = EvalCallback(
-        vec_env,
+        eval_env,
         n_eval_episodes=10,
         eval_freq=max(config["eval_freq"] // config["n_envs"], 1),
         best_model_save_path=f"./save/{args.env}",
@@ -137,7 +157,7 @@ if __name__ == "__main__":
     # Create the PPO model
     model = PPO(
         policy=config["policy"],
-        env=vec_env,
+        env=train_env,
         n_steps=config["n_steps"],
         gamma=config["gamma"],
         gae_lambda=config["gae_lambda"],
