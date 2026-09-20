@@ -3,33 +3,41 @@ import cv2
 import numpy as np
 from datasets import load_from_disk
 
-### Atari 2600
+### Environments
 env_names = (
-    "AssaultNoFrameskip-v4",
-    "AtlantisNoFrameskip-v4",
-    "BankHeistNoFrameskip-v4",
-    "BoxingNoFrameskip-v4",
-    "BreakoutNoFrameskip-v4",
-    "CrazyClimberNoFrameskip-v4",
-    "DefenderNoFrameskip-v4",
-    "DemonAttackNoFrameskip-v4",
-    "DoubleDunkNoFrameskip-v4",
-    "EnduroNoFrameskip-v4",
-    "FishingDerbyNoFrameskip-v4",
-    "FreewayNoFrameskip-v4",
-    "GopherNoFrameskip-v4",
-    "JamesbondNoFrameskip-v4",
-    "KangarooNoFrameskip-v4",
-    "KrullNoFrameskip-v4",
-    "KungFuMasterNoFrameskip-v4",
-    "PhoenixNoFrameskip-v4",
-    "PongNoFrameskip-v4",
-    "QbertNoFrameskip-v4",
-    "RoadRunnerNoFrameskip-v4",
-    "StarGunnerNoFrameskip-v4",
-    "TutankhamNoFrameskip-v4",
-    "UpNDownNoFrameskip-v4",
-    "VideoPinballNoFrameskip-v4",
+    ### Atari 2600
+    # "AssaultNoFrameskip-v4",
+    # "AtlantisNoFrameskip-v4",
+    # "BankHeistNoFrameskip-v4",
+    # "BoxingNoFrameskip-v4",
+    # "BreakoutNoFrameskip-v4",
+    # "CrazyClimberNoFrameskip-v4",
+    # "DefenderNoFrameskip-v4",
+    # "DemonAttackNoFrameskip-v4",
+    # "DoubleDunkNoFrameskip-v4",
+    # "EnduroNoFrameskip-v4",
+    # "FishingDerbyNoFrameskip-v4",
+    # "FreewayNoFrameskip-v4",
+    # "GopherNoFrameskip-v4",
+    # "JamesbondNoFrameskip-v4",
+    # "KangarooNoFrameskip-v4",
+    # "KrullNoFrameskip-v4",
+    # "KungFuMasterNoFrameskip-v4",
+    # "PhoenixNoFrameskip-v4",
+    # "PongNoFrameskip-v4",
+    # "QbertNoFrameskip-v4",
+    # "RoadRunnerNoFrameskip-v4",
+    # "StarGunnerNoFrameskip-v4",
+    # "TutankhamNoFrameskip-v4",
+    # "UpNDownNoFrameskip-v4",
+    # "VideoPinballNoFrameskip-v4",
+
+    ### Classic Environments
+    "Pendulum-v1",
+    "CartPole-v1",
+    "MountainCar-v0",
+    "Acrobot-v1",
+    "LunarLander-v3",
 )
 
 
@@ -46,16 +54,12 @@ for env_name in env_names:
     )
 
     for row in ds:
-        # Print the current agent's name
-        print(f"State:\n{row['messages']['state']}")
-        print(f"Action Mask:\n{row['messages']['action_mask']}")
-
-        for frame_id, img in enumerate(row['images']):            
+        for frame_id, img in enumerate(row['images']):
             # Convert to BGR format for OpenCV
             frame = cv2.cvtColor(np.asarray(img), cv2.COLOR_RGB2BGR)
 
             # Resize the frame
-            frame = cv2.resize(frame, (400, 400), interpolation=cv2.INTER_LANCZOS4)
+            frame = cv2.resize(frame, (1000, 1000), interpolation=cv2.INTER_LANCZOS4)
 
             # Add text to the frame
             cv2.putText(

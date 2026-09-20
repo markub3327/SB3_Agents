@@ -2,7 +2,9 @@ import argparse
 import ale_py
 import gymnasium
 import stable_retro as retro
-from gymnasium.wrappers import TimeLimit
+import minigrid
+from minigrid.wrappers import FlatObsWrapper
+from gymnasium.wrappers import TimeLimit, FlattenObservation
 from schedule import CosineAnnealingLR
 from stable_baselines3 import PPO
 from stable_baselines3.common.atari_wrappers import (
@@ -44,6 +46,22 @@ def make_retro_env(env_name):
 
     return _body
 
+def make_minigrid_env(env_name):
+    def _body():
+        env = gymnasium.make(env_name, render_mode="rgb_array")
+        env = FlatObsWrapper(env)
+        return env
+
+    return _body
+
+def make_toy_text_env(env_name):
+    def _body():
+        env = gymnasium.make(env_name, render_mode="rgb_array")
+        env = FlattenObservation(env)
+        return env
+
+    return _body
+
 
 if __name__ == "__main__":
     # Parse command-line arguments
@@ -54,8 +72,8 @@ if __name__ == "__main__":
         "--emulator",
         type=str,
         required=True,
-        choices=["ale", "retro", "classic"],
-        help="The name of the emulator ['ale', 'retro', 'classic']",
+        choices=["ale", "retro", "classic", "minigrid", "toy"],
+        help="The name of the emulator ['ale', 'retro', 'classic', 'minigrid', 'toy']",
     )
     parser.add_argument(
         "--env",
@@ -70,11 +88,23 @@ if __name__ == "__main__":
         # Load PPO configuration
         config = load_hyperparams(args.emulator, "./sb3_agents/hyperparams.yml")
         # Create train environment
-        train_env = make_atari_env(args.env, n_envs=config["n_envs"], wrapper_kwargs={"terminal_on_life_loss": True}, seed=42)
+        train_env = make_atari_env(
+            args.env,
+            n_envs=config["n_envs"],
+            wrapper_kwargs={"terminal_on_life_loss": True},
+            seed=42,
+            vec_env_cls=SubprocVecEnv,
+        )
         train_env = VecFrameStack(train_env, n_stack=config["frame_stack"])
         train_env = VecTransposeImage(train_env)
         # Create eval environment
-        eval_env = make_atari_env(args.env, n_envs=config["n_envs"], wrapper_kwargs={"terminal_on_life_loss": False}, seed=42)
+        eval_env = make_atari_env(
+            args.env,
+            n_envs=config["n_envs"],
+            wrapper_kwargs={"terminal_on_life_loss": False},
+            seed=42,
+            vec_env_cls=SubprocVecEnv,
+        )
         eval_env = VecFrameStack(eval_env, n_stack=config["frame_stack"])
         eval_env = VecTransposeImage(eval_env)
     # For stable-retro consoles
@@ -82,28 +112,78 @@ if __name__ == "__main__":
         # Load PPO configuration
         config = load_hyperparams(args.emulator, "./sb3_agents/hyperparams.yml")
         # Create train environment
-        train_env = SubprocVecEnv([make_retro_env(args.env)] * config["n_envs"])
+        train_env = make_vec_env(
+            make_retro_env(args.env),
+            n_envs=config["n_envs"],
+            seed=42,
+            vec_env_cls=SubprocVecEnv,
+        )
         train_env = VecFrameStack(train_env, n_stack=config["frame_stack"])
         train_env = VecTransposeImage(train_env)
-        train_env.action_space.seed(42)
-        train_env.seed(42)
         # Create eval environment
-        eval_env = SubprocVecEnv([make_retro_env(args.env)] * config["n_envs"])
+        eval_env = make_vec_env(
+            make_retro_env(args.env),
+            n_envs=config["n_envs"],
+            seed=42,
+            vec_env_cls=SubprocVecEnv,
+        )
         eval_env = VecFrameStack(eval_env, n_stack=config["frame_stack"])
         eval_env = VecTransposeImage(eval_env)
-        eval_env.action_space.seed(42)
-        eval_env.seed(42)
     # For Classic
     elif "classic" in args.emulator.lower():
         # Load PPO configuration
         config = load_hyperparams(args.env, "./sb3_agents/hyperparams.yml")
         # Create train environment
-        train_env = make_vec_env(args.env, n_envs=config["n_envs"], seed=42)
+        train_env = make_vec_env(
+            args.env,
+            n_envs=config["n_envs"],
+            seed=42,
+            vec_env_cls=SubprocVecEnv,
+        )
         # Create eval environment
-        eval_env = make_vec_env(args.env, n_envs=config["n_envs"], seed=42)
+        eval_env = make_vec_env(
+            args.env,
+            n_envs=config["n_envs"],
+            seed=42,
+            vec_env_cls=SubprocVecEnv,
+        )
         if config["policy"] == "CnnPolicy":
             train_env = VecTransposeImage(train_env)
             eval_env = VecTransposeImage(eval_env)
+    elif "minigrid" in args.emulator.lower():
+        # Load PPO configuration
+        config = load_hyperparams(args.env, "./sb3_agents/hyperparams.yml")
+        # Create train environment
+        train_env = make_vec_env(
+            make_minigrid_env(args.env),
+            n_envs=config["n_envs"],
+            seed=42,
+            vec_env_cls=SubprocVecEnv,
+        )
+        # Create eval environment
+        eval_env = make_vec_env(
+            make_minigrid_env(args.env),
+            n_envs=config["n_envs"],
+            seed=42,
+            vec_env_cls=SubprocVecEnv,
+        )
+    elif "toy" in args.emulator.lower():
+        # Load PPO configuration
+        config = load_hyperparams(args.env, "./sb3_agents/hyperparams.yml")
+        # Create train environment
+        train_env = make_vec_env(
+            make_toy_text_env(args.env),
+            n_envs=config["n_envs"],
+            seed=42,
+            vec_env_cls=SubprocVecEnv,
+        )
+        # Create eval environment
+        eval_env = make_vec_env(
+            make_toy_text_env(args.env),
+            n_envs=config["n_envs"],
+            seed=42,
+            vec_env_cls=SubprocVecEnv,
+        )
 
     # Use normalization
     if config["normalize"]:

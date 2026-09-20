@@ -23,5 +23,11 @@
   "StarGunnerNoFrameskip-v4": "Space Gunner",
   "TutankhamNoFrameskip-v4": "Tomb Explorer",
   "UpNDownNoFrameskip-v4": "Stunt Driver",
-  "VideoPinballNoFrameskip-v4": "Pinball Player"
+  "VideoPinballNoFrameskip-v4": "Pinball Player",
+
+  "Pendulum-v1": "Pendulum Balancer",
+  "CartPole-v1": "Pole Balancer",
+  "MountainCar-v0": "Mountain Driver",
+  "Acrobot-v1": "Swing Controller",
+  "LunarLander-v3": "Spacecraft Commander"
 }

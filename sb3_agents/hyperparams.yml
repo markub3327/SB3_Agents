@@ -26,3 +26,324 @@ ale:
     ortho_init: true
     activation_fn: 'relu'
   eval_freq: 10000
+
+# Tuned
+Pendulum-v1:
+  normalize: false
+  policy: 'MlpPolicy'
+  n_envs: 4
+  n_steps: 1024
+  batch_size: 256
+  gae_lambda: 0.95
+  gamma: 0.9
+  n_timesteps: !!float 1e5
+  n_epochs: 10
+  ent_coef: 0.0
+  learning_rate: !!float 1e-3
+  clip_range: 0.2
+  vf_coef: 0.5 
+  normalize_advantage: true
+  max_grad_norm: 0.5
+  policy_kwargs:
+      optimizer_class: 'AdamW'
+      optimizer_kwargs:
+        eps: !!float 1.0e-5
+      ortho_init: true
+      activation_fn: 'tanh'
+  eval_freq: 10000
+
+# Tuned
+CartPole-v1:
+  normalize: false
+  n_envs: 8
+  n_timesteps: !!float 1e5
+  policy: 'MlpPolicy'
+  n_steps: 32
+  batch_size: 256
+  gae_lambda: 0.8
+  gamma: 0.98
+  n_epochs: 20
+  ent_coef: 0.0
+  learning_rate: 0.001
+  clip_range: 0.2
+  vf_coef: 0.5
+  normalize_advantage: true
+  max_grad_norm: 0.5
+  policy_kwargs:
+    optimizer_class: 'AdamW'
+    optimizer_kwargs:
+      eps: !!float 1.0e-5
+    ortho_init: true
+    activation_fn: 'tanh'
+  eval_freq: 10000
+
+MountainCar-v0:
+  normalize:
+    norm_obs: true
+    norm_reward: true
+  n_envs: 16
+  n_timesteps: !!float 1e6
+  policy: 'MlpPolicy'
+  n_steps: 16
+  gae_lambda: 0.98
+  gamma: 0.99
+  n_epochs: 4
+  ent_coef: 0.0
+  batch_size: 256
+  learning_rate: 0.001
+  clip_range: 0.2
+  vf_coef: 0.5
+  normalize_advantage: true
+  max_grad_norm: 0.5
+  policy_kwargs:
+    optimizer_class: 'AdamW'
+    optimizer_kwargs:
+      eps: !!float 1.0e-5
+    ortho_init: true
+    activation_fn: 'tanh'
+  eval_freq: 10000
+
+Acrobot-v1:
+  normalize:
+    norm_obs: true
+    norm_reward: true
+  n_envs: 16
+  n_timesteps: !!float 1e6
+  policy: 'MlpPolicy'
+  n_steps: 256
+  gae_lambda: 0.94
+  gamma: 0.99
+  n_epochs: 4
+  ent_coef: 0.0
+  batch_size: 256
+  learning_rate: 0.001
+  clip_range: 0.2
+  vf_coef: 0.5
+  normalize_advantage: true
+  max_grad_norm: 0.5
+  policy_kwargs:
+    optimizer_class: 'AdamW'
+    optimizer_kwargs:
+      eps: !!float 1.0e-5
+    ortho_init: true
+    activation_fn: 'tanh'
+  eval_freq: 10000
+
+LunarLander-v3:
+  normalize: false
+  n_envs: 16
+  n_timesteps: !!float 1e6
+  policy: 'MlpPolicy'
+  n_steps: 1024
+  batch_size: 256
+  gae_lambda: 0.98
+  gamma: 0.999
+  n_epochs: 4
+  ent_coef: 0.01
+  learning_rate: 0.001
+  clip_range: 0.2
+  vf_coef: 0.5
+  normalize_advantage: true
+  max_grad_norm: 0.5
+  policy_kwargs:
+    optimizer_class: 'AdamW'
+    optimizer_kwargs:
+      eps: !!float 1.0e-5
+    ortho_init: true
+    activation_fn: 'tanh'
+  eval_freq: 10000
+
+# wrong normalization, wrong reward function (failure must be negative reward)
+MiniGrid-Empty-Random-5x5-v0: &minigrid-defaults
+  normalize: false
+  n_envs: 16
+  n_timesteps: !!float 1e7
+  policy: 'MlpPolicy'
+  n_steps: 128
+  batch_size: 256
+  gae_lambda: 0.95
+  gamma: 0.99
+  n_epochs: 10
+  ent_coef: 0.01
+  learning_rate: 2.5e-4
+  clip_range: 0.2
+  vf_coef: 0.5
+  normalize_advantage: true
+  max_grad_norm: 0.5
+  policy_kwargs:
+    optimizer_class: 'AdamW'
+    optimizer_kwargs:
+      eps: !!float 1.0e-5
+    ortho_init: true
+    activation_fn: 'tanh'
+  eval_freq: 10000
+
+MiniGrid-FourRooms-v0:
+  <<: *minigrid-defaults
+  n_steps: 512
+
+MiniGrid-DoorKey-5x5-v0:
+  <<: *minigrid-defaults
+
+MiniGrid-MultiRoom-N4-S5-v1:
+  <<: *minigrid-defaults
+
+MiniGrid-Fetch-5x5-N2-v0:
+  <<: *minigrid-defaults
+
+MiniGrid-GoToDoor-5x5-v0:
+  <<: *minigrid-defaults
+
+MiniGrid-PutNear-6x6-N2-v0:
+  <<: *minigrid-defaults
+
+MiniGrid-RedBlueDoors-6x6-v0:
+  <<: *minigrid-defaults
+  n_steps: 512
+
+MiniGrid-KeyCorridorS3R1-v0:
+  <<: *minigrid-defaults
+
+MiniGrid-Unlock-v0:
+  <<: *minigrid-defaults
+
+MiniGrid-ObstructedMaze-2Dlh-v0:
+  <<: *minigrid-defaults
+
+# Unsolved
+MiniGrid-BlockedUnlockPickup-v0:
+  <<: *minigrid-defaults
+
+MiniGrid-LavaCrossingS9N1-v0:
+  <<: *minigrid-defaults
+
+MiniGrid-SimpleCrossingS9N1-v0:
+  <<: *minigrid-defaults
+
+MiniGrid-DistShift2-v0:
+  <<: *minigrid-defaults
+
+MiniGrid-Dynamic-Obstacles-Random-5x5-v0:
+  <<: *minigrid-defaults
+
+MiniGrid-GoToObject-6x6-N2-v0:
+  <<: *minigrid-defaults
+
+MiniGrid-LavaGapS5-v0:
+  <<: *minigrid-defaults
+
+MiniGrid-LockedRoom-v0:
+  <<: *minigrid-defaults
+
+MiniGrid-MemoryS13Random-v0:
+  <<: *minigrid-defaults
+
+MiniGrid-ObstructedMaze-2Dlh-v0:
+  <<: *minigrid-defaults
+
+MiniGrid-ObstructedMaze-Full-v0:
+  <<: *minigrid-defaults
+
+MiniGrid-Playground-v0:
+  <<: *minigrid-defaults
+
+MiniGrid-UnlockPickup-v0:
+  <<: *minigrid-defaults
+
+Blackjack-v1:
+  normalize: false
+  n_envs: 16
+  n_timesteps: !!float 1e7
+  policy: 'MlpPolicy'
+  n_steps: 128
+  n_epochs: 10
+  batch_size: 256
+  gamma: 0.99
+  gae_lambda: 0.95
+  ent_coef: 0.01
+  learning_rate: 2.5e-4
+  clip_range: 0.2
+  vf_coef: 0.5
+  normalize_advantage: true
+  max_grad_norm: 0.5
+  policy_kwargs:
+    optimizer_class: 'AdamW'
+    optimizer_kwargs:
+      eps: !!float 1.0e-5
+    ortho_init: true
+    activation_fn: 'tanh'
+  eval_freq: 10000
+
+# Unsolved
+Taxi-v4:
+  normalize: false
+  n_envs: 16
+  n_timesteps: !!float 1e7
+  policy: 'MlpPolicy'
+  n_steps: 512
+  n_epochs: 5
+  batch_size: 256
+  gamma: 0.99
+  gae_lambda: 0.95
+  ent_coef: 0.01
+  learning_rate: 5e-4
+  clip_range: 0.2
+  vf_coef: 0.5
+  normalize_advantage: true
+  max_grad_norm: 0.5
+  policy_kwargs:
+      optimizer_class: 'AdamW'
+      optimizer_kwargs:
+        eps: !!float 1.0e-5
+      ortho_init: true
+      activation_fn: 'tanh'
+  eval_freq: 10000
+
+# wrong not working after step 2
+CliffWalking-v1:
+  normalize: false
+  n_envs: 16
+  n_timesteps: !!float 1e7
+  policy: 'MlpPolicy'
+  n_steps: 128
+  n_epochs: 10
+  batch_size: 256
+  gamma: 0.99
+  gae_lambda: 0.95
+  ent_coef: 0.01
+  learning_rate: 2.5e-4
+  clip_range: 0.2
+  vf_coef: 0.5
+  normalize_advantage: true
+  max_grad_norm: 0.5
+  policy_kwargs:
+      optimizer_class: 'AdamW'
+      optimizer_kwargs:
+        eps: !!float 1.0e-5
+      ortho_init: true
+      activation_fn: 'tanh'
+  eval_freq: 10000
+
+FrozenLake-v1:
+  normalize: false
+  n_envs: 16
+  n_timesteps: !!float 1e7
+  policy: 'MlpPolicy'
+  n_steps: 128
+  n_epochs: 10
+  batch_size: 256
+  gamma: 0.99
+  gae_lambda: 0.95
+  ent_coef: 0.01
+  learning_rate: 2.5e-4
+  clip_range: 0.2
+  vf_coef: 0.5
+  normalize_advantage: true
+  max_grad_norm: 0.5
+  policy_kwargs:
+      optimizer_class: 'AdamW'
+      optimizer_kwargs:
+        eps: !!float 1.0e-5
+      ortho_init: true
+      activation_fn: 'tanh'
+  eval_freq: 10000
