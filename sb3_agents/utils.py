@@ -13,7 +13,7 @@ class FrameFilterForQueue:
         self.processor = AutoImageProcessor.from_pretrained(self._model_id)
         self.model = AutoModel.from_pretrained(self._model_id, device_map="auto")
 
-    def get_embedding(self, images):
+    def _get_embedding(self, images):
         if not isinstance(images, list):
             images = list(images)
         inputs = self.processor(images=images, return_tensors="pt").to(
@@ -21,7 +21,12 @@ class FrameFilterForQueue:
         )
         with torch.inference_mode():
             outputs = self.model(**inputs)
-        return outputs.pooler_output.cpu().numpy()
+        return outputs.pooler_output
+
+    def get_similarity(self, images):
+        imgs_embed = self._get_embedding(images)
+        sims = torch.cosine_similarity(imgs_embed, imgs_embed)
+        return sims.cpu().numpy()
 
 def load_hyperparams(env_name, file_path):
     """

@@ -25,6 +25,7 @@ env_names = (
 
 )
 
+
 def main():
     # Initialize the frame filter
     img_filter = FrameFilterForQueue()
@@ -43,18 +44,17 @@ def main():
         )
 
         def dataset_generator(shards):
+            # Init environment
+            env = gymnasium.make(env_name, render_mode="rgb_array")
+            env = AtariPreprocessing(
+                env,
+                noop_max=30,
+                frame_skip=4,
+                grayscale_obs=True,
+            )
+            env = FrameStackObservation(env, stack_size=4, padding_type="zero")
+            env = TransformReward(env, lambda r: np.sign(float(r)))
             for shard in shards:
-                # Initialise the environment
-                env = gymnasium.make(env_name, render_mode="rgb_array")
-                env = AtariPreprocessing(
-                    env,
-                    noop_max=30,
-                    frame_skip=4,
-                    grayscale_obs=True,
-                )
-                env = FrameStackObservation(env, stack_size=4, padding_type="zero")
-                env = TransformReward(env, lambda r: np.sign(float(r)))
-
                 # Initialize the frame queue
                 frame_queue = deque(maxlen=8)
         
@@ -63,11 +63,10 @@ def main():
                     "frames": [],
                     "action": [],
                     "reward": [],
-                    "termination": [],
-                    "truncation": [],
-                    "started": [True],
+                    "truncated": [],
                     "lives": [],
-                    "img_embed": [],
+                    "status": [1],
+                    "frames_similarity": [],
                 }
 
                 # Reset the environment for a new game
@@ -76,7 +75,7 @@ def main():
 
                 # The initial frame
                 frame = env.render()
-                frame_queue.append(np.zeros_like(frame))  # Add a zero frame for the initial state
+                frame_queue.append(np.zeros_like(frame))  # Add a zero frame for the initial observation
 
                 # Run the game loop
                 # while True:
@@ -89,10 +88,10 @@ def main():
                     )
 
                     # Get the embedding for the current frame queue
-                    print("rendered_img", len(frame_queue))
-                    img_embed = img_filter.get_embedding(frame_queue)
-                    print("img_embed shape", img_embed.shape)
-                    player['img_embed'].append(img_embed)
+                    print("rendered frames", len(frame_queue))
+                    frames_similarity = img_filter.get_similarity(frame_queue)
+                    print("frames_similarity shape", frames_similarity.shape)
+                    player['frames_similarity'].append(frames_similarity)
 
                     # Get the number of lives
                     if 'lives' in info:
@@ -105,26 +104,31 @@ def main():
                     # step (transition) through the environment with the action
                     # receiving the next observation, reward and if the episode has terminated or truncated
                     observation, reward, terminated, truncated, info = env.step(action)
-                    print("info", info)
-
                     player['reward'].append(reward)
-                    player['termination'].append(terminated)
-                    player['truncation'].append(truncated)
+                    player['truncated'].append(truncated)
 
                     # If the episode has ended then we can reset to start a new episode
                     if terminated or truncated:
+                        # Win
+                        if reward == 1.0:
+                            players[agent]['status'].append(2)
+                        # Lose
+                        elif reward == -1.0:
+                            players[agent]['status'].append(3)
+                        # Draw
+                        else:
+                            players[agent]['status'].append(4)
                         break
                     else:
-                        player['started'].append(False)
+                        player['status'].append(0)
 
             print(f"Length of player['frames']: {len(player['frames'])}")
             print(f"Length of player['action']: {len(player['action'])}")
             print(f"Length of player['reward']: {len(player['reward'])}")
-            print(f"Length of player['termination']: {len(player['termination'])}")
-            print(f"Length of player['truncation']: {len(player['truncation'])}")
-            print(f"Length of player['started']: {len(player['started'])}")
+            print(f"Length of player['truncated']: {len(player['truncated'])}")
+            print(f"Length of player['status']: {len(player['status'])}")
             print(f"Length of player['lives']: {len(player['lives'])}")
-            print(f"Length of player['img_embed']: {len(player['img_embed'])}")
+            print(f"Length of player['frames_similarity']: {len(player['frames_similarity'])}")
 
             # Yield examples for the selected player
             for step in range(
@@ -134,16 +138,14 @@ def main():
                     "messages": {
                         "game": env_name,
                         "name": player_names.get(env_name, None),
-                        "state": None,  # Placeholder for state information
+                        "observation": None,  # Placeholder for observation information
                         "action_mask": None,  # Placeholder for action mask
                         "action": str(player['action'][step]),
                         "reward": player['reward'][step],
-                        "draw": None,  # Placeholder for draw information
-                        "termination": player['termination'][step],
-                        "truncation": player['truncation'][step],
-                        "started": player['started'][step],
+                        "truncated": player['truncated'][step],
+                        "status": player['status'][step],
                         "lives": player['lives'][step] if len(player['lives']) > 0 else None,
-                        "img_embed": player['img_embed'][step],
+                        "frames_similarity": player['frames_similarity'][step],
                     },
                     "images": player['frames'][step],
                 }
@@ -161,16 +163,14 @@ def main():
                     "messages": {
                         "game": Value("string"),
                         "name": Value("string"),
-                        "state": Value("string"),
+                        "observation": Value("string"),
                         "action_mask": Value("string"),
                         "action": Value("string"),
                         "reward": Value("float32"),
-                        "draw": Value("bool"),
-                        "termination": Value("bool"),
-                        "truncation": Value("bool"),
-                        "started": Value("bool"),
+                        "truncated": Value("bool"),
+                        "status": Value("int32"),
                         "lives": Value("int32"),
-                        "img_embed": Sequence(Sequence(Value("float32"))),
+                        "frames_similarity": Sequence(Sequence(Value("float32"))),
                     },
                     "images": Sequence(Image()),
                 }

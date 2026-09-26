@@ -4,7 +4,7 @@ import numpy as np
 from datasets import load_from_disk
 
 ### Environments
-env_names = (
+env_names = {
     ### Atari 2600
     # "AssaultNoFrameskip-v4",
     # "AtlantisNoFrameskip-v4",
@@ -32,18 +32,28 @@ env_names = (
     # "UpNDownNoFrameskip-v4",
     # "VideoPinballNoFrameskip-v4",
 
-    ### Classic Environments
-    "Pendulum-v1",
-    "CartPole-v1",
-    "MountainCar-v0",
-    "Acrobot-v1",
-    "LunarLander-v3",
-)
+    "Blackjack-v1": {"color": "black"},
+    "FrozenLake-v1": {"color": "black"},
 
+    "MiniGrid-UnlockPickup-v0": {"color": "white"},
+    "MiniGrid-LavaGapS5-v0": {"color": "white"},
+    "MiniGrid-GoToObject-6x6-N2-v0": {"color": "white"},
+    "MiniGrid-Dynamic-Obstacles-Random-5x5-v0": {"color": "white"},
+    "MiniGrid-SimpleCrossingS9N1-v0": {"color": "white"},
+    "MiniGrid-LavaCrossingS9N1-v0": {"color": "white"},
+    "MiniGrid-Unlock-v0": {"color": "white"},
+    "MiniGrid-KeyCorridorS3R1-v0": {"color": "white"},
+    "MiniGrid-RedBlueDoors-6x6-v0": {"color": "white"},
+    "MiniGrid-GoToDoor-5x5-v0": {"color": "white"},
+    "MiniGrid-Fetch-5x5-N2-v0": {"color": "white"},
+    "MiniGrid-DoorKey-5x5-v0": {"color": "white"},
+    "MiniGrid-Empty-Random-5x5-v0": {"color": "white"},
+}
 
-for env_name in env_names:
+for env_name in env_names.keys():
     # Load the dataset from disk
     ds = load_from_disk(f"./dataset/{env_name}")
+    print(f"Size of dataset for {env_name}: {len(ds)}")
 
     # Create a video writer object to save the frames as a video
     video_out = cv2.VideoWriter(
@@ -54,6 +64,9 @@ for env_name in env_names:
     )
 
     for row in ds:
+        print(f"Observation:\n{row['messages']['observation']}")
+        print(f"Info:\n{row['messages']['info']}")
+
         for frame_id, img in enumerate(row['images']):
             # Convert to BGR format for OpenCV
             frame = cv2.cvtColor(np.asarray(img), cv2.COLOR_RGB2BGR)
@@ -68,7 +81,7 @@ for env_name in env_names:
                 (40, 70),
                 cv2.FONT_HERSHEY_DUPLEX,
                 0.8,
-                (234, 232, 233),
+                (0, 18, 25) if env_names[env_name]["color"] == "black" else (234, 232, 233),
                 2,
                 cv2.LINE_AA,
             )
@@ -78,7 +91,7 @@ for env_name in env_names:
                 (40, 100),
                 cv2.FONT_HERSHEY_DUPLEX,
                 0.8,
-                (234, 232, 233),
+                (0, 18, 25) if env_names[env_name]["color"] == "black" else (234, 232, 233),
                 2,
                 cv2.LINE_AA,
             )
@@ -88,7 +101,7 @@ for env_name in env_names:
                 (40, 130),
                 cv2.FONT_HERSHEY_DUPLEX,
                 0.8,
-                (234, 232, 233),
+                (0, 18, 25) if env_names[env_name]["color"] == "black" else (234, 232, 233),
                 2,
                 cv2.LINE_AA,
             )
@@ -98,67 +111,37 @@ for env_name in env_names:
                 (40, 160),
                 cv2.FONT_HERSHEY_DUPLEX,
                 0.8,
-                (234, 232, 233),
+                (0, 18, 25) if env_names[env_name]["color"] == "black" else (234, 232, 233),
                 2,
                 cv2.LINE_AA,
             )
             cv2.putText(
                 frame,
-                f"Started: {row['messages']['started']}",
+                f"Status: {row['messages']['status']}",
                 (40, 190),
                 cv2.FONT_HERSHEY_DUPLEX,
                 0.8,
-                (234, 232, 233),
-                2,
-                cv2.LINE_AA,
-            )
-            cv2.putText(
-                frame,
-                f"Termination: {row['messages']['termination']}",
-                (40, 220),
-                cv2.FONT_HERSHEY_DUPLEX,
-                0.8,
-                (234, 232, 233),
-                2,
-                cv2.LINE_AA,
-            )
-            cv2.putText(
-                frame,
-                f"Truncation: {row['messages']['truncation']}",
-                (40, 250),
-                cv2.FONT_HERSHEY_DUPLEX,
-                0.8,
-                (234, 232, 233),
-                2,
-                cv2.LINE_AA,
-            )
-            cv2.putText(
-                frame,
-                f"Draw: {row['messages']['draw']}",
-                (40, 280),
-                cv2.FONT_HERSHEY_DUPLEX,
-                0.8,
-                (234, 232, 233),
+                (0, 18, 25) if env_names[env_name]["color"] == "black" else (234, 232, 233),
                 2,
                 cv2.LINE_AA,
             )
             cv2.putText(
                 frame,
                 f"Lives: {row['messages']['lives']}",
-                (40, 310),
+                (40, 220),
                 cv2.FONT_HERSHEY_DUPLEX,
                 0.8,
-                (234, 232, 233),
+                (0, 18, 25) if env_names[env_name]["color"] == "black" else (234, 232, 233),
                 2,
                 cv2.LINE_AA,
             )
             cv2.putText(
                 frame,
                 f"FrameID: {frame_id}",
-                (40, 340),
+                (40, 250),
                 cv2.FONT_HERSHEY_DUPLEX,
                 0.8,
-                (234, 232, 233),
+                (0, 18, 25) if env_names[env_name]["color"] == "black" else (234, 232, 233),
                 2,
                 cv2.LINE_AA,
             )

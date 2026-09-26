@@ -178,6 +178,7 @@ MiniGrid-Empty-Random-5x5-v0: &minigrid-defaults
     activation_fn: 'tanh'
   eval_freq: 10000
 
+# Unsolved
 MiniGrid-FourRooms-v0:
   <<: *minigrid-defaults
   n_steps: 512
@@ -185,6 +186,7 @@ MiniGrid-FourRooms-v0:
 MiniGrid-DoorKey-5x5-v0:
   <<: *minigrid-defaults
 
+# Unsolved
 MiniGrid-MultiRoom-N4-S5-v1:
   <<: *minigrid-defaults
 
@@ -194,6 +196,7 @@ MiniGrid-Fetch-5x5-N2-v0:
 MiniGrid-GoToDoor-5x5-v0:
   <<: *minigrid-defaults
 
+# Unsolved
 MiniGrid-PutNear-6x6-N2-v0:
   <<: *minigrid-defaults
 
@@ -207,9 +210,6 @@ MiniGrid-KeyCorridorS3R1-v0:
 MiniGrid-Unlock-v0:
   <<: *minigrid-defaults
 
-MiniGrid-ObstructedMaze-2Dlh-v0:
-  <<: *minigrid-defaults
-
 # Unsolved
 MiniGrid-BlockedUnlockPickup-v0:
   <<: *minigrid-defaults
@@ -220,6 +220,7 @@ MiniGrid-LavaCrossingS9N1-v0:
 MiniGrid-SimpleCrossingS9N1-v0:
   <<: *minigrid-defaults
 
+# Unsolved
 MiniGrid-DistShift2-v0:
   <<: *minigrid-defaults
 
@@ -232,18 +233,23 @@ MiniGrid-GoToObject-6x6-N2-v0:
 MiniGrid-LavaGapS5-v0:
   <<: *minigrid-defaults
 
+# Unsolved
 MiniGrid-LockedRoom-v0:
   <<: *minigrid-defaults
 
+# Unsolved
 MiniGrid-MemoryS13Random-v0:
   <<: *minigrid-defaults
 
+# Unsolved
 MiniGrid-ObstructedMaze-2Dlh-v0:
   <<: *minigrid-defaults
 
+# Unsolved
 MiniGrid-ObstructedMaze-Full-v0:
   <<: *minigrid-defaults
 
+# Unsolved
 MiniGrid-Playground-v0:
   <<: *minigrid-defaults
 
@@ -329,7 +335,7 @@ FrozenLake-v1:
   n_envs: 16
   n_timesteps: !!float 1e7
   policy: 'MlpPolicy'
-  n_steps: 128
+  n_steps: 512
   n_epochs: 10
   batch_size: 256
   gamma: 0.99

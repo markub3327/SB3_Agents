@@ -29,5 +29,22 @@
   "CartPole-v1": "Pole Balancer",
   "MountainCar-v0": "Mountain Driver",
   "Acrobot-v1": "Swing Controller",
-  "LunarLander-v3": "Spacecraft Commander"
+  "LunarLander-v3": "Spacecraft Commander",
+
+  "Blackjack-v1": "Card Strategist",
+  "FrozenLake-v1": "Safe Path Finder",
+
+  "MiniGrid-UnlockPickup-v0": "Locked Room Item Retriever",
+  "MiniGrid-LavaGapS5-v0": "Lava Hazard Navigator",
+  "MiniGrid-GoToObject-6x6-N2-v0": "Target Object Reacher",
+  "MiniGrid-Dynamic-Obstacles-Random-5x5-v0": "Moving Obstacle Navigator",
+  "MiniGrid-SimpleCrossingS9N1-v0": "Wall Gap Pathfinder",
+  "MiniGrid-LavaCrossingS9N1-v0": "Lava Crossing Pathfinder",
+  "MiniGrid-Unlock-v0": "Door Unlocker",
+  "MiniGrid-KeyCorridorS3R1-v0": "Key Finder and Object Retriever",
+  "MiniGrid-RedBlueDoors-6x6-v0": "Door Sequence Solver",
+  "MiniGrid-GoToDoor-5x5-v0": "Target Door Reacher",
+  "MiniGrid-Fetch-5x5-N2-v0": "Target Object Retriever",
+  "MiniGrid-DoorKey-5x5-v0": "Locked Goal Reacher",
+  "MiniGrid-Empty-Random-5x5-v0": "Goal Reacher"
 }

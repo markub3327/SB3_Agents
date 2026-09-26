@@ -56,7 +56,16 @@ def make_minigrid_env(env_name):
 
 def make_toy_text_env(env_name):
     def _body():
-        env = gymnasium.make(env_name, render_mode="rgb_array")
+        if env_name == "FrozenLake-v1":
+            env = gymnasium.make(
+                env_name,
+                render_mode="rgb_array",
+                reward_schedule=(1, -1, -0.01),
+                is_slippery=False,
+                map_name="8x8",
+            )
+        else:
+            env = gymnasium.make(env_name, render_mode="rgb_array")
         env = FlattenObservation(env)
         return env
 
