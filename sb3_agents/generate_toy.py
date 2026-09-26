@@ -15,7 +15,7 @@ from gymnasium.envs.toy_text.blackjack import sum_hand, usable_ace, is_bust
 os.environ["SDL_AUDIODRIVER"] = "dummy"
 
 # Metadata
-NUM_GAMES = 10
+NUM_GAMES = 1_000_000
 
 ### Toy Text
 env_names = (
