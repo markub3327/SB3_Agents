@@ -124,20 +124,24 @@ def main():
                         # draw
                         else:
                             status = 4
+                        player['status'].append(status)
+
                         if "Blackjack" in env_name:
                             if action == 1 and is_bust(env.unwrapped.player):
                                 player['info'].append("The player took an additional card and, as a result, the total value exceeded 21. This led to a bust, which concluded the episode.")
                             else:
                                 player['info'].append(f"The dealer's final hand has a value of {sum_hand(env.unwrapped.dealer)}.")
+
                         break
                     else:
                         if len(player["status"]) == 0:
                             status = 1
                         else:
                             status = 0
+                        player['status'].append(status)
+
                         if "Blackjack" in env_name:
                             player['info'].append(None)
-                    player['status'].append(status)
 
                 print(f"Length of player['frames']: {len(player['frames'])}")
                 print(f"Length of player['observation']: {len(player['observation'])}")
