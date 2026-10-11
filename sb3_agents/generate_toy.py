@@ -82,16 +82,13 @@ def main():
 
                     # Encode the current state
                     if "Blackjack" in env_name:
-                        player_value = sum_hand(env.unwrapped.player)
-                        dealer_value = sum_hand(env.unwrapped.dealer)
-                        obs = f"The player's hand has a value of {player_value}. The dealer's visible card has a value of {env.unwrapped.dealer[0]}."
+                        obs = f"The player's hand has a value of {sum_hand(env.unwrapped.player)}. The dealer's visible card has a value of {env.unwrapped.dealer[0]}."
                         if usable_ace(env.unwrapped.player) == 0:
                             obs += " The hand does not contain a usable Ace."
                         else:
                             obs += " The hand contains a usable Ace that is counted as 11."
-                        if dealer_value > 21:
+                        if is_bust(env.unwrapped.dealer):
                             obs += " The dealer's hand exceeds 21, resulting in a bust and an immediate win for the player."
-                        if 
                         obs += "\n"
                     elif "FrozenLake" in env_name:
                         desc = [[c.decode("utf-8") for c in line] for line in env.unwrapped.desc]
@@ -129,9 +126,9 @@ def main():
                             status = 4
                         if "Blackjack" in env_name:
                             if action == 1 and is_bust(env.unwrapped.player):
-                                player['info'].append(f"The player's final hand has a value of {player_value}.")
+                                player['info'].append("The player took an additional card and, as a result, the total value exceeded 21. This led to a bust, which concluded the episode.")
                             else:
-                                player['info'].append(f"The dealer's final hand has a value of {dealer_value}.")
+                                player['info'].append(f"The dealer's final hand has a value of {sum_hand(env.unwrapped.dealer)}.")
                         break
                     else:
                         if len(player["status"]) == 0:
