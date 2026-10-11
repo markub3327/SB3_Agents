@@ -1,11 +1,9 @@
-import datetime
 import gymnasium
 import os
 import json
 import hashlib
 import numpy as np
 from stable_baselines3 import PPO
-from utils import FrameFilterForQueue
 from datasets import Dataset, Features, Value, Image, Version, Sequence
 from collections import deque
 from gymnasium.wrappers import FlattenObservation
@@ -15,7 +13,7 @@ from gymnasium.envs.toy_text.blackjack import sum_hand, usable_ace, is_bust
 os.environ["SDL_AUDIODRIVER"] = "dummy"
 
 # Metadata
-NUM_GAMES = 1_000_000
+NUM_GAMES = 100_000  # Total number of games to generate
 
 ### Toy Text
 env_names = (
@@ -40,7 +38,7 @@ def main():
             )
             
             # Init environment
-            if env_name == "FrozenLake-v1":
+            if "FrozenLake" in env_name:
                 env = gymnasium.make(
                     env_name,
                     render_mode="rgb_array",
@@ -83,14 +81,19 @@ def main():
                     )
 
                     # Encode the current state
-                    if env_name == "Blackjack-v1":
-                        obs = f"The player's hand has a total value of {sum_hand(env.unwrapped.player)}. The dealer's visible card has a value of {env.unwrapped.dealer[0]}."
+                    if "Blackjack" in env_name:
+                        player_value = sum_hand(env.unwrapped.player)
+                        dealer_value = sum_hand(env.unwrapped.dealer)
+                        obs = f"The player's hand has a value of {player_value}. The dealer's visible card has a value of {env.unwrapped.dealer[0]}."
                         if usable_ace(env.unwrapped.player) == 0:
                             obs += " The hand does not contain a usable Ace."
                         else:
                             obs += " The hand contains a usable Ace that is counted as 11."
+                        if dealer_value > 21:
+                            obs += " The dealer's hand exceeds 21, resulting in a bust and an immediate win for the player."
+                        if 
                         obs += "\n"
-                    elif env_name == "FrozenLake-v1":
+                    elif "FrozenLake" in env_name:
                         desc = [[c.decode("utf-8") for c in line] for line in env.unwrapped.desc]
                         row, col = env.unwrapped.s // env.unwrapped.ncol, env.unwrapped.s % env.unwrapped.ncol
                         desc[row][col] = "P"
@@ -115,32 +118,29 @@ def main():
 
                     # If the episode has ended then we can reset to start a new episode
                     if terminated or truncated:
-                        if truncated:
-                            status = 5
+                        # win
+                        if reward == 1.0:
+                            status = 2
+                        # lose
+                        elif reward == -1.0:
+                            status = 3
+                        # draw
                         else:
-                            # win
-                            if reward == 1.0:
-                                status = 2
-                            # lose
-                            elif reward == -1.0:
-                                status = 3
-                            # draw
-                            else:
-                                status = 4
-                        player['status'].append(status)
-                        if env_name == "Blackjack-v1":
+                            status = 4
+                        if "Blackjack" in env_name:
                             if action == 1 and is_bust(env.unwrapped.player):
-                                player['info'].append(f"The player's total hand value of {sum_hand(env.unwrapped.player)} exceeds 21, resulting in a bust and immediate loss.")
+                                player['info'].append(f"The player's final hand has a value of {player_value}.")
                             else:
-                                player['info'].append(f"The dealer's final hand has a total value of {sum_hand(env.unwrapped.dealer)}.")
+                                player['info'].append(f"The dealer's final hand has a value of {dealer_value}.")
                         break
                     else:
                         if len(player["status"]) == 0:
-                            player["status"].append(1)
+                            status = 1
                         else:
-                            player["status"].append(0)
-                        if env_name == "Blackjack-v1":
+                            status = 0
+                        if "Blackjack" in env_name:
                             player['info'].append(None)
+                    player['status'].append(status)
 
                 print(f"Length of player['frames']: {len(player['frames'])}")
                 print(f"Length of player['observation']: {len(player['observation'])}")
@@ -151,13 +151,13 @@ def main():
 
                 # Check that all lists for the selected player have the same length
                 lengths = {k: len(v) for k, v in player.items() if isinstance(v, list)}
-                assert len({length for name, length in lengths.items() if not (name == "info" and length == 0)}) == 1, (
+                assert len({length for name, length in lengths.items()}) == 1, (
                     f"GameID: {shard}: List lengths are not equal: {lengths}"
                 )
 
-                # if not find the goal
-                if env_name == "FrozenLake-v1":
-                    yield_episode = (player["reward"][-1] == 1.0)
+                # Determine if the episode should be yielded based on the player status
+                if "FrozenLake" in env_name:
+                    yield_episode = (player["status"][-1] == 2)
 
                 if yield_episode:
                     # Yield examples for the selected player
@@ -175,11 +175,10 @@ def main():
                                 "status": player['status'][step],
                                 "lives": None,  # Placeholder for lives information
                                 "frames_similarity": None,  # Placeholder for frames similarity information
-                                "info": player['info'][step] if env_name == "Blackjack-v1" else None,
+                                "info": player['info'][step] if len(player['info']) > 0 else None,
                             },
                             "images": player['frames'][step],
                         }
-
                         yield example
 
             env.close()
@@ -226,11 +225,16 @@ def main():
             else:
                 print(f"Duplicate observation found for {i} sample!")
         dataset = dataset.select(list(keep_indices.values()))
+        print("Total samples:", len(dataset))
+
+        # Shuffle the dataset once before saving
+        dataset = dataset.shuffle()
+        print(f"Dataset shuffled!")
 
         # Save the dataset
         dataset.save_to_disk(
             f"/mnt/project/perun2601343/SB3_Agents/dataset/{env_name}",
-            num_proc=min(32, max(1, len(dataset))),
+            num_proc=8,
         )
 
 if __name__ == "__main__":
