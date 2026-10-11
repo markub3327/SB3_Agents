@@ -1,27 +1,18 @@
 import argparse
 import ale_py
 import gymnasium
-import stable_retro as retro
 import minigrid
-from minigrid.wrappers import FlatObsWrapper
-from gymnasium.wrappers import TimeLimit, FlattenObservation
 from schedule import CosineAnnealingLR
 from stable_baselines3 import PPO
-from stable_baselines3.common.atari_wrappers import (
-    ClipRewardEnv,
-    MaxAndSkipEnv,
-    WarpFrame,
-)
 from stable_baselines3.common.callbacks import EvalCallback
 from stable_baselines3.common.env_util import make_atari_env, make_vec_env
-from stable_baselines3.common.monitor import Monitor
 from stable_baselines3.common.vec_env import (
     SubprocVecEnv,
     VecFrameStack,
     VecNormalize,
     VecTransposeImage,
 )
-from utils import load_hyperparams
+from utils import load_hyperparams, make_retro_env, make_minigrid_env, make_toy_text_env
 from wandb.integration.sb3 import WandbCallback
 import wandb
 import torch
@@ -29,47 +20,6 @@ import torch
 
 # Register environments
 gymnasium.register_envs(ale_py)
-
-
-def make_retro_env(env_name):
-    def _body():
-        """
-        Configure environment for retro games, using config similar to DeepMind-style Atari in openai/baseline's wrap_deepmind
-        """
-        env = retro.make(env_name, retro.State.DEFAULT, render_mode="rgb_array")
-        env = TimeLimit(env, max_episode_steps=8192)
-        env = Monitor(env)
-        env = MaxAndSkipEnv(env, skip=4)
-        env = WarpFrame(env, width=96, height=96)
-        env = ClipRewardEnv(env)
-        return env
-
-    return _body
-
-def make_minigrid_env(env_name):
-    def _body():
-        env = gymnasium.make(env_name, render_mode="rgb_array")
-        env = FlatObsWrapper(env)
-        return env
-
-    return _body
-
-def make_toy_text_env(env_name):
-    def _body():
-        if env_name == "FrozenLake-v1":
-            env = gymnasium.make(
-                env_name,
-                render_mode="rgb_array",
-                reward_schedule=(1, -1, -0.01),
-                is_slippery=False,
-                map_name="8x8",
-            )
-        else:
-            env = gymnasium.make(env_name, render_mode="rgb_array")
-        env = FlattenObservation(env)
-        return env
-
-    return _body
 
 
 if __name__ == "__main__":
