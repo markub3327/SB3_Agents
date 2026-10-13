@@ -17,7 +17,7 @@ NUM_GAMES = 100_000  # Total number of games to generate
 
 ### Toy Text
 env_names = (
-    "Blackjack-v1",
+    # "Blackjack-v1",
     "FrozenLake-v1",
 )
 
@@ -131,6 +131,8 @@ def main():
                                 player['info'].append("The player took an additional card and, as a result, the total value exceeded 21. This led to a bust, which concluded the episode.")
                             else:
                                 player['info'].append(f"The dealer's final hand has a value of {sum_hand(env.unwrapped.dealer)}.")
+                        else:
+                            player['info'].append(None)
 
                         break
                     else:
@@ -139,9 +141,7 @@ def main():
                         else:
                             status = 0
                         player['status'].append(status)
-
-                        if "Blackjack" in env_name:
-                            player['info'].append(None)
+                        player['info'].append(None)
 
                 print(f"Length of player['frames']: {len(player['frames'])}")
                 print(f"Length of player['observation']: {len(player['observation'])}")
