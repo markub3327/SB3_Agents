@@ -35,19 +35,19 @@ env_names = {
     "Blackjack-v1": {"color": "black"},
     "FrozenLake-v1": {"color": "black"},
 
-    "MiniGrid-UnlockPickup-v0": {"color": "white"},
-    "MiniGrid-LavaGapS5-v0": {"color": "white"},
-    "MiniGrid-GoToObject-6x6-N2-v0": {"color": "white"},
-    "MiniGrid-Dynamic-Obstacles-Random-5x5-v0": {"color": "white"},
-    "MiniGrid-SimpleCrossingS9N1-v0": {"color": "white"},
-    "MiniGrid-LavaCrossingS9N1-v0": {"color": "white"},
-    "MiniGrid-Unlock-v0": {"color": "white"},
-    "MiniGrid-KeyCorridorS3R1-v0": {"color": "white"},
-    "MiniGrid-RedBlueDoors-6x6-v0": {"color": "white"},
-    "MiniGrid-GoToDoor-5x5-v0": {"color": "white"},
-    "MiniGrid-Fetch-5x5-N2-v0": {"color": "white"},
-    "MiniGrid-DoorKey-5x5-v0": {"color": "white"},
-    "MiniGrid-Empty-Random-5x5-v0": {"color": "white"},
+    # "MiniGrid-UnlockPickup-v0": {"color": "white"},
+    # "MiniGrid-LavaGapS5-v0": {"color": "white"},
+    # "MiniGrid-GoToObject-6x6-N2-v0": {"color": "white"},
+    # "MiniGrid-Dynamic-Obstacles-Random-5x5-v0": {"color": "white"},
+    # "MiniGrid-SimpleCrossingS9N1-v0": {"color": "white"},
+    # "MiniGrid-LavaCrossingS9N1-v0": {"color": "white"},
+    # "MiniGrid-Unlock-v0": {"color": "white"},
+    # "MiniGrid-KeyCorridorS3R1-v0": {"color": "white"},
+    # "MiniGrid-RedBlueDoors-6x6-v0": {"color": "white"},
+    # "MiniGrid-GoToDoor-5x5-v0": {"color": "white"},
+    # "MiniGrid-Fetch-5x5-N2-v0": {"color": "white"},
+    # "MiniGrid-DoorKey-5x5-v0": {"color": "white"},
+    # "MiniGrid-Empty-Random-5x5-v0": {"color": "white"},
 }
 
 for env_name in env_names.keys():
@@ -137,8 +137,18 @@ for env_name in env_names.keys():
             )
             cv2.putText(
                 frame,
-                f"FrameID: {frame_id}",
+                f"Info: {row['messages']['info']}",
                 (40, 250),
+                cv2.FONT_HERSHEY_DUPLEX,
+                0.8,
+                (0, 18, 25) if env_names[env_name]["color"] == "black" else (234, 232, 233),
+                2,
+                cv2.LINE_AA,
+            )
+             cv2.putText(
+                frame,
+                f"FrameID: {frame_id}",
+                (40, 280),
                 cv2.FONT_HERSHEY_DUPLEX,
                 0.8,
                 (0, 18, 25) if env_names[env_name]["color"] == "black" else (234, 232, 233),

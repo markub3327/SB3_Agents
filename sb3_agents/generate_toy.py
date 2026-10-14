@@ -17,7 +17,7 @@ NUM_GAMES = 100_000  # Total number of games to generate
 
 ### Toy Text
 env_names = (
-    # "Blackjack-v1",
+    "Blackjack-v1",
     "FrozenLake-v1",
 )
 
@@ -103,8 +103,13 @@ def main():
                             obs += "+" + ("-" * 3 + "+") * env.unwrapped.ncol + "\n"
                     player['observation'].append(obs)
 
+                    if "FrozenLake" in env_name:
+                        deterministic = False
+                    else:
+                        deterministic = True
+
                     # Predict action
-                    action, _ = model.predict(observation, deterministic=True)
+                    action, _ = model.predict(observation, deterministic=deterministic)
                     action = int(action)
                     player['action'].append(action)
 
@@ -159,6 +164,8 @@ def main():
                 # Determine if the episode should be yielded based on the player status
                 if "FrozenLake" in env_name:
                     yield_episode = (player["status"][-1] == 2)
+                elif "Blackjack" in env_name:
+                    yield_episode = (player["status"][-1] != 3) and (sum_hand(env.unwrapped.player) <= 21)
 
                 if yield_episode:
                     # Yield examples for the selected player
