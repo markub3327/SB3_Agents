@@ -138,7 +138,7 @@ for env_name in env_names.keys():
             cv2.putText(
                 frame,
                 f"Info: {row['messages']['info']}",
-                (40, 250),
+                (40, 220),
                 cv2.FONT_HERSHEY_DUPLEX,
                 0.8,
                 (0, 18, 25) if env_names[env_name]["color"] == "black" else (234, 232, 233),
