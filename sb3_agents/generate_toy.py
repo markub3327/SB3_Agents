@@ -164,8 +164,6 @@ def main():
                 # Determine if the episode should be yielded based on the player status
                 if "FrozenLake" in env_name:
                     yield_episode = (player["status"][-1] == 2)
-                elif "Blackjack" in env_name:
-                    yield_episode = (player["status"][-1] != 3) and (sum_hand(env.unwrapped.player) <= 21)
 
                 if yield_episode:
                     # Yield examples for the selected player
