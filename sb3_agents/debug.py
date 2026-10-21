@@ -2,6 +2,8 @@ import datetime
 import cv2
 import numpy as np
 from datasets import load_from_disk
+from collections import Counter
+
 
 ### Environments
 env_names = {
@@ -55,6 +57,14 @@ for env_name in env_names.keys():
     ds = load_from_disk(f"./dataset/{env_name}")
     print(f"Size of dataset for {env_name}: {len(ds)}")
 
+    # Get the count of samples for each status in the dataset
+    status_counts = Counter(row['messages']['status'] for row in ds)
+    print(f"Status counts: {status_counts}")
+
+    # Get the count of samples for each reward in the dataset
+    reward_counts = Counter(row['messages']['reward'] for row in ds)
+    print(f"Reward counts: {reward_counts}\n")
+
     # Create a video writer object to save the frames as a video
     video_out = cv2.VideoWriter(
         filename=f"./videos/{env_name}_{datetime.datetime.now().strftime('%d-%m-%Y_%H-%M-%S')}.mp4",
@@ -65,7 +75,7 @@ for env_name in env_names.keys():
 
     for row in ds:
         print(f"Observation:\n{row['messages']['observation']}")
-        print(f"Info:\n{row['messages']['info']}")
+        print(f"Info:\n{row['messages']['info']}\n")
 
         for frame_id, img in enumerate(row['images']):
             # Convert to BGR format for OpenCV
@@ -137,18 +147,8 @@ for env_name in env_names.keys():
             )
             cv2.putText(
                 frame,
-                f"Info: {row['messages']['info']}",
-                (40, 220),
-                cv2.FONT_HERSHEY_DUPLEX,
-                0.8,
-                (0, 18, 25) if env_names[env_name]["color"] == "black" else (234, 232, 233),
-                2,
-                cv2.LINE_AA,
-            )
-             cv2.putText(
-                frame,
                 f"FrameID: {frame_id}",
-                (40, 280),
+                (40, 250),
                 cv2.FONT_HERSHEY_DUPLEX,
                 0.8,
                 (0, 18, 25) if env_names[env_name]["color"] == "black" else (234, 232, 233),

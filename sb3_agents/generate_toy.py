@@ -14,7 +14,7 @@ from gymnasium.envs.toy_text.blackjack import sum_hand, usable_ace, is_bust
 os.environ["SDL_AUDIODRIVER"] = "dummy"
 
 # Metadata
-NUM_GAMES = 100_000  # Total number of games to generate
+NUM_GAMES = 250_000  # Total number of games to generate
 
 ### Toy Text
 env_names = (
@@ -55,7 +55,6 @@ def dataset_generator(shards, env_name, player_name):
             "action": [],
             "reward": [],
             "status": [],
-            "info": [],
         }
 
         # Reset the environment for a new game
@@ -81,8 +80,6 @@ def dataset_generator(shards, env_name, player_name):
                     obs += " My hand contains a usable Ace, which is counted as 11."
                 else:
                     obs += " My hand does not contain a usable Ace."
-                if is_bust(env.unwrapped.dealer):
-                    obs += " The dealer's hand exceeds 21, resulting in a bust and an immediate win for me."
                 obs += "\n"
             elif "FrozenLake" in env_name:
                 desc = [[c.decode("utf-8") for c in line] for line in env.unwrapped.desc]
@@ -104,7 +101,7 @@ def dataset_generator(shards, env_name, player_name):
 
             # step (transition) through the environment with the action
             # receiving the next observation, reward and if the episode has terminated or truncated
-            observation, reward, terminated, truncated, info = env.step(action)
+            observation, reward, terminated, truncated, _ = env.step(action)
             player['reward'].append(reward)
 
             # If the episode has ended then we can reset to start a new episode
@@ -120,14 +117,6 @@ def dataset_generator(shards, env_name, player_name):
                     status = 4
                 player['status'].append(status)
 
-                if "Blackjack" in env_name:
-                    if is_bust(env.unwrapped.player):
-                        player['info'].append("I took an additional card, which caused my hand value to exceed 21. This resulted in a bust and an immediate loss for me.")
-                    else:
-                        player['info'].append(f"The dealer's final hand is valued at {sum_hand(env.unwrapped.dealer)}.")
-                else:
-                    player['info'].append(None)
-
                 # End of the episode
                 break
             else:
@@ -136,7 +125,6 @@ def dataset_generator(shards, env_name, player_name):
                 else:
                     status = 0
                 player['status'].append(status)
-                player['info'].append(None)
 
         # Check that all lists for the selected player have the same length
         lengths = {k: len(v) for k, v in player.items() if isinstance(v, list)}
@@ -157,7 +145,7 @@ def dataset_generator(shards, env_name, player_name):
                     "status": player['status'][step],
                     "lives": None,  # Placeholder for lives information
                     "frames_similarity": None,  # Placeholder for frames similarity information
-                    "info": player['info'][step],
+                    "info": None,  # Placeholder for additional information
                 },
                 "images": player['frames'][step],
             }
