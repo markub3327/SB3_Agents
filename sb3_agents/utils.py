@@ -2,6 +2,7 @@ import torch
 import yaml
 import gymnasium
 import stable_retro as retro
+import torch.nn.functional as F
 from transformers import AutoImageProcessor, AutoModel
 from minigrid.wrappers import FlatObsWrapper
 from gymnasium.wrappers import TimeLimit, FlattenObservation
@@ -35,7 +36,8 @@ class FrameFilterForQueue:
 
     def get_similarity(self, images):
         imgs_embed = self._get_embedding(images)
-        sims = torch.cosine_similarity(imgs_embed, imgs_embed)
+        x = F.normalize(imgs_embed, p=2, dim=-1)
+        sims = x @ x.T
         return sims.cpu().numpy()
 
 def load_hyperparams(env_name, file_path):
