@@ -14,7 +14,7 @@ from collections import deque
 os.environ["SDL_AUDIODRIVER"] = "dummy"
 
 # Metadata
-NUM_GAMES = 250_000
+NUM_GAMES = 50_000
 
 ### Minigrid
 env_names = (
@@ -101,6 +101,9 @@ def dataset_generator(shards, env_name, player_name):
         # Initialize the frame queue
         frame_queue = deque(maxlen=2)
 
+        # Reset the environment for a new game
+        observation, _ = env.reset()
+
         # Init agent
         player = {
             "frames": [],
@@ -110,9 +113,6 @@ def dataset_generator(shards, env_name, player_name):
             "status": [],
             "info": f"Mission: {env.unwrapped.mission}",
         }
-
-        # Reset the environment for a new game
-        observation, _ = env.reset()
 
         # The initial frame
         frame = env.render()
