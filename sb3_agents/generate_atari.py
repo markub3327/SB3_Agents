@@ -149,7 +149,6 @@ def dataset_generator(shards, env_name, player_name):
                     "action": str(player['action'][step]),
                     "reward": player['reward'][step],
                     "status": player['status'][step],
-                    "lives": player['lives'][step] if len(player['lives']) > 0 else None,
                     "frames_similarity": player['frames_similarity'][step],
                     "info": None,  # Placeholder for additional information
                 },
@@ -181,7 +180,6 @@ def main():
                         "action": Value("string"),
                         "reward": Value("float32"),
                         "status": Value("int32"),
-                        "lives": Value("int32"),
                         "frames_similarity": Sequence(Sequence(Value("float32"))),
                         "info": Value("string"),
                     },
