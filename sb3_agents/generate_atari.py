@@ -1,5 +1,4 @@
 import ale_py
-import datetime
 import gymnasium
 import os
 import json
@@ -67,19 +66,19 @@ def dataset_generator(shards, env_name, player_name):
         # Initialize the frame queue
         frame_queue = deque(maxlen=8)
 
-        # Init agent
-        player = {
-            "frames": [],
-            "action": [],
-            "reward": [],
-            "lives": [],
-            "status": [],
-            "frames_similarity": [],
-        }
-
         # Reset the environment for a new game
         observation, info = env.reset()
         print("info", info)
+
+        # Init agent
+        player = {
+            "frames": [],
+            "observation": [],
+            "action": [],
+            "reward": [],
+            "status": [],
+            "frames_similarity": [],
+        }
 
         # The initial frame
         frame = env.render()
@@ -100,9 +99,10 @@ def dataset_generator(shards, env_name, player_name):
             print("frames_similarity shape", frames_similarity.shape)
             player['frames_similarity'].append(frames_similarity)
 
-            # Get the number of lives
+            # Encode the current state
             if 'lives' in info:
-                player['lives'].append(info['lives'])
+                obs = f"❤️ I currently have {info['lives']} lives remaining. Losing all remaining {info['lives']} lives will end the episode.\n"
+                player["observation"].append(obs)
 
             # Predict action
             action, _ = model.predict(observation, deterministic=True)
@@ -144,7 +144,7 @@ def dataset_generator(shards, env_name, player_name):
                 "messages": {
                     "game": env_name,
                     "name": player_name,
-                    "observation": None,  # Placeholder for observation information
+                    "observation": player['observation'][step],
                     "action_mask": None,  # Placeholder for action mask
                     "action": str(player['action'][step]),
                     "reward": player['reward'][step],
