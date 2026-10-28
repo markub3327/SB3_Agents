@@ -72,8 +72,12 @@ def get_ascii_map(base_env):
                             cell_symbol = "/"  # State 0: open
                         elif cell.is_locked:
                             cell_symbol = "D"  # State 2: locked
-                        else:
+                        elif not self.is_open:
                             cell_symbol = "d"  # State 1: closed and unlocked
+                        else:
+                            raise ValueError(
+                                f"There is no possible state encoding for the state:\n -Door Open: {self.is_open}\n -Door Closed: {not self.is_open}\n -Door Locked: {self.is_locked}"
+                            )
                     else:
                         cell_symbol = symbols[cell.type]
 
