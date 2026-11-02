@@ -14,7 +14,7 @@ from gymnasium.envs.toy_text.blackjack import sum_hand, usable_ace, is_bust
 os.environ["SDL_AUDIODRIVER"] = "dummy"
 
 # Metadata
-NUM_GAMES = 250_000  # Total number of games to generate
+NUM_GAMES = 100_000  # Total number of games to generate
 
 ### Toy Text
 env_names = (
@@ -173,7 +173,7 @@ def main():
                         "action": Value("string"),
                         "reward": Value("float32"),
                         "status": Value("int32"),
-                        "frames_similarity": Sequence(Sequence(Value("float32"))),
+                        "frames_similarity": Sequence(Value("float32")),
                         "info": Value("string"),
                     },
                     "images": Sequence(Image()),

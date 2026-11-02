@@ -11,5 +11,3 @@ wandb/
 __pycache__/
 
 dataset*/
-
-*.txt

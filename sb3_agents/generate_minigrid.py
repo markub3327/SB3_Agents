@@ -14,7 +14,7 @@ from collections import deque
 os.environ["SDL_AUDIODRIVER"] = "dummy"
 
 # Metadata
-NUM_GAMES = 50_000
+NUM_GAMES = 25_000
 
 ### Minigrid
 env_names = (
@@ -164,29 +164,31 @@ def dataset_generator(shards, env_name, player_name):
                     status = 0
                 player['status'].append(status)
 
-        # Check that all lists for the selected player have the same length
-        lengths = {k: len(v) for k, v in player.items() if isinstance(v, list)}
-        assert len(set(lengths.values())) == 1, (
-            f"GameID: {shard}: List lengths are not equal: {lengths}"
-        )
+        # Save only winning trajectories
+        if player['status'][-1] == 2:
+            # Check that all lists for the selected player have the same length
+            lengths = {k: len(v) for k, v in player.items() if isinstance(v, list)}
+            assert len(set(lengths.values())) == 1, (
+                f"GameID: {shard}: List lengths are not equal: {lengths}"
+            )
 
-        # Yield examples for the selected player
-        for step in range(len(player['frames'])):
-            example = {
-                "messages": {
-                    "game": "MiniGrid",
-                    "name": player_name,
-                    "observation": player['observation'][step],
-                    "action_mask": None,  # Placeholder for action mask
-                    "action": str(player['action'][step]),
-                    "reward": player['reward'][step],
-                    "status": player['status'][step],
-                    "frames_similarity": None,  # Placeholder for frames similarity information
-                    "info": player['info'],
-                },
-                "images": player['frames'][step],
-            }
-            yield example
+            # Yield examples for the selected player
+            for step in range(len(player['frames'])):
+                example = {
+                    "messages": {
+                        "game": "MiniGrid",
+                        "name": player_name,
+                        "observation": player['observation'][step],
+                        "action_mask": None,  # Placeholder for action mask
+                        "action": str(player['action'][step]),
+                        "reward": player['reward'][step],
+                        "status": player['status'][step],
+                        "frames_similarity": None,  # Placeholder for frames similarity information
+                        "info": player['info'],
+                    },
+                    "images": player['frames'][step],
+                }
+                yield example
 
     env.close()
 
@@ -211,7 +213,7 @@ def main():
                         "action": Value("string"),
                         "reward": Value("float32"),
                         "status": Value("int32"),
-                        "frames_similarity": Sequence(Sequence(Value("float32"))),
+                        "frames_similarity": Sequence(Value("float32")),
                         "info": Value("string"),
                     },
                     "images": Sequence(Image()),

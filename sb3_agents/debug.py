@@ -9,38 +9,29 @@ from collections import Counter
 env_names = {
     ### Atari 2600
     # "AssaultNoFrameskip-v4": {"color": "white"},
-    # "AtlantisNoFrameskip-v4": {"color": "white"},
     # "BankHeistNoFrameskip-v4": {"color": "white"},
     # "BoxingNoFrameskip-v4": {"color": "white"},
-    # "BreakoutNoFrameskip-v4": {"color": "white"},
     # "CrazyClimberNoFrameskip-v4": {"color": "white"},
-    # "DefenderNoFrameskip-v4": {"color": "white"},
-    # "DemonAttackNoFrameskip-v4": {"color": "white"},
     # "DoubleDunkNoFrameskip-v4": {"color": "white"},
-    # "EnduroNoFrameskip-v4": {"color": "white"},
     # "FishingDerbyNoFrameskip-v4": {"color": "white"},
     # "FreewayNoFrameskip-v4": {"color": "white"},
     # "GopherNoFrameskip-v4": {"color": "white"},
     # "JamesbondNoFrameskip-v4": {"color": "white"},
-    # "KangarooNoFrameskip-v4": {"color": "white"},
     # "KrullNoFrameskip-v4": {"color": "white"},
     # "KungFuMasterNoFrameskip-v4": {"color": "white"},
-    # "PhoenixNoFrameskip-v4": {"color": "white"},
     # "PongNoFrameskip-v4": {"color": "white"},
     # "QbertNoFrameskip-v4": {"color": "white"},
     # "RoadRunnerNoFrameskip-v4": {"color": "white"},
     # "StarGunnerNoFrameskip-v4": {"color": "white"},
-    # "TutankhamNoFrameskip-v4": {"color": "white"},
     # "UpNDownNoFrameskip-v4": {"color": "white"},
-    # "VideoPinballNoFrameskip-v4": {"color": "white"},
 
     "Blackjack-v1": {"color": "black"},
-    "FrozenLake-v1": {"color": "black"},
+    # "FrozenLake-v1": {"color": "black"},
 
     "MiniGrid-UnlockPickup-v0": {"color": "white"},
     "MiniGrid-LavaGapS5-v0": {"color": "white"},
-    "MiniGrid-GoToObject-6x6-N2-v0": {"color": "white"},
-    "MiniGrid-Dynamic-Obstacles-Random-5x5-v0": {"color": "white"},
+    # "MiniGrid-GoToObject-6x6-N2-v0": {"color": "white"},
+    # "MiniGrid-Dynamic-Obstacles-Random-5x5-v0": {"color": "white"},
     # "MiniGrid-SimpleCrossingS9N1-v0": {"color": "white"},
     # "MiniGrid-LavaCrossingS9N1-v0": {"color": "white"},
     # "MiniGrid-Unlock-v0": {"color": "white"},
@@ -56,13 +47,14 @@ for env_name in env_names.keys():
     # Load the dataset from disk
     ds = load_from_disk(f"./dataset/{env_name}")
     print(f"Size of dataset for {env_name}: {len(ds)}")
+    print(f"Features of dataset for {env_name}: {ds.features}\n")
 
     # Get the count of samples for each status in the dataset
     status_counts = Counter(row['messages']['status'] for row in ds)
     print(f"Status counts: {status_counts}")
 
     # Get the count of samples for each reward in the dataset
-    reward_counts = Counter(row['messages']['reward'] for row in ds)
+    reward_counts = Counter(round(row['messages']['reward'], 0) for row in ds)
     print(f"Reward counts: {reward_counts}\n")
 
     # Create a video writer object to save the frames as a video
@@ -137,18 +129,8 @@ for env_name in env_names.keys():
             )
             cv2.putText(
                 frame,
-                f"Lives: {row['messages']['lives']}",
-                (40, 220),
-                cv2.FONT_HERSHEY_DUPLEX,
-                0.8,
-                (0, 18, 25) if env_names[env_name]["color"] == "black" else (234, 232, 233),
-                2,
-                cv2.LINE_AA,
-            )
-            cv2.putText(
-                frame,
                 f"FrameID: {frame_id}",
-                (40, 250),
+                (40, 220),
                 cv2.FONT_HERSHEY_DUPLEX,
                 0.8,
                 (0, 18, 25) if env_names[env_name]["color"] == "black" else (234, 232, 233),

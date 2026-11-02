@@ -180,7 +180,7 @@ def main():
                         "action": Value("string"),
                         "reward": Value("float32"),
                         "status": Value("int32"),
-                        "frames_similarity": Sequence(Sequence(Value("float32"))),
+                        "frames_similarity": Sequence(Value("float32")),
                         "info": Value("string"),
                     },
                     "images": Sequence(Image()),
