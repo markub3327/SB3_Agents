@@ -6,7 +6,7 @@ import json
 import hashlib
 import numpy as np
 from stable_baselines3 import PPO
-from datasets import Dataset, Features, Value, Image, Version, Sequence
+from datasets import Dataset, Features, Value, Image, Version, List
 from collections import deque
 
 
@@ -213,13 +213,13 @@ def main():
                         "action": Value("string"),
                         "reward": Value("float32"),
                         "status": Value("int32"),
-                        "frames_similarity": Sequence(Value("float32")),
+                        "frames_similarity": List(Value("float32")),
                         "info": Value("string"),
                     },
-                    "images": Sequence(Image()),
+                    "images": List(Image()),
                 }
             ),
-            num_proc=40,
+            num_proc=48,
             gen_kwargs={
                 "shards": shards,
                 "env_name": env_name,
