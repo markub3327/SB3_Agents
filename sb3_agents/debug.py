@@ -26,21 +26,21 @@ env_names = {
     # "UpNDownNoFrameskip-v4": {"color": "white"},
 
     "Blackjack-v1": {"color": "black"},
-    # "FrozenLake-v1": {"color": "black"},
+    "FrozenLake-v1": {"color": "black"},
 
     "MiniGrid-UnlockPickup-v0": {"color": "white"},
     "MiniGrid-LavaGapS5-v0": {"color": "white"},
-    # "MiniGrid-GoToObject-6x6-N2-v0": {"color": "white"},
-    # "MiniGrid-Dynamic-Obstacles-Random-5x5-v0": {"color": "white"},
-    # "MiniGrid-SimpleCrossingS9N1-v0": {"color": "white"},
-    # "MiniGrid-LavaCrossingS9N1-v0": {"color": "white"},
-    # "MiniGrid-Unlock-v0": {"color": "white"},
-    # "MiniGrid-KeyCorridorS3R1-v0": {"color": "white"},
-    # "MiniGrid-RedBlueDoors-6x6-v0": {"color": "white"},
-    # "MiniGrid-GoToDoor-5x5-v0": {"color": "white"},
-    # "MiniGrid-Fetch-5x5-N2-v0": {"color": "white"},
-    # "MiniGrid-DoorKey-5x5-v0": {"color": "white"},
-    # "MiniGrid-Empty-Random-5x5-v0": {"color": "white"},
+    "MiniGrid-GoToObject-6x6-N2-v0": {"color": "white"},
+    "MiniGrid-Dynamic-Obstacles-Random-5x5-v0": {"color": "white"},
+    "MiniGrid-SimpleCrossingS9N1-v0": {"color": "white"},
+    "MiniGrid-LavaCrossingS9N1-v0": {"color": "white"},
+    "MiniGrid-Unlock-v0": {"color": "white"},
+    "MiniGrid-KeyCorridorS3R1-v0": {"color": "white"},
+    "MiniGrid-RedBlueDoors-6x6-v0": {"color": "white"},
+    "MiniGrid-GoToDoor-5x5-v0": {"color": "white"},
+    "MiniGrid-Fetch-5x5-N2-v0": {"color": "white"},
+    "MiniGrid-DoorKey-5x5-v0": {"color": "white"},
+    "MiniGrid-Empty-Random-5x5-v0": {"color": "white"},
 }
 
 for env_name in env_names.keys():

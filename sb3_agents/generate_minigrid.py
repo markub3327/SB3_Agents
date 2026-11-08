@@ -72,7 +72,7 @@ def get_ascii_map(base_env):
                             cell_symbol = "/"  # State 0: open
                         elif cell.is_locked:
                             cell_symbol = "D"  # State 2: locked
-                        elif not self.is_open:
+                        elif not cell.is_open:
                             cell_symbol = "d"  # State 1: closed and unlocked
                         else:
                             raise ValueError(

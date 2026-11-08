@@ -256,6 +256,24 @@ MiniGrid-Playground-v0:
 MiniGrid-UnlockPickup-v0:
   <<: *minigrid-defaults
 
+MiniGrid-WFC-MazeSimple-v0:
+  <<: *minigrid-defaults
+
+MiniGrid-WFC-DungeonMazeScaled-v0:
+  <<: *minigrid-defaults
+
+MiniGrid-WFC-RoomsFabric-v0:
+  <<: *minigrid-defaults
+
+MiniGrid-WFC-ObstaclesBlackdots-v0:
+  <<: *minigrid-defaults
+
+MiniGrid-WFC-ObstaclesAngular-v0:
+  <<: *minigrid-defaults
+
+MiniGrid-WFC-ObstaclesHogs3-v0:
+  <<: *minigrid-defaults
+
 Blackjack-v1:
   normalize: false
   n_envs: 16
