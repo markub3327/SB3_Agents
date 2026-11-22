@@ -14,7 +14,7 @@ from collections import deque
 os.environ["SDL_AUDIODRIVER"] = "dummy"
 
 # Metadata
-NUM_GAMES = 100_000
+NUM_GAMES = 250_000  # Total number of games to generate
 
 ### Minigrid
 env_names = (
