@@ -197,8 +197,13 @@ def main():
 
         # Remove duplicate samples based on their hash
         keep_indices = {}
-        for i, obs in enumerate(dataset["messages"]["observation"]):
-            h = hashlib.sha3_512(obs.encode("utf-8")).hexdigest()
+        for i, (obs, reward, status) in enumerate(zip(
+                dataset["messages"]["observation"],
+                dataset["messages"]["reward"],
+                dataset["messages"]["status"],
+                strict=True,
+        )):
+            h = hashlib.sha3_512(f"{obs}\n{reward}\n{status}".encode("utf-8")).hexdigest()
             if h not in keep_indices:
                 keep_indices[h] = i
             else:
