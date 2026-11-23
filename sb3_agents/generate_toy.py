@@ -7,14 +7,14 @@ from stable_baselines3 import PPO
 from datasets import Dataset, Features, Value, Image, Version, List
 from collections import deque
 from gymnasium.wrappers import FlattenObservation
-from gymnasium.envs.toy_text.blackjack import sum_hand, usable_ace, is_bust
+from gymnasium.envs.toy_text.blackjack import sum_hand, usable_ace
 
 
 # Use a dummy audio driver
 os.environ["SDL_AUDIODRIVER"] = "dummy"
 
 # Metadata
-NUM_GAMES = 250_000  # Total number of games to generate
+NUM_GAMES = 50_000  # Total number of games to generate
 
 ### Toy Text
 env_names = (
